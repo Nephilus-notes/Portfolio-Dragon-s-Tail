@@ -1,0 +1,25 @@
+<div class="container">
+    <app-character-info></app-character-info>
+    <div class="displayDiv">
+    <div class="textDisplay backgroundDark">
+        {{location.enterText}}
+        
+    </div>
+    <div class="optionsAndInput">
+        
+        <div class="options backgroundDark">
+            {{location.options}}
+            <div *ngfor="let item of location.options | keyvalue">
+                Key: <b>{{item.keys}}</b> and Value: <b>{{item.values}}</b>
+            </div>
+            stuff
+        </div>
+        <form action="" class="input backgroundDark">
+
+            <input class="inputUI backgroundDark" type="text">
+            <input class="submitButton" type="button" value="Enter">
+        </form>
+    </div>
+
+    </div>
+</div>
