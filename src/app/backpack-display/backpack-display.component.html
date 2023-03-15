@@ -1,1 +1,9 @@
-<p>backpack-display works!</p>
+<h2>My Locations</h2>
+<ul class="locations">
+  <li *ngFor="let location of locations">
+    <button type="button" (click)="onSelect(location)">
+      <span class="badge">{{location.id}}</span>
+      <span class="name">{{location.name}}</span>
+    </button>
+  </li>
+</ul>

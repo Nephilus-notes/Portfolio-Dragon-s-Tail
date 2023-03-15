@@ -1,5 +1,9 @@
 <div class="container">
-    <app-character-info></app-character-info>
+    <div >
+        <app-character-info ></app-character-info>
+        <!-- *ngIf="characterView" -->
+        <!-- <button type="button" id="characterViewButton" (click)="characterViewSwitch()">View Character</button> -->
+    </div>
     <div class="displayDiv">
     <div class="textDisplay backgroundDark">
         {{location.enterText}}
@@ -8,18 +12,23 @@
     <div class="optionsAndInput">
         
         <div class="options backgroundDark">
-            {{location.options}}
-            <div *ngfor="let item of location.options | keyvalue">
-                Key: <b>{{item.keys}}</b> and Value: <b>{{item.values}}</b>
-            </div>
-            stuff
+            <li *ngFor="let item of location.options">
+               {{item}}
+            </li>
+            <!-- <div *ngfor="let item of location.options; index as i; first as isFirst">
+                {{i}}/{{location.options.length}}. {{item}} <span *ngIf="isFirst">default</span>
+            </div> -->
         </div>
         <form action="" class="input backgroundDark">
 
-            <input class="inputUI backgroundDark" type="text">
+            <input name="inputUI" class="inputUI backgroundDark" type="text">
             <input class="submitButton" type="button" value="Enter">
         </form>
     </div>
 
+    </div>  
+      <div >
+        <app-character-info *ngIf="characterView"></app-character-info>
+        <button type="" id="characterViewButton" (click)="characterViewSwitch()">View Backpack</button>
     </div>
 </div>

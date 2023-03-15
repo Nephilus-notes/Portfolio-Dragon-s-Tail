@@ -3,6 +3,6 @@ export interface Location {
     name: string;
     enterText: string;
     exitText: string;
-    options: object;
-    enemies: Array<Int16Array>;
+    options: Array<string>;
+    enemies: Array<object>;
 }

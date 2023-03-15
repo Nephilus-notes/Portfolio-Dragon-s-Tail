@@ -7,3 +7,24 @@
     height: 600px;
     margin-right: 20px;
 }
+
+h3 {
+    background-color: darkgray;
+    text-align: center;
+    font-weight: lighter;
+    margin-top: 0;
+}
+
+p {
+    background-color: darkgray;
+}
+
+li {
+    background-color: darkgray;
+    list-style: none;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
