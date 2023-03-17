@@ -1,9 +1,12 @@
+import { Equipment } from './equipment';
+import { Item } from './item'
+
 export interface Character {
     name: string;
     // lifetime_currency: number;
     // currency: number;
-    bag: Array<object>
-    equippedItems: object
+    bag: Array<Item>
+    equippedItems: Equipment
 
     armor: number 
     resistance: number

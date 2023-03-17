@@ -3,3 +3,45 @@ span {
     color:blue;
     background-color: black;
 }
+
+.backpack {
+    background-color: darkgray;
+    border-right: 2px solid white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    height: 600px;
+    margin: 20px;
+}
+
+h3 {
+    background-color: darkgray;
+    text-align: center;
+    font-weight: lighter;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+h4 {
+    background-color: darkgray;
+    text-align: center;
+    font-weight: lighter;
+    margin-top: 0;
+}
+
+p {
+    background-color: darkgray;
+}
+
+li {
+    background-color: darkgray;
+    list-style: none;
+    border-radius: 5px;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+.equipment:hover {
+    background-color: lightgray;
+}

@@ -1,4 +1,34 @@
-<h2>My Locations</h2>
+<div class="backpack">
+  <h3>Equipped items</h3>
+  <li class="equipment">Head: {{character.equippedItems.head?.name}}</li>
+  <li class="equipment">Body: {{character.equippedItems.body?.name}}</li>
+  <li class="equipment">Hand: {{character.equippedItems.hand?.name}}</li>
+  <h3>Backpack</h3>
+  <li *ngFor="let item of items" class="equipment">
+    {{item.name}}
+  </li>
+<!-- {{oneItem.name}} -->
+ <!-- <div *ngFor="let item of items | keyvalue">
+  Key: <b>{{item.key}}</b> and Value: <b>{{item.value}}</b>
+  <div *ngFor="let piece of item |keyvalue">
+    piecekey: <b>{{piece.key}}</b> and pieceValue: <b>{{piece.value}}</b>
+  </div> -->
+<!-- </div> -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h2>My Locations</h2>
 <ul class="locations">
   <li *ngFor="let location of locations">
     <button type="button" (click)="onSelect(location)">
@@ -6,4 +36,4 @@
       <span class="name">{{location.name}}</span>
     </button>
   </li>
-</ul>
+</ul> -->
