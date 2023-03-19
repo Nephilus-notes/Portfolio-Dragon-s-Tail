@@ -37,6 +37,7 @@ export class GameDisplayComponent {
     options: [ "(T)Town", "(I)Inn"],
     enemies: []
   }
+  title = "Dragon's Tail";
 }
   
   // CharacterViewButton?.addEventListener(('click'), () => {
