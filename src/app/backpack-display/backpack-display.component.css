@@ -44,4 +44,5 @@ ul {
 
 .equipment:hover {
     background-color: lightgray;
+    cursor: pointer;
 }
