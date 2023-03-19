@@ -1,0 +1,58 @@
+.navbar {
+    max-width: 1300px;
+    margin-inline: auto;
+}
+
+.flexRow {
+    display: flex;
+    background-color: black;
+    flex-wrap: wrap;
+    border-radius: 20px;
+}
+
+.navbar-nav {
+    display: flex;
+    background-color: black;
+    gap: 20px;
+    align-items: center;
+}
+
+.homeLink {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 2rem;
+    padding:12px;
+    background-color: maroon;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px 3px rgba(255, 121, 121, 0.25), inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
+}
+
+
+.nav-link {
+    background-color: maroon;
+    padding: 10px;
+    border-radius: 30px;
+    box-shadow: inset 2px 2px 2px 3px rgba(255, 121, 121, 0.25), inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
+
+}
+
+li {
+    background-color: black;
+}
+a {
+    text-decoration: none;
+}
+a:link {
+    color: green
+}
+
+a:visited {
+    color:teal
+}
+a:hover {
+    color:antiquewhite
+}
+a:active {
+    color:yellow
+}

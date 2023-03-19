@@ -37,3 +37,7 @@ a {
     margin-bottom: 20px;
     font-size: 2rem;
 }
+.title {
+    max-width: 1100px;
+    margin-inline: auto;
+}
