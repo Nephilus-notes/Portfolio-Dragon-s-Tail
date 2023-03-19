@@ -8,6 +8,7 @@ import { GameDisplayComponent } from './game-display/game-display.component';
 import { CharacterInfoComponent } from './character-info/character-info.component';
 import { BackpackDisplayComponent } from './backpack-display/backpack-display.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     GameDisplayComponent,
     CharacterInfoComponent,
     BackpackDisplayComponent,
-    NavBarComponent
+    NavBarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
