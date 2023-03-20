@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { CharacterService } from './character.service';
 
@@ -13,4 +14,7 @@ describe('CharacterService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  it('character should be gotten', () =>{
+    expect(service.getCharacter()).toBeTruthy();
+  })
 });

@@ -25,7 +25,7 @@ export class CharacterInfoComponent {
     this.characterService.saveCharacter(this.character)
   }
 ngOnInit(): void {
-    this.loadCharacter();
+    this.getCharacter();
 }
 
 }
