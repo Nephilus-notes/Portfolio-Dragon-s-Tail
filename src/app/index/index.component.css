@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .flex {
     display:flex;
     width: 100%;
@@ -9,8 +15,8 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 80vh;
-    width: 50vw;
+    height: clamp(40vh, 75vh, fit-content);
+    width: clamp(20rem, 50vw, 40rem);
     margin-inline: auto;
 }
 
@@ -23,21 +29,61 @@ a {
 }
 
 .left {
-    width: 300px;
-    height: 60px;
+    height: clamp(6rem, 20rem, fit-content);
     color: orange;
-    margin-right: 30px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .right {
-    width: clamp(200px, 40%, 400px)
+    border-left: 5px solid rgb(0, 0, 0);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.headline {
+.card {
+    width: 50%;
+    background-image: linear-gradient(red, blue);
+    padding: 20px 15px;
+    /* border-radius: 10px; */
+    background-image: linear-gradient(45deg, black, rgb(77, 77, 77), rgb(28, 22, 22), rgb(49, 47, 47));    background-position: left;
+    background-position: left; 
+    background-size: 800%;
+    animation: bganimation 20s infinite alternate;
+    background-repeat: none;
+    text-rendering: optimizeSpeed;
     margin-bottom: 20px;
+}
+
+.card a {
+    background-color: rgba(62, 59, 59, 0.573);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+  @keyframes bganimation {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
+  }
+
+.headline {
+    margin: 40px;
     font-size: 2rem;
 }
+
 .title {
     max-width: 1100px;
     margin-inline: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
