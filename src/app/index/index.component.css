@@ -22,15 +22,15 @@
 
 p {
     font-size: 2rem;
-    color: teal
+    color: teal;
 }
 a {
-    color:  rgb(35, 12, 165);
+    color:  rgb(13, 164, 198);
 }
 
 .left {
     height: clamp(6rem, 20rem, fit-content);
-    color: orange;
+    color: rgb(0, 190, 190);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
