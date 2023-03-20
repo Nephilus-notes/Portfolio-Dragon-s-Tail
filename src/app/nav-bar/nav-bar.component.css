@@ -23,18 +23,26 @@
     justify-content: center;
     font-size: 2rem;
     padding:12px;
-    background-color: maroon;
     border-radius: 10px;
-    box-shadow: inset 2px 2px 2px 3px rgba(255, 121, 121, 0.25), inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
-}
+    box-shadow: inset 2px 2px 2px 3px rgba(179, 179, 179, 0.25), inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
+    background-image: linear-gradient(275deg, black, rgb(17, 5, 84), rgb(3, 79, 79), rgb(44, 6, 105));    background-position: left;
+    background-position: left; 
+    background-size: 800%;
+    animation: bganimation 60s infinite alternate;
+    background-repeat: none;
+    text-rendering: optimizeSpeed;}
 
 
 .nav-link {
-    background-color: maroon;
     padding: 10px;
     border-radius: 30px;
-    box-shadow: inset 2px 2px 2px 3px rgba(255, 121, 121, 0.25), inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
-
+    box-shadow: inset 2px 2px 2px 3px rgba(171, 171, 171, 0.25), inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
+    background-image: linear-gradient(75deg, black, rgb(17, 5, 84), rgb(3, 79, 79), rgb(44, 6, 105));    background-position: left;
+background-position: left; 
+background-size: 800%;
+animation: bganimation 20s infinite alternate;
+background-repeat: none;
+text-rendering: optimizeSpeed;
 }
 
 li {
@@ -56,3 +64,13 @@ a:hover {
 a:active {
     color:yellow
 }
+
+
+@keyframes bganimation {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
+  }
