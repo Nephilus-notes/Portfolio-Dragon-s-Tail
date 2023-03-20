@@ -1,4 +1,23 @@
-# DragonsTailPortfolio
+# Portfolio with Embedded Game Dragon's Tail
+
+Placeholder Description
+
+
+# Roadmap
+<ul>
+<li>Make the landing page sleek and stylish </li>
+<li> Add combat screen</li>
+<li> Add Login page and capability</li>
+<li> Add Load screen</li>
+</ul>
+
+Game
+
+
+
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
 
