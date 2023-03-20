@@ -25,7 +25,7 @@ p {
     color: teal
 }
 a {
-    color: yellow;
+    color:  rgb(35, 12, 165);
 }
 
 .left {
@@ -47,7 +47,6 @@ a {
 
 .card {
     width: 50%;
-    background-image: linear-gradient(red, blue);
     padding: 20px 15px;
     /* border-radius: 10px; */
     background-image: linear-gradient(45deg, black, rgb(77, 77, 77), rgb(28, 22, 22), rgb(49, 47, 47));    background-position: left;
@@ -60,7 +59,7 @@ a {
 }
 
 .card a {
-    background-color: rgba(62, 59, 59, 0.573);
+    background-color: rgba(0, 0, 0, 0.704);
     text-decoration: none;
     padding: 10px;
     border-radius: 10px;
@@ -86,4 +85,5 @@ a {
     margin-inline: auto;
     margin-top: 20px;
     margin-bottom: 30px;
+    color:(17, 5, 84);
 }
