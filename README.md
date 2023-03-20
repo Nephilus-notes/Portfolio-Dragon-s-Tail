@@ -6,6 +6,7 @@ Placeholder Description
 # Roadmap
 <ul>
 <li>Make the landing page sleek and stylish </li>
+<li>Figure out how to make persistent character that can be injected without APi call into all necessary components</li>
 <li> Add combat screen</li>
 <li> Add Login page and capability</li>
 <li> Add Load screen</li>

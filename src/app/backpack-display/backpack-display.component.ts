@@ -10,7 +10,7 @@ import { MessageService } from '../message.service';
   styleUrls: ['./backpack-display.component.css']
 })
 export class BackpackDisplayComponent {
-  character: Character [] = [];
+  character!: Character;
   constructor(private characterService: CharacterService, private messageService: MessageService) {}
 
   getCharacter(): void {
@@ -21,5 +21,5 @@ ngOnInit(): void {
     this.getCharacter();
 }
  
-  items: Array<Item> = this.character[0]?.bag
+  items: Array<Item> = this.character?.bag
 }

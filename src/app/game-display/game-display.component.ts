@@ -40,15 +40,28 @@ export class GameDisplayComponent {
     options: [ "(T)Town", "(I)Inn"],
     enemies: []
   }
-  character: Character [] = [];
+  character!: Character;
   constructor(private characterService: CharacterService, private messageService: MessageService) {}
 
   getCharacter(): void {
     this.characterService.getCharacter()
           .subscribe(character => this.character = character)
   }
+
+  loadCharacter(): void {
+    this.characterService.loadCharacter()
+  }
+  saveCharacter(): void {
+    this.characterService.saveCharacter(this.character)
+  }
+
+
 ngOnInit(): void {
-    this.getCharacter();
+  // if (this.characterService.exists()) {
+  // } else {
+    this.loadCharacter()
+    // this.getCharacter();
+  // }
 }
   title = "Dragon's Tail";
 }

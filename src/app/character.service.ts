@@ -7,10 +7,10 @@ import { MessageService } from './message.service';
   providedIn: 'root'
 })
 export class CharacterService {
-
+  character!: Character;
   
-  getCharacter(): Observable<Character[]> {
-    const character = of([{
+  getCharacter(): Observable<Character> {
+    const character = of({
       name: "Craelios",
       bag: [
         {id: 1,
@@ -52,9 +52,28 @@ export class CharacterService {
       abilities: [],
       current_hp: 32,
       current_mp: 26,
-    }]);
+    });
     this.messageService.add('CharacterService: fetched characters')
     return character;
+  }
+
+  saveCharacter(character:Character) {
+    this.character = character
+    this.messageService.add('Progress Saved')
+  }
+  loadCharacter() {
+    this.messageService.add('Character Loaded')
+    return this.character
+  }
+  exists() {
+    if (this.character) {
+      this.messageService.add('Character exists!')
+      return true
+    }
+    else {
+      this.messageService.add("Character doesn't exist")
+      return false
+    }
   }
   constructor(private messageService: MessageService) { }
 }
