@@ -9,6 +9,7 @@ import { CharacterInfoComponent } from './character-info/character-info.componen
 import { BackpackDisplayComponent } from './backpack-display/backpack-display.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { IndexComponent } from './index/index.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { IndexComponent } from './index/index.component';
     BackpackDisplayComponent,
     NavBarComponent,
     IndexComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,

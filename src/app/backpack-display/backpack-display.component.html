@@ -1,8 +1,8 @@
 <div class="backpack">
   <h3>Equipped items</h3>
-  <li class="equipment">Head: {{character.equippedItems.head?.name}}</li>
-  <li class="equipment">Body: {{character.equippedItems.body?.name}}</li>
-  <li class="equipment">Hand: {{character.equippedItems.hand?.name}}</li>
+  <li class="equipment">Head: {{character[0].equippedItems.head?.name}}</li>
+  <li class="equipment">Body: {{character[0].equippedItems.body?.name}}</li>
+  <li class="equipment">Hand: {{character[0].equippedItems.hand?.name}}</li>
   <h3>Backpack</h3>
   <li *ngFor="let item of items" class="equipment">
     {{item.name}}

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Location } from '../location'
+import { Character } from '../character';
+import { CharacterService } from '../character.service';
+import { MessageService } from '../message.service';
 
 const CharacterViewButton = document.getElementById("characterViewButton")
 let characterView = false;
@@ -37,6 +40,16 @@ export class GameDisplayComponent {
     options: [ "(T)Town", "(I)Inn"],
     enemies: []
   }
+  character: Character [] = [];
+  constructor(private characterService: CharacterService, private messageService: MessageService) {}
+
+  getCharacter(): void {
+    this.characterService.getCharacter()
+          .subscribe(character => this.character = character)
+  }
+ngOnInit(): void {
+    this.getCharacter();
+}
   title = "Dragon's Tail";
 }
   

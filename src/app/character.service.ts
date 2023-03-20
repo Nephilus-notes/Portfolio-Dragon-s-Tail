@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Character } from './character';
 import { Observable, of } from 'rxjs';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharacterService {
 
+  
   getCharacter(): Observable<Character[]> {
     const character = of([{
       name: "Craelios",
@@ -51,7 +53,8 @@ export class CharacterService {
       current_hp: 32,
       current_mp: 26,
     }]);
+    this.messageService.add('CharacterService: fetched characters')
     return character;
   }
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 }

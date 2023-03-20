@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Character } from '../character';
 import { CharacterService } from '../character.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-character-info',
@@ -9,7 +10,7 @@ import { CharacterService } from '../character.service';
 })
 export class CharacterInfoComponent {
   character: Character [] = [];
-  constructor(private characterService: CharacterService) {}
+  constructor(private characterService: CharacterService, private messageService: MessageService) {}
 
   getCharacter(): void {
     this.characterService.getCharacter()

@@ -1,0 +1,14 @@
+/* * {
+    color:yellow
+} */
+
+.message {
+    color: orange;
+    position:fixed;
+    bottom: 5vh;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.message-content {
+    background-color: rgba(255, 255, 255, 0);
+}
