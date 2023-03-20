@@ -17,8 +17,18 @@ export class BackpackDisplayComponent {
     this.characterService.getCharacter()
           .subscribe(character => this.character = character)
   }
+
+  loadCharacter(): Character {
+    this.character = this.characterService.loadCharacter()
+    return this.character
+    // this.messageService.add(`{ this.character }`)
+  }
+  saveCharacter(): void {
+    this.characterService.saveCharacter(this.character)
+  }
 ngOnInit(): void {
-    this.getCharacter();
+    // this.getCharacter();
+    this.character = this.loadCharacter();
 }
  
   items: Array<Item> = this.character?.bag

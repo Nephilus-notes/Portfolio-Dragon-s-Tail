@@ -59,8 +59,9 @@ export class GameDisplayComponent {
 ngOnInit(): void {
   // if (this.characterService.exists()) {
   // } else {
-    this.loadCharacter()
-    // this.getCharacter();
+    // this.loadCharacter()
+    this.getCharacter();
+    this.saveCharacter()
   // }
 }
   title = "Dragon's Tail";
