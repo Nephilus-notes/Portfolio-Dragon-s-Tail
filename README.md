@@ -4,60 +4,66 @@ Placeholder Description
 
 
 # Components
+Primary Game Display
 <ul>
-<h2>Primary Game Display<h2>
-<li>Display text pertaining to the location</li>
+<li><s>Display text pertaining to the location</s></li>
 <li>Display options to indicate what valid input are</li>
 <li>Take user input to initiate an api call to proceed to the next location</li>
 MVP+
-<li>Add exit text with a user controlled button to shut down the current loation</li>
-
-<h2>Character Info display<h2>
-<li>Parse a character object to display attributes</li>
+<li>Add exit text with a user controlled button to shut down the current location</li>
+</ul>
+Character Info display
+<ul>
+<li><s>Parse a character object to display attributes</s></li>
 <li>Internal logic to calculate variable attributes</li>
 <li>Ability to load the current character</li>
-<li></li>
-<li></li>
-
-<h2>Item Display<h2>
-<li>Parse a character object to display carried and equipped items</li>
-<li>Enable users to recieve more details about items they carry</li>
-<li>Enable users to equip and use items they carry</li>
+</ul>
+Item Display
+<ul>
+<li><s>Parse a character object to display carried and equipped items</s></li>
+<li><s>Enable users to recieve more details about items they carry</s></li>
+<li><s>Enable users to equip and use items they carry</s></li>
 <li>Enable users to view details about items they have equipped</li>
 <li>Enable users to unequip items</li>
-
-<h2>Load Game Page<h2>
+</ul>
+Load Game Page
+<ul>
 <li>Allow users to start a new game</li>
 <li>Allow users to view games associated with their account</li>
 <li>Allow users to load games associated with their account</li>
 <li>Allow users to delete games associated with their account</li>
 <li></li>
-
-<h2>Login View<h2>
+ </ul>
+Login View
+<ul>
 <li>Allow users to log into their account</li>
 <li>Users should be able to log out of their account</li>
-
-<h2>User Creation View<h2>
+</ul>
+User Creation View
+<ul>
 <li>Users can use a form to input information required for account creation</li>
-
-<h2>Password Update View<h2>
+</ul>
+Password Update View
+<ul>
 <li>Users can update their account with a new password</li>
-
-<h2>Landing Page<h2>
+</ul>
+Landing Page
+<ul>
 <li>short bio/mission statement</li>
 <li>Link to Github page</li>
 <li>Project Descriptions and links</li>
 MVP+
 <li>Make it nice</li>
-
-<h2>Nav Bar<h2>
+</ul>
+Nav Bar
+<ul>
 <li>link to load/start game (game entrypoint)</li>
-<li>Link to landing page</li>
+<li><s>Link to landing page</s></li>
 <li>link to log in page</li>
 <li>conditional button for logout</li>
-<!-- <li></li> -->
-
-<h2>Combat component</h2>
+</ul>
+Combat component
+<ul>
 <li>Display the enemy and certain attributes including hp</li>
 <li>Display abilities the character has available</li>
 <li>Take user input on what abilities are used</li>
@@ -67,11 +73,6 @@ MVP+
 MVP+
 <li>Display detailed information on abilities</li>
 </ul>
-
-Game
-
-
-
 
 
 
