@@ -12,8 +12,13 @@ import { MessageService } from '../message.service';
 export class BackpackDisplayComponent {
   selectedItem?: Item;
   onSelect(item:Item): void {
-    this.selectedItem = item;
-    this.messageService.add('item selected')
+    if (this.selectedItem === item) {
+      this.selectedItem = undefined;
+      this.messageService.add('item deselected')
+    } else {
+      this.selectedItem = item;
+      this.messageService.add('item selected')
+    }
   }
 
   character!: Character;
