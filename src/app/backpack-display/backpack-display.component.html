@@ -4,7 +4,7 @@
   <li class="equipment">Body: {{character.equippedItems.body?.name}}</li>
   <li class="equipment">Hand: {{character.equippedItems.hand?.name}}</li>
   <h3>Backpack</h3>
-  <li *ngFor="let item of items" class="equipment">
+  <li *ngFor="let item of character.bag" class="equipment">
     {{item.name}}
   </li>
 <!-- {{oneItem.name}} -->
