@@ -46,3 +46,37 @@ ul {
     background-color: lightgray;
     cursor: pointer;
 }
+
+button {
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.singleItemDisplay {
+    background-color: darkgray;
+    border: 1px solid white;
+    border-radius: 10px;
+    position: fixed;
+    top: 2vh;
+    padding: 5px;
+}
+
+.singleItemDisplay h2 {
+    background-color: darkgray;
+    margin: 0;
+}
+.singleItemDisplay div {
+    background-color: darkgray;
+}
+.singleItemDisplay label {
+    background-color: darkgray;
+}
+.singleItemDisplay input {
+    background-color: darkgray;
+}
+

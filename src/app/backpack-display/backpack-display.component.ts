@@ -13,8 +13,9 @@ export class BackpackDisplayComponent {
   selectedItem?: Item;
   onSelect(item:Item): void {
     this.selectedItem = item;
+    this.messageService.add('item selected')
   }
-  
+
   character!: Character;
   constructor(private characterService: CharacterService, private messageService: MessageService) {}
 
@@ -35,5 +36,4 @@ ngOnInit(): void {
     // this.getCharacter();
     this.character = this.loadCharacter();
 }
- 
 }

@@ -1,19 +1,23 @@
 <div class="backpack">
+  <div class="invisEquip">
+    
+  </div>
   <h3>Equipped items</h3>
   <li class="equipment">Head: {{character.equippedItems.head?.name}}</li>
   <li class="equipment">Body: {{character.equippedItems.body?.name}}</li>
   <li class="equipment">Hand: {{character.equippedItems.hand?.name}}</li>
   <h3>Backpack</h3>
   <li *ngFor="let item of character.bag" class="equipment">
-    {{item.name}}
+    <button type="button" (click)="onSelect(item)">{{item.name}}</button>
   </li>
-<!-- {{oneItem.name}} -->
- <!-- <div *ngFor="let item of items | keyvalue">
-  Key: <b>{{item.key}}</b> and Value: <b>{{item.value}}</b>
-  <div *ngFor="let piece of item |keyvalue">
-    piecekey: <b>{{piece.key}}</b> and pieceValue: <b>{{piece.value}}</b>
-  </div> -->
-<!-- </div> -->
+  <div class="singleItemDisplay" *ngIf="selectedItem">
+    <h2>{{selectedItem.name | uppercase}} Details</h2>
+    <div>id: {{selectedItem.id}}</div>
+    <div>
+      <label for="hero-name">Hero name: </label>
+      <input id="hero-name" [(ngModel)]="selectedItem.name" placeholder="name">
+    </div>
+  </div>
 </div>
 
 
