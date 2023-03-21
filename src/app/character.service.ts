@@ -34,7 +34,12 @@ export class CharacterService {
         'description':
     `Red potion 
     Smells of cinnamon and 
-    nutmeg. Heals a little.`}
+    nutmeg. Heals a little.`},
+    {id: 3, 'name': 'Leather Armor',
+        'itemStat': 1, 'price': 20, "slot": "body",
+        'description': 
+`Toughened leather Protects against
+both elements and enemies.`}
     ],
       equippedItems: {
         'head':null,
