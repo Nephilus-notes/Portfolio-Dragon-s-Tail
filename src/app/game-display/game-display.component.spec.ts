@@ -10,7 +10,7 @@ describe('GameDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GameDisplayComponent, CharacterInfoComponent, BackpackDisplayComponent ]
+      declarations: [ GameDisplayComponent, CharacterInfoComponent, BackpackDisplayComponent ],
     })
     .compileComponents();
 

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackpackDisplayComponent } from './backpack-display.component';
+import { Character } from '../character';
+import { CharacterService } from '../character.service';
 
 describe('BackpackDisplayComponent', () => {
   let component: BackpackDisplayComponent;
@@ -8,7 +10,7 @@ describe('BackpackDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BackpackDisplayComponent ]
+      declarations: [ BackpackDisplayComponent, CharacterService ]
     })
     .compileComponents();
 
