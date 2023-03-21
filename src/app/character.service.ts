@@ -7,8 +7,15 @@ import { MessageService } from './message.service';
   providedIn: 'root'
 })
 export class CharacterService {
-  character!: Character;
-  
+  charactercache!: Character;
+  /** 
+  * Asynchronous function to perform an api call to retrieve the character based on its ID
+  *
+  * @returns A character object 
+  *
+  *
+  *
+  */
   getCharacter(): Observable<Character> {
     const character = of({
       name: "Craelios",
@@ -56,17 +63,32 @@ export class CharacterService {
     this.messageService.add('CharacterService: fetched characters')
     return character;
   }
-
+  /** 
+  * Caches the retrieved character into state so it can be accessed by other components 
+  * without extraneous API calls
+  *
+  * @param character - Character type object to be cached
+  * @returns none
+  *
+  */
   saveCharacter(character:Character) {
-    this.character = character
+    this.charactercache = character
     this.messageService.add('Progress Saved')
   }
+  /** 
+  * Loads a character from the CharacterService cache without an API call
+  *
+  * @param none
+  * @returns none
+  *
+  *
+  */
   loadCharacter() {
     this.messageService.add('Character Loaded')
-    return this.character
+    return this.charactercache
   }
   exists() {
-    if (this.character) {
+    if (this.charactercache) {
       this.messageService.add('Character exists!')
       return true
     }
