@@ -7,8 +7,8 @@
   <li class="equipment">Body: {{character.equippedItems.body?.name}}</li>
   <li class="equipment">Hand: {{character.equippedItems.hand?.name}}</li>
   <h3>Backpack</h3>
-  <li *ngFor="let item of character.bag" class="equipment">
-    <button type="button" (click)="onSelect(item)">{{item.name}}</button>
+  <li *ngFor="let item of character.bag; index as i;" class="equipment">
+    <button class="backpackItem" type="button" (click)="onSelect(item, i)">{{item.name}}</button>
   </li>
   <div class="singleItemDisplay" *ngIf="selectedItem">
     <h4>{{selectedItem.name | uppercase}} Details</h4>
@@ -16,8 +16,7 @@
     <div></div>
     <div>{{selectedItem.description}}</div>
     <div>
-      <label for="hero-name">Hero name: </label>
-      <input id="hero-name" [(ngModel)]="selectedItem.name" placeholder="name">
+      <button class="useItem" type="button" (click)="onItemUse(useItem, selectedItem)">{{useItem}}</button>
     </div>
   </div>
 </div>

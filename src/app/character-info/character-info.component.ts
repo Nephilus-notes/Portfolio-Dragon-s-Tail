@@ -29,4 +29,8 @@ ngOnInit(): void {
     this.loadCharacter();
 }
 
+// ngOnChanges(charactercache:Character) {
+//   this.loadCharacter();
+// }
+
 }

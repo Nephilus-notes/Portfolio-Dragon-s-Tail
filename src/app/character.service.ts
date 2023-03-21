@@ -35,8 +35,8 @@ export class CharacterService {
     `Red potion 
     Smells of cinnamon and 
     nutmeg. Heals a little.`},
-    {id: 3, 'name': 'Leather Armor',
-        'itemStat': 1, 'price': 20, "slot": "body",
+    {id: 3, 'name': 'Chainmail Armor',
+        'itemStat': 3, 'price': 60, "slot": "body",
         'description': 
 `Toughened leather Protects against
 both elements and enemies.`}
@@ -62,7 +62,7 @@ both elements and enemies.`}
       max_mp: 26,
       damage: 5,
       abilities: [],
-      current_hp: 32,
+      current_hp: 31,
       current_mp: 26,
     });
     this.messageService.add('CharacterService: fetched characters')
