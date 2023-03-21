@@ -14,8 +14,8 @@
     <div class="optionsAndInput">
         
         <div class="options backgroundDark">
-            <li *ngFor="let item of location.options">
-               {{item}}
+            <li *ngFor="let option of location.options; index as i">
+               {{option}}
             </li>
             <!-- <div *ngfor="let item of location.options; index as i; first as isFirst">
                 {{i}}/{{location.options.length}}. {{item}} <span *ngIf="isFirst">default</span>
@@ -23,8 +23,8 @@
         </div>
         <form action="" class="input backgroundDark">
 
-            <input name="inputUI" class="inputUI backgroundDark" type="text">
-            <input class="submitButton" type="button" value="Enter">
+            <input name="inputUI" class="inputUI backgroundDark" [(ngModel)]="submitString" type="text" value="">
+            <input class="submitButton"  type="button" ng (click)="onSubmit(submitString)" value="Enter">
         </form>
     </div>
 
