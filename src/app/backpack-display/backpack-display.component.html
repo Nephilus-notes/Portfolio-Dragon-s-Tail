@@ -1,6 +1,6 @@
 <div class="backpack">
   <div class="invisEquip">
-    
+
   </div>
   <h3>Equipped items</h3>
   <li class="equipment">Head: {{character.equippedItems.head?.name}}</li>
@@ -11,8 +11,10 @@
     <button type="button" (click)="onSelect(item)">{{item.name}}</button>
   </li>
   <div class="singleItemDisplay" *ngIf="selectedItem">
-    <h2>{{selectedItem.name | uppercase}} Details</h2>
-    <div>id: {{selectedItem.id}}</div>
+    <h4>{{selectedItem.name | uppercase}} Details</h4>
+    <div> <p class="itemText">{{ selectedItemUse }}: {{selectedItem.itemStat}}</p>  <p class="itemText"> Price: {{selectedItem.price}} </p> </div>
+    <div></div>
+    <div>{{selectedItem.description}}</div>
     <div>
       <label for="hero-name">Hero name: </label>
       <input id="hero-name" [(ngModel)]="selectedItem.name" placeholder="name">

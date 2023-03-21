@@ -66,7 +66,7 @@ button {
     padding: 5px;
 }
 
-.singleItemDisplay h2 {
+.singleItemDisplay h4 {
     background-color: darkgray;
     margin: 0;
 }
@@ -80,3 +80,7 @@ button {
     background-color: darkgray;
 }
 
+.itemText {
+    display: inline;
+    margin-right: 5rem;
+}

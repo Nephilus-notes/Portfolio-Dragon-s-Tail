@@ -11,6 +11,7 @@ import { MessageService } from '../message.service';
 })
 export class BackpackDisplayComponent {
   selectedItem?: Item;
+  selectedItemUse!: string;
   onSelect(item:Item): void {
     if (this.selectedItem === item) {
       this.selectedItem = undefined;
@@ -18,6 +19,20 @@ export class BackpackDisplayComponent {
     } else {
       this.selectedItem = item;
       this.messageService.add('item selected')
+      switch(this.selectedItem.slot) {
+        case "hand": {
+          this.selectedItemUse = "Damage"
+          break;
+        }
+        case "body": {
+          this.selectedItemUse = "Armor"
+          break;
+        }
+        default: {
+          this.selectedItemUse = "Healing"
+          break;
+        }
+      }
     }
   }
 
