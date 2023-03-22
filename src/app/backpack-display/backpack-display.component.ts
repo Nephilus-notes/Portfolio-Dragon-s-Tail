@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Character } from '../character';
 import { Item } from '../item'
 import { CharacterService } from '../character.service';
@@ -10,6 +10,8 @@ import { MessageService } from '../message.service';
   styleUrls: ['./backpack-display.component.css']
 })
 export class BackpackDisplayComponent {
+  @Input() character!: Character;
+
   selectedItem?: Item;
   selectedItemUse!: string;
   useItem!: string;
@@ -62,7 +64,7 @@ export class BackpackDisplayComponent {
    * @param useItem - String that will determine what to do with the selectedItem: 
    * Equip for equippable items and healing for all others
    * @param selectedItem - Object of type Item that will be used if conditions allow
-   */
+  */
   onItemUse(useItem: string, selectedItem: Item) {
     switch(useItem) {
       case "Use": {
@@ -148,29 +150,12 @@ export class BackpackDisplayComponent {
         this.messageService.add("item used unsuccessfully")
       }
     }
-    this.saveCharacter();
+    // this.saveCharacter();
     this.selectedItem = undefined;
     this.backpacklocation = 0;
   }
 
-  character!: Character;
-  constructor(private characterService: CharacterService, private messageService: MessageService) {}
+  constructor(private messageService: MessageService) {}
 
-  getCharacter(): void {
-    this.characterService.getCharacter()
-          .subscribe(character => this.character = character)
-  }
 
-  loadCharacter(): Character {
-    this.character = this.characterService.loadCharacter()
-    return this.character
-    // this.messageService.add(`{ this.character }`)
-  }
-  saveCharacter(): void {
-    this.characterService.saveCharacter(this.character)
-  }
-ngOnInit(): void {
-    // this.getCharacter();
-    this.character = this.loadCharacter();
-}
 }

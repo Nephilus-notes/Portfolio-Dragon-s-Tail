@@ -2,7 +2,7 @@
 
 <div class="container">
     <div >
-        <app-character-info ></app-character-info>
+        <app-character-info [character]="character"></app-character-info>
         <!-- *ngIf="characterView" -->
         <!-- <button type="button" id="characterViewButton" (click)="characterViewSwitch()">View Character</button> -->
     </div>
@@ -32,7 +32,7 @@
 
     </div>  
       <div >
-        <app-backpack-display ></app-backpack-display>
+        <app-backpack-display [character]="character"></app-backpack-display>
         <!-- <button type="" id="characterViewButton" (click)="characterViewSwitch()">View Backpack</button> -->
     </div>
 </div>

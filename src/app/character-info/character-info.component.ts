@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Character } from '../character';
 import { CharacterService } from '../character.service';
 import { MessageService } from '../message.service';
@@ -9,7 +9,8 @@ import { MessageService } from '../message.service';
   styleUrls: ['./character-info.component.css']
 })
 export class CharacterInfoComponent {
-  character!: Character;
+  @Input() character!: Character;
+
   constructor(private characterService: CharacterService, private messageService: MessageService) {}
 
   getCharacter(): void {
@@ -26,7 +27,7 @@ export class CharacterInfoComponent {
   }
 ngOnInit(): void {
     // this.getCharacter();
-    this.loadCharacter();
+    // this.loadCharacter();
 }
 
 // ngOnChanges(charactercache:Character) {

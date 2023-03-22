@@ -78,7 +78,7 @@ ngOnInit(): void {
   // } else {
     // this.loadCharacter()
     this.getCharacter();
-    this.saveCharacter();
+    // this.saveCharacter();
     this.changeLocation("T");
   // }
 }
