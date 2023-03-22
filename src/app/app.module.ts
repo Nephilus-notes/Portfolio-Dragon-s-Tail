@@ -12,6 +12,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { IndexComponent } from './index/index.component';
 import { MessagesComponent } from './messages/messages.component';
 import { UIformComponent } from './uiform/uiform.component';
+import { TextDisplayComponent } from './text-display/text-display.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UIformComponent } from './uiform/uiform.component';
     IndexComponent,
     MessagesComponent,
     UIformComponent,
+    TextDisplayComponent,
   ],
   imports: [
     BrowserModule,

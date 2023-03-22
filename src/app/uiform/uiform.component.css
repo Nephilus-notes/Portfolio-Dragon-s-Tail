@@ -2,8 +2,12 @@
     color: white;
     background-color: darkgray;
     font-size: 2rem;
+    padding: 0;
 }
 
+input {
+    padding: 0;
+}
 .submitString {
     color: white;
     height: 3rem;
@@ -15,10 +19,19 @@ body {
 
 .submitButton {
     background-color: rgb(59, 59, 59);
-    margin-left: 10px;
+    margin: 0 0 0 10px;
     padding: 10px 20px;
 }
 
 .invalidInput {
     margin: 5px 0px 0px
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+#LocationControl {
+    width: 50%;
 }
