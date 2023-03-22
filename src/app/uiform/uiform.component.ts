@@ -25,6 +25,7 @@ export class UIformComponent {
   public onSubmit(): void {
 
     this.submitValue.emit(this.LocationControl.value)
+    this.LocationControl.reset()
   }
 
  
