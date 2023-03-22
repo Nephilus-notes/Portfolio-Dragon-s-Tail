@@ -3,7 +3,7 @@
 <input id="LocationControl" type="text" [formControl]="LocationControl" [(ngModel)]="submitString">
 <button class="submitButton"  type="submit"
 ng (click)="onSubmit()"
-[disabled]="!LocationControl.valid">Enter</button>
+[disabled]="!options.includes(submitString.toUpperCase())">Enter</button>
 <p class="invalidInput" *ngIf="submitString && !options.includes(submitString.toUpperCase())">Take a close look at your options</p>
 
 </form>

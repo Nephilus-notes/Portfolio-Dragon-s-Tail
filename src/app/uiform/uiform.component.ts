@@ -2,6 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
+// function optionValidator(control: FormControl) {
+//   let submitString = control.value
+//   return null
+// }
 
 @Component({
   selector: 'app-uiform',
@@ -10,8 +14,11 @@ import { Validators } from '@angular/forms';
 })
 export class UIformComponent {
   submitString = '';
-  
-  LocationControl = new FormControl('', Validators.required);
+
+  LocationControl = new FormControl('', [
+    Validators.required,
+    // optionValidator
+  ]);
   @Input() options!: Array<string>;
 
   @Output() submitValue = new EventEmitter<string|null>();
