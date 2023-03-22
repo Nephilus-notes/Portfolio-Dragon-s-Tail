@@ -23,7 +23,7 @@
             </div> -->
         </div>
         <form action="" class="input backgroundDark">
-            <app-uiform (submitValue)="formData($event)"></app-uiform>
+            <app-uiform (submitValue)="formData($event)" [options]="location.options"></app-uiform>
             <!-- <input name="inputUI" class="inputUI backgroundDark" [(ngModel)]="submitString" type="text" value="">
             <input class="submitButton"  type="submit" ng (click)="onSubmit(submitString.toUpperCase())" value="Enter">
             <p class="invalidInput" *ngIf="submitString && !this.location.options.includes(submitString.toUpperCase())">Take a close look at your options</p> -->

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
@@ -9,12 +9,15 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./uiform.component.css']
 })
 export class UIformComponent {
-  submitString = new FormControl('', Validators.required);
+  submitString = '';
+  
+  LocationControl = new FormControl('', Validators.required);
+  @Input() options!: Array<string>;
 
   @Output() submitValue = new EventEmitter<string|null>();
   public onSubmit(): void {
 
-    this.submitValue.emit(this.submitString.value)
+    this.submitValue.emit(this.LocationControl.value)
   }
 
  

@@ -18,3 +18,7 @@ body {
     margin-left: 10px;
     padding: 10px 20px;
 }
+
+.invalidInput {
+    margin: 5px 0px 0px
+}

@@ -63,15 +63,7 @@ export class GameDisplayComponent {
   }
 
 
-onSubmit(submitString: string): void {
-  // this.messageService.add(`input submitted ${submitString}`)
- 
-  if (this.location.options.includes(submitString.toUpperCase())) {
-    this.changeLocation(submitString)
-    // this.messageService.add(`${LOCATIONS[5].enterText}`)
 
-  }
-}
 
 ngOnInit(): void {
   // if (this.characterService.exists()) {

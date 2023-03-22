@@ -1,8 +1,9 @@
 <form action="">
-<label for="submitString">: </label>
-<input id="submitString" type="text" [formControl]="submitString">
+<label for="LocationControl">: </label>
+<input id="LocationControl" type="text" [formControl]="LocationControl" [(ngModel)]="submitString">
 <button class="submitButton"  type="submit"
 ng (click)="onSubmit()"
-[disabled]="!submitString.valid">Enter</button>
+[disabled]="!LocationControl.valid">Enter</button>
+<p class="invalidInput" *ngIf="submitString && !options.includes(submitString.toUpperCase())">Take a close look at your options</p>
 
 </form>
