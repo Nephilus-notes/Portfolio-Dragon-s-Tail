@@ -25,6 +25,7 @@
 
             <input name="inputUI" class="inputUI backgroundDark" [(ngModel)]="submitString" type="text" value="">
             <input class="submitButton"  type="button" ng (click)="onSubmit(submitString)" value="Enter">
+            <p class="invalidInput" *ngIf="submitString && !this.location.options.includes(submitString.toUpperCase())">Take a close look at your options</p>
         </form>
     </div>
 
