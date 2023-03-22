@@ -11,27 +11,9 @@ import { MessageService } from '../message.service';
 export class CharacterInfoComponent {
   @Input() character!: Character;
 
-  constructor(private characterService: CharacterService, private messageService: MessageService) {}
-
-  getCharacter(): void {
-    this.characterService.getCharacter()
-          .subscribe(character => this.character = character)
-  }
-
-  loadCharacter(): void {
-    this.character = this.characterService.loadCharacter()
-    // this.messageService.add(`{ this.character }`)
-  }
-  saveCharacter(): void {
-    this.characterService.saveCharacter(this.character)
-  }
-ngOnInit(): void {
-    // this.getCharacter();
-    // this.loadCharacter();
-}
-
-// ngOnChanges(charactercache:Character) {
-//   this.loadCharacter();
-// }
+  /**
+   * Add more logic to compute different attributes that depend on others
+   * Once the full character objects are instantiated it will have more to do.
+   */
 
 }
