@@ -7,7 +7,7 @@ import { MessageService } from './message.service';
   providedIn: 'root'
 })
 export class CharacterService {
-  charactercache!: Character;
+  characterCache!: Character;
   /** 
   * Asynchronous function to perform an api call to retrieve the character based on its ID
   *
@@ -77,7 +77,7 @@ both elements and enemies.`}
   *
   */
   saveCharacter(character:Character) {
-    this.charactercache = character
+    this.characterCache = character
     this.messageService.add('Progress Saved')
   }
   /** 
@@ -90,10 +90,10 @@ both elements and enemies.`}
   */
   loadCharacter() {
     this.messageService.add('Character Loaded')
-    return this.charactercache
+    return this.characterCache
   }
   exists() {
-    if (this.charactercache) {
+    if (this.characterCache) {
       this.messageService.add('Character exists!')
       return true
     }

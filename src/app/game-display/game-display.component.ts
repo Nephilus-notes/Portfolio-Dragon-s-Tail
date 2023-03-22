@@ -29,23 +29,15 @@ export class GameDisplayComponent {
   constructor(private characterService: CharacterService, private messageService: MessageService, private locationService: LocationService) {}
 
   submitString!: string;
-  characterView: boolean = false
-  characterViewSwitch(): void {
-    if (characterView) {
-      characterView = false
-    } else {
-      characterView = true
-    }
-  }
-  // location: Location = {
-  //   id: "BS",
-  //   name: "Blacksmith's Shop",
-  //   enterText: `You step into a shop with black and silver shining at you from all around as arms and armor coat the walls.
-  //   The blacksmith's face shines at you from over the counter.`,
-  //   exitText: "You exit the shop",
-  //   options: [ "T", "I"],
-  //   enemies: []
+  // characterView: boolean = false
+  // characterViewSwitch(): void {
+  //   if (characterView) {
+  //     characterView = false
+  //   } else {
+  //     characterView = true
+  //   }
   // }
+
   character!: Character;
   location!: Location;
 
@@ -60,12 +52,14 @@ export class GameDisplayComponent {
   saveCharacter(): void {
     this.characterService.saveCharacter(this.character)
   }
-
-
+  public formData($event: any): void {
+    this.messageService.add(`event: ${$event}`)
+    this.location = this.locationService.getNewLocation($event.toUpperCase())
+  }
 
   changeLocation(submitString:string): void {
-    this.location = this.locationService.getNewLocation(submitString)
     // this.messageService.add(`${submitString} trying for new location`)
+    this.location = this.locationService.getNewLocation(submitString)
   }
 
 

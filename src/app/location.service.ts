@@ -7,7 +7,7 @@ import { MessageService } from './message.service';
   providedIn: 'root'
 })
 export class LocationService {
-
+  locationCache!:Location;
   /**
    * Takes in a location ID, makes an api call to retrieve the location object 
    * associated with that ID, and returns it
@@ -33,6 +33,22 @@ export class LocationService {
       options: [ "T"],
       enemies: []
     }
+  }
+  saveLocation(location:Location) {
+    this.locationCache = location
+    this.messageService.add('location Saved')
+  }
+  /** 
+  * Loads a location from the CharacterService cache without an API call
+  *
+  * @param none
+  * @returns none
+  *
+  *
+  */
+  loadLocation() {
+    this.messageService.add('location Loaded')
+    return this.locationCache
   }
 
   constructor(private messageService: MessageService) { }

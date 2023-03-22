@@ -14,18 +14,19 @@
     <div class="optionsAndInput">
         
         <div class="options backgroundDark">
-            <li *ngFor="let option of location.options; index as i">
-               {{option}}
-            </li>
+            <li>{{location.options}}</li>
+            <!-- <li *ngFor="let option of location.options; index as i">
+               {{option}} -->
+            <!-- </li> -->
             <!-- <div *ngfor="let item of location.options; index as i; first as isFirst">
                 {{i}}/{{location.options.length}}. {{item}} <span *ngIf="isFirst">default</span>
             </div> -->
         </div>
         <form action="" class="input backgroundDark">
-
-            <input name="inputUI" class="inputUI backgroundDark" [(ngModel)]="submitString" type="text" value="">
+            <app-uiform (submitValue)="formData($event)"></app-uiform>
+            <!-- <input name="inputUI" class="inputUI backgroundDark" [(ngModel)]="submitString" type="text" value="">
             <input class="submitButton"  type="submit" ng (click)="onSubmit(submitString.toUpperCase())" value="Enter">
-            <p class="invalidInput" *ngIf="submitString && !this.location.options.includes(submitString.toUpperCase())">Take a close look at your options</p>
+            <p class="invalidInput" *ngIf="submitString && !this.location.options.includes(submitString.toUpperCase())">Take a close look at your options</p> -->
         </form>
     </div>
 

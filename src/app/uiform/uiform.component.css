@@ -1,0 +1,20 @@
+* {
+    color: white;
+    background-color: darkgray;
+    font-size: 2rem;
+}
+
+.submitString {
+    color: white;
+    height: 3rem;
+}
+
+body {
+    color: white;
+}
+
+.submitButton {
+    background-color: rgb(59, 59, 59);
+    margin-left: 10px;
+    padding: 10px 20px;
+}

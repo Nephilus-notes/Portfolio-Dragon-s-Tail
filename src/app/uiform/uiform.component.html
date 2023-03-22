@@ -1,0 +1,8 @@
+<form action="">
+<label for="submitString">: </label>
+<input id="submitString" type="text" [formControl]="submitString">
+<button class="submitButton"  type="submit"
+ng (click)="onSubmit()"
+[disabled]="!submitString.valid">Enter</button>
+
+</form>
