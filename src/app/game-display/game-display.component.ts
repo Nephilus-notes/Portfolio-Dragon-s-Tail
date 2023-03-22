@@ -4,6 +4,7 @@ import { Character } from '../character';
 import { CharacterService } from '../character.service';
 import { MessageService } from '../message.service';
 import { LOCATIONS } from '../locations';
+import { LocationService } from '../location.service';
 
 const CharacterViewButton = document.getElementById("characterViewButton")
 let characterView = false;
@@ -24,6 +25,9 @@ const onClickCharacter = function () {
   styleUrls: ['./game-display.component.css']
 })
 export class GameDisplayComponent {
+
+  constructor(private characterService: CharacterService, private messageService: MessageService, private locationService: LocationService) {}
+
   submitString!: string;
   characterView: boolean = false
   characterViewSwitch(): void {
@@ -33,17 +37,17 @@ export class GameDisplayComponent {
       characterView = true
     }
   }
-  location: Location = {
-    id: "BS",
-    name: "Blacksmith's Shop",
-    enterText: `You step into a shop with black and silver shining at you from all around as arms and armor coat the walls.
-    The blacksmith's face shines at you from over the counter.`,
-    exitText: "You exit the shop",
-    options: [ "T", "I"],
-    enemies: []
-  }
+  // location: Location = {
+  //   id: "BS",
+  //   name: "Blacksmith's Shop",
+  //   enterText: `You step into a shop with black and silver shining at you from all around as arms and armor coat the walls.
+  //   The blacksmith's face shines at you from over the counter.`,
+  //   exitText: "You exit the shop",
+  //   options: [ "T", "I"],
+  //   enemies: []
+  // }
   character!: Character;
-  constructor(private characterService: CharacterService, private messageService: MessageService) {}
+  location!: Location;
 
   getCharacter(): void {
     this.characterService.getCharacter()
@@ -56,18 +60,21 @@ export class GameDisplayComponent {
   saveCharacter(): void {
     this.characterService.saveCharacter(this.character)
   }
-onSubmit(submitString: string): void {
-  this.messageService.add(`input submitted ${submitString}`)
-  for (let option of this.location.options){
-    // if (submitString === option) {
-    //   this.location = LOCATIONS[6]
-    //   this.messageService.add('moved to 6')
-    // }
+
+
+
+  changeLocation(submitString:string): void {
+    this.location = this.locationService.getNewLocation(submitString)
+    // this.messageService.add(`${submitString} trying for new location`)
   }
+
+
+onSubmit(submitString: string): void {
+  // this.messageService.add(`input submitted ${submitString}`)
+ 
   if (this.location.options.includes(submitString.toUpperCase())) {
-    this.location = LOCATIONS[5]
-    this.messageService.add("location changed")
-    this.messageService.add(`${LOCATIONS[5].enterText}`)
+    this.changeLocation(submitString)
+    // this.messageService.add(`${LOCATIONS[5].enterText}`)
 
   }
 }
@@ -77,7 +84,8 @@ ngOnInit(): void {
   // } else {
     // this.loadCharacter()
     this.getCharacter();
-    this.saveCharacter()
+    this.saveCharacter();
+    this.changeLocation("T");
   // }
 }
   title = "Dragon's Tail";
