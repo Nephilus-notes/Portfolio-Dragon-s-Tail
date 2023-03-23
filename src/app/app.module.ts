@@ -13,6 +13,7 @@ import { IndexComponent } from './index/index.component';
 import { MessagesComponent } from './messages/messages.component';
 import { UIformComponent } from './uiform/uiform.component';
 import { TextDisplayComponent } from './text-display/text-display.component';
+import { CombatDisplayComponent } from './combat-display/combat-display.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TextDisplayComponent } from './text-display/text-display.component';
     MessagesComponent,
     UIformComponent,
     TextDisplayComponent,
+    CombatDisplayComponent,
   ],
   imports: [
     BrowserModule,

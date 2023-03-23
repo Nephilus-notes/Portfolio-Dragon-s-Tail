@@ -39,6 +39,7 @@ export class GameDisplayComponent {
   // }
 
   character!: Character;
+  enemy!: Character;
   location!: Location;
 
   getCharacter(): void {
@@ -62,16 +63,18 @@ export class GameDisplayComponent {
     this.location = this.locationService.getNewLocation(submitString)
   }
 
+  getNPC(): void {
+    this.characterService.getEnemy()
+          .subscribe(enemy => this.enemy = enemy)
+  }
 
 
 
 ngOnInit(): void {
-  // if (this.characterService.exists()) {
-  // } else {
-    // this.loadCharacter()
+
     this.getCharacter();
-    // this.saveCharacter();
     this.changeLocation("T");
+    this.getNPC();
   // }
 }
   title = "Dragon's Tail";

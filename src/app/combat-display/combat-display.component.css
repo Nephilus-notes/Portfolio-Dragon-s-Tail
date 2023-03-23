@@ -1,0 +1,23 @@
+.combatDisplay {
+    width: clamp(23rem, 50vw, 70rem);
+    height: 600px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: darkgray;
+    border: 2px solid white;
+    margin-left: 0;
+}
+
+.NPCStatBar {
+    display: flex;
+    background-color: darkgray;
+    justify-content: space-around;
+    border-bottom: 2px solid white;
+}
+
+.NPCStatBar div{
+    /* background-color: darkgray; */
+    width: clamp(90px, 10vw, 200px);
+
+}

@@ -23,6 +23,9 @@
     max-height: 1100px;
     min-height: 600px;
     margin: 20px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     /* width: clamp(23rem, 50vw, 70rem); */
 
 }

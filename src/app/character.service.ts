@@ -102,5 +102,40 @@ both elements and enemies.`}
       return false
     }
   }
+
+ 
+    /** 
+    * Asynchronous function to perform an api call to retrieve the character based on its ID
+    *
+    * @returns A character object 
+    *
+    *
+    *
+    */
+    getEnemy(): Observable<Character> {
+      const npc = of({
+        name: "Krakt Rat",
+        bag: [],
+        equippedItems: {
+          head:null,
+          body:null,
+          hand: null
+      },
+        armor: 4,
+        resistance: 2,
+        strength: 13,
+        dexterity: 15,
+        intelligence: 13,
+        constitution: 16,
+        hp: 32,
+        max_mp: 26,
+        damage: 5,
+        abilities: [],
+        current_hp: 31,
+        current_mp: 26,
+      });
+      this.messageService.add('CharacterService: generated enemy')
+      return npc;
+    }
   constructor(private messageService: MessageService) { }
 }
