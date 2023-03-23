@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Character } from '../character';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-combat-display',
@@ -8,4 +9,6 @@ import { Character } from '../character';
 })
 export class CombatDisplayComponent {
   @Input() combatant!: Character;
+
+  constructor(public messageService: MessageService) {}
 }

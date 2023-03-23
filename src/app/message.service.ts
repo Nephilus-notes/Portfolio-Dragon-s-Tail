@@ -15,7 +15,12 @@ export class MessageService {
     }
   }
 
-  clear() {
-    this.messages = []
+  clear(combat:boolean=false) {
+    if (combat) {
+      this.combatMessages = []
+    } else {
+      this.messages = []
+    }
   }
+  
 }

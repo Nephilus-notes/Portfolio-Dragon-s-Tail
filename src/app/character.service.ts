@@ -134,7 +134,7 @@ both elements and enemies.`}
         current_hp: 31,
         current_mp: 26,
       });
-      this.messageService.add('CharacterService: generated enemy')
+      this.messageService.add('CharacterService: generated enemy', true)
       return npc;
     }
   constructor(private messageService: MessageService) { }
