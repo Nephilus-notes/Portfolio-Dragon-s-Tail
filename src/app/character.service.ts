@@ -130,7 +130,7 @@ both elements and enemies.`}
         hp: 32,
         max_mp: 26,
         damage: 5,
-        abilities: [],
+        abilities: [['a', {name:"attack"}], ['d',{name:"defend"}],['g',{name:"dodge"}],['f',{name:"flee"}]],
         current_hp: 31,
         current_mp: 26,
       });

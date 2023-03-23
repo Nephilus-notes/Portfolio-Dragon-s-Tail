@@ -29,14 +29,7 @@ export class GameDisplayComponent {
   constructor(private characterService: CharacterService, private messageService: MessageService, private locationService: LocationService) {}
 
   submitString!: string;
-  // characterView: boolean = false
-  // characterViewSwitch(): void {
-  //   if (characterView) {
-  //     characterView = false
-  //   } else {
-  //     characterView = true
-  //   }
-  // }
+  CombatBool!:boolean;
 
   character!: Character;
   enemy!: Character;
@@ -75,6 +68,7 @@ ngOnInit(): void {
     this.getCharacter();
     this.changeLocation("T");
     this.getNPC();
+    this.CombatBool=true
   // }
 }
   title = "Dragon's Tail";

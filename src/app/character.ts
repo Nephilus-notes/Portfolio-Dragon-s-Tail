@@ -20,7 +20,7 @@ export interface Character {
     // weapon_damage : number
     damage : number
 
-    abilities: Array<object>
+    abilities: Array<Array <any>>
     current_hp: number
     current_mp: number  
 

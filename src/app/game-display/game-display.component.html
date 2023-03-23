@@ -9,12 +9,23 @@
     <div class="displayDiv">
         <app-combat-display [combatant]="enemy"></app-combat-display>
     <!-- <app-text-display [location]="location"></app-text-display> -->
+    <div *NgFor="ability of character.bag">
+        {{character.abilities}}
+    </div>
     <div class="optionsAndInput">
-        
+        <div class="options backgroundDark" *ngIf="CombatBool; else elseBlock">
+            <div *NgFor="let ability of character.abilities">
+            {{character.abilities}}
+        </div>
+        <li *ngFor="let item of character.abilities;" class="equipment">
+            <button class="backpackItem" type="button" >{{item}}</button>
+          </li>
+    </div>
+        <ng-template #elseBlock>
         <div class="options backgroundDark">
             <li>{{location.options}}</li>
            
-        </div>
+        </div></ng-template>
         <form action="" class="input backgroundDark">
             <app-uiform (submitValue)="formData($event)" [options]="location.options"></app-uiform>
             
