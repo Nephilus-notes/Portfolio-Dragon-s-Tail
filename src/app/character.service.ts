@@ -8,6 +8,7 @@ import { MessageService } from './message.service';
 })
 export class CharacterService {
   characterCache!: Character;
+  npcCache!: Character
   /** 
   * Asynchronous function to perform an api call to retrieve the character based on its ID
   *
@@ -121,17 +122,17 @@ both elements and enemies.`}
           body:null,
           hand: null
       },
-        armor: 4,
+        armor: 1,
         resistance: 2,
         strength: 13,
         dexterity: 15,
         intelligence: 13,
         constitution: 16,
-        hp: 32,
+        hp: 20,
         max_mp: 26,
         damage: 5,
         abilities: [['a', {name:"attack"}], ['d',{name:"defend"}],['g',{name:"dodge"}],['f',{name:"flee"}]],
-        current_hp: 31,
+        current_hp: 20,
         current_mp: 26,
       });
       this.messageService.add('CharacterService: generated enemy', true)

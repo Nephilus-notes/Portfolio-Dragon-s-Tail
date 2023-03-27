@@ -76,7 +76,17 @@ MVP+
 <li>Display detailed information on abilities</li>
 </ul>
 
+## Logic 
+Combat
 
+Abilities (if variable) should be pulled from the DB/validated at the start of combat
+    Attack - calculates enemy dodge % and deals damage based on str
+    Evade - boosts dodge by 10 for 2 turns (resulting in 10% evade boost)
+    Defend - boosts armor by 2 for 2 turns
+    Flee - if character has a higher dex results in combat ending, otherwise it adds a fleeing flag. if the flag is already raised the character escapes regardless.
+
+
+Travel
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
