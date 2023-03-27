@@ -85,6 +85,8 @@ Abilities (if variable) should be pulled from the DB/validated at the start of c
     Defend - boosts armor by 2 for 2 turns
     Flee - if character has a higher dex results in combat ending, otherwise it adds a fleeing flag. if the flag is already raised the character escapes regardless.
 
+Transfer:
+pass character to combat display, let that component take care of all combat logic
 
 Travel
 

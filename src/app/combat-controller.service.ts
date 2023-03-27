@@ -15,9 +15,13 @@ export class CombatControllerService {
       return self.damage * 2
     }
     else if (attack > target.dexterity) {
-      let totalDamage = self.damage - target.armor // Math.random() * self.damage * .1
+      var totalDamage = self.damage - target.armor // Math.random() * self.damage * .1
       this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
-      return totalDamage
+      if (totalDamage > 1) {
+        return totalDamage
+      } else {
+        return 1
+      }
     } else {
       this.messageService.add(`${self.name} missed ${target.name}`, true)
       return 0
@@ -34,10 +38,32 @@ export class CombatControllerService {
 
   flee(self: Character, target: Character): boolean {
     if (self.dexterity > target.dexterity) {
+      this.messageService.add(`${self.name} has fled!`, true)
       return true
     }
     else {
+      this.messageService.add(`${self.name} tried to flee!`, true)
       return false
+    }
+  }
+
+  Delay(time:number): Promise<boolean> {
+    return new Promise(resolve => setTimeout(resolve, time))
+  }
+  checkCombatants(player: Character, enemy:Character): boolean {
+    if (player.current_hp <= 0) {
+      player.current_hp = 0;
+      this.messageService.add("You can no longer fight. You return home", true)
+
+      // Send back to town
+      return false
+    } else if (enemy.current_hp <= 0) {
+      enemy.current_hp = 0;
+      this.messageService.add(`You defeated the ${enemy.name}! You might get some reward from this eventually.`, true)
+
+      return false
+    } else {
+      return true
     }
   }
 

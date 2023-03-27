@@ -53,17 +53,21 @@ export class GameDisplayComponent {
     this.messageService.add("player choice starting")
     if (this.CombatBool === true) {
       this.messageService.add("player action")
-      this.playerAction($event);
+      this.round($event);
     } else {
       this.location = this.locationService.getNewLocation($event);
     }
   }
+
+  /* START COMBAT LOGIC */
+
 
   attack(self:Character, target:Character) {
     let damage: number = this.combatService.attack(self, target);
     if (damage) {
       target.current_hp -= damage;
     }
+    this.messageService.add("attack")
   }
 /**
  * A switch function to determine what action the character takes based on the actionCall,
@@ -98,6 +102,7 @@ export class GameDisplayComponent {
 
 
   round(actionCall:string) {
+    this.messageService.add(` character ${this.character.dexterity} enemy ${this.enemy.dexterity}`);
     if (this.character.dexterity >= this.enemy.dexterity) {
       this.playerAction(actionCall);
       this.attack(this.enemy, this.character);
@@ -106,7 +111,14 @@ export class GameDisplayComponent {
       this.attack(this.enemy, this.character);
       this.playerAction(actionCall);
     }
+    this.CombatBool = this.combatService.checkCombatants(this.character, this.enemy)
   }
+
+
+
+
+/* END COMBAT LOGIC */
+
 /**
  * Defunct: Currently generates the first town entrance.  Will be replaced by an api call 
  * from the load screen in future iterations. 
