@@ -17,6 +17,7 @@ Character Info display
 <li><s>Parse a character object to display attributes</s></li>
 <li>Internal logic to calculate variable attributes</li>
 <li>Ability to load the current character</li>
+<li>Button to hide or expand character info</li>
 </ul>
 Item Display
 <ul>
@@ -25,6 +26,7 @@ Item Display
 <li><s>Enable users to equip and use items they carry</s></li>
 <li>Enable users to view details about items they have equipped</li>
 <li>Enable users to unequip items</li>
+<li>Button to hide or expand backpack info</li>
 </ul>
 Load Game Page
 <ul>
