@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Location } from '../location'
-import { Character } from '../character';
 import { CharacterService } from '../character.service';
 import { MessageService } from '../message.service';
-import { LOCATIONS } from '../locations';
 import { LocationService } from '../location.service';
+import { CombatControllerService } from '../combat-controller.service';
+
+import { Location } from '../location'
+import { Character } from '../character';
 
 const CharacterViewButton = document.getElementById("characterViewButton")
 let characterView = false;
@@ -46,11 +47,21 @@ export class GameDisplayComponent {
   saveCharacter(): void {
     this.characterService.saveCharacter(this.character)
   }
-  public formData($event: any): void {
-    this.messageService.add(`event: ${$event}`)
-    this.location = this.locationService.getNewLocation($event.toUpperCase())
+
+  public playerChoice($event:any): void {
+    if (this.CombatBool) {
+      
+    } else {
+      this.location = this.locationService.getNewLocation($event.toUpperCase())
+    }
   }
 
+/**
+ * Defunct: Currently generates the first town entrance.  Will be replaced by an api call 
+ * from the load screen in future iterations. 
+ * 
+ * @param submitString 
+ */
   changeLocation(submitString:string): void {
     // this.messageService.add(`${submitString} trying for new location`)
     this.location = this.locationService.getNewLocation(submitString)
