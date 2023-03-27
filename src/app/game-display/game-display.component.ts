@@ -27,7 +27,8 @@ const onClickCharacter = function () {
 })
 export class GameDisplayComponent {
 
-  constructor(private characterService: CharacterService, private messageService: MessageService, private locationService: LocationService) {}
+  constructor(private characterService: CharacterService, private messageService: 
+    MessageService, private locationService: LocationService, private combatService: CombatControllerService) {}
 
   submitString!: string;
   CombatBool!:boolean;
@@ -49,13 +50,63 @@ export class GameDisplayComponent {
   }
 
   public playerChoice($event:any): void {
-    if (this.CombatBool) {
-      
+    this.messageService.add("player choice starting")
+    if (this.CombatBool === true) {
+      this.messageService.add("player action")
+      this.playerAction($event);
     } else {
-      this.location = this.locationService.getNewLocation($event.toUpperCase())
+      this.location = this.locationService.getNewLocation($event);
     }
   }
 
+  attack(self:Character, target:Character) {
+    let damage: number = this.combatService.attack(self, target);
+    if (damage) {
+      target.current_hp -= damage;
+    }
+  }
+/**
+ * A switch function to determine what action the character takes based on the actionCall,
+ * a string passed in from the input form.  4 options: A - Attack, E -Evade, D - Defend, and F - Flee
+ * 
+ * @param actionCall 
+ */
+  playerAction(actionCall:string) {
+    this.messageService.add(`player action call ${actionCall}`)
+    
+      switch (actionCall){
+        case "A": {
+          this.attack(this.character, this.enemy);
+          break;
+        }
+        case "D": {
+          this.combatService.defend(this.character);
+          break;
+        }
+        case "E": {
+          this.combatService.evade(this.character);
+          break;
+        }
+        case "F": {
+          this.combatService.flee(this.character, this.enemy);
+          break;
+        }
+      }
+    }
+
+ 
+
+
+  round(actionCall:string) {
+    if (this.character.dexterity >= this.enemy.dexterity) {
+      this.playerAction(actionCall);
+      this.attack(this.enemy, this.character);
+    }
+    else {
+      this.attack(this.enemy, this.character);
+      this.playerAction(actionCall);
+    }
+  }
 /**
  * Defunct: Currently generates the first town entrance.  Will be replaced by an api call 
  * from the load screen in future iterations. 

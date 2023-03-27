@@ -8,18 +8,18 @@ import { Character } from './character';
 })
 export class CombatControllerService {
 
-  attack(self:Character, target: Character): Number {
-    let attack: Number = Math.random() * 100;
+  attack(self:Character, target: Character): number {
+    let attack: number = Math.random() * 100;
     if (attack === 100) {
-      this.messageService.add(`${target.name} has been hit critically for ${self.damage * 2} damage!`)
+      this.messageService.add(`${target.name} has been hit critically for ${self.damage * 2} damage!`, true)
       return self.damage * 2
     }
     else if (attack > target.dexterity) {
-      let totalDamage = self.damage + Math.random() * self.damage * .1 - target.armor
-      this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`)
+      let totalDamage = self.damage - target.armor // Math.random() * self.damage * .1
+      this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
       return totalDamage
     } else {
-      this.messageService.add(`${self.name} missed ${target.name}`)
+      this.messageService.add(`${self.name} missed ${target.name}`, true)
       return 0
     }
   }

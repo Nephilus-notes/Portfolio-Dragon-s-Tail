@@ -29,7 +29,7 @@ export class UIformComponent {
   @Output() submitValue = new EventEmitter<string|null>();
   public onSubmit(): void {
 
-    this.submitValue.emit(this.Control.value)
+    this.submitValue.emit(this.Control.value?.toUpperCase())
     this.Control.reset()
   }
 ngOnChanges(): void {
