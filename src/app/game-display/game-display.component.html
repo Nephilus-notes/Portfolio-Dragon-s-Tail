@@ -6,17 +6,23 @@
         <!-- *ngIf="characterView" -->
         <!-- <button type="button" id="characterViewButton" (click)="characterViewSwitch()">View Character</button> -->
     </div>
-    <div class="displayDiv">
-        <app-combat-display [combatant]="enemy"></app-combat-display>
-    <!-- <app-text-display [location]="location"></app-text-display> -->
+    <div class="displayDiv" >
+        <div *ngIf="CombatBool; else locationDisplay"> 
+
+            <app-combat-display [combatant]="enemy" ></app-combat-display>
+        </div>
+    <ng-template #locationDisplay>
+
+        <app-text-display [location]="location" >></app-text-display>
+    </ng-template>
+    
     <div *NgFor="ability of character.bag">
         {{character.abilities}}
     </div>
     <div class="optionsAndInput">
         <div class="options backgroundDark" *ngIf="CombatBool; else elseBlock">
-            <div *NgFor="let ability of character.abilities">
-            {{character.abilities}}
-        </div>
+           (A) Attack, (E) Evade, (D) Defend, (F) Flee
+        
         <li *ngFor="let item of character.abilities;" class="equipment">
             <button class="backpackItem" type="button" >{{item}}</button>
           </li>
@@ -27,7 +33,7 @@
            
         </div></ng-template>
         <form action="" class="input backgroundDark">
-            <app-uiform (submitValue)="formData($event)" [options]="location.options"></app-uiform>
+            <app-uiform (submitValue)="formData($event)" [locationOptions]="location.options" [CombatBool]="CombatBool" [combatOptions]='["A", "E", "D", "F"]'></app-uiform>
             
         </form>
     </div>
@@ -38,3 +44,4 @@
         <!-- <button type="" id="characterViewButton" (click)="characterViewSwitch()">View Backpack</button> -->
     </div>
 </div>
+<button ng (click)="combatToggle()">Combat Toggle</button>

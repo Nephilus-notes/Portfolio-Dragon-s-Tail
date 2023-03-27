@@ -23,6 +23,7 @@ p {
 li {
     background-color: darkgray;
     list-style: none;
+    font-size: 1.5rem;
 }
 
 ul {

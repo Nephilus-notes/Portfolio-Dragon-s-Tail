@@ -61,6 +61,15 @@ export class GameDisplayComponent {
           .subscribe(enemy => this.enemy = enemy)
   }
 
+  combatToggle(): void {
+    if (this.CombatBool) {
+      this.CombatBool = false;
+    }
+    else {
+      this.CombatBool = true
+    }
+  }
+
 
 
 ngOnInit(): void {
@@ -68,7 +77,7 @@ ngOnInit(): void {
     this.getCharacter();
     this.changeLocation("T");
     this.getNPC();
-    this.CombatBool=true
+    this.CombatBool=false;
   // }
 }
   title = "Dragon's Tail";

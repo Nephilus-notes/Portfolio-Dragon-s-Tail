@@ -15,18 +15,29 @@ import { Validators } from '@angular/forms';
 export class UIformComponent {
   submitString = '';
 
-  LocationControl = new FormControl('', [
+  Control = new FormControl('', [
     Validators.required,
     // optionValidator
   ]);
-  @Input() options!: Array<string>;
+  @Input() locationOptions!: Array<string>;
+  @Input() CombatBool!: boolean;
+
+  @Input()combatOptions!: Array<string>;
+  options!: Array<string>;
+
 
   @Output() submitValue = new EventEmitter<string|null>();
   public onSubmit(): void {
 
-    this.submitValue.emit(this.LocationControl.value)
-    this.LocationControl.reset()
+    this.submitValue.emit(this.Control.value)
+    this.Control.reset()
   }
-
+ngOnChanges(): void {
+  if (this.CombatBool) {
+    this.options = this.combatOptions;
+  } else {
+    this.options = this.locationOptions;
+  }
+}
  
 }
