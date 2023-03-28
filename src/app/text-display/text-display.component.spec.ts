@@ -14,6 +14,11 @@ describe('TextDisplayComponent', () => {
 
     fixture = TestBed.createComponent(TextDisplayComponent);
     component = fixture.componentInstance;
+    const ExpectedLocation = { id:"T",
+    name:"Town",
+     enterText: "Here we are in town", 
+    exitText: "", options:["B", "A", "I", "U", "S"], enemies: []};
+    component.location = ExpectedLocation;
     fixture.detectChanges();
   });
 

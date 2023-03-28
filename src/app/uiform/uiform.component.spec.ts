@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { UIformComponent } from './uiform.component';
 
@@ -8,7 +9,8 @@ describe('UIformComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UIformComponent ]
+      declarations: [ UIformComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
@@ -20,4 +22,7 @@ describe('UIformComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
+
 });
