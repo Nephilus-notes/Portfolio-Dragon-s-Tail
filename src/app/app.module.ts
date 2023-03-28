@@ -14,6 +14,9 @@ import { MessagesComponent } from './messages/messages.component';
 import { UIformComponent } from './uiform/uiform.component';
 import { TextDisplayComponent } from './text-display/text-display.component';
 import { CombatDisplayComponent } from './combat-display/combat-display.component';
+import { LoadGameComponent } from './load-game/load-game.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { CombatDisplayComponent } from './combat-display/combat-display.componen
     UIformComponent,
     TextDisplayComponent,
     CombatDisplayComponent,
+    LoadGameComponent,
+    LoginPageComponent,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,

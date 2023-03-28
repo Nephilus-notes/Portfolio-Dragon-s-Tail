@@ -50,6 +50,7 @@ export class CombatControllerService {
   Delay(time:number): Promise<boolean> {
     return new Promise(resolve => setTimeout(resolve, time))
   }
+  
   checkCombatants(player: Character, enemy:Character): boolean {
     if (player.current_hp <= 0) {
       player.current_hp = 0;
