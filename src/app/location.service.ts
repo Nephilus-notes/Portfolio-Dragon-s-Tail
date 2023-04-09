@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from './location';
 import { LOCATIONS } from './locations';
 import { MessageService } from './message.service';
@@ -10,7 +10,9 @@ import { MessageService } from './message.service';
   providedIn: 'root'
 })
 export class LocationService {
+  constructor(private messageService: MessageService, private http: HttpClient) { }
   locationCache!:Location;
+  locations!:Location[];
   /**
    * Takes in a location ID, makes an api call to retrieve the location object 
    * associated with that ID, and returns it
@@ -22,7 +24,12 @@ export class LocationService {
   getNewLocation(loc_id:string): Location {
 
     // I want a locations variable from teh server
-    // const locations = of()
+    // var headers = new HttpHeaders
+    //  const locations = of(this.http.get<any>(`https://localhost:7212/api/location`, {
+    //   headers: headers
+    //  })).subscribe(data => {
+    //   console.log(data)
+    //  });
     for (let location of LOCATIONS) {
       // this.messageService.add(`${location}`)
       if (location.id === loc_id) {
@@ -57,5 +64,16 @@ export class LocationService {
     return this.locationCache
   }
 
-  constructor(private messageService: MessageService) { }
+  getLocations() {
+    // var headers = new HttpHeaders
+    // const locations = of(this.http.get<any>(`https://localhost:7212/api/location`, {
+    //  headers: headers
+    // })).subscribe(data => {
+    //  console.log(data)
+    // });
+    let headers = new HttpHeaders;
+    let head2 = {headers: "Access-Control-Allow-Origin"}
+    let url = 'https://localhost:7212/api/location';
+    return this.http.get<any>(url, {headers: head2})
+  }
 }

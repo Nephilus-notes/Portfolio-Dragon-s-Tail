@@ -28,7 +28,11 @@ const onClickCharacter = function () {
 export class GameDisplayComponent {
 
   constructor(private characterService: CharacterService, private messageService: 
-    MessageService, private locationService: LocationService, private combatService: CombatControllerService) {}
+    MessageService, private locationService: LocationService, private combatService: CombatControllerService) {
+      this.locationService.getLocations().subscribe(data => {
+        console.warn(data)
+      })
+    }
 
   submitString!: string;
   CombatBool!:boolean;
