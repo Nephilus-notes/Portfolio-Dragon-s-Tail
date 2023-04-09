@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Character } from './character';
-import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharacterService {
+  constructor(private messageService: MessageService, private http:HttpClient) { }
+
   characterCache!: Character;
   npcCache!: Character
   /** 
@@ -18,6 +23,9 @@ export class CharacterService {
   *
   */
   getCharacter(): Observable<Character> {
+    // const character = of (
+
+    // )
     const character = of({
       name: "Craelios",
       bag: [
@@ -138,5 +146,4 @@ both elements and enemies.`}
       this.messageService.add('CharacterService: generated enemy', true)
       return npc;
     }
-  constructor(private messageService: MessageService) { }
 }

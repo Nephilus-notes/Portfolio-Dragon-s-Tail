@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Location } from './location';
 import { LOCATIONS } from './locations';
 import { MessageService } from './message.service';
@@ -17,6 +20,9 @@ export class LocationService {
    * @returns a location object
    */
   getNewLocation(loc_id:string): Location {
+
+    // I want a locations variable from teh server
+    // const locations = of()
     for (let location of LOCATIONS) {
       // this.messageService.add(`${location}`)
       if (location.id === loc_id) {

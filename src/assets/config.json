@@ -1,0 +1,4 @@
+{
+    "playerUrl": "https://localhost:7212/api/PlayerCharacters/${id}",
+    "locationUrl": "https://localhost:7212/api/Location"
+}
