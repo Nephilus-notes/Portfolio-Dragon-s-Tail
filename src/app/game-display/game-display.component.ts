@@ -44,6 +44,8 @@ export class GameDisplayComponent {
   getCharacter(): void {
     this.characterService.getCharacter(10)
           .subscribe(character => this.character = character)
+          this.characterService.getCharacter(10)
+          .subscribe(character => console.warn(character))
   }
 
   loadCharacter(): void {
@@ -70,7 +72,7 @@ export class GameDisplayComponent {
   attack(self:Character, target:Character) {
     let damage: number = this.combatService.attack(self, target);
     if (damage) {
-      target.current_hp -= damage;
+      target.currentHP -= damage;
     }
     this.messageService.add("attack")
   }
@@ -184,4 +186,3 @@ ngOnInit(): void {
   //   console.log('clicked')
   //   characterView = false ? characterView : true
   // })
-

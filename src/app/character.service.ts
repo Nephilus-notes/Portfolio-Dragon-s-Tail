@@ -138,12 +138,12 @@ both elements and enemies.`}
         dexterity: 15,
         intelligence: 13,
         constitution: 16,
-        hp: 20,
-        max_mp: 26,
+        maxHP: 20,
+        maxMP: 26,
         damage: 5,
         abilities: [['a', {name:"attack"}], ['d',{name:"defend"}],['g',{name:"dodge"}],['f',{name:"flee"}]],
-        current_hp: 20,
-        current_mp: 26,
+        currentHP: 20,
+        currentMP: 26,
       });
       this.messageService.add('CharacterService: generated enemy', true)
       return npc;
