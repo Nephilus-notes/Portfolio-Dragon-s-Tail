@@ -28,7 +28,7 @@ export class UIformComponent {
 
   @Output() submitValue = new EventEmitter<string|null>();
   public onSubmit(): void {
-
+    console.warn('clicking button')
     this.submitValue.emit(this.Control.value?.toUpperCase())
     this.Control.reset()
   }

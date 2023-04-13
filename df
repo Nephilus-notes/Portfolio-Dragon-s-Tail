@@ -1,0 +1,387 @@
+[33mcommit 3e4f5c137ab2f52f4d399083951d646a157d3ffb[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Thu Apr 13 14:55:16 2023 -0500
+
+    Revert "changed over current_mp, current_hp, hp, and max_mp to currentMP, currentHP, maxHP, and maxMP and added api calls for character generation."
+    
+    This reverts commit d5d8a5ba692f6391a230027d4ea70068cc1ffd26.
+
+[33mcommit f81b8db4794797d629cf05771f02e43857197ef2[m[33m ([m[1;31morigin/production[m[33m, [m[1;32mproduction[m[33m)[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Thu Apr 13 14:48:08 2023 -0500
+
+    something's broken
+
+[33mcommit d5d8a5ba692f6391a230027d4ea70068cc1ffd26[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Thu Apr 13 14:21:07 2023 -0500
+
+    changed over current_mp, current_hp, hp, and max_mp to currentMP, currentHP, maxHP, and maxMP and added api calls for character generation.
+
+[33mcommit 84414cb26498f3937162d515787f9d5b243c76ee[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Thu Apr 13 13:27:31 2023 -0500
+
+    implimented C for continue to obscure next area name
+
+[33mcommit 753d8f7c483106d66fbb404bd47bef8ec397ec3f[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Thu Apr 13 12:05:14 2023 -0500
+
+    Data is had!!!
+
+[33mcommit 3d6c6cf7020020b1c35bc0af9420ee7a7f3439cd[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Apr 9 13:19:49 2023 -0500
+
+    CORS still not working properly
+
+[33mcommit c86d4e21be7c3667212565192bc3d6b81d7ab95b[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Apr 9 12:10:30 2023 -0500
+
+    partway through adding usable api routes
+
+[33mcommit f448ac2cfa5710e36639ac7b30c26a69a413d593[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 28 12:47:16 2023 -0500
+
+    generated folders for loading page, login page, and create profile page
+
+[33mcommit 6abe361a3c8573c6f77ab08cce6fe4472ca10b57[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 28 12:00:44 2023 -0500
+
+    added test dependencies in text, char, and backpack (location and/or character/combatant) and added no_errors_schema to uiform and game-display
+
+[33mcommit affdc0ee308b95ae7fe1cf3ac00451ee5bf555d4[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 27 14:01:19 2023 -0500
+
+    added player and enemy status check logic that revert to the town screen on hp = 0.
+
+[33mcommit 3ba56b87776dfd807e77897a3419bf5b8c5bf6b5[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 27 13:16:46 2023 -0500
+
+    character can attack enemies
+
+[33mcommit 45669bf01e676da13ef0dfab73f5ec1e7d42fd27[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 27 12:52:25 2023 -0500
+
+    made a sketch of combat controller with 4 basic abilities.  changed the formData function on gamedisplay into playerchoice which has a combat conditional in it.
+
+[33mcommit 9f6a810ea049678d9db398400d7a3a5f3cf73001[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 27 12:21:40 2023 -0500
+
+    added some logic plans in readme, changed rat's hp/maxhp in character service
+
+[33mcommit 869f78dcb18e38a057b794b5bb3782d8a9b9fec7[m
+Merge: f24045d 01d0d27
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 27 12:05:00 2023 -0500
+
+    Merge branch 'main' of https://github.com/Nephilus-notes/Portfolio-Dragon-s-Tail
+
+[33mcommit f24045d115e90c62f258df921c1c897a3401fb80[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 27 12:04:14 2023 -0500
+
+    added combat toggle button to gamedisplay and hardcoded basic 4 abilities.  changed font size on character info.  passed combat bool and hard coded ability options to uiform for validation along with CombatBool for some conditional logic.
+
+[33mcommit 01d0d278b899730ed17daea03ef7a6ee90f9206f[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 27 11:37:20 2023 -0500
+
+    Update README.md
+
+[33mcommit a9f2875f8efa07986f900c28b9dbf136eca45fc8[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Thu Mar 23 17:22:14 2023 -0500
+
+    WIP displaying character abilities/ability options near input
+
+[33mcommit cdb71cf68c7d57e403e4dc3f4c8144c21dbc5108[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Thu Mar 23 16:22:49 2023 -0500
+
+    added boolean to clear for combat, successfully displayed text in combat
+
+[33mcommit b43b69d2fe2a2bc2022baab96da1eedf664df574[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Thu Mar 23 16:14:22 2023 -0500
+
+    created combat display component and added enemy to the character service and gamedisplay init. also added a second parameter to my messageservice's add function(combat:boolean=false) along with a combat message cache for in combat text display
+
+[33mcommit 06b70985e6eb8417cd849cd4f2ba5d4fce465113[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 14:02:14 2023 -0500
+
+    putxed with css, slightly more responsive display
+
+[33mcommit ce39179831cf72e88bdde128aa80af4cd317d96c[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 13:15:38 2023 -0500
+
+    locationcontrol reset on submit
+
+[33mcommit 6b9da2ccce3284b998a002f2c1a84c7d5101c685[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 13:08:28 2023 -0500
+
+    added basic validation to location control form html
+
+[33mcommit f695c580b703655ace4dbfb496bbae5264277acd[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 12:45:44 2023 -0500
+
+    added submit string to uiform for validation purposes
+
+[33mcommit e16769aeefc7d574d8e03a21221f76e2b2ef5bf2[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 12:33:34 2023 -0500
+
+    took out extraneous code in charinfo
+
+[33mcommit fd4f2ab0097f15858e5a194152b18e6916450730[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 12:29:57 2023 -0500
+
+    passed character to backpack and charinfo from gamedisplay
+
+[33mcommit ff2678bef9f8fc42fc4001eaf0b9bf36647dd9a4[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 12:13:43 2023 -0500
+
+    created form component for user input to change locations
+
+[33mcommit 6066220a949a6e99002b6f63742f4e9817139d18[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 10:40:03 2023 -0500
+
+    added mock locationservice and traveling is live.  Form is not using angular formControl so that is the next step
+
+[33mcommit 7a7751f6cdd0baba24d7e6aa55396dca1ca4607e[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 22 09:52:39 2023 -0500
+
+    added basical error message to inut validation
+
+[33mcommit 1861d21e67b0764a488e2fe63610720e28c1d6f2[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 17:03:49 2023 -0500
+
+    started on input interactivity for gamedisplay component.
+
+[33mcommit 2ba03cebe04383e8181eef6e1f7b1df01ec765f7[m
+Merge: 52ca46f 1885250
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 16:06:45 2023 -0500
+
+    Merge branch 'main' of https://github.com/Nephilus-notes/Portfolio-Dragon-s-Tail
+
+[33mcommit 52ca46f5fe15ff4c82809b803663504a4ee7267c[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 16:06:17 2023 -0500
+
+    small testing tweaks, tests are failing
+
+[33mcommit 188525055bfe39ac0840aa4db9f99f47c99a362e[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 15:07:20 2023 -0500
+
+    Update README.md
+
+[33mcommit 29ab8c45087af261b3d5474b5a91bad5fae87eb5[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 14:58:44 2023 -0500
+
+    Update README.md
+
+[33mcommit 8e1f4233d8dc4019c10a7653ab356466f5e6a29e[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 14:49:18 2023 -0500
+
+    readme h3-h2
+
+[33mcommit 49593b50c8c3f00d818f312a0a2b36b94e6f62f3[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 14:48:11 2023 -0500
+
+    updated readme
+
+[33mcommit 3dd679a0187e22585457b43616e4b167bc170d5c[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 13:45:22 2023 -0500
+
+    equipping and using items enabled
+
+[33mcommit 388dd5a2d0745ef07fa55f45a2a353a5c6d49a89[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 11:31:37 2023 -0500
+
+    added armor to manual test selectedItemUse switch
+
+[33mcommit 4fc10b1e94eddf73046a7e69673eb1c94474f937[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 11:25:29 2023 -0500
+
+    item display mockup working
+
+[33mcommit 434bd79d2540e1c1920c1c9b1366f8eae8b58fa9[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 11:09:47 2023 -0500
+
+    added deselect to item in backpack
+
+[33mcommit edd5ce2ec555fc57dd462b396e70d271b15d2011[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 11:07:28 2023 -0500
+
+    added pop up for item click in backpack
+
+[33mcommit cd782f751dae8775dfe396c864528612191264b1[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 10:43:58 2023 -0500
+
+    in backpack display took out items and used character.bag. implimenting selected item dropdown now
+
+[33mcommit 32e746456d88bb55e7ef0fe2d074b342b49dda15[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 21 10:24:07 2023 -0500
+
+    add documentation for character service
+
+[33mcommit 6dd9d846fe85c91b059b6e9b4dc6356af3f00cfa[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 20 13:17:45 2023 -0500
+
+    added save to get for game display, switched character and backpack to load and it functions.
+
+[33mcommit 2ec8833035f296616fc437537ab3dbbdbdc83f62[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 20 12:36:36 2023 -0500
+
+    got testing up and running by fixing crash in app and fixed other tests.
+
+[33mcommit 18fff361ed21f7f26ed70f40116772c2c30d4d84[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 20 12:09:03 2023 -0500
+
+    incomplete, working on persistent DI
+
+[33mcommit 86d32835d1a2933390704c2cf274262157a39ef4[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 20 11:15:18 2023 -0500
+
+    ice theme
+
+[33mcommit 2fdcc51ba876c9c9d8624120152d96df06839cbb[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 20 11:11:08 2023 -0500
+
+    sea theme almost complete
+
+[33mcommit 757ead191d4a1ceb7a3d223918b264d740c81933[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 20 11:06:53 2023 -0500
+
+    added shifting BG on buttons
+
+[33mcommit 3f6faac7c92d4eef1432d64509c2c05e5073f3fd[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 20 11:01:25 2023 -0500
+
+    prettified the index, added moving background to cards
+
+[33mcommit 5a30b6170c3d39e24f6602fea0afd2be42c02f09[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Mon Mar 20 10:32:00 2023 -0500
+
+    added roadmap to MD file
+
+[33mcommit 4221b27142d7573120415327cf019fef9c59afa0[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 23:50:06 2023 -0500
+
+    incomplete commit.  Need to adjust character DI to be a cache, and then create methods to load the cached character into different components
+
+[33mcommit 255d3d2699d4ced815502b2143572855a1c1b530[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 23:21:55 2023 -0500
+
+    created character DI as an array with one element, as asynchronous OnInit
+
+[33mcommit c140e49291e8cbe9c8e8aed9356fb6fb2c445e5e[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 14:16:54 2023 -0500
+
+    changed curser to pointer on item hover
+
+[33mcommit f449aa7cd248d35511a82d84bbd63cb0c4f17620[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 13:59:22 2023 -0500
+
+    added usable navbar mockup, fixed one index css property
+
+[33mcommit b91b2920934bdf9dc511791c8abb1193a41fbc17[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 13:18:07 2023 -0500
+
+    mock up of index page done with links to 3 projects, main github, and space for short blurb.
+
+[33mcommit be45ca7f480aa926a4b705901441b76e09644d93[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 09:25:53 2023 -0500
+
+    added general github link to index.html
+
+[33mcommit 0134785c5bd0e7b7ccc5d96f626e4d5536149ae9[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 09:24:21 2023 -0500
+
+    added some flex components for a mock up of the home screen
+
+[33mcommit 69dc2396f665d5eac659e0c162a9d82f539616ea[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 09:12:50 2023 -0500
+
+    generated index component
+
+[33mcommit 3d49afb074467f3cba7a0aae2e0da8c238bab030[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 09:12:01 2023 -0500
+
+    deleted home component
+
+[33mcommit 9d0e05025b3af09db29a92518b823a7507ffe502[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Sun Mar 19 09:11:44 2023 -0500
+
+    added router-outlet to app html for routing genereated a home component to delete
+
+[33mcommit a819b0e96610c06433aecbdecde15f58f660b8b0[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Fri Mar 17 12:07:42 2023 -0500
+
+    mock up game UI done.  Item, Equipment, Character, and Location objects made and able to display character stats, backpack contents, text, options, and a user input field
+
+[33mcommit 61a1b684559e5d92ed1379796876b6061b6b45c1[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Wed Mar 15 17:54:33 2023 -0500
+
+    various changes including generating a nav bar, changing location.options to a list, and finishing a usable character info bar
+
+[33mcommit 829c9e2729278644e795d663fcb80f3782591f82[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 14 16:14:30 2023 -0500
+
+    game display in progress
+
+[33mcommit 1e4710d629b0ca71e9d5ae07a6f76252d9f05309[m
+Author: Nephilus-notes <114515979+Nephilus-notes@users.noreply.github.com>
+Date:   Tue Mar 14 10:53:53 2023 -0500
+
+    initial commit
