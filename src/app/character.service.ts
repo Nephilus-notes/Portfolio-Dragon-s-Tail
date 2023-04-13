@@ -128,9 +128,9 @@ export class CharacterService {
         name: "Krakt Rat",
         bag: [],
         equippedItems: {
-          head:null,
-          body:null,
-          hand: null
+          Head:null,
+          Body:null,
+          Hand: null
       },
         armor: 1,
         resistance: 2,

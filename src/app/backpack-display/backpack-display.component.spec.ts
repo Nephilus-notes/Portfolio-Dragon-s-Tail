@@ -23,7 +23,7 @@ describe('BackpackDisplayComponent', () => {
       bag: [
         {id: 1,
       'name': "Death's Scythe",
-      'itemStat': 15, 'price': 500, "slot": "hand",
+      'itemStat': 15, 'price': 500, "slot": "Hand",
       'description': 
     `Magical scythe 
     Whenever you touch this 
@@ -43,15 +43,15 @@ describe('BackpackDisplayComponent', () => {
 both elements and enemies.`}
     ],
       equippedItems: {
-        'head':null,
-        'body':{id:3,
+        'Head':null,
+        'Body':{id:3,
       'name': 'Leather Armor',
       'itemStat': 1, 'price': 20, "slot": "body",
       'description': 
     `Toughened leather 
     Protects against
     both elements and enemies.`},
-        hand: null
+        Hand: null
     },
       armor: 4,
       resistance: 2,
@@ -59,12 +59,12 @@ both elements and enemies.`}
       dexterity: 15,
       intelligence: 13,
       constitution: 16,
-      hp: 32,
-      max_mp: 26,
+      maxHP: 32,
+      maxMP: 26,
       damage: 5,
       abilities: [],
-      current_hp: 31,
-      current_mp: 26,
+      currentHP: 31,
+      currentMP: 26,
     };
     component.character = expectedCharacter
     fixture.detectChanges();

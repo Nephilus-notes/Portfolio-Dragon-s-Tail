@@ -38,12 +38,12 @@ export class BackpackDisplayComponent {
       this.backpacklocation = i;
       this.messageService.add('item selected')
       switch(this.selectedItem.slot) {
-        case "hand": {
+        case "Hand": {
           this.selectedItemUse = "Damage";
           this.useItem = "Equip";
           break;
         }
-        case "body": {
+        case "Body": {
           this.selectedItemUse = "Armor";
           this.useItem = "Equip";
           break;
@@ -82,15 +82,15 @@ export class BackpackDisplayComponent {
       case "Equip": {
         switch(selectedItem.slot) {
 
-          case 'hand': {
+          case 'Hand': {
             var temp_item!: Item
 
-            if (this.character.equippedItems.hand) 
+            if (this.character.equippedItems.Hand) 
             {
-              temp_item = this.character.equippedItems.hand
+              temp_item = this.character.equippedItems.Hand
             }
 
-            this.character.equippedItems.hand = selectedItem
+            this.character.equippedItems.Hand = selectedItem
 
             if (temp_item) 
             {
@@ -102,15 +102,15 @@ export class BackpackDisplayComponent {
           }
           break;
           }
-          case "body": {
+          case "Body": {
             var temp_item!: Item
 
-            if (this.character.equippedItems.body) 
+            if (this.character.equippedItems.Body) 
             {
-              temp_item = this.character.equippedItems.body
+              temp_item = this.character.equippedItems.Body
             }
 
-            this.character.equippedItems.body = selectedItem
+            this.character.equippedItems.Body = selectedItem
 
             if (temp_item) 
             {
@@ -122,15 +122,15 @@ export class BackpackDisplayComponent {
           }
           break;
           }
-          case "head": {
+          case "Head": {
             var temp_item!: Item
 
-            if (this.character.equippedItems.head) 
+            if (this.character.equippedItems.Head) 
             {
-              temp_item = this.character.equippedItems.head
+              temp_item = this.character.equippedItems.Head
             }
 
-            this.character.equippedItems.head = selectedItem
+            this.character.equippedItems.Head = selectedItem
 
             if (temp_item) 
             {

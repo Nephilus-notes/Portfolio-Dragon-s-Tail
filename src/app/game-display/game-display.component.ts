@@ -133,7 +133,10 @@ export class GameDisplayComponent {
  * @param submitString 
  */
   changeLocation(submitString:string): void {
-
+    this.messageService.add("moving")
+    if (this.location != null && this.location != undefined) {
+      this.messageService.add(`changed to ${this.location.name}`)
+    }
     if(submitString === 'C') {
 this.messageService.add("trying next")
     this.messageService.add(this.location.next)  
@@ -145,8 +148,8 @@ this.messageService.add("trying next")
       .subscribe(location => this.location = location)
 
       // Console log of location data
-      // this.locationService.getNewLocation(submitString)
-      // .subscribe(location => console.warn(location))
+       this.locationService.getNewLocation(submitString)
+       .subscribe(location => console.warn(location))
     }
   }
 
