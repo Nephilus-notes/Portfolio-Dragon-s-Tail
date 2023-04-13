@@ -22,10 +22,12 @@ export class CharacterService {
   *
   *
   */
-  getCharacter(): Observable<Character> {
-    // const character = of (
+  getCharacter(char_id: number): Observable<Character> {
+  
+    // let url = `https://localhost:7212/api/PlayerCharacters/${char_id}`
+    // const character = this.http.get<Character>(url)
+    this.messageService.add('CharacterService: fetched characters')
 
-    // )
     const character = of({
       name: "Craelios",
       bag: [
@@ -51,15 +53,15 @@ export class CharacterService {
 both elements and enemies.`}
     ],
       equippedItems: {
-        'head':null,
-        'body':{id:3,
+        'Head':null,
+        'Body':{id:3,
       'name': 'Leather Armor',
       'itemStat': 1, 'price': 20, "slot": "body",
       'description': 
     `Toughened leather 
     Protects against
     both elements and enemies.`},
-        hand: null
+        Hand: null
     },
       armor: 4,
       resistance: 2,
@@ -67,12 +69,12 @@ both elements and enemies.`}
       dexterity: 15,
       intelligence: 13,
       constitution: 16,
-      hp: 32,
-      max_mp: 26,
+      maxHP: 32,
+      maxMP: 26,
       damage: 5,
       abilities: [],
-      current_hp: 31,
-      current_mp: 26,
+      currentHP: 31,
+      currentMP: 26,
     });
     this.messageService.add('CharacterService: fetched characters')
     return character;
