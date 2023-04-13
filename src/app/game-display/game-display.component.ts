@@ -42,8 +42,10 @@ export class GameDisplayComponent {
   location!: Location;
 
   getCharacter(): void {
-    this.characterService.getCharacter()
+    this.characterService.getCharacter(10)
           .subscribe(character => this.character = character)
+          this.characterService.getCharacter(10)
+          .subscribe(character => console.warn(character))
   }
 
   loadCharacter(): void {
@@ -70,7 +72,7 @@ export class GameDisplayComponent {
   attack(self:Character, target:Character) {
     let damage: number = this.combatService.attack(self, target);
     if (damage) {
-      target.current_hp -= damage;
+      target.currentHP -= damage;
     }
     this.messageService.add("attack")
   }
@@ -141,8 +143,10 @@ this.messageService.add("trying next")
 
       this.locationService.getNewLocation(submitString)
       .subscribe(location => this.location = location)
-      this.locationService.getNewLocation(submitString)
-      .subscribe(location => console.warn(location))
+
+      // Console log of location data
+      // this.locationService.getNewLocation(submitString)
+      // .subscribe(location => console.warn(location))
     }
   }
 
