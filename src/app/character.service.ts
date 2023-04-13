@@ -22,9 +22,9 @@ export class CharacterService {
   *
   *
   */
-  getCharacter(char_id: number): Observable<Character> {
+  getCharacter(charID: number): Observable<Character> {
   
-    // let url = `https://localhost:7212/api/PlayerCharacters/${char_id}`
+    // let url = `https://localhost:7212/api/PlayerCharacters/${charID}`
     // const character = this.http.get<Character>(url)
     this.messageService.add('CharacterService: fetched characters')
 
