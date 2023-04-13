@@ -1,15 +1,15 @@
 <div class="combatDisplay">
-<div class="NPCStatBar">
-    <div class="name">{{combatant.name}}</div>
-    <div class="stats">{{combatant.current_hp}}/{{combatant.hp}}</div>
-    <div class="conditions"></div>
-</div>
-<div class="combatMessage" *ngIf="messageService.combatMessages.length">
-
-    <!-- <h2 class="message-content">Messages</h2> -->
-    <button type="button" class="clear"
-            (click)="messageService.clear(true)">Clear messages</button>
-    <div class="message-content" *ngFor='let message of messageService.combatMessages'> {{message}} </div>
-  
+  <div class="NPCStatBar">
+      <div class="name">{{combatant.name}}</div>
+      <div class="stats">{{combatant.currentHP}}/{{combatant.maxHP}}</div>
+      <div class="conditions"></div>
   </div>
-</div>
+  <div class="combatMessage" *ngIf="messageService.combatMessages.length">
+  
+      <!-- <h2 class="message-content">Messages</h2> -->
+      <button type="button" class="clear"
+              (click)="messageService.clear(true)">Clear messages</button>
+      <div class="message-content" *ngFor='let message of messageService.combatMessages'> {{message}} </div>
+    
+    </div>
+  </div>
