@@ -3,7 +3,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from './location';
-import { LOCATIONS } from './locations';
+// import { LOCATIONS } from './locations';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -12,7 +12,7 @@ import { MessageService } from './message.service';
 export class LocationService {
   constructor(private messageService: MessageService, private http: HttpClient) { }
   locationCache!:Location;
-  locations!: Observable<Location[]>;
+  locations!: Location[];
   /**
    * Takes in a location ID, makes an api call to retrieve the location object 
    * associated with that ID, and returns it
@@ -21,32 +21,13 @@ export class LocationService {
    * sanitized user input
    * @returns a location object
    */
-  getNewLocation(loc_id:string): Location {
+  getNewLocation(loc_id:string): Observable<Location> {
+    let url = `https://localhost:7212/api/location/${loc_id}`;
 
-    // I want a locations variable from teh server
-    // var headers = new HttpHeaders
-    //  const locations = of(this.http.get<any>(`https://localhost:7212/api/location`, {
-    //   headers: headers
-    //  })).subscribe(data => {
-    //   console.log(data)
-    //  });
-    for (let location of LOCATIONS) {
-      // this.messageService.add(`${location}`)
-      if (location.id === loc_id) {
-        // this.messageService.add(`${location.id} and ${loc_id}`)
-        // this.messageService.add(`${location.name}`)
-        return location
-      } 
-    }
-    return  {
-      id: "BS",
-      name: "Blacksmith's Shop",
-      enterText: `An error has occurred. Please go to town`,
-      exitText: "You exit the shop",
-      options: [ "T"],
-      enemies: []
-    }
+    const location = this.http.get<Location>(url)
+    return location
   }
+
   saveLocation(location:Location) {
     this.locationCache = location
     this.messageService.add('location Saved')
@@ -65,17 +46,10 @@ export class LocationService {
   }
 
   getLocations() {
-    // var headers = new HttpHeaders
-    // const locations = of(this.http.get<any>(`https://localhost:7212/api/location`, {
-    //  headers: headers
-    // })).subscribe(data => {
-    //  console.log(data)
-    // });
-    let headers = new HttpHeaders;
-    let head2 = {headers: "Access-Control-Allow-Origin"}
+
     let url = 'https://localhost:7212/api/location';
-    // return this.http.get<any>(url, {headers: head2})
-    this.locations = this.http.get<any>(url)
-    return this.locations
+
+    return this.http.get<any>(url)
   }
+
 }

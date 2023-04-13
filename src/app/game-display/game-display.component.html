@@ -29,11 +29,11 @@
     </div>
         <ng-template #elseBlock>
         <div class="options backgroundDark">
-            <li>{{location.options}}</li>
+            <li>{{location.moveOptions}}</li>
            
         </div></ng-template>
         <form action="" class="input backgroundDark">
-            <app-uiform (submitValue)="playerChoice($event)" [locationOptions]="location.options" [CombatBool]="CombatBool" [combatOptions]='["A", "E", "D", "F"]'></app-uiform>
+            <app-uiform (submitValue)="playerChoice($event)" [locationOptions]="location.moveOptions" [CombatBool]="CombatBool" [combatOptions]='["A", "E", "D", "F"]'></app-uiform>
             
         </form>
     </div>

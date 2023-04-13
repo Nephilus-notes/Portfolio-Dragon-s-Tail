@@ -59,7 +59,8 @@ export class GameDisplayComponent {
       this.messageService.add("player action")
       this.round($event);
     } else {
-      this.location = this.locationService.getNewLocation($event);
+
+      this.changeLocation($event)
     }
   }
 
@@ -130,8 +131,19 @@ export class GameDisplayComponent {
  * @param submitString 
  */
   changeLocation(submitString:string): void {
-    // this.messageService.add(`${submitString} trying for new location`)
-    this.location = this.locationService.getNewLocation(submitString)
+
+    if(submitString === 'C') {
+this.messageService.add("trying next")
+    this.messageService.add(this.location.next)  
+    this.locationService.getNewLocation(this.location.next)
+      .subscribe(location => this.location = location)
+    } else {
+
+      this.locationService.getNewLocation(submitString)
+      .subscribe(location => this.location = location)
+      this.locationService.getNewLocation(submitString)
+      .subscribe(location => console.warn(location))
+    }
   }
 
   getNPC(): void {

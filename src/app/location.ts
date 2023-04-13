@@ -3,6 +3,10 @@ export interface Location {
     name: string;
     enterText: string;
     exitText: string;
-    options: Array<string>;
-    enemies: Array<object>;
+    moveOptions: Array<string>;
+    commonNPC: string;
+    uncommonNPC: string;
+    rareNPC: string;
+    secretNPC: string;
+    next: string;
 }
