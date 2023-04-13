@@ -134,6 +134,7 @@ export class GameDisplayComponent {
  */
   changeLocation(submitString:string): void {
     this.messageService.add("moving")
+    
     if (this.location != null && this.location != undefined) {
       this.messageService.add(`changed to ${this.location.name}`)
     }
