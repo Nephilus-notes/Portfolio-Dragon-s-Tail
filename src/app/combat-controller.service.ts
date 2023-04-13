@@ -52,14 +52,14 @@ export class CombatControllerService {
   }
   
   checkCombatants(player: Character, enemy:Character): boolean {
-    if (player.currentHP <= 0) {
-      player.currentHP = 0;
+    if (player.current_hp <= 0) {
+      player.current_hp = 0;
       this.messageService.add("You can no longer fight. You return home", true)
 
       // Send back to town
       return false
-    } else if (enemy.currentHP <= 0) {
-      enemy.currentHP = 0;
+    } else if (enemy.current_hp <= 0) {
+      enemy.current_hp = 0;
       this.messageService.add(`You defeated the ${enemy.name}! You might get some reward from this eventually.`, true)
 
       return false

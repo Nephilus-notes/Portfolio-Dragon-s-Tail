@@ -14,15 +14,15 @@ export interface Character {
     dexterity: number
     intelligence: number
     constitution: number
-    maxHP : number
-    maxMP : number
+    hp : number
+    max_mp : number
     // weapon: object
     // weapon_damage : number
     damage : number
 
     abilities: Array<Array <any>>
-    currentHP: number
-    currentMP: number  
+    current_hp: number
+    current_mp: number  
 
     // armor_val :number
     // att_val :number

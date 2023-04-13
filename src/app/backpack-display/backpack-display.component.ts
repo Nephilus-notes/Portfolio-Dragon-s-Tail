@@ -68,10 +68,10 @@ export class BackpackDisplayComponent {
   onItemUse(useItem: string, selectedItem: Item) {
     switch(useItem) {
       case "Use": {
-        if (this.character.currentHP < this.character.maxHP) {
-          this.character.currentHP += selectedItem.itemStat;
-          if (this.character.currentHP > this.character.maxHP) {
-            this.character.currentHP = this.character.maxHP;
+        if (this.character.current_hp < this.character.hp) {
+          this.character.current_hp += selectedItem.itemStat;
+          if (this.character.current_hp > this.character.hp) {
+            this.character.current_hp = this.character.hp;
             this.messageService.add("potion used")
             this.character.bag.splice(this.backpacklocation, 1);
             // this.saveCharacter();

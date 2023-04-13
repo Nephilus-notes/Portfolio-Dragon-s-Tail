@@ -2,10 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { GameDisplayComponent } from './game-display.component';
+import { BackpackDisplayComponent } from '../backpack-display/backpack-display.component';
 import { CharacterInfoComponent } from '../character-info/character-info.component';
 import { UIformComponent } from '../uiform/uiform.component';
 import { TextDisplayComponent } from '../text-display/text-display.component';
-import { BackpackDisplayComponent } from '../backpack-display/backpack-display.component';
 
 describe('GameDisplayComponent', () => {
   let component: GameDisplayComponent;

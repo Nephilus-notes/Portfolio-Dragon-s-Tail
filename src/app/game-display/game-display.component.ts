@@ -42,10 +42,8 @@ export class GameDisplayComponent {
   location!: Location;
 
   getCharacter(): void {
-    this.characterService.getCharacter(10)
+    this.characterService.getCharacter()
           .subscribe(character => this.character = character)
-          this.characterService.getCharacter(10)
-          .subscribe(character => console.warn(character))
   }
 
   loadCharacter(): void {
@@ -72,7 +70,7 @@ export class GameDisplayComponent {
   attack(self:Character, target:Character) {
     let damage: number = this.combatService.attack(self, target);
     if (damage) {
-      target.currentHP -= damage;
+      target.current_hp -= damage;
     }
     this.messageService.add("attack")
   }
