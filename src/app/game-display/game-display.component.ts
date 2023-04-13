@@ -42,7 +42,7 @@ export class GameDisplayComponent {
   location!: Location;
 
   getCharacter(): void {
-    this.characterService.getCharacter()
+    this.characterService.getCharacter(10)
           .subscribe(character => this.character = character)
   }
 
