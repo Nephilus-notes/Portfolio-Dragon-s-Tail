@@ -12,7 +12,7 @@ import { MessageService } from './message.service';
 export class LocationService {
   constructor(private messageService: MessageService, private http: HttpClient) { }
   locationCache!:Location;
-  locations!:Location[];
+  locations!: Observable<Location[]>;
   /**
    * Takes in a location ID, makes an api call to retrieve the location object 
    * associated with that ID, and returns it
@@ -74,6 +74,8 @@ export class LocationService {
     let headers = new HttpHeaders;
     let head2 = {headers: "Access-Control-Allow-Origin"}
     let url = 'https://localhost:7212/api/location';
-    return this.http.get<any>(url, {headers: head2})
+    // return this.http.get<any>(url, {headers: head2})
+    this.locations = this.http.get<any>(url)
+    return this.locations
   }
 }
