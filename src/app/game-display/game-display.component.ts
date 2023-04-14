@@ -50,9 +50,11 @@ export class GameDisplayComponent {
 
   loadCharacter(): void {
     if(!this.characterService.characterCache) {
-      this.characterService.getCharacter(28);
+      console.warn(`cache empty= ${this.characterService.characterCache}`)
+      this.getCharacter();
       this.messageService.add("loading failed");
     } else {
+      console.warn(`cache full = ${this.characterService.characterCache}`)
       this.character = this.characterService.loadCharacter();
       this.messageService.add("Character Loaded");
     }
