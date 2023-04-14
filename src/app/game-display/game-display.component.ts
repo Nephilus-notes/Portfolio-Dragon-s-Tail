@@ -60,15 +60,7 @@ export class GameDisplayComponent {
       this.character = this.characterService.loadCharacter();
       this.messageService.add("Character Loaded");
     }
-    // if(this.characterService.exists()) {
-    //   this.characterService.loadCharacter()
-    //   this.messageService.add("Character loaded properly")
-    // } else {
-    //   this.messageService.add("loading failed")
-    //   this.characterService.getCharacter(28)
-    //   .subscribe(character => this.character = character)
-    //   ;
-    // }
+
   }
   cacheCharacter(): void {
     this.characterService.cacheCharacter(this.character)
@@ -159,7 +151,10 @@ export class GameDisplayComponent {
       this.messageService.add(`changed from ${this.location.name}`)
     }
     if(submitString === 'C') {
-
+      var playerExplored = this.checkPlayerExploration()
+      if (playerExplored > 3) {
+        // startCombat()
+      }
 this.messageService.add("trying next")
     this.messageService.add(this.location.next)  
     this.locationService.getNewLocation(this.location.next)
@@ -175,7 +170,7 @@ this.messageService.add("trying next")
     }
   }
 
-  checkLocation(): number {
+  checkPlayerExploration(): number {
     switch (this.location.id) {
       case "T": {
         return this.character.thagragsHopeExplored
@@ -217,13 +212,6 @@ this.messageService.add("trying next")
       this.messageService.add('location Loaded')
     }
     console.warn(`Location Cache: ${this.locationService.locationCache}`)
-
-    // if(this.locationService.cacheExists()) {
-    //   this.location = this.locationService.loadLocation();
-    //   this.messageService.add("location loaded");
-    // }
-    // this.messageService.add("location load failed");
-    // this.locationService.getNewLocation('T');
   };
 
   getNPC(): void {
