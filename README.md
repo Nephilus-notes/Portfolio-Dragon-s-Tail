@@ -8,7 +8,7 @@ Primary Game Display
 <ul>
 <li><s>Display text pertaining to the location</s></li>
 <li>Display options to indicate what valid input are</li>
-<li>Take user input to initiate an api call to proceed to the next location</li>
+<li><s>Take user input to initiate an api call to proceed to the next location</s></li>
 MVP+
 <li>Add exit text with a user controlled button to shut down the current location</li>
 </ul>
@@ -59,19 +59,19 @@ MVP+
 </ul>
 Nav Bar
 <ul>
-<li>link to load/start game (game entrypoint)</li>
+<li><s>link to load/start game (game entrypoint)</s></li>
 <li><s>Link to landing page</s></li>
 <li>link to log in page</li>
 <li>conditional button for logout</li>
 </ul>
 Combat component
 <ul>
-<li>Display the enemy and certain attributes including hp</li>
+<li><s>Display the enemy and certain attributes including hp</s></li>
 <li>Display abilities the character has available</li>
-<li>Take user input on what abilities are used</li>
+<li><s>Take user input on what abilities are used</s></li>
 <li>Use ability display to guide user in choosing an input</li>
-<li>Display/generate text to tell the user what is happening</li>
-<li>Maintain character info and character item display in some way</li>
+<li><s>Display/generate text to tell the user what is happening</s></li>
+<li><s>Maintain character info and character item display in some way</s></li>
 MVP+
 <li>Display detailed information on abilities</li>
 </ul>
