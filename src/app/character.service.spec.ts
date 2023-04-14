@@ -15,6 +15,6 @@ describe('CharacterService', () => {
     expect(service).toBeTruthy();
   });
   it('character should be gotten', () =>{
-    expect(service.getCharacter(10)).toBeTruthy();
+    expect(service.getCharacter(28)).toBeTruthy();
   })
 });

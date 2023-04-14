@@ -87,7 +87,8 @@ both elements and enemies.`}
   * @returns none
   *
   */
-  saveCharacter(character:Character) {
+  cacheCharacter(character:Character) {
+    // console.warn(`character cache: ${character}`)
     this.characterCache = character
     this.messageService.add('Progress Saved')
   }

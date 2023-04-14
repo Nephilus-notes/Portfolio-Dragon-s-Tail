@@ -28,8 +28,8 @@ export class LoadGameComponent {
       this.getLocation(file.locationID);
       
     })
-    this.saveService.getSaveFile(3)
-    .subscribe(file => console.warn(file))
+    // this.saveService.getSaveFile(3)
+    // .subscribe(file => console.warn(file))
 
 
 
@@ -39,18 +39,18 @@ export class LoadGameComponent {
     this.characterService.getCharacter(charID)
     .subscribe(character => {
       this.character = character
-      console.warn(character)
+      // console.warn(character)
+      this.characterService.cacheCharacter(character);
     });
-    this.characterService.saveCharacter(this.character);
   }
 
   getLocation(locationID:string) {
     this.locationService.getNewLocation(locationID)
     .subscribe(location => {
       this.location = location
-      console.warn(location)
+      // console.warn(location)
+      this.locationService.saveLocation(this.location);
     });
-    this.locationService.saveLocation(this.location);
   }
 
 }

@@ -28,21 +28,29 @@ export class LocationService {
     return location
   }
 
-  saveLocation(location:Location) {
+  saveLocation(location:Location): void {
     this.locationCache = location
+    // console.warn(location)
     this.messageService.add('location Saved')
   }
   /** 
   * Loads a location from the CharacterService cache without an API call
   *
   * @param none
-  * @returns none
+  * @returns a location object
   *
   *
   */
-  loadLocation() {
+  loadLocation(): Location {
     this.messageService.add('location Loaded')
     return this.locationCache
+  }
+
+  cacheExists(): boolean {
+    if(this.locationCache) {
+      return true
+    }
+    return false
   }
 
   getLocations() {

@@ -29,9 +29,9 @@ export class GameDisplayComponent {
 
   constructor(private characterService: CharacterService, private messageService: 
     MessageService, private locationService: LocationService, private combatService: CombatControllerService) {
-      this.locationService.getLocations().subscribe(data => {
-        console.warn(data)
-      })
+      // this.locationService.getLocations().subscribe(data => {
+      //   console.warn(data)
+      // })
     }
 
   submitString!: string;
@@ -42,17 +42,25 @@ export class GameDisplayComponent {
   location!: Location;
 
   getCharacter(): void {
-    this.characterService.getCharacter(10)
+    this.characterService.getCharacter(28)
           .subscribe(character => this.character = character)
-          this.characterService.getCharacter(10)
+          this.characterService.getCharacter(28)
           .subscribe(character => console.warn(character))
   }
 
   loadCharacter(): void {
-    this.characterService.loadCharacter()
+    if(this.characterService.exists()) {
+      this.characterService.loadCharacter()
+      this.messageService.add("Character loaded properly")
+    } else {
+      this.messageService.add("loading failed")
+      this.characterService.getCharacter(28)
+      .subscribe(character => this.character = character)
+      ;
+    }
   }
-  saveCharacter(): void {
-    this.characterService.saveCharacter(this.character)
+  cacheCharacter(): void {
+    this.characterService.cacheCharacter(this.character)
   }
 
   public playerChoice($event:any): void {
@@ -133,7 +141,7 @@ export class GameDisplayComponent {
  * @param submitString 
  */
   changeLocation(submitString:string): void {
-    this.messageService.add("moving")
+    // this.messageService.add("moving")
 
     
     if (this.location != null && this.location != undefined) {
@@ -150,10 +158,29 @@ this.messageService.add("trying next")
       .subscribe(location => this.location = location)
 
       // Console log of location data
-       this.locationService.getNewLocation(submitString)
-       .subscribe(location => console.warn(location))
+      //  this.locationService.getNewLocation(submitString)
+      //  .subscribe(location => console.warn(location))
     }
   }
+
+  loadLocation() {
+    // this.messageService.add("Loading")
+    if(!this.locationService.locationCache) {
+      this.changeLocation('T');
+      // console.warn(`Location Cache: ${this.locationService.locationCache}`)
+    } else {
+      this.location = this.locationService.locationCache;
+      this.messageService.add('location Loaded')
+    }
+    console.warn(`Location Cache: ${this.locationService.locationCache}`)
+
+    // if(this.locationService.cacheExists()) {
+    //   this.location = this.locationService.loadLocation();
+    //   this.messageService.add("location loaded");
+    // }
+    // this.messageService.add("location load failed");
+    // this.locationService.getNewLocation('T');
+  };
 
   getNPC(): void {
     this.characterService.getEnemy()
@@ -172,9 +199,11 @@ this.messageService.add("trying next")
 
 
 ngOnInit(): void {
-
+    this.messageService.add("initializing")
+    // this.changeLocation("T")
+    this.loadLocation();
     this.getCharacter();
-    this.changeLocation("T");
+    // this.loadCharacter();
     this.getNPC();
     this.CombatBool=false;
   // }
