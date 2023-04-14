@@ -7,5 +7,6 @@
     <!-- build a loading bar? -->
 
     <!-- make this nav link an ngIf to ensure all pieces are loaded first -->
-    <a class="nav-link" ria-current="Dragon's Tail Game" routerLink="/loadgame">Start Game</a>
+    <a  *ngIf="character" class="nav-link" ria-current="Dragon's Tail Game" routerLink="/game"
+    >Start Game</a>
 </div>

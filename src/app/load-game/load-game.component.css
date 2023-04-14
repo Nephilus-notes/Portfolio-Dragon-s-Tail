@@ -33,7 +33,7 @@ a:active {
 .loadbutton {
     margin-inline: auto;
     display: block;
-    width: clamp(3rem, 7vw, 70rem);
+    width: clamp(7rem, 7vw, 70rem);
 }
 
 .nav-link {
@@ -48,7 +48,7 @@ a:active {
     text-rendering: optimizeSpeed;
     margin-inline: auto;
     display: block;
-    width: clamp(3rem, 4vw, 70rem);
+    width: clamp(7rem, 4vw, 70rem);
 }
 
 @keyframes bganimation {
