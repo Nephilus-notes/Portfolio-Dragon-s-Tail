@@ -5,7 +5,9 @@ import { LocationService } from '../location.service';
 import { CombatControllerService } from '../combat-controller.service';
 
 import { Location } from '../location'
+import { Char } from '../char';
 import { Character } from '../character';
+import { NPC } from '../npc';
 
 const CharacterViewButton = document.getElementById("characterViewButton")
 let characterView = false;
@@ -38,7 +40,7 @@ export class GameDisplayComponent {
   CombatBool!:boolean;
 
   character!: Character;
-  enemy!: Character;
+  enemy!: NPC;
   location!: Location;
 
   getCharacter(): void {
@@ -86,7 +88,7 @@ export class GameDisplayComponent {
   /* START COMBAT LOGIC */
 
 
-  attack(self:Character, target:Character) {
+  attack(self:Character|NPC, target:Character|NPC): void {
     let damage: number = this.combatService.attack(self, target);
     if (damage) {
       target.currentHP -= damage;
@@ -154,9 +156,10 @@ export class GameDisplayComponent {
 
     
     if (this.location != null && this.location != undefined) {
-      this.messageService.add(`changed to ${this.location.name}`)
+      this.messageService.add(`changed from ${this.location.name}`)
     }
     if(submitString === 'C') {
+
 this.messageService.add("trying next")
     this.messageService.add(this.location.next)  
     this.locationService.getNewLocation(this.location.next)
@@ -169,6 +172,38 @@ this.messageService.add("trying next")
       // Console log of location data
       //  this.locationService.getNewLocation(submitString)
       //  .subscribe(location => console.warn(location))
+    }
+  }
+
+  checkLocation(): number {
+    switch (this.location.id) {
+      case "T": {
+        return this.character.thagragsHopeExplored
+      }
+      case "W": {
+        return this.character.webOfDepthsExplored
+      }
+      case "G": {
+        return this.character.graithsGrottoExplored
+      }
+      case "Q": {
+        return this.character.graithQueensLairExplored
+      }
+      case "K": {
+        return this.character.kratabsFollyExplored
+      }
+      case "D": {
+        return this.character.drippingDeathExplored
+      }
+      case "P": {
+        return this.character.playersRespiteExplored
+      }
+      case "TTD": {
+        return this.character.tailOfTheDragonExplored
+      }
+      default: {
+        return 0
+      }
     }
   }
 

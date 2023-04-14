@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 
-import { Character } from './character';
+import { NPC } from './npc';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NpcService {
-  getEnemy(): Observable<Character> {
+  getEnemy(): Observable<NPC> {
     const Enemy = of({
       name: "Craelios",
       bag: [
@@ -34,15 +34,15 @@ export class NpcService {
 both elements and enemies.`}
     ],
       equippedItems: {
-        'head':null,
-        'body':{id:3,
+        'Head':null,
+        'Body':{id:3,
       'name': 'Leather Armor',
       'itemStat': 1, 'price': 20, "slot": "body",
       'description': 
     `Toughened leather 
     Protects against
     both elements and enemies.`},
-        hand: null
+        Hand: null
     },
       armor: 4,
       resistance: 2,
@@ -50,12 +50,12 @@ both elements and enemies.`}
       dexterity: 15,
       intelligence: 13,
       constitution: 16,
-      hp: 32,
-      max_mp: 26,
+      maxHP: 32,
+      maxMP: 26,
       damage: 5,
       abilities: [],
-      current_hp: 31,
-      current_mp: 26,
+      currentHP: 31,
+      currentMP: 26,
     });
     this.messageService.add('CharacterService: fetched characters')
     return Enemy;

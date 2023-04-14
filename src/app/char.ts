@@ -1,8 +1,7 @@
-import { Equipment } from './equipment';
-import { Item } from './item'
-import { Char } from './char';
+import { Item } from "./item";
+import { Equipment } from "./equipment";
 
-export interface Character extends Char {
+export interface Char {
     name: string;
     // lifetime_currency: number;
     // currency: number;
@@ -24,14 +23,6 @@ export interface Character extends Char {
     abilities: Array<Array <any>>
     currentHP: number
     currentMP: number  
-    kratabsFollyExplored: number
-    drippingDeathExplored: number
-    playersRespiteExplored: number
-    tailOfTheDragonExplored: number
-    thagragsHopeExplored: number
-    webOfDepthsExplored: number
-    graithsGrottoExplored: number
-    graithQueensLairExplored: number
 
     // armor_val :number
     // att_val :number

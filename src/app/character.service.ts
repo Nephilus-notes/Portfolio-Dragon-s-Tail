@@ -3,6 +3,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Character } from './character';
+import { NPC } from './npc';
 import { MessageService } from './message.service';
 
 
@@ -75,6 +76,14 @@ both elements and enemies.`}
       abilities: [],
       currentHP: 31,
       currentMP: 26,
+      "kratabsFollyExplored": 0,
+    "drippingDeathExplored": 0,
+    "playersRespiteExplored": 0,
+    "tailOfTheDragonExplored": 0,
+    "thagragsHopeExplored": 0,
+    "webOfDepthsExplored": 0,
+    "graithsGrottoExplored": 0,
+    "graithQueensLairExplored": 0,
     });
     this.messageService.add('CharacterService: fetched characters')
     return character;
@@ -101,7 +110,7 @@ both elements and enemies.`}
   *
   */
   loadCharacter() {
-    this.messageService.add('Character Loaded')
+    this.messageService.add('Character Loaded from characterservice')
     return this.characterCache
   }
   exists() {
@@ -124,7 +133,7 @@ both elements and enemies.`}
     *
     *
     */
-    getEnemy(): Observable<Character> {
+    getEnemy(): Observable<NPC> {
       const npc = of({
         name: "Krakt Rat",
         bag: [],

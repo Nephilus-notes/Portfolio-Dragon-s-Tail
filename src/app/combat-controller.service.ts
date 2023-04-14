@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 
 import { MessageService } from './message.service';
 import { Character } from './character';
+import { NPC } from './npc';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CombatControllerService {
 
-  attack(self:Character, target: Character): number {
+  attack(self:Character|NPC, target: Character|NPC): number {
     let attack: number = Math.random() * 100;
     if (attack === 100) {
       this.messageService.add(`${target.name} has been hit critically for ${self.damage * 2} damage!`, true)
@@ -36,7 +37,7 @@ export class CombatControllerService {
     self.dexterity += 2
   }
 
-  flee(self: Character, target: Character): boolean {
+  flee(self: Character|NPC, target: Character|NPC): boolean {
     if (self.dexterity > target.dexterity) {
       this.messageService.add(`${self.name} has fled!`, true)
       return true
@@ -51,7 +52,7 @@ export class CombatControllerService {
     return new Promise(resolve => setTimeout(resolve, time))
   }
   
-  checkCombatants(player: Character, enemy:Character): boolean {
+  checkCombatants(player: Character, enemy:NPC): boolean {
     if (player.currentHP <= 0) {
       player.currentHP = 0;
       this.messageService.add("You can no longer fight. You return home", true)
