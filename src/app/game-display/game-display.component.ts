@@ -49,15 +49,22 @@ export class GameDisplayComponent {
   }
 
   loadCharacter(): void {
-    if(this.characterService.exists()) {
-      this.characterService.loadCharacter()
-      this.messageService.add("Character loaded properly")
+    if(!this.characterService.characterCache) {
+      this.characterService.getCharacter(28);
+      this.messageService.add("loading failed");
     } else {
-      this.messageService.add("loading failed")
-      this.characterService.getCharacter(28)
-      .subscribe(character => this.character = character)
-      ;
+      this.character = this.characterService.loadCharacter();
+      this.messageService.add("Character Loaded");
     }
+    // if(this.characterService.exists()) {
+    //   this.characterService.loadCharacter()
+    //   this.messageService.add("Character loaded properly")
+    // } else {
+    //   this.messageService.add("loading failed")
+    //   this.characterService.getCharacter(28)
+    //   .subscribe(character => this.character = character)
+    //   ;
+    // }
   }
   cacheCharacter(): void {
     this.characterService.cacheCharacter(this.character)
@@ -200,10 +207,9 @@ this.messageService.add("trying next")
 
 ngOnInit(): void {
     this.messageService.add("initializing")
-    // this.changeLocation("T")
     this.loadLocation();
-    this.getCharacter();
-    // this.loadCharacter();
+    // this.getCharacter();
+    this.loadCharacter();
     this.getNPC();
     this.CombatBool=false;
   // }
