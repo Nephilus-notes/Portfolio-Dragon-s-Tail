@@ -6,7 +6,7 @@ import { CharacterService } from '../character.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environment/environment';
 
 import { SaveFile } from '../models/saveFile';
 
