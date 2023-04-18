@@ -44,3 +44,7 @@ Thumbs.db
 
 # Bonus
 .readmebackend.md
+
+environments
+environments/environments.prod.ts
+environments/environments.ts
