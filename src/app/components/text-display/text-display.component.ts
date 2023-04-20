@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Location } from '../../location';
+import { Location } from '../../models/location';
 
 @Component({
   selector: 'app-text-display',

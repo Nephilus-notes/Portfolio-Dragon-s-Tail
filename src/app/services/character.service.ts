@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Character } from '../character';
-import { NPC } from '../npc';
+import { Character } from '../models/character';
+import { NPC } from '../models/npc';
 import { MessageService } from './message.service';
 
 import { environment } from 'src/environment/environment';

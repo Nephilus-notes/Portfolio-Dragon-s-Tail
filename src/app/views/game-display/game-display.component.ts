@@ -4,10 +4,10 @@ import { MessageService } from '../../services/message.service';
 import { LocationService } from '../../services/location.service';
 import { CombatControllerService } from '../../combat-controller.service';
 
-import { Location } from '../../location';
-import { Char } from '../../char';
-import { Character } from '../../character';
-import { NPC } from '../../npc';
+import { Location } from '../../models/location';
+import { Char } from '../../models/char';
+import { Character } from '../../models/character';
+import { NPC } from '../../models/npc';
 
 const CharacterViewButton = document.getElementById('characterViewButton');
 let characterView = false;

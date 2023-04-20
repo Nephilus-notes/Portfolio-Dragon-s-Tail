@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Character } from '../../character';
+import { Character } from '../../models/character';
 import { MessageService } from '../../services/message.service';
-import { NPC } from '../../npc';
+import { NPC } from '../../models/npc';
 
 @Component({
   selector: 'app-combat-display',

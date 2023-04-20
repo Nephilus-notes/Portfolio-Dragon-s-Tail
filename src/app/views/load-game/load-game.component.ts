@@ -3,8 +3,8 @@ import { SaveFileService } from '../../services/save-file.service';
 import { SaveFile } from '../../models/saveFile';
 import { LocationService } from '../../services/location.service';
 import { CharacterService } from '../../services/character.service';
-import { Character } from '../../character';
-import { Location } from '../../location';
+import { Character } from '../../models/character';
+import { Location } from '../../models/location';
 
 @Component({
   selector: 'app-load-game',

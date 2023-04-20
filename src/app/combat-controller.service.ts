@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { MessageService } from './services/message.service';
-import { Character } from './character';
-import { NPC } from './npc';
+import { Character } from './models/character';
+import { NPC } from './models/npc';
 
 @Injectable({
   providedIn: 'root'

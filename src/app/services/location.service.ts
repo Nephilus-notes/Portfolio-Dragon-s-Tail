@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Location } from '../location';
+import { Location } from '../models/location';
 import { environment } from 'src/environment/environment';
 
 import { MessageService } from './message.service';
