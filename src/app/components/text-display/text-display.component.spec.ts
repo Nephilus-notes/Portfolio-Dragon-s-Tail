@@ -17,7 +17,12 @@ describe('TextDisplayComponent', () => {
     const ExpectedLocation = { id:"T",
     name:"Town",
      enterText: "Here we are in town", 
-    exitText: "", options:["B", "A", "I", "U", "S"], enemies: []};
+    exitText: "", moveOptions:["B", "A", "I", "U", "S"], 
+    commonNPC: '',
+    uncommonNPC: '',
+    rareNPC: '',
+    secretNPC: '',
+    next: ''};
     component.location = ExpectedLocation;
     fixture.detectChanges();
   });

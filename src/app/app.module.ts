@@ -7,18 +7,18 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GameDisplayComponent } from './game-display/game-display.component';
-import { CharacterInfoComponent } from './character-info/character-info.component';
-import { BackpackDisplayComponent } from './backpack-display/backpack-display.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { IndexComponent } from './index/index.component';
-import { MessagesComponent } from './messages/messages.component';
-import { UIformComponent } from './uiform/uiform.component';
-import { TextDisplayComponent } from './text-display/text-display.component';
-import { CombatDisplayComponent } from './combat-display/combat-display.component';
-import { LoadGameComponent } from './load-game/load-game.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { CreateUserComponent } from './create-user/create-user.component';
+import { GameDisplayComponent } from './views/game-display/game-display.component';
+import { CharacterInfoComponent } from './components/character-info/character-info.component';
+import { BackpackDisplayComponent } from './components/backpack-display/backpack-display.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { IndexComponent } from './views/index/index.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { UIformComponent } from './components/uiform/uiform.component';
+import { TextDisplayComponent } from './components/text-display/text-display.component';
+import { CombatDisplayComponent } from './components/combat-display/combat-display.component';
+import { LoadGameComponent } from './views/load-game/load-game.component';
+import { LoginPageComponent } from './views/login-page/login-page.component';
+import { CreateUserComponent } from './views/create-user/create-user.component';
 
 @NgModule({
   declarations: [

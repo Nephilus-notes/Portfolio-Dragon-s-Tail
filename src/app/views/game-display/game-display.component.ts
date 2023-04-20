@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { CharacterService } from '../services/character.service';
-import { MessageService } from '../services/message.service';
-import { LocationService } from '../services/location.service';
-import { CombatControllerService } from '../combat-controller.service';
+import { CharacterService } from '../../services/character.service';
+import { MessageService } from '../../services/message.service';
+import { LocationService } from '../../services/location.service';
+import { CombatControllerService } from '../../combat-controller.service';
 
-import { Location } from '../location';
-import { Char } from '../char';
-import { Character } from '../character';
-import { NPC } from '../npc';
+import { Location } from '../../location';
+import { Char } from '../../char';
+import { Character } from '../../character';
+import { NPC } from '../../npc';
 
 const CharacterViewButton = document.getElementById('characterViewButton');
 let characterView = false;

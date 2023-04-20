@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SaveFileService } from '../services/save-file.service';
-import { SaveFile } from '../models/saveFile';
-import { LocationService } from '../services/location.service';
-import { CharacterService } from '../services/character.service';
-import { Character } from '../character';
-import { Location } from '../location';
+import { SaveFileService } from '../../services/save-file.service';
+import { SaveFile } from '../../models/saveFile';
+import { LocationService } from '../../services/location.service';
+import { CharacterService } from '../../services/character.service';
+import { Character } from '../../character';
+import { Location } from '../../location';
 
 @Component({
   selector: 'app-load-game',
