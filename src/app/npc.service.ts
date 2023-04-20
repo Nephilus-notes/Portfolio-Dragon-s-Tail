@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { MessageService } from './message.service';
+import { MessageService } from './services/message.service';
 
 import { NPC } from './npc';
 

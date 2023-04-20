@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Character } from '../character';
 import { Item } from '../item'
-import { CharacterService } from '../character.service';
-import { MessageService } from '../message.service';
+import { CharacterService } from '../services/character.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-backpack-display',

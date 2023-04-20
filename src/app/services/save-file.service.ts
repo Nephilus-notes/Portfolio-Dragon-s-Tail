@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { MessageService } from '../message.service';
-import { LocationService } from '../location.service';
-import { CharacterService } from '../character.service';
+import { MessageService } from './message.service';
+import { LocationService } from './location.service';
+import { CharacterService } from './character.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CharacterService } from '../character.service';
-import { MessageService } from '../message.service';
-import { LocationService } from '../location.service';
+import { CharacterService } from '../services/character.service';
+import { MessageService } from '../services/message.service';
+import { LocationService } from '../services/location.service';
 import { CombatControllerService } from '../combat-controller.service';
 
 import { Location } from '../location';
