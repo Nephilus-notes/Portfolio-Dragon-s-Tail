@@ -40,6 +40,7 @@ export class GameDisplayComponent {
 
   submitString!: string;
   CombatBool!: boolean;
+  ShopBool!: boolean;
 
   character!: Character;
   enemy!: NPC;
@@ -251,7 +252,7 @@ export class GameDisplayComponent {
   loadLocation() {
     // this.messageService.add("Loading")
     if (!this.locationService.locationCache) {
-      this.changeLocation('T');
+      this.changeLocation('B');
       // console.warn(`Location Cache: ${this.locationService.locationCache}`)
     } else {
       this.location = this.locationService.locationCache;
@@ -269,6 +270,14 @@ export class GameDisplayComponent {
       this.CombatBool = false;
     } else {
       this.CombatBool = true;
+    }
+  }
+
+  shopToggle(): void {
+    if (this.ShopBool) {
+      this.ShopBool = false;
+    } else {
+      this.ShopBool = true;
     }
   }
 

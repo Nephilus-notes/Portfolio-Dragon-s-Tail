@@ -7,14 +7,13 @@
         <!-- <button type="button" id="characterViewButton" (click)="characterViewSwitch()">View Character</button> -->
     </div>
     <div class="displayDiv" >
-        <div *ngIf="CombatBool; else locationDisplay"> 
 
-            <app-combat-display [combatant]="enemy" ></app-combat-display>
-        </div>
-    <ng-template #locationDisplay>
 
-        <app-text-display [location]="location" >></app-text-display>
-    </ng-template>
+            <app-combat-display *ngIf="CombatBool" [combatant]="enemy" ></app-combat-display>
+
+        <app-text-display *ngIf="!CombatBool && !ShopBool" [location]="location" >></app-text-display>
+
+            <app-shop-display *ngIf="ShopBool" [location]="location" [shopBool]="ShopBool"></app-shop-display>
     
     <div *NgFor="ability of character.bag">
         {{character.abilities}}
@@ -45,3 +44,4 @@
     </div>
 </div>
 <button ng (click)="combatToggle()" class="center">Combat Toggle</button>
+<button ng (click)="shopToggle()" class="center">Shop Toggle</button>

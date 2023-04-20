@@ -19,6 +19,7 @@ import { CombatDisplayComponent } from './components/combat-display/combat-displ
 import { LoadGameComponent } from './views/load-game/load-game.component';
 import { LoginPageComponent } from './views/login-page/login-page.component';
 import { CreateUserComponent } from './views/create-user/create-user.component';
+import { ShopDisplayComponent } from './components/shop-display/shop-display.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CreateUserComponent } from './views/create-user/create-user.component';
     LoadGameComponent,
     LoginPageComponent,
     CreateUserComponent,
+    ShopDisplayComponent,
   ],
   imports: [
     BrowserModule,
