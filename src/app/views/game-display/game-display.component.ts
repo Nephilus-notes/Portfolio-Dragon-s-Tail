@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CharacterService } from '../../services/character.service';
 import { MessageService } from '../../services/message.service';
 import { LocationService } from '../../services/location.service';
-import { CombatControllerService } from '../../combat-controller.service';
+import { CombatControllerService } from '../../services/combat-controller.service';
 
 import { Location } from '../../models/location';
 import { Char } from '../../models/char';
