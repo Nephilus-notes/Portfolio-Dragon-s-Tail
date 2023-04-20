@@ -20,7 +20,7 @@ export class SaveFileService {
   
   getSaveFile(saveID:number): Observable<SaveFile>{
 
-    let url = `https://localhost:7212/api/SaveFileS/${saveID}`;
+    let url = `${environment.saveFileURL}${saveID}`;
 
     return this.http.get<SaveFile>(url)
   }

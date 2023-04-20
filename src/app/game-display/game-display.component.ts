@@ -47,10 +47,10 @@ export class GameDisplayComponent {
 
   getCharacter(): void {
     this.characterService
-      .getCharacter(28)
+      .getCharacter(1)
       .subscribe((character) => (this.character = character));
     this.characterService
-      .getCharacter(28)
+      .getCharacter(1)
       .subscribe((character) => console.warn(character));
   }
 

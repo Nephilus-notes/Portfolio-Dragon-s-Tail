@@ -3,7 +3,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from './location';
-// import { LOCATIONS } from './locations';
+import { environment } from 'src/environment/environment';
+
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class LocationService {
    * @returns a location object
    */
   getNewLocation(loc_id:string): Observable<Location> {
-    let url = `https://localhost:7212/api/location/${loc_id}`;
+    let url = `${environment.locationURL}${loc_id}`;
 
     const location = this.http.get<Location>(url)
     return location
@@ -55,7 +56,7 @@ export class LocationService {
 
   getLocations() {
 
-    let url = 'https://localhost:7212/api/location';
+    let url = environment.locationURL;
 
     return this.http.get<any>(url)
   }
