@@ -19,13 +19,17 @@ export class LoadGameComponent {
   character!: Character;
   location!: Location;
 
+  Loading!: boolean;
+
 
   loadSaveFile() {
-    this.saveService.getSaveFile(3)
+    this.Loading = true;
+    this.saveService.getSaveFile(1)
     .subscribe(file => {
-      this.file = file
+      this.file = file;
       this.getCharacter(file.playerCharacterID);
       this.getLocation(file.locationID);
+      this.Loading = false;
       
     })
     // this.saveService.getSaveFile(3)

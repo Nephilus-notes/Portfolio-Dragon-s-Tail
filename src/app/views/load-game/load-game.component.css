@@ -18,6 +18,19 @@ a:active {
     color:yellow
 }
 
+.background-primary {
+     background-color: darkgray;
+    }
+    
+.bordered {
+    border: 2px solid white;
+
+}
+
+.centered {
+    margin-inline: auto;
+}
+
 .load {
     width: clamp(23rem, 50vw, 70rem);
     height: 600px;
@@ -25,12 +38,15 @@ a:active {
     padding: 20px;
     margin-bottom: 20px;
     margin-top: 10rem;
-    margin-inline: auto;
-    background-color: darkgray;
-    border: 2px solid white;
 }
 
-.loadbutton {
+.mini {
+    width: 5rem;
+    font-size: 3rem;
+    border-radius: 10px;
+}
+
+.loadButton {
     margin-inline: auto;
     display: block;
     width: clamp(7rem, 7vw, 70rem);
