@@ -145,7 +145,10 @@ export class GameDisplayComponent {
    */
   changeLocation(submitString: string): void {
 
-    if (submitString === 'C') {
+    if (submitString === 'S') {
+      this.ShopBool = true
+    }
+    else if (submitString === 'C') {
       var playerExplored = this.checkPlayerExploration();
       if (playerExplored < 3) {
         playerExplored++;
