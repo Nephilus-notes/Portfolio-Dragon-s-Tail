@@ -20,6 +20,7 @@ import { LoadGameComponent } from './views/load-game/load-game.component';
 import { LoginPageComponent } from './views/login-page/login-page.component';
 import { CreateUserComponent } from './views/create-user/create-user.component';
 import { ShopDisplayComponent } from './components/shop-display/shop-display.component';
+import { SelectedItemComponent } from './components/selected-item/selected-item.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ShopDisplayComponent } from './components/shop-display/shop-display.com
     LoginPageComponent,
     CreateUserComponent,
     ShopDisplayComponent,
+    SelectedItemComponent,
   ],
   imports: [
     BrowserModule,

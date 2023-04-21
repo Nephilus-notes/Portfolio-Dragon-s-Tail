@@ -3,57 +3,23 @@
     
 }
 
-.textDisplay {
-    width: clamp(23rem, 50vw, 70rem);
-    height: 600px;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    margin-left: 0;
-}
-
-.background-primary {
-    background-color: darkgray;
-    
-}
-
-
-
-.selection {
-    padding: 15px;
-    border-radius: 10px;
-    display: block;
-    width: fit-content;
+.toolTipButton {
     background-color: rgba(204, 204, 204, 0.726);
-    margin: 2px 0;
     box-shadow: inset -3px -3px 5px 5px rgba(255, 253, 253, 0.2), inset 3px 3px 5px 5px rgba(5, 5, 5, 0.2);
-    font-size: 2rem;
+    margin: 0 0 0 10px;
+    padding: 10px 20px;
     color: white;
+
 }
 
-.selection:hover {
+.toolTipButton:hover {
     background-color: rgb(3, 79, 79);
     box-shadow: inset 3px 3px 5px 5px rgba(255, 253, 253, 0.493), inset -3px -3px 5px 5px rgba(5, 5, 5, 0.493);
-    z-index: 10;
-    /* margin-bottom: 20px; */
 }
 
-.itemTitle {
-    display: block;
-    width: fit-content;
-    margin-inline: auto;
-}
-
-.shopTitle {
-    display: block;
-    width: fit-content;
-}
-
-.goldDisplay {
-    display: block;
-    width: fit-content;
-    margin-right: 5px;
-
+.toolTipButton:disabled:hover {
+    background-color: lightgray;
+    box-shadow: inset 3px 3px 5px 5px rgba(255, 253, 253, 0.242), inset -3px -3px 5px 5px rgba(5, 5, 5, 0.493);
 }
 
 .flex-co {

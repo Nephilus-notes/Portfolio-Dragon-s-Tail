@@ -5,3 +5,27 @@
 * {
     background-color: black;
 }
+
+.flex-co {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    gap: 7x;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-space {
+    justify-content: space-between;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+.bordered {
+    border: 2px solid white;
+
+}

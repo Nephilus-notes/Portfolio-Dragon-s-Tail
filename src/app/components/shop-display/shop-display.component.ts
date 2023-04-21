@@ -159,19 +159,22 @@ export class ShopDisplayComponent {
     }
   }
 
-  public buyItem(boughtItem: Item): void {
-    this.character.currentCurrency -= boughtItem.price;
+  public buyItem(): void {
+    this.character.currentCurrency -= this.selectedItem!.price;
     this.character.bag = [];
-    this.selectedItem = undefined;
-    this.character.bag.push(boughtItem);
+    this.character.bag.push(this.selectedItem!);
     for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].id === boughtItem.id) {
-        this.items.splice(i,1)
-        // console.warn(this.items)
-        return
+      if (this.items[i].id === this.selectedItem!.id) {
+        this.items.splice(i,1);
+        this.resetSelectedItem();
+        return;
       }
     }
-  }
+  };
+
+  public resetSelectedItem(): void {
+    this.selectedItem = undefined;
+  };
 
   constructor(private itemService:ItemService, private messageService: MessageService) {};
  

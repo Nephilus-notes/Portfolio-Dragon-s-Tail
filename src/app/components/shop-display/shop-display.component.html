@@ -16,7 +16,10 @@
         </button>
     </div>
     <div *ngIf="selectedItem">
-        <h2 class="itemTitle">{{selectedItem.name}}</h2>
+        <app-selected-item [location]="location" [character]="character" [selectedItem]="selectedItem"
+        (selectedItemReset)="resetSelectedItem()"
+        (chosenItem)="buyItem()"></app-selected-item>
+        <!-- <h2 class="itemTitle">{{selectedItem.name}}</h2>
         {{selectedItem.price}}gp 
         {{selectedItem.description}} 
 
@@ -24,7 +27,7 @@
 
             <button class="toolTipButton" (click)="onSelect(selectedItem)">Back</button>
             <button class="toolTipButton"  (click)="buyItem(selectedItem)">Buy</button>
-            <!-- [disabled]="character.currentCurrency<selectedItem.price" -->
-        </div>
+            [disabled]="character.currentCurrency<selectedItem.price" -->
+        <!-- </div> -->
     </div>
 </div>
