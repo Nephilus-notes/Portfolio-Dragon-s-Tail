@@ -9,12 +9,12 @@ import { Item } from '../models/item';
 @Injectable({
   providedIn: 'root'
 })
-export class ItemServiceService {
+export class ItemService {
   getItem(itemID: number): Observable<Item> {
   
     let url = `${environment.itemURL}${itemID}`
     const item = this.http.get<Item>(url)
-    this.messageService.add('CharacterService: fetched characters')
+    this.messageService.add('ItemService: Item Fetched')
     return item;
   }
 
