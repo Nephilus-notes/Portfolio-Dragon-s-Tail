@@ -144,21 +144,14 @@ export class GameDisplayComponent {
    * @param submitString
    */
   changeLocation(submitString: string): void {
-    // this.messageService.add("moving")
 
-    if (this.location != null && this.location != undefined) {
-      this.messageService.add(`changed from ${this.location.name}`);
-    }
     if (submitString === 'C') {
       var playerExplored = this.checkPlayerExploration();
-      this.messageService.add(`${playerExplored}`)
       if (playerExplored < 3) {
         playerExplored++;
         this.modifyPlayerExploration(playerExplored)
         this.startCombat();
-      } else if (playerExplored >= 3) {
-        this.messageService.add('trying next');
-        this.messageService.add(this.location.next);
+
         playerExplored = Math.floor(playerExplored/2)
         this.modifyPlayerExploration(playerExplored)
         this.locationService
@@ -169,10 +162,6 @@ export class GameDisplayComponent {
         this.locationService
           .getNewLocation(submitString)
           .subscribe((location) => (this.location = location));
-
-        // Console log of location data
-        //  this.locationService.getNewLocation(submitString)
-        //  .subscribe(location => console.warn(location))
       }
   }
 
