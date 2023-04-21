@@ -38,12 +38,12 @@ export class BackpackDisplayComponent {
       this.backpacklocation = i;
       this.messageService.add('item selected')
       switch(this.selectedItem.slot) {
-        case "Hand": {
+        case "hand": {
           this.selectedItemUse = "Damage";
           this.useItem = "Equip";
           break;
         }
-        case "Body": {
+        case "body": {
           this.selectedItemUse = "Armor";
           this.useItem = "Equip";
           break;

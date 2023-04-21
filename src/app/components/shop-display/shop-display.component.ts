@@ -167,6 +167,7 @@ export class ShopDisplayComponent {
       if (this.items[i].id === this.selectedItem!.id) {
         this.items.splice(i,1);
         this.resetSelectedItem();
+        console.warn(this.items)
         return;
       }
     }
