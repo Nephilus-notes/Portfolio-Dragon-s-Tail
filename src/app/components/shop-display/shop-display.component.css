@@ -1,3 +1,8 @@
+* {
+    background-color:darkgray;
+    
+}
+
 .textDisplay {
     width: clamp(23rem, 50vw, 70rem);
     height: 600px;
@@ -12,8 +17,32 @@
     
 }
 
+.flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    gap: 7x;
+}
 .bordered {
     border: 2px solid white;
 
 }
 
+.selection {
+    padding: 15px;
+    border-radius: 10px;
+    display: block;
+    width: fit-content;
+    background-color: rgba(204, 204, 204, 0.726);
+    margin: 2px 0;
+    box-shadow: inset -3px -3px 5px 5px rgba(255, 253, 253, 0.2), inset 3px 3px 5px 5px rgba(5, 5, 5, 0.2);
+
+}
+
+.selection:hover {
+    background-color: rgb(3, 79, 79);
+    box-shadow: inset 3px 3px 5px 5px rgba(255, 253, 253, 0.493), inset -3px -3px 5px 5px rgba(5, 5, 5, 0.493);
+    z-index: 10;
+    /* margin-bottom: 20px; */
+}

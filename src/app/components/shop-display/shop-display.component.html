@@ -1,8 +1,8 @@
 <div class="textDisplay background-primary bordered">
     {{display}}
         
-    <div *ngIf="items">
-        <div class="background-primary" *ngFor="let item of items; index as i;">
+    <div class="flex" *ngIf="items">
+        <div class="background-primary selection" *ngFor="let item of items; index as i;">
             {{item.name}} : {{item.price}}gp
         </div>
 
