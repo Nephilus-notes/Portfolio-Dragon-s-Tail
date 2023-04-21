@@ -17,12 +17,24 @@
     
 }
 
-.flex {
+.flex-co {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     /* justify-content: space-evenly; */
     gap: 7x;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-space {
+    justify-content: space-between;
+}
+
+.flex-end {
+    justify-content: flex-end;
 }
 .bordered {
     border: 2px solid white;
@@ -37,7 +49,8 @@
     background-color: rgba(204, 204, 204, 0.726);
     margin: 2px 0;
     box-shadow: inset -3px -3px 5px 5px rgba(255, 253, 253, 0.2), inset 3px 3px 5px 5px rgba(5, 5, 5, 0.2);
-
+    font-size: 2rem;
+    color: white;
 }
 
 .selection:hover {
@@ -45,4 +58,41 @@
     box-shadow: inset 3px 3px 5px 5px rgba(255, 253, 253, 0.493), inset -3px -3px 5px 5px rgba(5, 5, 5, 0.493);
     z-index: 10;
     /* margin-bottom: 20px; */
+}
+
+.itemTitle {
+    display: block;
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.shopTitle {
+    display: block;
+    width: fit-content;
+}
+
+.goldDisplay {
+    display: block;
+    width: fit-content;
+    margin-right: 5px;
+
+}
+
+.toolTipButton {
+    background-color: rgba(204, 204, 204, 0.726);
+    box-shadow: inset -3px -3px 5px 5px rgba(255, 253, 253, 0.2), inset 3px 3px 5px 5px rgba(5, 5, 5, 0.2);
+    margin: 0 0 0 10px;
+    padding: 10px 20px;
+    color: white;
+
+}
+
+.toolTipButton:hover {
+    background-color: rgb(3, 79, 79);
+    box-shadow: inset 3px 3px 5px 5px rgba(255, 253, 253, 0.493), inset -3px -3px 5px 5px rgba(5, 5, 5, 0.493);
+}
+
+.toolTipButton:disabled:hover {
+    background-color: lightgray;
+    box-shadow: inset 3px 3px 5px 5px rgba(255, 253, 253, 0.242), inset -3px -3px 5px 5px rgba(5, 5, 5, 0.493);
 }

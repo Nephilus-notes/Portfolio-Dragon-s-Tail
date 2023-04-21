@@ -144,7 +144,9 @@ export class GameDisplayComponent {
    * @param submitString
    */
   changeLocation(submitString: string): void {
-
+    if (this.ShopBool == true) {
+      this.ShopBool = false;
+    }
     if (submitString === 'S') {
       this.ShopBool = true
     }

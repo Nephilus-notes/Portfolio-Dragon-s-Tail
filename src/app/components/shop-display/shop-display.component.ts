@@ -5,6 +5,7 @@ import { Item } from 'src/app/models/item';
 
 import { ItemService } from 'src/app/services/item.service';
 import { MessageService } from 'src/app/services/message.service';
+import { Character } from 'src/app/models/character';
 
 @Component({
   selector: 'app-shop-display',
@@ -14,8 +15,10 @@ import { MessageService } from 'src/app/services/message.service';
 export class ShopDisplayComponent {
   @Input() location!: Location;
   @Input() shopBool!: boolean;
-  building!: string;
-  display!: string;
+  @Input() character!: Character;
+  building?: string;
+  display?: string;
+  selectedItem?: Item;
 
   items: Array<Item> = [];
 
@@ -132,8 +135,7 @@ export class ShopDisplayComponent {
 
   ngOnInit(): void {
     this.building = this.location.id
-  }
-
+  };
 
 
   private getItems(idList: Array<number>): void {
@@ -146,6 +148,28 @@ export class ShopDisplayComponent {
       });
       
       this.messageService.add(`${item}`);
+    }
+  }
+
+  public onSelect(item: Item): void {
+    if (this.selectedItem == item) {
+      this.selectedItem = undefined;
+    } else {
+      this.selectedItem = item;
+    }
+  }
+
+  public buyItem(boughtItem: Item): void {
+    this.character.currentCurrency -= boughtItem.price;
+    this.character.bag = [];
+    this.selectedItem = undefined;
+    this.character.bag.push(boughtItem);
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i].id === boughtItem.id) {
+        this.items.splice(i,1)
+        // console.warn(this.items)
+        return
+      }
     }
   }
 

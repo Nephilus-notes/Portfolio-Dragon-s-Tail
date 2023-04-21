@@ -5,7 +5,7 @@ import { Char } from './char';
 export interface Character extends Char {
     name: string;
     // lifetime_currency: number;
-    // currency: number;
+    currentCurrency: number;
     bag: Array<Item>
     equippedItems: Equipment
 

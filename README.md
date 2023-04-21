@@ -32,7 +32,7 @@ Load Game Page
 <ul>
 <li>Allow users to start a new game</li>
 <li>Allow users to view games associated with their account</li>
-<li>Allow users to load games associated with their account</li>
+<li><s>Allow users to load games</s></li>
 <li>Allow users to delete games associated with their account</li>
 <li></li>
  </ul>

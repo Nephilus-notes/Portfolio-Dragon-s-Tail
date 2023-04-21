@@ -1,10 +1,30 @@
 <div class="textDisplay background-primary bordered">
-    {{display}}
-        
-    <div class="flex" *ngIf="items">
-        <div class="background-primary selection" *ngFor="let item of items; index as i;">
-            {{item.name}} : {{item.price}}gp
-        </div>
+    <div class="flex flex-space">
+        <div class="shopTitle">
 
+            {{display}} 
+        </div>
+        <div class="goldDisplay">
+            |{{character.currentCurrency}}
+        </div>
+    </div>
+        
+    <div class="flex flex-co" *ngIf="items && !selectedItem">
+        <button class="background-primary selection" *ngFor="let item of items; index as i;"
+        type="button" (click)="onSelect(item)">
+            {{item.name}} : {{item.price}}gp
+        </button>
+    </div>
+    <div *ngIf="selectedItem">
+        <h2 class="itemTitle">{{selectedItem.name}}</h2>
+        {{selectedItem.price}}gp 
+        {{selectedItem.description}} 
+
+        <div class="flex flex-end">
+
+            <button class="toolTipButton" (click)="onSelect(selectedItem)">Back</button>
+            <button class="toolTipButton"  (click)="buyItem(selectedItem)">Buy</button>
+            <!-- [disabled]="character.currentCurrency<selectedItem.price" -->
+        </div>
     </div>
 </div>
