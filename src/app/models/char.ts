@@ -21,6 +21,11 @@ export interface Char {
     abilities: Array<Array <any>>
     currentHP: number
     currentMP: number  
+    armorValue: number;
+    attackValue: number;
+    damageValue: number;
+    evadePercentage: number;
+    resistValue: number;
 
     // armor_val :number
     // att_val :number
