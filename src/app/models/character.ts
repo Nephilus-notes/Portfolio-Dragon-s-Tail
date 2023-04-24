@@ -6,7 +6,7 @@ export interface Character extends Char {
     name: string;
     // lifetime_currency: number;
     currentCurrency: number;
-    bag: Array<Item>
+    items: Array<Item>
     equippedItems: Equipment
 
     armor: number 

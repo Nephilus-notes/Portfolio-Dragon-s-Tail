@@ -15,7 +15,7 @@
 
             <app-shop-display *ngIf="ShopBool" [location]="location" [shopBool]="ShopBool"[character]="character"></app-shop-display>
     
-    <div *NgFor="ability of character.bag">
+    <div *NgFor="ability of character.items">
         {{character.abilities}}
     </div>
     <div class="optionsAndInput">

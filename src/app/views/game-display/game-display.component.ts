@@ -49,10 +49,20 @@ export class GameDisplayComponent {
   getCharacter(): void {
     this.characterService
       .getCharacter(1)
-      .subscribe((character) => (this.character = character));
-    this.characterService
-      .getCharacter(1)
-      .subscribe((character) => console.warn(character));
+      .subscribe((character) => {
+
+        this.character = character
+        // if (this.character.items == null) {
+        //   this.character.items = []
+        // }
+        // this.character.equippedItems = {
+        //   head: null,
+        //   body: null,
+        //   hand: null
+        // }
+        console.warn(character)
+      });
+    
   }
 
   loadCharacter(): void {
@@ -147,7 +157,7 @@ export class GameDisplayComponent {
     if (this.ShopBool == true) {
       this.ShopBool = false;
     }
-    if (submitString === 'S') {
+    if (submitString === 'S' && this.location.id == "A" || submitString === "S" && this.location.id == "B") {
       this.ShopBool = true
     }
     else if (submitString === 'C') {

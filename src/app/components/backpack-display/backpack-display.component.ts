@@ -73,7 +73,7 @@ export class BackpackDisplayComponent {
           if (this.character.currentHP > this.character.maxHP) {
             this.character.currentHP = this.character.maxHP;
             this.messageService.add("potion used")
-            this.character.bag.splice(this.backpacklocation, 1);
+            this.character.items.splice(this.backpacklocation, 1);
             // this.saveCharacter();
           }
         }
@@ -82,63 +82,63 @@ export class BackpackDisplayComponent {
       case "Equip": {
         switch(selectedItem.slot) {
 
-          case 'Hand': {
+          case 'hand': {
             var temp_item!: Item
 
-            if (this.character.equippedItems.Hand) 
+            if (this.character.equippedItems.hand) 
             {
-              temp_item = this.character.equippedItems.Hand
+              temp_item = this.character.equippedItems.hand
             }
 
-            this.character.equippedItems.Hand = selectedItem
+            this.character.equippedItems.hand = selectedItem
 
             if (temp_item) 
             {
-            this.character.bag[this.backpacklocation] = temp_item;
+            this.character.items[this.backpacklocation] = temp_item;
           } 
           else 
           {
-            this.character.bag.splice(this.backpacklocation, 1);
+            this.character.items.splice(this.backpacklocation, 1);
           }
           break;
           }
-          case "Body": {
+          case "body": {
             var temp_item!: Item
 
-            if (this.character.equippedItems.Body) 
+            if (this.character.equippedItems.body) 
             {
-              temp_item = this.character.equippedItems.Body
+              temp_item = this.character.equippedItems.body
             }
 
-            this.character.equippedItems.Body = selectedItem
+            this.character.equippedItems.body = selectedItem
 
             if (temp_item) 
             {
-            this.character.bag[this.backpacklocation] = temp_item;
+            this.character.items[this.backpacklocation] = temp_item;
           } 
           else 
           {
-            this.character.bag.splice(this.backpacklocation, 1);
+            this.character.items.splice(this.backpacklocation, 1);
           }
           break;
           }
-          case "Head": {
+          case "head": {
             var temp_item!: Item
 
-            if (this.character.equippedItems.Head) 
+            if (this.character.equippedItems.head) 
             {
-              temp_item = this.character.equippedItems.Head
+              temp_item = this.character.equippedItems.head
             }
 
-            this.character.equippedItems.Head = selectedItem
+            this.character.equippedItems.head = selectedItem
 
             if (temp_item) 
             {
-            this.character.bag[this.backpacklocation] = temp_item;
+            this.character.items[this.backpacklocation] = temp_item;
           } 
           else 
           {
-            this.character.bag.splice(this.backpacklocation, 1);
+            this.character.items.splice(this.backpacklocation, 1);
           }
           break;
           }

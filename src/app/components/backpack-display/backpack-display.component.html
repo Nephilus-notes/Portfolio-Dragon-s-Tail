@@ -3,11 +3,13 @@
 
   </div>
   <h3>Equipped items</h3>
-  <!-- <li class="equipment">Head: {{character.equippedItems.Head?.name}}</li>
-  <li class="equipment">Body: {{character.equippedItems.Body?.name}}</li>
-  <li class="equipment">Hand: {{character.equippedItems.Hand?.name}}</li> -->
+  <div *ngIf="character.equippedItems">
+    <li *ngIf="character.equippedItems" class="equipment">Head: {{character.equippedItems.head?.name}}</li>
+    <li *ngIf="character.equippedItems" class="equipment">Body: {{character.equippedItems.body?.name}}</li>
+    <li *ngIf="character.equippedItems" class="equipment">Hand: {{character.equippedItems.hand?.name}}</li>
+  </div>
   <h3>Backpack</h3>
-  <li *ngFor="let item of character.bag; index as i;" class="equipment">
+  <li *ngFor="let item of character.items; index as i;" class="equipment">
     <button class="backpackItem" type="button" (click)="onSelect(item, i)">{{item.name}}</button>
   </li>
   <div class="singleItemDisplay" *ngIf="selectedItem">
