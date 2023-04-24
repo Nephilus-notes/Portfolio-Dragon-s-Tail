@@ -3,6 +3,7 @@ import { SaveFileService } from '../../services/save-file.service';
 import { SaveFile } from '../../models/saveFile';
 import { LocationService } from '../../services/location.service';
 import { CharacterService } from '../../services/character.service';
+import { TemplateService } from 'src/app/services/template.service';
 import { Character } from '../../models/character';
 import { Location } from '../../models/location';
 
@@ -14,7 +15,7 @@ import { Location } from '../../models/location';
 })
 export class StartGameComponent {
   constructor(private saveService:SaveFileService, private locationService: LocationService, 
-    private characterService:CharacterService) { }
+    private characterService:CharacterService, private templateService: TemplateService) { }
 
   file!: SaveFile;
   character!: Character;
@@ -35,9 +36,6 @@ export class StartGameComponent {
     })
     // this.saveService.getSaveFile(3)
     // .subscribe(file => console.warn(file))
-
-
-
   }
 
   getCharacter(charID:number) {
@@ -56,6 +54,8 @@ export class StartGameComponent {
       // console.warn(location)
       this.locationService.saveLocation(this.location);
     });
+
+    
   }
 
 }

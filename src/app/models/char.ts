@@ -5,7 +5,6 @@ export interface Char {
     name: string;
     // lifetime_currency: number;
     // currency: number;
-    bag: Array<Item>
     equippedItems: Equipment
 
     armor: number 
@@ -18,7 +17,6 @@ export interface Char {
     maxMP : number
     // weapon: object
     // weapon_damage : number
-    damage : number
 
     abilities: Array<Array <any>>
     currentHP: number

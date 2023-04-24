@@ -6,32 +6,31 @@ export interface Character extends Char {
     name: string;
     // lifetime_currency: number;
     currentCurrency: number;
-    items: Array<Item>
-    equippedItems: Equipment
+    items: Array<Item>;
+    equippedItems: Equipment;
 
-    armor: number 
-    resistance: number
-    strength: number
-    dexterity: number
-    intelligence: number
-    constitution: number
-    maxHP : number
-    maxMP : number
-    // weapon: object
-    // weapon_damage : number
-    damage : number
+    armor: number ;
+    resistance: number;
+    strength: number;
+    dexterity: number;
+    intelligence: number;
+    constitution: number;
+    maxHP : number;
+    maxMP : number;
+    // weapon: object;
+    // weapon_damage : number;
 
-    abilities: Array<Array <any>>
-    currentHP: number
-    currentMP: number  
-    kratabsFollyExplored: number
-    drippingDeathExplored: number
-    playersRespiteExplored: number
-    tailOfTheDragonExplored: number
-    thagragsHopeExplored: number
-    webOfDepthsExplored: number
-    graithsGrottoExplored: number
-    graithQueensLairExplored: number
+    abilities: Array<Array <any>>;
+    currentHP: number;
+    currentMP: number  ;
+    kratabsFollyExplored: number;
+    drippingDeathExplored: number;
+    playersRespiteExplored: number;
+    tailOfTheDragonExplored: number;
+    thagragsHopeExplored: number;
+    webOfDepthsExplored: number;
+    graithsGrottoExplored: number;
+    graithQueensLairExplored: number;
 
     // armor_val :number
     // att_val :number
