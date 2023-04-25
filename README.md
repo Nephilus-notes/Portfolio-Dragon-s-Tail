@@ -1,6 +1,57 @@
 # Portfolio with Embedded Game Dragon's Tail
 
-Placeholder Description
+Hundreds of years ago, while magic was in its nascent stages, a goblin made a huge mistake: Graith'Gesh Trees.  Born of magic and betrayal, Graith'Gesh Trees were trees that could move as easily as an animal with one thought in their minds: killing any goblin they could.  This murderous intent drove the goblins underground, where they lived many years cut off from their brethren.  Now a young goblin is coming of age and doing what nobody else has: blazing a trail north out of the Dragon's Tail.
+
+In this text-based RPG you strive to complete your Enlightening, a coming of age ritual every young goblin undertakes to prove their worth to the clan. You just happened to choose one much, much harder than anyone else.  By exploring quiet caves of the Underdark you can strengthen yourself to tackle the world above.  After years of living underground you must brave the bright lands of the shining forest, fending off wolves and worse, armed with whatever weapons you can acquire.
+
+Using a combination of text input fields and buttons you explore the Dragon's Tail, buying weapons and items in town before heading out into the wilds once again.
+
+Level up your stats to be able to take down more powerful creatures!
+
+Soon you will be able to learn the powerful magicks that are your birthrite, fighting fire with fire as you take back what is yours from the magic-born Graith'Gesh Trees.
+
+
+## Logic 
+### Combat
+
+Combat is a simple turn based affair, with the player choosing their action and both player and computer taking their turns based on who is faster.
+Currently the player has 4 abilities(Attack, Evade, Defend, and Flee) but magic is coming and player's will be able to customize their approach to combat.
+
+Abilities (if variable) should be pulled from the DB/validated at the start of combat
+    <li>Attack - calculates enemy dodge % and deals damage based on str</li>
+    <li>Evade - boosts dodge by 10 for 2 turns (resulting in 10% evade boost)</li>
+    <li>Defend - boosts armor by 2 for 2 turns</li>
+    <li>Flee - if character has a higher dex results in combat ending, otherwise it adds a fleeing flag. if the flag is already raised the character escapes regardless.</li>
+
+Transfer:
+pass character to combat display, let that component take care of all combat logic
+
+### Travel
+Traveling is handled by taking validated string inputs and using them to make APi calls to get information on a new location from the database to change the game states.
+
+When traveling in the Shining Forest of the Underdark you start to learn the fastest ways through the area.  You will be able to speed quickly through, or spend more time fighting more creatures and getting to know the landscape by heart.  Character exploration variables are incremented behind the scenes.
+
+When shopping the string input gives way to buttons, a simpler way to choose the item you want to know more about, buy it and add it to your inventory if you have enough resources, or leave.  
+
+Will you discover strange and wonderful things that don't result in a creature trying to eat your face off? Time will tell....
+
+
+## If you want to play:
+You'll need:
+A way to run an Angular file (VS code or your IDE of choice)
+A way to run a .NET project (VS Studio)
+And a Database (DBeaver for current PostgreSQL configuration)
+
+This project will be hosted once I get far enough in development but in the meantime...
+
+### Clone the Repo
+Clone the repo and type "ng serve --open" to open up a development server but wait...
+
+### Spin up a backend
+[Github for ASP.NET backend](https://github.com/Nephilus-notes/DTpureback)
+Clone the repo above to download the backend API.  Currently configured with a Postgres database, if you're using Visual Studio all you have to do is put your Postgres password into your Secret Manager, Update the Database with the lastest Migration, and enjoy.
+
+
 
 
 # Components
@@ -75,20 +126,6 @@ Combat component
 MVP+
 <li>Display detailed information on abilities</li>
 </ul>
-
-## Logic 
-Combat
-
-Abilities (if variable) should be pulled from the DB/validated at the start of combat
-    Attack - calculates enemy dodge % and deals damage based on str
-    Evade - boosts dodge by 10 for 2 turns (resulting in 10% evade boost)
-    Defend - boosts armor by 2 for 2 turns
-    Flee - if character has a higher dex results in combat ending, otherwise it adds a fleeing flag. if the flag is already raised the character escapes regardless.
-
-Transfer:
-pass character to combat display, let that component take care of all combat logic
-
-Travel
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
