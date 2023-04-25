@@ -26,6 +26,7 @@ import { SelectedItemComponent } from './components/selected-item/selected-item.
 import { StartGameComponent } from './views/start-game/start-game.component';
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { InnScreenComponent } from './components/inn-screen/inn-screen.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     StartGameComponent,
     AuthButtonComponent,
     UserProfileComponent,
+    InnScreenComponent,
   ],
   imports: [
     BrowserModule,

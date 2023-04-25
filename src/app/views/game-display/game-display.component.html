@@ -13,7 +13,9 @@
 
         <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location" >></app-text-display>
 
-            <app-shop-display *ngIf="GameStateSwitch" [location]="location" [GameStateSwitch]="GameStateSwitch"[character]="character"></app-shop-display>
+            <app-shop-display *ngIf="GameStateSwitch == 1" [location]="location" [GameStateSwitch]="GameStateSwitch"[character]="character"></app-shop-display>
+
+            <app-inn-screen *ngIf="GameStateSwitch == 2" [location]="location" [GameStateSwitch]="GameStateSwitch"[character]="character"></app-inn-screen>
     
     <div *NgFor="ability of character.items">
         {{character.abilities}}

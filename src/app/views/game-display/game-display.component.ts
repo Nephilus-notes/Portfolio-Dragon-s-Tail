@@ -49,7 +49,7 @@ export class GameDisplayComponent {
    * 
    * 2 - Inn Screen (only applied in Inn location)
    */
-  GameStateSwitch!: number;
+  GameStateSwitch: number = 0;
 
   character!: Character;
   enemy!: NPC;
@@ -168,6 +168,8 @@ export class GameDisplayComponent {
     }
     if (submitString === 'S' && this.location.id == "A" || submitString === "S" && this.location.id == "B") {
       this.GameStateSwitch = 1
+    } else if (submitString === 'S' && this.location.id == "I" ) {
+      this.GameStateSwitch = 2
     }
     else if (submitString === 'C') {
       var playerExplored = this.checkPlayerExploration();
@@ -287,13 +289,15 @@ export class GameDisplayComponent {
   }
 
   shopToggle(): void {
-    if (this.GameStateSwitch >= 0) {
+    if (this.GameStateSwitch > 0) {
       this.GameStateSwitch = 0;
-    } else if (this.GameStateSwitch == 0 && this.location.id == "A" || "B") {
+    } else if (this.GameStateSwitch == 0 && this.location.id == 'A' || this.GameStateSwitch == 0 && this.location.id == 'B' ) {
       this.GameStateSwitch = 1;
     } else if (this.GameStateSwitch == 0 && this.location.id == "I") {
-      this.GameStateSwitch = 2
+      this.GameStateSwitch = 2;
     }
+    console.warn(this.location.id);
+    console.warn(this.GameStateSwitch);
   }
 
   startCombat() {

@@ -23,7 +23,7 @@ export class ShopDisplayComponent {
   items: Array<Item> = [];
 
   ngOnChanges(): void {
-    if (this.GameStateSwitch >= 0) {
+    if (this.GameStateSwitch >= 1) {
       this.buildingID = this.location.id
     }
     switch (this.buildingID) {
@@ -43,7 +43,7 @@ export class ShopDisplayComponent {
         break
       }
       case "I" : {
-        this.display = "A nice glimpse into clan life"
+        this.display = "wrong screen"
       }
     }
   }
