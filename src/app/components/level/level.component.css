@@ -5,3 +5,22 @@
 .flex {
     display: flex;
 }
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flexWrap {
+    flex-wrap: wrap;
+}
+
+.stats {
+    margin:20px;
+}
+
+.wide {
+    width:45%;
+    display:block;
+    
+}

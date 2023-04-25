@@ -22,7 +22,7 @@
     we are in level and learn 
     <div *ngIf="levelBool;" class="centerDisplay bordered">
         Leveling now
-        <app-level [character]="character"></app-level>
+        <app-level [character]="character" [levelBool]="levelBool"></app-level>
     </div>
 
     <div *ngIf="learnBool;" class="centerDisplay bordered">
