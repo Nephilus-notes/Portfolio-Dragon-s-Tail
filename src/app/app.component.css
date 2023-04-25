@@ -29,3 +29,46 @@
     border: 2px solid white;
 
 }
+
+a {
+    text-decoration: none;
+}
+a:link {
+    color: green
+}
+
+a:visited {
+    color:teal
+}
+a:hover {
+    color:antiquewhite
+}
+a:active {
+    color:yellow
+}
+
+.button {
+    padding: 10px;
+    border-radius: 30px;
+}
+
+a {
+    box-shadow: inset 2px 2px 2px 3px rgba(171, 171, 171, 0.25), inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
+    background-image: linear-gradient(75deg, black, rgb(17, 5, 84), rgb(3, 79, 79), rgb(44, 6, 105));    background-position: left;
+    background-position: left; 
+    background-size: 800%;
+    animation: bganimation 20s infinite alternate;
+    background-repeat: none;
+    text-rendering: optimizeSpeed;
+
+}
+
+
+@keyframes bganimation {
+    0% {
+        background-position: left;
+    }
+    100% {
+        background-position: right;
+    }
+  }
