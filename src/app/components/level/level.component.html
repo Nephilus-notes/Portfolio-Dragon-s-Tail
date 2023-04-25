@@ -1,0 +1,22 @@
+<!-- <ng-template ngFor let-attribute [ngForOf]="Attributes" let-i="index">
+    <div class="stats flex">
+        <app-game-button [text]="minus"></app-game-button>
+        {{attribute}}
+        <app-game-button [text]="plus"></app-game-button>
+    </div>
+</ng-template> -->
+<div class="stats flex">
+    <app-game-button [text]="minus"></app-game-button>
+    {{character.dexterity}}
+    <app-game-button [text]="plus"></app-game-button>
+</div>
+<div class="stats flex">
+    <app-game-button [text]="minus"></app-game-button>
+    {{character.intelligence}}
+    <app-game-button [text]="plus"></app-game-button>
+</div>
+<div class="stats flex">
+    <app-game-button [text]="minus"></app-game-button>
+    {{character.constitution}}
+    <app-game-button [text]="plus"></app-game-button>
+</div>

@@ -19,10 +19,13 @@ export class InnScreenComponent {
   display?: string;
   save:string = "Save";
   level:string = "Level Stats";
-  learn:string = "Learn Abilities"
+  learn:string = "Learn Abilities";
+  back: string = "Back";
+  levelBool:boolean = false;
+  learnBool: boolean = false;
 
   ngOnChanges(): void {
-    if (this.GameStateSwitch >= 2) {
+    if (this.GameStateSwitch == 2) {
       this.buildingID = this.location.id
     }
     switch (this.buildingID) {
@@ -42,10 +45,32 @@ export class InnScreenComponent {
         this.display = "A nice glimpse into clan life"
       }
     }
+    if (this.GameStateSwitch == 3) {
+
+    }
   }
 
   ngOnInit(): void {
     this.buildingID = this.location.id
   };
+
+  levelClick(): void {
+    this.levelBool = true;
+    console.warn(this.GameStateSwitch)
+  }
+
+  learnClick(): void {
+    this.learnBool = true;
+    console.warn(this.GameStateSwitch)
+  }
+
+  backClick(): void {
+    if (this.levelBool || this.learnBool) {
+      this.levelBool = false;
+      this.learnBool = false;
+    } else {
+      this.GameStateSwitch = 0
+    }
+  }
 
 }

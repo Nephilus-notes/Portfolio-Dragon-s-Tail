@@ -1,0 +1,7 @@
+* {
+    background-color: darkgray;
+}
+
+.flex {
+    display: flex;
+}

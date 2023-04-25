@@ -1,18 +1,34 @@
-<div class="centerDisplay bordered">
-    <div class="flex flex-space">
-        <div class="shopTitle">
+<ng-template [ngIf]="!levelBool && !learnBool" [ngIfElse]="LevelAndLearn">
+    <div class="centerDisplay bordered">
+        <div class="flex flex-co">
+            <div class="shopTitle">
 
-            {{display}} 
+                {{display}}
+            </div>
+
+            <app-game-button [text]="save" class="center marginBottomTop block"></app-game-button>
+            <app-game-button [text]="level" class="center marginBottomTop block"
+                (click)="levelClick()"></app-game-button>
+            <app-game-button [text]="learn" class="center marginBottomTop block"
+                (click)="learnClick()"></app-game-button>
+
+
         </div>
-        <div class="goldDisplay">
-            |{{character.currentCurrency}}
-   
-        
-   
+    </div>
+</ng-template>
+
+<ng-template #LevelAndLearn>
+
+    we are in level and learn 
+    <div *ngIf="levelBool;" class="centerDisplay bordered">
+        Leveling now
+        <app-level [character]="character"></app-level>
     </div>
 
-    
-</div>
-<app-game-button [text]="save" class="center marginBottomTop block"></app-game-button>
-<app-game-button [text]="level" class="center marginBottomTop block"></app-game-button>
-<app-game-button [text]="learn" class="center marginBottomTop block"></app-game-button>
+    <div *ngIf="learnBool;" class="centerDisplay bordered">
+        trying to learn
+
+    </div>
+
+    <app-game-button text="back" class="center marginBottomTop block" (click)="backClick()"></app-game-button>
+</ng-template>
