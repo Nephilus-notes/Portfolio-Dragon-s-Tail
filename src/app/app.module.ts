@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment } from 'src/environment/environment';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +24,8 @@ import { CreateUserComponent } from './views/create-user/create-user.component';
 import { ShopDisplayComponent } from './components/shop-display/shop-display.component';
 import { SelectedItemComponent } from './components/selected-item/selected-item.component';
 import { StartGameComponent } from './views/start-game/start-game.component';
+import { AuthButtonComponent } from './components/auth-button/auth-button.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -41,13 +45,22 @@ import { StartGameComponent } from './views/start-game/start-game.component';
     ShopDisplayComponent,
     SelectedItemComponent,
     StartGameComponent,
+    AuthButtonComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule.forRoot({
+      domain:environment.AuthDomain,
+      clientId: environment.ClientID,
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -30,11 +30,11 @@ export class CombatControllerService {
   }
 
   defend(self: Character): void {
-    self.armor += 2
+    self.armorValue += 2
   }
 
   evade(self: Character): void {
-    self.dexterity += 2
+    self.evadePercentage += 2
   }
 
   flee(self: Character|NPC, target: Character|NPC): boolean {

@@ -58,6 +58,12 @@ export class CharacterService {
     this.messageService.add('Character Loaded from characterservice')
     return this.characterCache
   }
+
+  /**
+   * Checks to see if a character has been cached
+   * 
+   * @returns - Boolean
+   */
   exists() {
     if (this.characterCache) {
       this.messageService.add('Character exists!')
