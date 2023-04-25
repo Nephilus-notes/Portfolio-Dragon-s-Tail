@@ -2,6 +2,7 @@
 
 <div class="container">
     <div >
+        <button ng (click)="shopToggle()" class="center">Shop Toggle</button>
         <app-character-info [character]="character"></app-character-info>
         <!-- *ngIf="characterView" -->
         <!-- <button type="button" id="characterViewButton" (click)="characterViewSwitch()">View Character</button> -->
@@ -46,4 +47,3 @@
     </div>
 </div>
 <button ng (click)="combatToggle()" class="center">Combat Toggle</button>
-<button ng (click)="shopToggle()" class="center">Shop Toggle</button>

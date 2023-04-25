@@ -1,0 +1,45 @@
+* {
+    background-color: darkgray;
+}
+
+
+.bordered {
+    border: 2px solid white;
+
+}
+
+.flex-co {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    gap: 7x;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-space {
+    justify-content: space-between;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+
+    .goldDisplay {
+        display: block;
+        width: fit-content;
+        margin-right: 5px;
+    
+    }
+    .centerDisplay {
+        width: clamp(23rem, 50vw, 70rem);
+        height: 600px;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        margin-left: 0;
+      }

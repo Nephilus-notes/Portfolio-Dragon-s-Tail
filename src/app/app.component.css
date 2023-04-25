@@ -1,74 +1,92 @@
 .title {
-    text-align: center;
+  text-align: center;
 }
 
 * {
-    background-color: black;
+  background-color: black;
 }
 
 .flex-co {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    /* justify-content: space-evenly; */
-    gap: 7x;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* justify-content: space-evenly; */
+  gap: 7x;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .flex-space {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .flex-end {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 .bordered {
-    border: 2px solid white;
-
+  border: 2px solid white;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 a:link {
-    color: green
+  color: green;
 }
 
 a:visited {
-    color:teal
+  color: teal;
 }
 a:hover {
-    color:antiquewhite
+  color: antiquewhite;
 }
 a:active {
-    color:yellow
+  color: yellow;
 }
 
 .button {
-    padding: 10px;
-    border-radius: 30px;
+  padding: 10px;
+  border-radius: 30px;
 }
 
 a {
-    box-shadow: inset 2px 2px 2px 3px rgba(171, 171, 171, 0.25), inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
-    background-image: linear-gradient(75deg, black, rgb(17, 5, 84), rgb(3, 79, 79), rgb(44, 6, 105));    background-position: left;
-    background-position: left; 
-    background-size: 800%;
-    animation: bganimation 20s infinite alternate;
-    background-repeat: none;
-    text-rendering: optimizeSpeed;
-
+  box-shadow: inset 2px 2px 2px 3px rgba(171, 171, 171, 0.25),
+    inset -2px -2px 2px 3px rgba(6, 6, 6, 0.25);
+  background-image: linear-gradient(
+    75deg,
+    black,
+    rgb(17, 5, 84),
+    rgb(3, 79, 79),
+    rgb(44, 6, 105)
+  );
+  background-position: left;
+  background-position: left;
+  background-size: 800%;
+  animation: bganimation 20s infinite alternate;
+  background-repeat: none;
+  text-rendering: optimizeSpeed;
 }
 
-
 @keyframes bganimation {
-    0% {
-        background-position: left;
-    }
-    100% {
-        background-position: right;
-    }
+  0% {
+    background-position: left;
   }
+  100% {
+    background-position: right;
+  }
+}
+
+.centerDislpay {
+  width: clamp(23rem, 50vw, 70rem);
+  height: 600px;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-left: 0;
+}
+
+.background-primary {
+  background-color: darkgray;
+}

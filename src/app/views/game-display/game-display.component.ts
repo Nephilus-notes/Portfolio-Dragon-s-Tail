@@ -267,7 +267,7 @@ export class GameDisplayComponent {
   loadLocation() {
     // this.messageService.add("Loading")
     if (!this.locationService.locationCache) {
-      this.changeLocation('B');
+      this.changeLocation('I');
       // console.warn(`Location Cache: ${this.locationService.locationCache}`)
     } else {
       this.location = this.locationService.locationCache;
