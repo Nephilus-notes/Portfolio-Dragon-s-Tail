@@ -27,6 +27,8 @@ import { StartGameComponent } from './views/start-game/start-game.component';
 import { AuthButtonComponent } from './components/auth-button/auth-button.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { InnScreenComponent } from './components/inn-screen/inn-screen.component';
+import { GameButtonComponent } from './components/game-button/game-button.component';
+import { MovingBackgroundButtonComponent } from './components/moving-background-button/moving-background-button.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { InnScreenComponent } from './components/inn-screen/inn-screen.component
     AuthButtonComponent,
     UserProfileComponent,
     InnScreenComponent,
+    GameButtonComponent,
+    MovingBackgroundButtonComponent,
   ],
   imports: [
     BrowserModule,

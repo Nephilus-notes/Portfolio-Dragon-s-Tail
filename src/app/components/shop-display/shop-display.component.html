@@ -10,10 +10,11 @@
     </div>
         
     <div class="flex flex-co" *ngIf="items && !selectedItem">
-        <button class="background-primary selection" *ngFor="let item of items; index as i;"
-        type="button" (click)="onSelect(item)">
+        <app-game-button *ngFor="let item of items; index as i;"[item]="item" (click)="onSelect(item)"></app-game-button>
+        <!-- <button class=" selection" *ngFor="let item of items; index as i;"
+        type="button" >
             {{item.name}} : {{item.price}}gp
-        </button>
+        </button> -->
     </div>
     <div *ngIf="selectedItem">
         <app-selected-item [location]="location" [character]="character" [selectedItem]="selectedItem"

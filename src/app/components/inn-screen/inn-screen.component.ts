@@ -17,6 +17,9 @@ export class InnScreenComponent {
   @Input() character!: Character;
   buildingID?: string;
   display?: string;
+  save:string = "Save";
+  level:string = "Level Stats";
+  learn:string = "Learn Abilities"
 
   ngOnChanges(): void {
     if (this.GameStateSwitch >= 2) {

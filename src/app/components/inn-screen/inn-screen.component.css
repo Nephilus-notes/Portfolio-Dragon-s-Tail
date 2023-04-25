@@ -16,6 +16,11 @@
     gap: 7x;
 }
 
+.block {
+    display:block;
+    width: fit-content;
+}
+
 .flex {
     display: flex;
 }
@@ -28,6 +33,13 @@
     justify-content: flex-end;
 }
 
+.marginBottomTop {
+    margin: 40px 5px;
+}
+
+.center {
+    margin-inline: auto;
+}
 
     .goldDisplay {
         display: block;
