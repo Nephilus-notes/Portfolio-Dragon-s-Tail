@@ -38,9 +38,9 @@ Will you discover strange and wonderful things that don't result in a creature t
 
 ## If you want to play:
 You'll need:
-A way to run an Angular file (VS code or your IDE of choice)
-A way to run a .NET project (VS Studio)
-And a Database (DBeaver for current PostgreSQL configuration)
+ <li>A way to run an Angular file (VS code or your IDE of choice)</li>
+ <li>A way to run a .NET project (VS Studio)</li>
+ <li>And a Database (DBeaver for current PostgreSQL configuration)</li>
 
 This project will be hosted once I get far enough in development but in the meantime...
 
