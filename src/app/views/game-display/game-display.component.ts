@@ -40,7 +40,16 @@ export class GameDisplayComponent {
 
   submitString!: string;
   CombatBool!: boolean;
-  ShopBool!: boolean;
+  /**
+   * GameStateSwitch controls all non combat, non standard travel game states.
+   * 
+   * 0 - Normal Game State
+   * 
+   * 1 - Shop Screen (Only applied in Blacksmith and Alchemist locations)
+   * 
+   * 2 - Inn Screen (only applied in Inn location)
+   */
+  GameStateSwitch!: number;
 
   character!: Character;
   enemy!: NPC;
@@ -154,11 +163,11 @@ export class GameDisplayComponent {
    * @param submitString
    */
   changeLocation(submitString: string): void {
-    if (this.ShopBool == true) {
-      this.ShopBool = false;
+    if (this.GameStateSwitch >= 0) {
+      this.GameStateSwitch = 0;
     }
     if (submitString === 'S' && this.location.id == "A" || submitString === "S" && this.location.id == "B") {
-      this.ShopBool = true
+      this.GameStateSwitch = 1
     }
     else if (submitString === 'C') {
       var playerExplored = this.checkPlayerExploration();
@@ -278,10 +287,12 @@ export class GameDisplayComponent {
   }
 
   shopToggle(): void {
-    if (this.ShopBool) {
-      this.ShopBool = false;
-    } else {
-      this.ShopBool = true;
+    if (this.GameStateSwitch >= 0) {
+      this.GameStateSwitch = 0;
+    } else if (this.GameStateSwitch == 0 && this.location.id == "A" || "B") {
+      this.GameStateSwitch = 1;
+    } else if (this.GameStateSwitch == 0 && this.location.id == "I") {
+      this.GameStateSwitch = 2
     }
   }
 
@@ -322,8 +333,3 @@ export class GameDisplayComponent {
   }
   title = "Dragon's Tail";
 }
-
-// CharacterViewButton?.addEventListener(('click'), () => {
-//   console.log('clicked')
-//   characterView = false ? characterView : true
-// })

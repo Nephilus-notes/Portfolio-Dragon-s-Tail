@@ -11,9 +11,9 @@
 
             <app-combat-display *ngIf="CombatBool" [combatant]="enemy" ></app-combat-display>
 
-        <app-text-display *ngIf="!CombatBool && !ShopBool" [location]="location" >></app-text-display>
+        <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location" >></app-text-display>
 
-            <app-shop-display *ngIf="ShopBool" [location]="location" [shopBool]="ShopBool"[character]="character"></app-shop-display>
+            <app-shop-display *ngIf="GameStateSwitch" [location]="location" [GameStateSwitch]="GameStateSwitch"[character]="character"></app-shop-display>
     
     <div *NgFor="ability of character.items">
         {{character.abilities}}
