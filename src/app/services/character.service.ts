@@ -13,7 +13,7 @@ import { environment } from 'src/environment/environment';
 })
 export class CharacterService {
   constructor(private messageService: MessageService, private http:HttpClient) { }
-
+  characterIDCache!: number;
   characterCache!: Character;
   npcCache!: Character
   /** 
@@ -38,12 +38,17 @@ export class CharacterService {
   * without extraneous API calls
   *
   * @param character - Character type object to be cached
+  * @param charID - temp param until character has an id field on it.
   * @returns none
   *
   */
-  cacheCharacter(character:Character) {
+  cacheCharacter(character:Character, charID: number|null = null) {
     // console.warn(`character cache: ${character}`)
     this.characterCache = character
+    if (charID != null) {
+
+      this.characterIDCache = charID
+    }
     this.messageService.add('Progress Saved')
   }
   /** 
@@ -54,11 +59,25 @@ export class CharacterService {
   *
   *
   */
-  loadCharacter() {
+  public loadCharacter(): Character {
     this.messageService.add('Character Loaded from characterservice')
     return this.characterCache
   }
 
+  public patchCharacter(charID:number, character:Character): void {
+    let url = `${environment.characterURL}${charID}`
+    let response = this.http.patch<Character>(url, character)
+
+    this.messageService.add("success, but how do we measure it?")
+  }
+
+
+  public postCharacter(character:Character): void {
+    let url = `${environment.characterURL}`
+    this.http.patch<Character>(url, character)
+
+    this.messageService.add("success, but how do we measure it?")
+  }
   /**
    * Checks to see if a character has been cached
    * 
