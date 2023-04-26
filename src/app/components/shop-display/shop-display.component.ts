@@ -30,13 +30,13 @@ export class ShopDisplayComponent {
 
       case "A" : {
         this.display = "healing potions!";
-        this.getItems([8,9,11])
+        this.getItems([9,10,11])
       
         break;
       }
       case "B" : {
         this.display = "arms and armor";
-        this.getItems([5,10,1,2,4,6,7])
+        this.getItems([1,2,3,4,5,6,7,8])
 
         console.warn(`These items : ${this.items}`)
         console.warn(this.display)
