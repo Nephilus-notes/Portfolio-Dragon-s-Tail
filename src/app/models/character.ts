@@ -3,12 +3,20 @@ import { Item } from './item'
 import { Char } from './char';
 
 export interface Character extends Char {
+    id?: number;
     name: string;
-    // lifetime_currency: number;
+    level: number;
+    currentLocation: string;
+    lifeTimeCurrency: number;
     currentCurrency: number;
     items: Array<Item>;
     equippedItems: Equipment;
 
+
+    strengthXP: number;
+    dexterityXP: number;
+    constitutionXP: number;
+    intelligenceXP: number;
     armor: number ;
     resistance: number;
     strength: number;
@@ -32,39 +40,41 @@ export interface Character extends Char {
     graithsGrottoExplored: number;
     graithQueensLairExplored: number;
 
-    // armor_val :number
-    // att_val :number
-    // damage_val :number
-    // dodge_val :number
-    // resist_val:number
+    armorValue: number;
+  attackValue: number;
+  damageValue: number;
+  evadePercentage: number;
+  resistValue: number;
     
      // STATUSES //
-    // # Status flags
-    // defended : boolean
-    // dodging : boolean
-    // fleeing: boolean
-    // stone_armored : boolean
-    // slowed : boolean
-    // vulnerable : boolean
-    // double_armed : boolean
-    // burning_blades : boolean
-    // stone_fists : boolean
+    //# Status flags
+    defended : boolean;
+    evading : boolean;
+    fleeing: boolean;
+    stoneArmored : boolean;
+    slowed : boolean;
+    vulnerable : boolean;
+    doubleArmed : boolean;
+    burningBlades : boolean;
+    stoneFists : boolean;
+    focusing: boolean;
 
     // no incrementers
-    // poisoned : boolean
-    // burning: boolean
-    // wind_hit_by : boolean
-    // stunned: boolean
+    poisoned : boolean;
+    burning: boolean;
+    hitByWind : boolean;
+    stunned: boolean;
 
-    // // status Incrementors
-    // dodging_rounds: number
-    // defended_rounds: number
-    // flee_count : number
-    // slowed_rounds : number
-    // stone_armored_rounds: number
-    // vulnerable_rounds: number
-    // double_armed_rounds : number
-    // burning_blades_rounds : number
-    // burning_rounds: number
-    // poisoned_rounds : number
+    // status Incrementors
+    evadingRounds: number;
+    defendingRounds: number;
+    fleeingRounds : number;
+    focusingRounds: number;
+    slowedRounds : number;
+    stoneArmoredRounds: number;
+    vulnerableRounds: number;
+    doubleArmedRounds : number;
+    burningBladesRounds : number;
+    burningRounds: number;
+    poisonedRounds : number;
 }

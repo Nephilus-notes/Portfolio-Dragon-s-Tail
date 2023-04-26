@@ -2,7 +2,10 @@
 
 <div class="container">
     <div >
+        <app-game-button [text]="saveString" (click)="saveGame(this.location.id)"></app-game-button>
         <!-- <button ng (click)="shopToggle()" class="center">Shop Toggle</button> -->
+        <app-game-button [text]="postChar" (click)="saveChar()"></app-game-button>
+
         <app-character-info [character]="character"></app-character-info>
         <!-- *ngIf="characterView" -->
         <!-- <button type="button" id="characterViewButton" (click)="characterViewSwitch()">View Character</button> -->

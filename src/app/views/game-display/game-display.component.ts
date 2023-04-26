@@ -8,6 +8,7 @@ import { Location } from '../../models/location';
 import { Char } from '../../models/char';
 import { Character } from '../../models/character';
 import { NPC } from '../../models/npc';
+import { SaveFileService } from 'src/app/services/save-file.service';
 
 const CharacterViewButton = document.getElementById('characterViewButton');
 let characterView = false;
@@ -31,7 +32,8 @@ export class GameDisplayComponent {
     private characterService: CharacterService,
     private messageService: MessageService,
     private locationService: LocationService,
-    private combatService: CombatControllerService
+    private combatService: CombatControllerService,
+    private saveService: SaveFileService
   ) {
     // this.locationService.getLocations().subscribe(data => {
     //   console.warn(data)
@@ -58,14 +60,7 @@ export class GameDisplayComponent {
   getCharacter(): void {
     this.characterService.getCharacter(1).subscribe((character) => {
       this.character = character;
-      // if (this.character.items == null) {
-      //   this.character.items = []
-      // }
-      // this.character.equippedItems = {
-      //   head: null,
-      //   body: null,
-      //   hand: null
-      // }
+
       console.warn(character);
     });
   }
@@ -381,6 +376,16 @@ export class GameDisplayComponent {
     // This runs regardless of case right now.
     this.getNPC();
   }
+  saveGame(locationID:string) {
+  
+    this.saveService.postSaveFile(locationID, this.characterService.characterIDCache, this.character)
+    this.messageService.add("game saved?")
+  }
+
+  saveChar() {
+    console.warn(this.character)
+    this.characterService.postCharacter(this.character)
+  }
 
   ngOnInit(): void {
     this.messageService.add('initializing');
@@ -390,5 +395,7 @@ export class GameDisplayComponent {
     // this.getNPC();
     // }
   }
-  title = "Dragon's Tail";
+  title: string = "Dragon's Tail";
+  saveString:string = "post savefile"
+  postChar:string = "post character"
 }

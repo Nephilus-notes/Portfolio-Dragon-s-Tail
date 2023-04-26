@@ -27,9 +27,16 @@ export class CharacterObject implements Character {
     this.resistValue = this.resistance;
     this.attackValue = this.intelligence;
   }
+  id?: number = undefined; // fix hard coded thing
+  currentLocation!: string;
   name: string;
-  // lifetime_currency: number;
+  level: number = 0;
+  lifeTimeCurrency: number = 0;
   currentCurrency: number = 0;
+  strengthXP: number = 0;
+    dexterityXP: number = 0;
+    constitutionXP: number = 0;
+    intelligenceXP: number = 0;
   items: Array<Item> = [];
   equippedItems: Equipment = {
     head: null,
@@ -68,33 +75,35 @@ export class CharacterObject implements Character {
 
   //  STATUSES //
   // # Status flags
-  defended: boolean = false;
-  dodging: boolean = false;
-  fleeing: boolean = false;
-  stone_armored: boolean = false;
-  slowed: boolean = false;
-  vulnerable: boolean = false;
-  double_armed: boolean = false;
-  burning_blades: boolean = false;
-  stone_fists: boolean = false;
+  defended : boolean = false;
+    evading : boolean = false;
+    fleeing: boolean = false;
+    stoneArmored : boolean = false;
+    slowed : boolean = false;
+    vulnerable : boolean = false;
+    doubleArmed : boolean = false;
+    burningBlades : boolean = false;
+    stoneFists : boolean = false;
+    focusing: boolean = false;
 
-  // no incrementers
-  poisoned: boolean = false;
-  burning: boolean = false;
-  wind_hit_by: boolean = false;
-  stunned: boolean = false;
+    // no incrementers
+    poisoned : boolean = false;
+    burning: boolean = false;
+    hitByWind : boolean = false;
+    stunned: boolean = false;
 
-  // status Incrementors
-  dodging_rounds: number = 0;
-  defended_rounds: number = 0;
-  flee_count: number = 0;
-  slowed_rounds: number = 0;
-  stone_armored_rounds: number = 0;
-  vulnerable_rounds: number = 0;
-  double_armed_rounds: number = 0;
-  burning_blades_rounds: number = 0;
-  burning_rounds: number = 0;
-  poisoned_rounds: number = 0;
+    // status Incrementors
+    evadingRounds: number = 0;
+    defendingRounds: number = 0;
+    fleeingRounds : number = 0;
+    focusingRounds: number = 0;
+    slowedRounds : number = 0;
+    stoneArmoredRounds: number = 0;
+    vulnerableRounds: number = 0;
+    doubleArmedRounds : number = 0;
+    burningBladesRounds : number = 0;
+    burningRounds: number = 0;
+    poisonedRounds : number = 0;
 
   resetTempStats() {
     this.attackValue = this.intelligence;

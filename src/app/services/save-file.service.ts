@@ -31,20 +31,23 @@ saveIDCache!:number;
     return this.http.get<SaveFile>(url)
   }
 
-  postSaveFile(locationID: number, characterID: number, character: Character): void {
+  postSaveFile(locationID: string, characterID: number, character: Character): void {
     this.auth.user$.subscribe(user => {
 
       if (!this.saveIDCache) {
-        this.http.post(`${environment.saveFileURL}`, {
+        this.messageService.add("posting new")
+        this.characterService.postCharacter(character)
+        let response = this.http.post(`${environment.saveFileURL}`, {
           UserID:user?.sub,
           PlayerCharacterID:characterID,
           LocationID:locationID,
           DateAdded: Date.UTC.toString(),
           DateUpdated: Date.UTC.toString()
         })
-        this.characterService.postCharacter(character)
+        response.subscribe(r => console.warn(r))
       } 
       else  {
+        this.messageService.add("posting old")
 
         this.http.patch(`${environment.saveFileURL}${this.saveIDCache}`, {
           UserID:user?.sub,
