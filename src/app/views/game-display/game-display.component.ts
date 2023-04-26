@@ -42,11 +42,11 @@ export class GameDisplayComponent {
   CombatBool: boolean = false;
   /**
    * GameStateSwitch controls all non combat, non standard travel game states.
-   * 
+   *
    * 0 - Normal Game State
-   * 
+   *
    * 1 - Shop Screen (Only applied in Blacksmith and Alchemist locations)
-   * 
+   *
    * 2 - Inn Screen (only applied in Inn location)
    */
   GameStateSwitch: number = 0;
@@ -56,22 +56,18 @@ export class GameDisplayComponent {
   location!: Location;
 
   getCharacter(): void {
-    this.characterService
-      .getCharacter(1)
-      .subscribe((character) => {
-
-        this.character = character
-        // if (this.character.items == null) {
-        //   this.character.items = []
-        // }
-        // this.character.equippedItems = {
-        //   head: null,
-        //   body: null,
-        //   hand: null
-        // }
-        console.warn(character)
-      });
-    
+    this.characterService.getCharacter(1).subscribe((character) => {
+      this.character = character;
+      // if (this.character.items == null) {
+      //   this.character.items = []
+      // }
+      // this.character.equippedItems = {
+      //   head: null,
+      //   body: null,
+      //   hand: null
+      // }
+      console.warn(character);
+    });
   }
 
   loadCharacter(): void {
@@ -102,7 +98,7 @@ export class GameDisplayComponent {
   /* START COMBAT LOGIC */
 
   attack(self: Character | NPC, target: Character | NPC): void {
-    this.messageService.add("starting an attack")
+    this.messageService.add('starting an attack');
     let damage: number = this.combatService.attack(self, target);
     if (damage) {
       target.currentHP -= damage;
@@ -149,11 +145,13 @@ export class GameDisplayComponent {
       this.attack(this.enemy, this.character);
       this.playerAction(actionCall);
     }
-    this.messageService.add(`combat check ${this.combatService.checkCombatants(
-      this.character,
-      this.enemy
-    )}`);
-    
+    this.messageService.add(
+      `combat check ${this.combatService.checkCombatants(
+        this.character,
+        this.enemy
+      )}`
+    );
+
     this.CombatBool = this.combatService.checkCombatants(
       this.character,
       this.enemy
@@ -171,38 +169,38 @@ export class GameDisplayComponent {
   handleInput(submitString: string): void {
     if (this.GameStateSwitch > 0) {
       this.GameStateSwitch = 0;
-      this.messageService.add("got to gameStateCheck")
+      this.messageService.add('got to gameStateCheck');
     }
-    if (submitString === 'S' && this.location.id == "A" || submitString === 'S' && this.location.id == "B") {
-      this.GameStateSwitch = 1
-      this.messageService.add("got to shop check")
-    } else if (submitString === 'S' && this.location.id == "I" ) {
-      this.GameStateSwitch = 2
-      this.messageService.add("got to Inn check")
-    }
-    else if (submitString === 'C') {
+    if (
+      (submitString === 'S' && this.location.id == 'A') ||
+      (submitString === 'S' && this.location.id == 'B')
+    ) {
+      this.GameStateSwitch = 1;
+      this.messageService.add('got to shop check');
+    } else if (submitString === 'S' && this.location.id == 'I') {
+      this.GameStateSwitch = 2;
+      this.messageService.add('got to Inn check');
+    } else if (submitString === 'C') {
       var playerExplored = this.checkPlayerExploration();
-      this.messageService.add(`playerExplored ${playerExplored}`)
+      this.messageService.add(`playerExplored ${playerExplored}`);
       if (playerExplored < 3) {
         playerExplored++;
-        this.modifyPlayerExploration(playerExplored)
+        this.modifyPlayerExploration(playerExplored);
         this.startCombat();
       } else {
-        this.modifyPlayerExploration(Math.floor(playerExplored/2))
-        this.locationService
-          .getNewLocation(this.location.next)
-          .subscribe((location) => (this.location = location));
-        }
-      } else {
-        this.changeLocation(submitString)
-        this.messageService.add(`Got to the else. string is ${submitString}`)
+        this.modifyPlayerExploration(Math.floor(playerExplored / 2));
+        this.changeLocation(submitString);
       }
+    } else {
+      this.changeLocation(submitString);
+      this.messageService.add(`Got to the else. string is ${submitString}`);
+    }
   }
 
   changeLocation(submitString: string): void {
-  this.locationService
-          .getNewLocation(submitString)
-          .subscribe((location) => (this.location = location));
+    this.locationService
+      .getNewLocation(submitString)
+      .subscribe((location) => (this.location = location));
   }
 
   checkPlayerExploration(): number {
@@ -241,39 +239,39 @@ export class GameDisplayComponent {
     switch (this.location.id) {
       case 'U': {
         this.character.thagragsHopeExplored = newExploration;
-        break
+        break;
       }
       case 'W': {
         this.character.webOfDepthsExplored = newExploration;
-        break
+        break;
       }
       case 'G': {
         this.character.graithsGrottoExplored = newExploration;
-        break
+        break;
       }
       case 'Q': {
         this.character.graithQueensLairExplored = newExploration;
-        break
+        break;
       }
       case 'S': {
         this.character.kratabsFollyExplored = newExploration;
-        break
+        break;
       }
       case 'D': {
         this.character.drippingDeathExplored = newExploration;
-        break
+        break;
       }
       case 'P': {
         this.character.playersRespiteExplored = newExploration;
-        break
+        break;
       }
       case 'TTD': {
         this.character.tailOfTheDragonExplored = newExploration;
-        break
+        break;
       }
       default: {
-        this.messageService.add(this.location.id)
-        this.messageService.add("Failed to change exploration number");
+        this.messageService.add(this.location.id);
+        this.messageService.add('Failed to change exploration number');
       }
     }
   }
@@ -291,9 +289,9 @@ export class GameDisplayComponent {
   }
 
   getNPC(): void {
-    this.characterService.getEnemy().subscribe(enemy => {
+    this.characterService.getEnemy().subscribe((enemy) => {
       this.enemy = enemy;
-      this.messageService.add(`got npc `)
+      this.messageService.add(`got npc `);
       this.CombatBool = true;
     });
   }
@@ -309,9 +307,12 @@ export class GameDisplayComponent {
   shopToggle(): void {
     if (this.GameStateSwitch > 0) {
       this.GameStateSwitch = 0;
-    } else if (this.GameStateSwitch == 0 && this.location.id == 'A' || this.GameStateSwitch == 0 && this.location.id == 'B' ) {
+    } else if (
+      (this.GameStateSwitch == 0 && this.location.id == 'A') ||
+      (this.GameStateSwitch == 0 && this.location.id == 'B')
+    ) {
       this.GameStateSwitch = 1;
-    } else if (this.GameStateSwitch == 0 && this.location.id == "I") {
+    } else if (this.GameStateSwitch == 0 && this.location.id == 'I') {
       this.GameStateSwitch = 2;
     }
     console.warn(this.location.id);
