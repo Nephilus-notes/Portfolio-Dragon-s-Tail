@@ -39,7 +39,7 @@ export class GameDisplayComponent {
   }
 
   submitString!: string;
-  CombatBool!: boolean;
+  CombatBool: boolean = false;
   /**
    * GameStateSwitch controls all non combat, non standard travel game states.
    * 
@@ -95,18 +95,19 @@ export class GameDisplayComponent {
       // this.messageService.add('player action');
       this.round($event);
     } else {
-      this.changeLocation($event);
+      this.handleInput($event);
     }
   }
 
   /* START COMBAT LOGIC */
 
   attack(self: Character | NPC, target: Character | NPC): void {
+    this.messageService.add("starting an attack")
     let damage: number = this.combatService.attack(self, target);
     if (damage) {
       target.currentHP -= damage;
     }
-    // this.messageService.add('attack');
+    this.messageService.add(`attack finished Damage ${damage}`);
   }
   /**
    * A switch function to determine what action the character takes based on the actionCall,
@@ -148,6 +149,11 @@ export class GameDisplayComponent {
       this.attack(this.enemy, this.character);
       this.playerAction(actionCall);
     }
+    this.messageService.add(`combat check ${this.combatService.checkCombatants(
+      this.character,
+      this.enemy
+    )}`);
+    
     this.CombatBool = this.combatService.checkCombatants(
       this.character,
       this.enemy
@@ -162,33 +168,41 @@ export class GameDisplayComponent {
    *
    * @param submitString
    */
-  changeLocation(submitString: string): void {
-    if (this.GameStateSwitch >= 0) {
+  handleInput(submitString: string): void {
+    if (this.GameStateSwitch > 0) {
       this.GameStateSwitch = 0;
+      this.messageService.add("got to gameStateCheck")
     }
-    if (submitString === 'S' && this.location.id == "A" || submitString === "S" && this.location.id == "B") {
+    if (submitString === 'S' && this.location.id == "A" || submitString === 'S' && this.location.id == "B") {
       this.GameStateSwitch = 1
+      this.messageService.add("got to shop check")
     } else if (submitString === 'S' && this.location.id == "I" ) {
       this.GameStateSwitch = 2
+      this.messageService.add("got to Inn check")
     }
     else if (submitString === 'C') {
       var playerExplored = this.checkPlayerExploration();
+      this.messageService.add(`playerExplored ${playerExplored}`)
       if (playerExplored < 3) {
         playerExplored++;
         this.modifyPlayerExploration(playerExplored)
         this.startCombat();
-
-        playerExplored = Math.floor(playerExplored/2)
-        this.modifyPlayerExploration(playerExplored)
+      } else {
+        this.modifyPlayerExploration(Math.floor(playerExplored/2))
         this.locationService
           .getNewLocation(this.location.next)
           .subscribe((location) => (this.location = location));
         }
       } else {
-        this.locationService
+        this.changeLocation(submitString)
+        this.messageService.add(`Got to the else. string is ${submitString}`)
+      }
+  }
+
+  changeLocation(submitString: string): void {
+  this.locationService
           .getNewLocation(submitString)
           .subscribe((location) => (this.location = location));
-      }
   }
 
   checkPlayerExploration(): number {
@@ -267,7 +281,7 @@ export class GameDisplayComponent {
   loadLocation() {
     // this.messageService.add("Loading")
     if (!this.locationService.locationCache) {
-      this.changeLocation('I');
+      this.changeLocation('U');
       // console.warn(`Location Cache: ${this.locationService.locationCache}`)
     } else {
       this.location = this.locationService.locationCache;
@@ -277,7 +291,11 @@ export class GameDisplayComponent {
   }
 
   getNPC(): void {
-    this.characterService.getEnemy().subscribe((enemy) => (this.enemy = enemy));
+    this.characterService.getEnemy().subscribe(enemy => {
+      this.enemy = enemy;
+      this.messageService.add(`got npc `)
+      this.CombatBool = true;
+    });
   }
 
   combatToggle(): void {
@@ -322,8 +340,9 @@ export class GameDisplayComponent {
     } else {
       console.warn('shit happened. Check your math');
       // get a common enemy.
-      this.getNPC();
     }
+    // This runs regardless of case right now.
+    this.getNPC();
   }
 
   ngOnInit(): void {
@@ -331,8 +350,7 @@ export class GameDisplayComponent {
     this.loadLocation();
     // this.getCharacter();
     this.loadCharacter();
-    this.getNPC();
-    this.CombatBool = false;
+    // this.getNPC();
     // }
   }
   title = "Dragon's Tail";

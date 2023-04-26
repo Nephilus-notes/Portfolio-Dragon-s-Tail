@@ -17,7 +17,7 @@ describe('CharacterInfoComponent', () => {
 
     const expectedCharacter = {
       name: "Craelios",
-            bag: [
+            items: [
               {id: 1,
             'name': "Death's Scythe",
             'itemStat': 15, 'price': 500, "slot": "hand",
@@ -40,16 +40,17 @@ describe('CharacterInfoComponent', () => {
       both elements and enemies.`}
           ],
             equippedItems: {
-              'Head':null,
-              'Body':{id:3,
+              head:null,
+              body:{id:3,
             'name': 'Leather Armor',
             'itemStat': 1, 'price': 20, "slot": "body",
             'description': 
           `Toughened leather 
           Protects against
           both elements and enemies.`},
-              Hand: null
+              hand: null
           },
+          currentCurrency:1,
             armor: 4,
             resistance: 2,
             strength: 13,
@@ -69,7 +70,12 @@ describe('CharacterInfoComponent', () => {
           "thagragsHopeExplored": 0,
           "webOfDepthsExplored": 0,
           "graithsGrottoExplored": 0,
-          "graithQueensLairExplored": 0
+          "graithQueensLairExplored": 0,
+          damageValue:10,
+          armorValue: 1,
+          evadePercentage: 10, 
+          attackValue:10,
+          resistValue:1
     };
     component.character = expectedCharacter
     fixture.detectChanges();

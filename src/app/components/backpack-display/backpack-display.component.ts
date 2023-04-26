@@ -100,6 +100,8 @@ export class BackpackDisplayComponent {
           {
             this.character.items.splice(this.backpacklocation, 1);
           }
+          this.resetCharacterAttributes()
+
           break;
           }
           case "body": {
@@ -120,6 +122,7 @@ export class BackpackDisplayComponent {
           {
             this.character.items.splice(this.backpacklocation, 1);
           }
+          this.resetCharacterAttributes()
           break;
           }
           case "head": {
@@ -153,6 +156,15 @@ export class BackpackDisplayComponent {
     // this.saveCharacter();
     this.selectedItem = undefined;
     this.backpacklocation = 0;
+  }
+
+  private resetCharacterAttributes(): void {
+    this.character.armorValue = this.character.armor;
+    this.character.damageValue = this.character.equippedItems.hand?.itemStat ?
+        this.character.equippedItems.hand?.itemStat + Math.floor(this.character.strength / 2) : Math.floor(this.character.strength / 2);
+    this.character.evadePercentage = this.character.dexterity;
+    this.character.resistValue = this.character.resistance;
+    this.character.attackValue = this.character.intelligence;
   }
 
   constructor(private messageService: MessageService) {}
