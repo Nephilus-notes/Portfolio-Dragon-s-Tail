@@ -161,8 +161,10 @@ export class GameDisplayComponent {
   /* END COMBAT LOGIC */
 
   /**
-   * Defunct: Currently generates the first town entrance.  Will be replaced by an api call
-   * from the load screen in future iterations.
+   * Takes the user input as a string and performs conditional checks to determine the next step.
+   * 
+   * Either changes the game state with the GameStateSwitch, triggers exploration and combat logic,
+   * or performs the api call to move the character to the next location.
    *
    * @param submitString
    */
@@ -196,13 +198,22 @@ export class GameDisplayComponent {
       this.messageService.add(`Got to the else. string is ${submitString}`);
     }
   }
-
+/**
+ * Takes in user input as a string and uses it to make an api call to retrieve the next location 
+ * from the db and load it.
+ * @param submitString User input that has been vetted
+ */
   changeLocation(submitString: string): void {
     this.locationService
       .getNewLocation(submitString)
       .subscribe((location) => (this.location = location));
   }
-
+/**
+ * A switch that checks how much knowledge the player has of the area they are in.
+ * 
+ * Uses the location ID to determine which character attribute to return
+ * @returns A number representing the character's knowledge of the area.
+ */
   checkPlayerExploration(): number {
     switch (this.location.id) {
       case 'U': {
@@ -234,7 +245,10 @@ export class GameDisplayComponent {
       }
     }
   }
-
+/**
+ * Increments the player's exploration valued for the current location
+ * @param newExploration The new exploration value
+ */
   modifyPlayerExploration(newExploration: number): void {
     switch (this.location.id) {
       case 'U': {
@@ -276,6 +290,10 @@ export class GameDisplayComponent {
     }
   }
 
+  /**
+   * Dev method that checks to see if a location is cached from saveFileService.
+   * If the location is cached it loads it up, if not it calls a default location
+   */
   loadLocation() {
     // this.messageService.add("Loading")
     if (!this.locationService.locationCache) {
@@ -287,7 +305,11 @@ export class GameDisplayComponent {
     }
     console.warn(`Location Cache: ${this.locationService.locationCache}`);
   }
-
+/**
+ * A method that links into the character service to retrieve an enemy for combat.
+ * 
+ * Currently a hard code, but will change to dynamic api call with a primary key id parameter
+ */
   getNPC(): void {
     this.characterService.getEnemy().subscribe((enemy) => {
       this.enemy = enemy;
@@ -295,7 +317,9 @@ export class GameDisplayComponent {
       this.CombatBool = true;
     });
   }
-
+/**
+ * A now unnecessary dev tool for entering combat state
+ */
   combatToggle(): void {
     if (this.CombatBool) {
       this.CombatBool = false;
@@ -303,7 +327,9 @@ export class GameDisplayComponent {
       this.CombatBool = true;
     }
   }
-
+/**
+ * A now unnecessary dev tool for entering different game states
+ */
   shopToggle(): void {
     if (this.GameStateSwitch > 0) {
       this.GameStateSwitch = 0;
@@ -319,12 +345,22 @@ export class GameDisplayComponent {
     console.warn(this.GameStateSwitch);
   }
 
+  /**
+   * Potentially an entry point into the combat controller's combat loop, removing all combat logic 
+   * except NPC generation from the game display/
+   * 
+   * Will require combatants to be passed as parameters
+   */
   startCombat() {
     this.generateNPC();
-    this.CombatBool = true;
   }
-
-  generateNPC() {
+/**
+ * A function that determines which enemy to retrieve and generates it.
+ * 
+ * Currently uses a hard coded rat but will dynamically make api calls using 
+ * the ID in the location's corresponding rarity attribute
+ */
+  private generateNPC(): void {
     var random = Math.random() * 1000;
     if (random <= 500) {
       this.messageService.add('common');
