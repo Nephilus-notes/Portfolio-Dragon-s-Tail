@@ -104,13 +104,15 @@ export class CharacterObject implements Character {
     burningBladesRounds : number = 0;
     burningRounds: number = 0;
     poisonedRounds : number = 0;
+    // dateAdded?: string;
+    // dateUpdated?: string;
 
-  resetTempStats() {
-    this.attackValue = this.intelligence;
-    this.armorValue = this.armor;
-    this.damageValue = this.equippedItems.hand?.itemStat ? 
-    this.equippedItems.hand?.itemStat + (this.strength /2) : this.strength/2;
-    this.evadePercentage = this.dexterity;
-    this.resistValue = this.resistance;
-  }
+  // resetTempStats() {
+  //   this.attackValue = this.intelligence;
+  //   this.armorValue = this.armor;
+  //   this.damageValue = this.equippedItems.hand?.itemStat ? 
+  //   this.equippedItems.hand?.itemStat + (this.strength /2) : this.strength/2;
+  //   this.evadePercentage = this.dexterity;
+  //   this.resistValue = this.resistance;
+  // }
 }

@@ -77,4 +77,5 @@ export interface Character extends Char {
     burningBladesRounds : number;
     burningRounds: number;
     poisonedRounds : number;
+    
 }
