@@ -34,9 +34,10 @@ export class LoadGameComponent {
     })
     // this.saveService.getSaveFile(3)
     // .subscribe(file => console.warn(file))
+  }
 
-
-
+  newGame(): void {
+    
   }
 
   getCharacter(charID:number) {

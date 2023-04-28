@@ -1,4 +1,25 @@
 <div class="textDisplay">
-    {{location.enterText}}
+    <div *ngIf="location.id!=SG">
+
+        {{location.enterText}}
+    </div>
+
+    <div *ngIf="location.id == SG">
+
+        <div *ngIf="locationState==0">
+
+            {{location.enterText}}
+        </div>
+        <div *ngIf="locationState==1">
+
+            {{location.middleText}}
+        </div>
+        <div *ngIf="locationState==2">
+
+            {{location.exitText}}
+        </div>
+        {{this.placement}}
+        <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
+    </div>
     
 </div>

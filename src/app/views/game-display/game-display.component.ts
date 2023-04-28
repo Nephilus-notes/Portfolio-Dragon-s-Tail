@@ -61,13 +61,13 @@ export class GameDisplayComponent {
     this.characterService.getCharacter(1).subscribe((character) => {
       this.character = character;
 
-      console.warn(character);
+      // console.warn(character);
     });
   }
 
   loadCharacter(): void {
     if (!this.characterService.characterCache) {
-      console.warn(`cache empty= ${this.characterService.characterCache}`);
+      // console.warn(`cache empty= ${this.characterService.characterCache}`);
       this.getCharacter();
       // this.messageService.add('loading failed');
     } else {
@@ -201,7 +201,10 @@ export class GameDisplayComponent {
   changeLocation(submitString: string): void {
     this.locationService
       .getNewLocation(submitString)
-      .subscribe((location) => (this.location = location));
+      .subscribe((location) => {
+        this.location = location;
+        console.warn(location)
+      });
   }
 /**
  * A switch that checks how much knowledge the player has of the area they are in.
@@ -292,7 +295,7 @@ export class GameDisplayComponent {
   loadLocation() {
     // this.messageService.add("Loading")
     if (!this.locationService.locationCache) {
-      this.changeLocation('U');
+      this.changeLocation('SG');
       // console.warn(`Location Cache: ${this.locationService.locationCache}`)
     } else {
       this.location = this.locationService.locationCache;
@@ -383,7 +386,7 @@ export class GameDisplayComponent {
   }
 
   saveChar() {
-    console.warn(this.character)
+    // console.warn(this.character)
     this.characterService.patchCharacter(this.character)
   }
 

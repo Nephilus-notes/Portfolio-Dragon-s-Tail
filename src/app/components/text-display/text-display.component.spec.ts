@@ -23,7 +23,7 @@ describe('TextDisplayComponent', () => {
     rareNPC: '',
     secretNPC: '',
     next: ''};
-    component.location = ExpectedLocation;
+    // component.location = ExpectedLocation;
     fixture.detectChanges();
   });
 
