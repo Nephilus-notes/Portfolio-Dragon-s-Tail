@@ -8,6 +8,7 @@ import { MessageService } from './message.service';
 
 import { environment } from 'src/environment/environment';
 import { characterDTO } from '../models/characterDTO';
+import { Template } from '../models/template';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ import { characterDTO } from '../models/characterDTO';
 export class CharacterService {
   constructor(private messageService: MessageService, private http:HttpClient) { }
   characterCache!: Character;
-  npcCache!: Character
+  npcCache!: Character;
+
+  templateCache!: Array<Template>;
   /** 
   * Asynchronous function to perform an api call to retrieve the character based on its ID
   *
@@ -83,71 +86,6 @@ export class CharacterService {
     let charDTO: characterDTO = {
       dateAdded:date,
       dateUpdated:date,
-
-      // armor:character.armor,
-      // armorValue:character.armorValue,
-      // burning: character.burning,
-      // burningBlades: character.burningBlades,
-      // burningBladesRounds: character.burningBladesRounds,
-      // burningRounds: character.burningRounds,
-      // constitution: character.constitution,
-      // constitutionXP: character.constitutionXP,
-      // currentCurrency: character.currentCurrency,
-      // currentHP: character.currentHP,
-      // currentMP: character.currentMP,
-      // currentLocation: character.currentLocation,
-      // damageValue: character.damageValue,
-      // defended: character.defended,
-      // defendingRounds: character.defendingRounds,
-      // dexterity: character.dexterity,
-      // dexterityXP: character.dexterityXP,
-      // doubleArmed: character.doubleArmed,
-      // doubleArmedRounds: character.doubleArmedRounds,
-      // drippingDeathExplored: character.drippingDeathExplored,
-      // // Equipment
-      // equippedItems: {
-      //   "hand":character.equippedItems.hand,
-      //   "body":character.equippedItems.body,
-      //   "head":character.equippedItems.head,
-
-      // }, // potential sticking point
-      // evadePercentage: character.evadePercentage, 
-      // evading: character.evading, 
-      // evadingRounds: character.evadingRounds, 
-      // fleeing: character.fleeing, 
-      // fleeingRounds: character.fleeingRounds, 
-      // focusing: character.focusing, 
-      // focusingRounds: character.focusingRounds, 
-      // graithQueensLairExplored: character.graithQueensLairExplored, 
-      // graithsGrottoExplored: character.graithsGrottoExplored, 
-      // hitByWind: character.hitByWind, 
-      // intelligence: character.intelligence, 
-      // intelligenceXP: character.intelligenceXP, 
-      // // Items here
-      // items: [], 
-      // kratabsFollyExplored: character.kratabsFollyExplored, 
-      // level: character.level, 
-      // lifeTimeCurrency: character.lifeTimeCurrency, 
-      // maxHP: character.maxHP, 
-      // maxMP: character.maxMP, 
-      // name: character.name, 
-      // playersRespiteExplored: character.playersRespiteExplored, 
-      // poisoned: character.poisoned, 
-      // poisonedRounds: character.poisonedRounds, 
-      // resistance: character.resistance, 
-      // slowed: character.slowed, 
-      // slowedRounds: character.slowedRounds, 
-      // stoneArmored: character.stoneArmored, 
-      // stoneArmoredRounds: character.stoneArmoredRounds, 
-      // stoneFists: character.stoneFists, 
-      // strength: character.strength, 
-      // strengthXP: character.strengthXP, 
-      // stunned: character.stunned, 
-      // tailOfTheDragonExplored: character.tailOfTheDragonExplored, 
-      // thagragsHopeExplored: character.thagragsHopeExplored, 
-      // vulnerable: character.vulnerable, 
-      // vulnerableRounds: character.vulnerableRounds, 
-      // webOfDepthsExplored: character.webOfDepthsExplored, 
       ...character,
       id:undefined
       }
@@ -210,5 +148,21 @@ export class CharacterService {
       });
       this.messageService.add('CharacterService: generated enemy', true)
       return npc;
+    }
+
+    getTemplates(): Observable<Array<Template>>{
+      let url = `${environment.templateURL}`
+      const templateList = this.http.get<Array<Template>>(url)
+  
+      this.messageService.add('CharacterService: fetched templates')
+      return templateList;
+    }
+
+    cacheTemplates(templateList:Array<Template>): void {
+      this.templateCache = templateList;
+    }
+
+    loadTemplates(): Array<Template> {
+      return this.templateCache;
     }
 }

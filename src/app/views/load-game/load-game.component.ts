@@ -36,9 +36,6 @@ export class LoadGameComponent {
     // .subscribe(file => console.warn(file))
   }
 
-  newGame(): void {
-    
-  }
 
   getCharacter(charID:number) {
     this.characterService.getCharacter(charID)

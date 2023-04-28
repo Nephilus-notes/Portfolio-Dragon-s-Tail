@@ -22,6 +22,7 @@ export class StartGameComponent {
   location!: Location;
 
   Loading!: boolean;
+  startGame: boolean = false;
 
 
   loadSaveFile() {
@@ -54,8 +55,18 @@ export class StartGameComponent {
       // console.warn(location)
       this.locationService.saveLocation(this.location);
     });
+  }
 
-    
+  newGame(): void {
+    this.Loading = true;
+    this.characterService.getTemplates().subscribe(t=> {
+      console.warn(t);
+      this.characterService.cacheTemplates(t);
+      this.Loading = false;
+      this.startGame = true;
+    }
+      
+    )
   }
 
 }

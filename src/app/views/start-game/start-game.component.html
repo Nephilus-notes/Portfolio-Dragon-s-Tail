@@ -1,12 +1,12 @@
 <div class="load background-primary centered bordered">
     
-    <button  ng (click)="loadSaveFile()"  class="loadButton">New Game</button>
+    <button  ng (click)="newGame()"  class="loadButton">New Game</button>
     <!-- Build an ngFor to loop over the save files that user has saved and display buttons for all of them. -->
     <button  ng (click)="loadSaveFile()"  class="loadButton">Load Game</button>
 
     <!-- build a loading bar? --><div *ngIf="Loading" class="background-primary centered mini"> ... </div>
 
     <!-- make this nav link an ngIf to ensure all pieces are loaded first -->
-    <a  *ngIf="character && location" class="nav-link" ria-current="Dragon's Tail Game" routerLink="/game"
+    <a  *ngIf="character && location || startGame==true" class="nav-link" ria-current="Dragon's Tail Game" routerLink="/game"
     >Start Game</a>
 </div>
