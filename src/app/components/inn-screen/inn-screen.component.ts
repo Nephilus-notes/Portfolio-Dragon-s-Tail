@@ -6,21 +6,24 @@ import { Character } from 'src/app/models/character';
 
 import { ItemService } from 'src/app/services/item.service';
 import { MessageService } from 'src/app/services/message.service';
+import { SaveFileService } from 'src/app/services/save-file.service';
 @Component({
   selector: 'app-inn-screen',
   templateUrl: './inn-screen.component.html',
   styleUrls: ['./inn-screen.component.css']
 })
 export class InnScreenComponent {
+
+  constructor(private saveService: SaveFileService) {}
   @Input() location!: Location;
   @Input() GameStateSwitch!: number;
   @Input() character!: Character;
   buildingID?: string;
   display?: string;
-  save:string = "Save";
-  level:string = "Level Stats";
-  learn:string = "Learn Abilities";
-  back: string = "Back";
+  saveText:string = "Save";
+  levelText:string = "Level Stats";
+  learnText:string = "Learn Abilities";
+  backText: string = "Back";
   levelBool:boolean = false;
   learnBool: boolean = false;
 
@@ -73,4 +76,7 @@ export class InnScreenComponent {
     }
   }
 
+  saveGame(): void {
+    this.saveService.postSaveFile(this.location.id, this.character)
+  }
 }

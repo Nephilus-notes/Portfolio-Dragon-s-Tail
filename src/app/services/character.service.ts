@@ -14,7 +14,6 @@ import { characterDTO } from '../models/characterDTO';
 })
 export class CharacterService {
   constructor(private messageService: MessageService, private http:HttpClient) { }
-  characterIDCache!: number;
   characterCache!: Character;
   npcCache!: Character
   /** 
@@ -43,13 +42,9 @@ export class CharacterService {
   * @returns none
   *
   */
-  cacheCharacter(character:Character, charID: number|null = null) {
+  cacheCharacter(character:Character) {
     // console.warn(`character cache: ${character}`)
     this.characterCache = character
-    if (charID != null) {
-
-      this.characterIDCache = charID
-    }
     this.messageService.add('Progress Saved')
   }
   /** 
@@ -65,10 +60,15 @@ export class CharacterService {
     return this.characterCache
   }
 
-  public patchCharacter(charID:number, character:Character): void {
-    let url = `${environment.characterURL}${charID}`
+  public patchCharacter(character:Character): void {
+    let url = `${environment.characterURL}${character.id}`
+    let charDTO: characterDTO = {
+      dateUpdated:new Date().toISOString(),
+      ...character,
+    }
     let response = this.http.patch<Character>(url, character)
 
+    response.subscribe(p => console.warn(p))
     this.messageService.add("success, but how do we measure it?")
   }
 
@@ -76,16 +76,14 @@ export class CharacterService {
   public postCharacter(character:Character): void {
     let url = `${environment.characterURL}`
     let date = new Date().toISOString()
-    // let dateAdded = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
-    // date.getUTCDate(), date.getUTCHours(),
-    // date.getUTCMinutes(), date.getUTCSeconds());
+
 
     console.warn(date)
 
     let charDTO: characterDTO = {
       dateAdded:date,
       dateUpdated:date,
-      
+
       // armor:character.armor,
       // armorValue:character.armorValue,
       // burning: character.burning,

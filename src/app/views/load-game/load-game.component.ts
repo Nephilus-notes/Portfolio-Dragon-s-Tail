@@ -44,7 +44,7 @@ export class LoadGameComponent {
     .subscribe(character => {
       this.character = character
       // console.warn(character)
-      this.characterService.cacheCharacter(character, charID);
+      this.characterService.cacheCharacter(character);
     });
   }
 

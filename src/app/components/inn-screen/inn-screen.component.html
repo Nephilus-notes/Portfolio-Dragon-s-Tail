@@ -6,10 +6,11 @@
                 {{display}}
             </div>
 
-            <app-game-button [text]="save" class="center marginBottomTop block"></app-game-button>
-            <app-game-button [text]="level" class="center marginBottomTop block"
+            <app-game-button [text]="saveText" class="center marginBottomTop block"
+            (click)="saveGame()"></app-game-button>
+            <app-game-button [text]="levelText" class="center marginBottomTop block"
                 (click)="levelClick()"></app-game-button>
-            <app-game-button [text]="learn" class="center marginBottomTop block"
+            <app-game-button [text]="learnText" class="center marginBottomTop block"
                 (click)="learnClick()"></app-game-button>
 
 

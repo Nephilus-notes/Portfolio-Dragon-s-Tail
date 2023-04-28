@@ -378,13 +378,13 @@ export class GameDisplayComponent {
   }
   saveGame(locationID:string) {
   
-    this.saveService.postSaveFile(locationID, this.characterService.characterIDCache, this.character)
+    this.saveService.postSaveFile(locationID, this.character)
     this.messageService.add("game saved?")
   }
 
   saveChar() {
     console.warn(this.character)
-    this.characterService.postCharacter(this.character)
+    this.characterService.patchCharacter(this.character)
   }
 
   ngOnInit(): void {
@@ -397,5 +397,5 @@ export class GameDisplayComponent {
   }
   title: string = "Dragon's Tail";
   saveString:string = "post savefile"
-  postChar:string = "post character"
+  postChar:string = "patch character"
 }
