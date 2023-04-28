@@ -28,8 +28,8 @@ export interface Character extends Char {
     // weapon: object;
     // weapon_damage : number;
 
-    abilities: Array<Array <any>>;
-    currentHP: number;
+    abilities: Array<string>;
+        currentHP: number;
     currentMP: number  ;
     kratabsFollyExplored: number;
     drippingDeathExplored: number;

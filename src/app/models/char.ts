@@ -18,7 +18,7 @@ export interface Char {
     // weapon: object
     // weapon_damage : number
 
-    abilities: Array<Array <any>>
+    abilities: Array <any>
     currentHP: number
     currentMP: number  
     armorValue: number;

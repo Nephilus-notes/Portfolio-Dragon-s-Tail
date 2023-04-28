@@ -394,7 +394,7 @@ export class GameDisplayComponent {
     this.messageService.add('initializing');
     this.loadLocation();
     // this.getCharacter();
-    this.loadCharacter();
+    // this.loadCharacter();
     // this.getNPC();
     // }
   }

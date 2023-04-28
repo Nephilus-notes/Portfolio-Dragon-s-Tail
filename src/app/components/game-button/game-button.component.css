@@ -13,3 +13,9 @@
     box-shadow: inset -3px -3px 5px 5px rgba(255, 253, 253, 0.2), inset 3px 3px 5px 5px rgba(5, 5, 5, 0.2);
     font-size: 2rem;
 }
+.selection:hover {
+    background-color: rgb(3, 79, 79);
+    box-shadow: inset 3px 3px 5px 5px rgba(255, 253, 253, 0.493), inset -3px -3px 5px 5px rgba(5, 5, 5, 0.493);
+    z-index: 10;
+    /* margin-bottom: 20px; */
+}

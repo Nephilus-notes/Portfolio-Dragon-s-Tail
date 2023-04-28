@@ -2,11 +2,11 @@
 
 <div class="container">
     <div >
-        <app-game-button [text]="saveString" (click)="saveGame(this.location.id)"></app-game-button>
+        <!-- <app-game-button [text]="saveString" (click)="saveGame(this.location.id)"></app-game-button> -->
         <!-- <button ng (click)="shopToggle()" class="center">Shop Toggle</button> -->
-        <app-game-button [text]="postChar" (click)="saveChar()"></app-game-button>
+        <!-- <app-game-button [text]="postChar" (click)="saveChar()"></app-game-button> -->
 
-        <app-character-info [character]="character"></app-character-info>
+        <app-character-info [character]="character" *ngIf="character"></app-character-info>
         <!-- *ngIf="characterView" -->
         <!-- <button type="button" id="characterViewButton" (click)="characterViewSwitch()">View Character</button> -->
     </div>
@@ -15,14 +15,16 @@
 
             <app-combat-display *ngIf="CombatBool" [combatant]="enemy" ></app-combat-display>
 
-        <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location" >></app-text-display>
+        <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location" (submitValue)="playerChoice($event)">></app-text-display>
 
             <app-shop-display *ngIf="GameStateSwitch == 1" [location]="location" [GameStateSwitch]="GameStateSwitch"[character]="character"></app-shop-display>
 
             <app-inn-screen *ngIf="GameStateSwitch == 2" [location]="location" [GameStateSwitch]="GameStateSwitch"[character]="character"></app-inn-screen>
     
+            <div *ngIf="character">
     <div *NgFor="ability of character.items">
-        {{character.abilities}}
+           {{character.abilities}}
+       </div>
     </div>
     <div class="optionsAndInput">
         <div class="options backgroundDark" *ngIf="CombatBool; else elseBlock">
@@ -45,7 +47,7 @@
 
     </div>  
       <div >
-        <app-backpack-display [character]="character"></app-backpack-display>
+        <app-backpack-display [character]="character" *ngIf="character"></app-backpack-display>
         <!-- <button type="" id="characterViewButton" (click)="characterViewSwitch()">View Backpack</button> -->
     </div>
 </div>

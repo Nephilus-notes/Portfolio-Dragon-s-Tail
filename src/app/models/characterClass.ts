@@ -9,7 +9,7 @@ export class CharacterObject implements Character {
     dexterity: number,
     intelligence: number,
     constitution: number,
-    abilities: Array<any>
+    abilities: string[]
   ) {
     this.name = name;
     this.strength = strength;
@@ -55,7 +55,7 @@ export class CharacterObject implements Character {
   // weapon: object;
   // weapon_damage : number;
 
-  abilities: Array<Array<any>>;
+  abilities: Array<string>;
   currentHP: number;
   currentMP: number;
   kratabsFollyExplored: number = 0;

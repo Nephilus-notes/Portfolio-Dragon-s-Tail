@@ -6,5 +6,6 @@ export interface Template {
     intelligence:number;
     constitution:number;
     job:string;
-    ability:string[];
+    ability:string;
+    description:string;
 }

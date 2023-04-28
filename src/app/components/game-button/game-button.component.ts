@@ -8,7 +8,7 @@ import { Item } from 'src/app/models/item';
 })
 export class GameButtonComponent {
 @Input() item!: Item;
-@Input() text!: string;
+@Input() text: string = "Choose";
 
 
 }

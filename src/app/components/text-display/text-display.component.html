@@ -4,7 +4,7 @@
         {{location.enterText}}
     </div>
 
-    <div *ngIf="location.id == SG">
+    <div *ngIf="location.id == SG && !selectedTemplate">
 
         <div *ngIf="locationState==0">
 
@@ -13,13 +13,31 @@
         <div *ngIf="locationState==1">
 
             {{location.middleText}}
+
+            <div *ngIf="templates">
+                <div *ngFor="let template of templates">
+                    <app-game-button [text]="template.job" class="template" (click)="onSelect(template)"></app-game-button>
+                </div>
+            </div>
         </div>
         <div *ngIf="locationState==2">
 
             {{location.exitText}}
         </div>
-        {{this.placement}}
         <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
+    </div>
+
+    <div *ngIf="selectedTemplate">
+
+        <h3>{{selectedTemplate.name}}</h3>
+        <h4>Job: {{selectedTemplate.job}}</h4>
+        <p>Strengths:</p>
+        <p>{{selectedTemplate.description}}</p>
+
+
+        <p>Perks: (Not available)</p>
+
+        <app-game-button (click)="chooseCharacter(selectedTemplate)"></app-game-button>
     </div>
     
 </div>
