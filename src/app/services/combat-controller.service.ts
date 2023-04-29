@@ -69,6 +69,9 @@ export class CombatControllerService {
   }
   
   checkCombatants(player: Character, enemy:NPC): boolean {
+    if (player.fleeing == true) {
+      return false
+    }
     if (player.currentHP <= 0) {
       player.currentHP = 0;
       this.messageService.add("You can no longer fight.", true)
@@ -77,7 +80,8 @@ export class CombatControllerService {
       return false
     } else if (enemy.currentHP <= 0) {
       enemy.currentHP = 0;
-      this.messageService.add(`You defeated the ${enemy.name}! You scavenge ${enemy.currentCurrency} Essence.`, true)
+      this.messageService.add(`You defeated the ${enemy.name}! You scavenge ${enemy.currentCurrency} Essence.`, true);
+      this.gainLoot(player, enemy);
 
       return false
     } else {
@@ -131,6 +135,11 @@ export class CombatControllerService {
         break;
       }
     }
+  }
+
+  gainLoot(character: Character, enemy: NPC): void {
+    character.currentCurrency += enemy.currentCurrency;
+    character.lifeTimeCurrency += enemy.currentCurrency;
   }
 
   // startCombat(player: Character, enemy:NPC) {
