@@ -115,4 +115,35 @@ export class Char {
         public resetAttackValue(): void {
             this.attackValue = this.intelligence;
         }
+
+        public resetCombatStats(): void {
+            this.resetArmorValue();
+            this.resetAttackValue();
+            this.resetDamageValue();
+            this.resetEvadePercentage();
+            this.resetResistValue();
+        }
+
+        public setDependentStats(): void {
+            this.maxHP = this.constitution * 2;
+            this.maxMP = this.intelligence * 2;
+            this.hpToMax();
+            this.mpToMax();
+        }
+
+        public hpToMax(): void {
+            this.currentHP = this.maxHP;
+        }
+
+        public mpToMax(): void {
+            this.currentHP = this.maxMP;
+        }
+
+        public checkStatus(): void {
+
+        }
+
+        public resetStatusBoolean(attribute:boolean): void {
+
+        }
 }

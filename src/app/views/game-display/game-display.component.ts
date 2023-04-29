@@ -315,7 +315,17 @@ export class GameDisplayComponent {
  */
   getNPC(NPCID: number): void {
     this.characterService.getEnemy(NPCID).subscribe((enemy) => {
-      this.enemy = enemy;
+      this.enemy = new NPC(
+        enemy.name,
+        enemy.strength,
+        enemy.dexterity,
+        enemy.constitution,
+        enemy.intelligence,
+        enemy.armor,
+        enemy.resistance,
+        enemy.abilities,
+        enemy.level
+        );
       this.messageService.add(`got npc `);
       this.CombatBool = true;
     });

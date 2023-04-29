@@ -7,7 +7,11 @@ export class NPC extends Char {
         dexterity: number,
         constitution: number,
         intelligence: number,
-        abilities: string[]
+        armor: number,
+        resistance: number,
+        abilities: string[],
+        level: number,
+
       ) {
 
         let attributeList = [strength, dexterity, constitution, intelligence]
@@ -29,6 +33,10 @@ export class NPC extends Char {
         }
         super(name, attributeList[0], attributeList[1], attributeList[2], attributeList[3], abilities)
        
+
+        this.level = level;
+        this.resistance = resistance;
+        this.armor = armor;
         this.currentCurrency = Math.floor(Math.random() * (5 - 1) + 1) * this.level;
       }
 
