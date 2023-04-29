@@ -3,6 +3,14 @@
 
         {{location.enterText}}
     </div>
+    <!-- <div *ngIf="exploring > 0 && exploring < 3">
+
+        {{location.middleText}}
+</div>
+<div *ngIf="exploring >= 3">
+
+    {{location.exitText}}
+</div> -->
 
     <div *ngIf="location.id == SG && !selectedTemplate">
 
@@ -10,7 +18,7 @@
 
             {{location.enterText}}
         </div>
-        <div *ngIf="locationState==1">
+        <div *ngIf="locationState==1 || exploring > 0 && exploring < 3">
 
             {{location.middleText}}
 
@@ -20,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="locationState==2">
+        <div *ngIf="locationState==2 || exploring >= 3">
 
             {{location.exitText}}
         </div>

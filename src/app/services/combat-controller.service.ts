@@ -11,9 +11,9 @@ export class CombatControllerService {
 
   attack(self:Character|NPC, target: Character|NPC): number {
     let attack: number = Math.random() * 100;
-    this.messageService.add(`attack num : ${attack}`)
-    this.messageService.add(`damageValue ${self.name} ${self.damageValue}`)
-    this.messageService.add(`armorvalue: ${target.armorValue}`)
+    // this.messageService.add(`attack num : ${attack}`)
+    // this.messageService.add(`damageValue ${self.name} ${self.damageValue}`)
+    // this.messageService.add(`armorvalue: ${target.armorValue}`)
     if (attack === 100) {
       this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
       return self.damageValue * 2

@@ -21,13 +21,7 @@ back:string = "Back"
 
 
 constructor(private messageService:MessageService) {}
-// OnChanges() {
-//   if (this.character) {
-//     this.Attributes = [this.character.strength, this.character.dexterity, this.character.constitution, this.character.intelligence]
-//     console.warn("stats")
-//     console.warn(this.Attributes)
-//   }
-// }
+
 incrementStat(i:number) {
   this.Attributes[i] += 1;
 }
@@ -66,6 +60,26 @@ saveStats(): void {
   this.character.dexterity = this.Attributes[1];
   this.character.constitution = this.Attributes[2];
   this.character.intelligence = this.Attributes[3];
+  
+  this.setDependentAttributes();
+}
+
+
+setDependentAttributes(): void {
+  this.character.maxHP = this.character.constitution * 2;
+  this.character.currentHP = this.character.maxHP;
+  this.character.maxMP = this.character.intelligence * 2;
+  this.character.currentMP = this.character.maxMP;
+  this.resetCharacterAttributes();
+}
+
+private resetCharacterAttributes(): void {
+  this.character.armorValue = this.character.armor;
+  this.character.damageValue = this.character.equippedItems.hand?.itemStat ?
+      this.character.equippedItems.hand?.itemStat + Math.floor(this.character.strength / 2) : Math.floor(this.character.strength / 2);
+  this.character.evadePercentage = this.character.dexterity;
+  this.character.resistValue = this.character.resistance;
+  this.character.attackValue = this.character.intelligence;
 }
 
 @Output() ReturnToMainInn = new EventEmitter<boolean>();

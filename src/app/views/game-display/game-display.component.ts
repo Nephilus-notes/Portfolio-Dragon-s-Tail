@@ -39,7 +39,7 @@ export class GameDisplayComponent {
     //   console.warn(data)
     // })
   }
-
+  exploring: number = 0;
   submitString!: string;
   CombatBool: boolean = false;
   /**
@@ -96,12 +96,12 @@ export class GameDisplayComponent {
   /* START COMBAT LOGIC */
 
   attack(self: Character | NPC, target: Character | NPC): void {
-    this.messageService.add('starting an attack');
+    // this.messageService.add('starting an attack');
     let damage: number = this.combatService.attack(self, target);
     if (damage) {
       target.currentHP -= damage;
     }
-    this.messageService.add(`attack finished Damage ${damage}`);
+    // this.messageService.add(`attack finished Damage ${damage}`);
   }
   /**
    * A switch function to determine what action the character takes based on the actionCall,
@@ -181,15 +181,17 @@ export class GameDisplayComponent {
       this.GameStateSwitch = 2;
       this.messageService.add('got to Inn check');
     } else if (submitString === 'C') {
-      var playerExplored = this.checkPlayerExploration();
-      this.messageService.add(`playerExplored ${playerExplored}`);
-      if (playerExplored < 3) {
-        playerExplored++;
-        this.modifyPlayerExploration(playerExplored);
+      this.exploring = this.checkPlayerExploration();
+      this.messageService.add(`exploring ${this.exploring} vs pcexploring ${this.checkPlayerExploration()}`)
+      this.messageService.add(`playerExplored ${ this.exploring}`);
+      if ( this.exploring < 3) {
+         this.exploring++;
+        this.modifyPlayerExploration( this.exploring);
         this.startCombat();
       } else {
-        this.modifyPlayerExploration(Math.floor(playerExplored / 2));
-        this.changeLocation(submitString);
+        this.modifyPlayerExploration(Math.floor( this.exploring / 2));
+        console.warn(`exploring ${this.exploring}`)
+        this.changeLocation(this.location.next);
       }
     } else {
       this.changeLocation(submitString);

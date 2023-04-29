@@ -13,6 +13,7 @@ import { CharacterObject } from 'src/app/models/characterClass';
 })
 export class TextDisplayComponent implements OnInit{
   @Input() location!: Location;
+  @Input() exploring!: number;
   SG: string = "SG";
   placement:string = "enter";
   locationState: number = 0;

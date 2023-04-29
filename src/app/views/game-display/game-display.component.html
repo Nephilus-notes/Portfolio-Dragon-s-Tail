@@ -15,7 +15,7 @@
 
             <app-combat-display *ngIf="CombatBool" [combatant]="enemy" ></app-combat-display>
 
-        <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location" (submitValue)="playerChoice($event)" (loadingCharacter)="loadCharacter()">></app-text-display>
+        <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location" (submitValue)="playerChoice($event)" (loadingCharacter)="loadCharacter()" [exploring]="exploring">></app-text-display>
 
             <app-shop-display *ngIf="GameStateSwitch == 1" [location]="location" [GameStateSwitch]="GameStateSwitch"[character]="character"></app-shop-display>
 
