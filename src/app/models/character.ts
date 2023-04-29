@@ -2,80 +2,51 @@ import { Equipment } from './equipment';
 import { Item } from './item'
 import { Char } from './char';
 
-export interface Character extends Char {
-    id?: number;
-    name: string;
-    level: number;
-    currentLocation: string;
-    lifeTimeCurrency: number;
-    currentCurrency: number;
-    items: Array<Item>;
-    equippedItems: Equipment;
-
-
-    strengthXP: number;
-    dexterityXP: number;
-    constitutionXP: number;
-    intelligenceXP: number;
-    armor: number ;
-    resistance: number;
-    strength: number;
-    dexterity: number;
-    intelligence: number;
-    constitution: number;
-    maxHP : number;
-    maxMP : number;
-    // weapon: object;
-    // weapon_damage : number;
-
-    abilities: Array<string>;
-        currentHP: number;
-    currentMP: number  ;
-    kratabsFollyExplored: number;
-    drippingDeathExplored: number;
-    playersRespiteExplored: number;
-    tailOfTheDragonExplored: number;
-    thagragsHopeExplored: number;
-    webOfDepthsExplored: number;
-    graithsGrottoExplored: number;
-    graithQueensLairExplored: number;
-
-    armorValue: number;
-  attackValue: number;
-  damageValue: number;
-  evadePercentage: number;
-  resistValue: number;
+export class Character extends Char {
+    constructor(
+        name: string,
+        strength: number,
+        dexterity: number,
+        constitution: number,
+        intelligence: number,
+        abilities: string[]
+      ) {
+        super(name, strength, dexterity, constitution, intelligence,abilities)
+        // this.name = name;
+        // this.strength = strength;
+        // this.dexterity = dexterity;
+        // this.intelligence = intelligence;
+        // this.constitution = constitution;
+        // this.abilities = abilities;
+        // this.maxHP = 2 * this.constitution;
+        // this.maxMP = 2 * this.intelligence;
+        // this.currentHP = this.maxHP;
+        // this.currentMP = this.maxMP;
+        // this.armorValue = this.armor;
+        // this.damageValue = this.strength / 2;
+        // this.evadePercentage = this.dexterity; // Times 2 for maxed evasion at 50?
+        // this.resistValue = this.resistance;
+        // this.attackValue = this.intelligence;
+      }
+     
+      currentLocation!: string;
+      
+      lifeTimeCurrency: number = 0;
+      items: Array<Item> = [];
+     
     
-     // STATUSES //
-    //# Status flags
-    defended : boolean;
-    evading : boolean;
-    fleeing: boolean;
-    stoneArmored : boolean;
-    slowed : boolean;
-    vulnerable : boolean;
-    doubleArmed : boolean;
-    burningBlades : boolean;
-    stoneFists : boolean;
-    focusing: boolean;
-
-    // no incrementers
-    poisoned : boolean;
-    burning: boolean;
-    hitByWind : boolean;
-    stunned: boolean;
-
-    // status Incrementors
-    evadingRounds: number;
-    defendingRounds: number;
-    fleeingRounds : number;
-    focusingRounds: number;
-    slowedRounds : number;
-    stoneArmoredRounds: number;
-    vulnerableRounds: number;
-    doubleArmedRounds : number;
-    burningBladesRounds : number;
-    burningRounds: number;
-    poisonedRounds : number;
+      strengthXP: number = 0;
+      dexterityXP: number = 0;
+      constitutionXP: number = 0;
+      intelligenceXP: number = 0;
+    
+      kratabsFollyExplored: number = 0;
+      drippingDeathExplored: number = 0;
+      playersRespiteExplored: number = 0;
+      tailOfTheDragonExplored: number = 0;
+      thagragsHopeExplored: number = 0;
+      webOfDepthsExplored: number = 0;
+      graithsGrottoExplored: number = 0;
+      graithQueensLairExplored: number = 0;
     
 }

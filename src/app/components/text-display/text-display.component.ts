@@ -4,7 +4,8 @@ import { Location } from '../../models/location';
 
 import { CharacterService } from 'src/app/services/character.service';
 import { Template } from 'src/app/models/template';
-import { CharacterObject } from 'src/app/models/characterClass';
+import { Character } from 'src/app/models/character';
+
 
 @Component({
   selector: 'app-text-display',
@@ -45,7 +46,7 @@ export class TextDisplayComponent implements OnInit{
 
   @Output() loadingCharacter = new EventEmitter<boolean>();
   public chooseCharacter(template:Template) {
-    var character = new CharacterObject(template.name, template.strength, template.dexterity, 
+    var character = new Character(template.name, template.strength, template.dexterity, 
       template.intelligence, template.constitution,[template.ability]);
       this.characterService.cacheCharacter(character);
       this.incrementState();
