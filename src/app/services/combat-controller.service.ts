@@ -24,12 +24,13 @@ export class CombatControllerService {
       }
       else if (attack > target.evadePercentage) {
         var totalDamage = self.damageValue - target.armorValue // Math.random() * self.damage * .1
-        this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
-        if (totalDamage > 1) {
+
+        if (totalDamage < 1) {
+          totalDamage = 1;
+        } 
           this.dealDamage(target, totalDamage)
-        } else {
-          this.dealDamage(target, 1)
-        }
+        this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
+        
       } else {
         this.messageService.add(`${self.name} missed ${target.name}`, true)
       } 
@@ -70,13 +71,13 @@ export class CombatControllerService {
   checkCombatants(player: Character, enemy:NPC): boolean {
     if (player.currentHP <= 0) {
       player.currentHP = 0;
-      this.messageService.add("You can no longer fight. You return home", true)
+      this.messageService.add("You can no longer fight.", true)
 
       // Send back to town
       return false
     } else if (enemy.currentHP <= 0) {
       enemy.currentHP = 0;
-      this.messageService.add(`You defeated the ${enemy.name}! You might get some reward from this eventually.`, true)
+      this.messageService.add(`You defeated the ${enemy.name}! You scavenge ${enemy.currentCurrency} Essence.`, true)
 
       return false
     } else {
@@ -95,18 +96,18 @@ export class CombatControllerService {
       this.attack(enemy, character);
       this.playerAction(character, enemy, actionCall);
     }
-    this.messageService.add(
-      `combat check ${this.checkCombatants(
-        character,
-        enemy
-      )}`
-    );
+    // this.messageService.add(
+    //   `combat check ${this.checkCombatants(
+    //     character,
+    //     enemy
+    //   )}`
+    // );
 
-    // this.CombatBool = 
-    this.checkCombatants(
-      character,
-      enemy
-    );
+    // // this.CombatBool = 
+    // this.checkCombatants(
+    //   character,
+    //   enemy
+    // );
   }
 
   playerAction(character: Character, enemy: NPC, actionCall: string) {
