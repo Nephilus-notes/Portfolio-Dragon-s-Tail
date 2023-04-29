@@ -36,15 +36,18 @@ saveIDCache!:number;
 
       if (!this.saveIDCache) {
         this.messageService.add("posting new")
-        this.characterService.postCharacter(character)
-        let response = this.http.post(`${environment.saveFileURL}`, {
+        var savedChar = this.characterService.postCharacter(character).subscribe(p => {
+          let response = this.http.post(`${environment.saveFileURL}`, {
           UserID:user?.sub,
-          PlayerCharacterID:character.id,
+          PlayerCharacterID:p.id,
           LocationID:locationID,
           DateAdded: new Date().toISOString(),
           DateUpdated: new Date().toISOString()
         })
         response.subscribe(r => console.warn(r))
+
+        })
+        
       } 
       else  {
         this.messageService.add("posting old")

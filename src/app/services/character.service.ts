@@ -76,7 +76,7 @@ export class CharacterService {
   }
 
 
-  public postCharacter(character:Character): void {
+  public postCharacter(character:Character): Observable<Character> {
     let url = `${environment.characterURL}`
     let date = new Date().toISOString()
 
@@ -94,6 +94,7 @@ export class CharacterService {
       console.warn(charDTO)
     response.subscribe(r => console.warn(r))
     this.messageService.add("success, but how do we measure it?")
+    return response
   }
   /**
    * Checks to see if a character has been cached
