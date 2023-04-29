@@ -313,8 +313,8 @@ export class GameDisplayComponent {
  * 
  * Currently a hard code, but will change to dynamic api call with a primary key id parameter
  */
-  getNPC(): void {
-    this.characterService.getEnemy().subscribe((enemy) => {
+  getNPC(NPCID: number): void {
+    this.characterService.getEnemy(NPCID).subscribe((enemy) => {
       this.enemy = enemy;
       this.messageService.add(`got npc `);
       this.CombatBool = true;
@@ -368,21 +368,26 @@ export class GameDisplayComponent {
     if (random <= 500) {
       this.messageService.add('common');
       // Grab the common enemy from the db
+      return this.getNPC(this.location.commonNPC);
+
     } else if (random > 500 && random <= 850) {
       this.messageService.add('uncommon');
       // Grab the uncommon enemy by passing in its id
+       return this.getNPC(this.location.uncommonNPC);
     } else if (random > 850 && random <= 995) {
       this.messageService.add('rare');
       // call getNPC(this.location.rareNPC)
+       return this.getNPC(this.location.rareNPC);
     } else if (random > 995 && random <= 1000) {
       this.messageService.add('secret');
       // getNPC(this.location.secretNPC)
+       return this.getNPC(this.location.secretNPC);
     } else {
       console.warn('shit happened. Check your math');
       // get a common enemy.
     }
     // This runs regardless of case right now.
-    this.getNPC();
+    // this.getNPC();
   }
   saveGame(locationID:string) {
   

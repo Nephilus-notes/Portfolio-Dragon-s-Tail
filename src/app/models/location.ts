@@ -5,9 +5,9 @@ export interface Location {
     middleText: string;
     exitText: string;
     moveOptions: Array<string>;
-    commonNPC: string;
-    uncommonNPC: string;
-    rareNPC: string;
-    secretNPC: string;
+    commonNPC: number;
+    uncommonNPC: number;
+    rareNPC: number;
+    secretNPC: number;
     next: string;
 }

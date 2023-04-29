@@ -121,34 +121,14 @@ export class CharacterService {
     *
     *
     */
-    getEnemy(): Observable<NPC> {
-      const npc = of({
-        name: "Krakt Rat",
-        bag: [],
-        equippedItems: {
-          head:null,
-          body:null,
-          hand: null
-      },
-        armor: 1,
-        resistance: 2,
-        strength: 13,
-        dexterity: 15,
-        intelligence: 13,
-        constitution: 16,
-        maxHP: 20,
-        maxMP: 26,
-        damageValue: 5,
-        armorValue: 1,
-        attackValue: 13,
-        evadePercentage: 15,
-        resistValue: 0,
-        abilities: [['a', {name:"attack"}], ['d',{name:"defend"}],['g',{name:"dodge"}],['f',{name:"flee"}]],
-        currentHP: 20,
-        currentMP: 26,
-      });
-      this.messageService.add('CharacterService: generated enemy', true)
-      return npc;
+    getEnemy(NPCID:number): Observable<NPC> {
+
+      let url = `${environment.NpcURL}${NPCID}`
+    const enemy = this.http.get<Character>(url)
+
+    this.messageService.add('CharacterService: fetched enemy')
+    return enemy;
+
     }
 
     getTemplates(): Observable<Array<Template>>{
