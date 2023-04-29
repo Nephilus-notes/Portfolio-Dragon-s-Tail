@@ -30,6 +30,7 @@ import { InnScreenComponent } from './components/inn-screen/inn-screen.component
 import { GameButtonComponent } from './components/game-button/game-button.component';
 import { MovingBackgroundButtonComponent } from './components/moving-background-button/moving-background-button.component';
 import { LevelComponent } from './components/level/level.component';
+import { NewGameComponent } from './components/new-game/new-game.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { LevelComponent } from './components/level/level.component';
     GameButtonComponent,
     MovingBackgroundButtonComponent,
     LevelComponent,
+    NewGameComponent,
   ],
   imports: [
     BrowserModule,

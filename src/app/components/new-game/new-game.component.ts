@@ -7,11 +7,11 @@ import { Template } from 'src/app/models/template';
 import { CharacterObject } from 'src/app/models/characterClass';
 
 @Component({
-  selector: 'app-text-display',
-  templateUrl: './text-display.component.html',
-  styleUrls: ['./text-display.component.css']
+  selector: 'app-new-game',
+  templateUrl: './new-game.component.html',
+  styleUrls: ['./new-game.component.css']
 })
-export class TextDisplayComponent implements OnInit{
+export class NewGameComponent {
   @Input() location!: Location;
   SG: string = "SG";
   placement:string = "enter";
@@ -25,8 +25,7 @@ export class TextDisplayComponent implements OnInit{
       this.locationState += 1
     }
     else if (this.location.id == "SG") {
-      this.characterService.loadCharacter();
-      this.submitValue.emit("T");
+      this.submitValue.emit("T")
     } 
     else {
       this.locationState = 0;
@@ -41,15 +40,12 @@ export class TextDisplayComponent implements OnInit{
       this.selectedTemplate = template;
     }
   }
-
-  @Output() loadingCharacter = new EventEmitter<boolean>();
   public chooseCharacter(template:Template) {
     var character = new CharacterObject(template.name, template.strength, template.dexterity, 
       template.intelligence, template.constitution,[template.ability]);
       this.characterService.cacheCharacter(character);
       this.incrementState();
       this.selectedTemplate = undefined;
-      this.loadingCharacter.emit(true)
   }
 
 ngOnInit(): void {

@@ -1,0 +1,14 @@
+* {
+    background-color: darkgray;
+}
+
+.textDisplay {
+    width: clamp(23rem, 50vw, 70rem);
+    height: 600px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: darkgray;
+    border: 2px solid white;
+    margin-left: 0;
+}
