@@ -10,7 +10,7 @@
     </div>
         
     <div class="flex flex-co" *ngIf="items && !selectedItem">
-        <app-game-button *ngFor="let item of items; index as i;"[item]="item" (click)="onSelect(item)"></app-game-button>
+        <app-game-button *ngFor="let item of items; index as i;"[text]="item.name" (click)="onSelect(item)"></app-game-button>
         <!-- <button class=" selection" *ngFor="let item of items; index as i;"
         type="button" >
             {{item.name}} : {{item.price}}gp

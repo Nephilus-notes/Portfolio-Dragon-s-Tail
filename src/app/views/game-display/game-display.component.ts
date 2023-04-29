@@ -66,14 +66,17 @@ export class GameDisplayComponent {
   }
 
   loadCharacter(): void {
-    if (!this.characterService.characterCache) {
+    if (!this.characterService.characterCache && this.location.id != "SG") {
       // console.warn(`cache empty= ${this.characterService.characterCache}`);
       this.getCharacter();
       // this.messageService.add('loading failed');
-    } else {
+    } else if (this.characterService.characterCache) {
       console.warn(`cache full = ${this.characterService.characterCache}`);
       this.character = this.characterService.loadCharacter();
       // this.messageService.add('Character Loaded');
+    }
+    else {
+      
     }
   }
   cacheCharacter(): void {
@@ -393,9 +396,7 @@ export class GameDisplayComponent {
   ngOnInit(): void {
     this.messageService.add('initializing');
     this.loadLocation();
-    // this.getCharacter();
-    // this.loadCharacter();
-    // this.getNPC();
+    this.loadCharacter();
     // }
   }
   title: string = "Dragon's Tail";
