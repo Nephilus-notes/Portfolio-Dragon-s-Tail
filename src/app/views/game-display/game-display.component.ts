@@ -87,7 +87,7 @@ export class GameDisplayComponent {
     // this.messageService.add('player choice starting');
     if (this.CombatBool === true) {
       // this.messageService.add('player action');
-      this.round($event);
+      this.combatService.round(this.character, this.enemy, $event);
     } else {
       this.handleInput($event);
     }
@@ -95,66 +95,14 @@ export class GameDisplayComponent {
 
   /* START COMBAT LOGIC */
 
-  attack(self: Character | NPC, target: Character | NPC): void {
-    // this.messageService.add('starting an attack');
-    let damage: number = this.combatService.attack(self, target);
-    if (damage) {
-      target.currentHP -= damage;
-    }
-    // this.messageService.add(`attack finished Damage ${damage}`);
-  }
+  
   /**
    * A switch function to determine what action the character takes based on the actionCall,
    * a string passed in from the input form.  4 options: A - Attack, E -Evade, D - Defend, and F - Flee
    *
    * @param actionCall
    */
-  playerAction(actionCall: string) {
-    // this.messageService.add(`player action call ${actionCall}`);
-
-    switch (actionCall) {
-      case 'A': {
-        this.attack(this.character, this.enemy);
-        break;
-      }
-      case 'D': {
-        this.combatService.defend(this.character);
-        break;
-      }
-      case 'E': {
-        this.combatService.evade(this.character);
-        break;
-      }
-      case 'F': {
-        this.combatService.flee(this.character, this.enemy);
-        break;
-      }
-    }
-  }
-
-  round(actionCall: string) {
-    // this.messageService.add(
-    //   ` character ${this.character.dexterity} enemy ${this.enemy.dexterity}`
-    // );
-    if (this.character.dexterity >= this.enemy.dexterity) {
-      this.playerAction(actionCall);
-      this.attack(this.enemy, this.character);
-    } else {
-      this.attack(this.enemy, this.character);
-      this.playerAction(actionCall);
-    }
-    this.messageService.add(
-      `combat check ${this.combatService.checkCombatants(
-        this.character,
-        this.enemy
-      )}`
-    );
-
-    this.CombatBool = this.combatService.checkCombatants(
-      this.character,
-      this.enemy
-    );
-  }
+ 
 
   /* END COMBAT LOGIC */
 

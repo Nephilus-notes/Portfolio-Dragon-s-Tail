@@ -9,26 +9,35 @@ import { NPC } from '../models/npc';
 })
 export class CombatControllerService {
 
-  attack(self:Character|NPC, target: Character|NPC): number {
+  playerCharacter!: Character;
+  NPCEnemy!: NPC;
+
+  attack(self:Character|NPC, target: Character|NPC): void {
     let attack: number = Math.random() * 100;
     // this.messageService.add(`attack num : ${attack}`)
     // this.messageService.add(`damageValue ${self.name} ${self.damageValue}`)
     // this.messageService.add(`armorvalue: ${target.armorValue}`)
     if (attack === 100) {
       this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
-      return self.damageValue * 2
+      this.dealDamage(target, self.damageValue * 2)
     }
     else if (attack > target.evadePercentage) {
       var totalDamage = self.damageValue - target.armorValue // Math.random() * self.damage * .1
       this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
       if (totalDamage > 1) {
-        return totalDamage
+        this.dealDamage(target, totalDamage)
       } else {
-        return 1
+        this.dealDamage(target, 1)
       }
     } else {
       this.messageService.add(`${self.name} missed ${target.name}`, true)
-      return 0
+      
+    }
+  }
+
+  dealDamage(char:Character|NPC, damage: number): void {
+    if (damage > 0) {
+      char.currentHP -= damage
     }
   }
 
@@ -72,19 +81,67 @@ export class CombatControllerService {
     }
   }
 
-  startCombat(player: Character, enemy:NPC) {
-    this.setTempAttributes(player)
-    this.setTempAttributes(enemy)
-  };
+  round(character: Character, enemy: NPC, actionCall: string) {
+    // this.messageService.add(
+    //   ` character ${this.character.dexterity} enemy ${this.enemy.dexterity}`
+    // );
+    if (character.dexterity >= enemy.dexterity) {
+      this.playerAction(character, enemy, actionCall);
+      this.attack(enemy, character);
+    } else {
+      this.attack(enemy, character);
+      this.playerAction(character, enemy, actionCall);
+    }
+    this.messageService.add(
+      `combat check ${this.checkCombatants(
+        character,
+        enemy
+      )}`
+    );
 
-  setTempAttributes(character: Character | NPC) {
-    character.armorValue = character.armor;
-    character.damageValue = character.equippedItems.hand?.itemStat ?
-        character.equippedItems.hand?.itemStat + (character.strength / 2) : character.strength / 2;
-    character.evadePercentage = character.dexterity;
-    character.resistValue = character.resistance;
-    character.attackValue = character.intelligence;
-  };
+    // this.CombatBool = 
+    this.checkCombatants(
+      character,
+      enemy
+    );
+  }
+
+  playerAction(character: Character, enemy: NPC, actionCall: string) {
+    // this.messageService.add(`player action call ${actionCall}`);
+
+    switch (actionCall) {
+      case 'A': {
+        this.attack(character, enemy);
+        break;
+      }
+      case 'D': {
+        this.defend(character);
+        break;
+      }
+      case 'E': {
+        this.evade(character);
+        break;
+      }
+      case 'F': {
+        this.flee(character, enemy);
+        break;
+      }
+    }
+  }
+
+  // startCombat(player: Character, enemy:NPC) {
+  //   this.setTempAttributes(player)
+  //   this.setTempAttributes(enemy)
+  // };
+
+  // setTempAttributes(character: Character | NPC) {
+  //   character.armorValue = character.armor;
+  //   character.damageValue = character.equippedItems.hand?.itemStat ?
+  //       character.equippedItems.hand?.itemStat + (character.strength / 2) : character.strength / 2;
+  //   character.evadePercentage = character.dexterity;
+  //   character.resistValue = character.resistance;
+  //   character.attackValue = character.intelligence;
+  // };
 
   constructor(private messageService: MessageService) { }
 }
