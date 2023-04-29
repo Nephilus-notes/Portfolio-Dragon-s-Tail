@@ -13,7 +13,7 @@
     <div class="displayDiv" >
 
 
-            <app-combat-display *ngIf="CombatBool" [combatant]="enemy" ></app-combat-display>
+            <app-combat-display *ngIf="CombatBool" [combatant]="enemy" [battleNotDone]="battleNotDone" (CombatEnd)="combatFinish()" [battleEndText]="battleEndText"></app-combat-display>
 
         <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location" (submitValue)="playerChoice($event)" (loadingCharacter)="loadCharacter()" [exploring]="exploring">></app-text-display>
 

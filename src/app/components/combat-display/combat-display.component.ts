@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Character } from '../../models/character';
 import { MessageService } from '../../services/message.service';
 import { NPC } from '../../models/npc';
+import { CombatControllerService } from 'src/app/services/combat-controller.service';
 
 @Component({
   selector: 'app-combat-display',
@@ -10,6 +11,13 @@ import { NPC } from '../../models/npc';
 })
 export class CombatDisplayComponent {
   @Input() combatant!: NPC;
+  @Input() battleNotDone!: boolean;
+  @Input() battleEndText!:string;
 
-  constructor(public messageService: MessageService) {}
+  @Output() CombatEnd = new EventEmitter();
+  endCombat(): void {
+    this.CombatEnd.emit(true);
+  }
+
+  constructor(public messageService: MessageService, private combatService: CombatControllerService) {}
 }

@@ -10,6 +10,10 @@ export class MessageService {
   add(message: string, combat:boolean=false) {
     if (combat) {
       this.combatMessages.push(message)
+      console.warn(this.combatMessages.length)
+      if (this.combatMessages.length > 6) {
+        this.combatMessages.shift()
+      }
     } else {
       this.messages.push(message)
     }

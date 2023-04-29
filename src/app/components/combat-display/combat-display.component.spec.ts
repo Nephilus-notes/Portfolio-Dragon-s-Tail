@@ -76,7 +76,7 @@ describe('CombatDisplayComponent', () => {
           attackValue:10,
           resistValue:1
     };
-    component.combatant = expectedCombatant
+    // component.combatant = expectedCombatant
     fixture.detectChanges();
   });
 

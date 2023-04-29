@@ -13,25 +13,26 @@ export class CombatControllerService {
   NPCEnemy!: NPC;
 
   attack(self:Character|NPC, target: Character|NPC): void {
-    let attack: number = Math.random() * 100;
-    // this.messageService.add(`attack num : ${attack}`)
-    // this.messageService.add(`damageValue ${self.name} ${self.damageValue}`)
-    // this.messageService.add(`armorvalue: ${target.armorValue}`)
-    if (attack === 100) {
-      this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
-      this.dealDamage(target, self.damageValue * 2)
-    }
-    else if (attack > target.evadePercentage) {
-      var totalDamage = self.damageValue - target.armorValue // Math.random() * self.damage * .1
-      this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
-      if (totalDamage > 1) {
-        this.dealDamage(target, totalDamage)
-      } else {
-        this.dealDamage(target, 1)
+    if (self.currentHP > 0) {
+      let attack: number = Math.random() * 100;
+      // this.messageService.add(`attack num : ${attack}`)
+      // this.messageService.add(`damageValue ${self.name} ${self.damageValue}`)
+      // this.messageService.add(`armorvalue: ${target.armorValue}`)
+      if (attack === 100) {
+        this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
+        this.dealDamage(target, self.damageValue * 2)
       }
-    } else {
-      this.messageService.add(`${self.name} missed ${target.name}`, true)
-      
+      else if (attack > target.evadePercentage) {
+        var totalDamage = self.damageValue - target.armorValue // Math.random() * self.damage * .1
+        this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
+        if (totalDamage > 1) {
+          this.dealDamage(target, totalDamage)
+        } else {
+          this.dealDamage(target, 1)
+        }
+      } else {
+        this.messageService.add(`${self.name} missed ${target.name}`, true)
+      } 
     }
   }
 
@@ -43,10 +44,12 @@ export class CombatControllerService {
 
   defend(self: Character): void {
     self.armorValue += 2
+    this.messageService.add(`${self.name} focuses on defense`, true)
   }
 
   evade(self: Character): void {
     self.evadePercentage += 2
+    this.messageService.add(`${self.name} focuses on evasion`, true)
   }
 
   flee(self: Character|NPC, target: Character|NPC): boolean {

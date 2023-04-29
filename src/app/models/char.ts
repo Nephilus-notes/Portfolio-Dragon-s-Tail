@@ -136,7 +136,12 @@ export class Char {
         }
 
         public mpToMax(): void {
-            this.currentHP = this.maxMP;
+            this.currentMP = this.maxMP;
+        }
+
+        public fullHeal(): void {
+            this.hpToMax();
+            this.mpToMax();
         }
 
         public checkStatus(): void {

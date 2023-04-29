@@ -10,17 +10,17 @@ import { Character } from '../../models/character';
 import { NPC } from '../../models/npc';
 import { SaveFileService } from 'src/app/services/save-file.service';
 
-const CharacterViewButton = document.getElementById('characterViewButton');
-let characterView = false;
+// const CharacterViewButton = document.getElementById('characterViewButton');
+// let characterView = false;
 
-const onClickCharacter = function () {
-  if (characterView) {
-    characterView = false;
-  } else {
-    characterView = true;
-  }
-  // characterView = false ? characterView : true
-};
+// const onClickCharacter = function () {
+//   if (characterView) {
+//     characterView = false;
+//   } else {
+//     characterView = true;
+//   }
+//   // characterView = false ? characterView : true
+// };
 
 @Component({
   selector: 'app-game-display',
@@ -42,6 +42,8 @@ export class GameDisplayComponent {
   exploring: number = 0;
   submitString!: string;
   CombatBool: boolean = false;
+  battleNotDone!: boolean;
+  battleEndText!: string ;
   /**
    * GameStateSwitch controls all non combat, non standard travel game states.
    *
@@ -88,23 +90,21 @@ export class GameDisplayComponent {
     if (this.CombatBool === true) {
       // this.messageService.add('player action');
       this.combatService.round(this.character, this.enemy, $event);
+      this.battleNotDone = this.combatService.checkCombatants(this.character, this.enemy)
+
+      if (this.battleNotDone == false) {
+        if (this.character.currentHP > 0) {
+          this.battleEndText = "You won!"
+        }
+        else {
+          this.battleEndText = "Return to Town"
+        }
+      }
     } else {
       this.handleInput($event);
     }
   }
 
-  /* START COMBAT LOGIC */
-
-  
-  /**
-   * A switch function to determine what action the character takes based on the actionCall,
-   * a string passed in from the input form.  4 options: A - Attack, E -Evade, D - Defend, and F - Flee
-   *
-   * @param actionCall
-   */
- 
-
-  /* END COMBAT LOGIC */
 
   /**
    * Takes the user input as a string and performs conditional checks to determine the next step.
@@ -156,7 +156,7 @@ export class GameDisplayComponent {
       .getNewLocation(submitString)
       .subscribe((location) => {
         this.location = location;
-        console.warn(location)
+        // console.warn(location)
       });
   }
 /**
@@ -284,8 +284,20 @@ export class GameDisplayComponent {
   combatToggle(): void {
     if (this.CombatBool) {
       this.CombatBool = false;
+      this.messageService.add(`CombatBool = ${this.CombatBool}`)
     } else {
       this.CombatBool = true;
+      this.messageService.add(`CombatBool = ${this.CombatBool}`)
+    }
+  }
+
+  combatFinish(): void {
+    this.CombatBool = false;
+    this.battleNotDone = true;
+    this.messageService.clear(true);
+    if (this.character.currentHP == 0) {
+      this.changeLocation("T")
+      this.character.fullHeal();
     }
   }
 /**
