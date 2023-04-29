@@ -75,15 +75,17 @@ export class ShopDisplayComponent {
   }
 
   public buyItem(): void {
-    this.character.currentCurrency -= this.selectedItem!.price;
-    // this.character.items = [];
-    this.character.items.push(this.selectedItem!);
-    for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].id === this.selectedItem!.id) {
-        this.items.splice(i,1);
-        this.resetSelectedItem();
-        console.warn(this.items)
-        return;
+    if (this.character.currentCurrency > this.selectedItem!.price) {
+      this.character.currentCurrency -= this.selectedItem!.price;
+      // this.character.items = [];
+      this.character.items.push(this.selectedItem!);
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i].id === this.selectedItem!.id) {
+          this.items.splice(i,1);
+          this.resetSelectedItem();
+          console.warn(this.items)
+          return;
+        }
       }
     }
   };

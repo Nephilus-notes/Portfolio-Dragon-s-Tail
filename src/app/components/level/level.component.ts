@@ -18,12 +18,15 @@ Attributes!:number[];
 attributeNames: string[] = ["Strength", "Dexterity", "Constitution", "Intelligence"]
 saveChanges:string = "Save Changes";
 back:string = "Back"
+runningTotal!: number;
 
 
 constructor(private messageService:MessageService) {}
 
 incrementStat(i:number) {
-  this.Attributes[i] += 1;
+  if (this.character.currentCurrency > 5 *(this.character.level **this.character.level) / 2) {
+    this.Attributes[i] += 1;
+  }
 }
 
 decrementStat(i:number): void {
