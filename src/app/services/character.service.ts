@@ -124,7 +124,7 @@ export class CharacterService {
     getEnemy(NPCID:number): Observable<NPC> {
 
       let url = `${environment.NpcURL}${NPCID}`
-    const enemy = this.http.get<Character>(url)
+    const enemy = this.http.get<NPC>(url)
 
     this.messageService.add('CharacterService: fetched enemy')
     return enemy;

@@ -6,8 +6,8 @@ export class Char {
         name: string,
         strength: number,
         dexterity: number,
-        intelligence: number,
         constitution: number,
+        intelligence: number,
         abilities: string[]
       ) {
         this.name = name;
