@@ -87,3 +87,11 @@ a {
     margin-bottom: 30px;
     color:(17, 5, 84);
 }
+
+.musicFrame:only-child {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.SongTitle {
+    color:rgb(0, 190, 190);
+}
