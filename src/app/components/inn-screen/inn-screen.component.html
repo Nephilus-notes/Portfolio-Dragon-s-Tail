@@ -20,10 +20,8 @@
 
 <ng-template #LevelAndLearn>
 
-    we are in level and learn 
     <!-- place for experience bar if multiple experience types -->
     <div *ngIf="levelBool;" class="centerDisplay bordered">
-        Leveling now
         <app-level [character]="character" [levelBool]="levelBool" (ReturnToMainInn)="backClick()"></app-level>
     </div>
 

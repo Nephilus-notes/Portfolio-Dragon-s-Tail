@@ -17,6 +17,7 @@
         <div *ngIf="locationState==0">
 
             {{location.enterText}}
+            <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
         </div>
         <div *ngIf="locationState==1 || exploring > 0 && exploring < 3">
 
@@ -29,10 +30,10 @@
             </div>
         </div>
         <div *ngIf="locationState==2 || exploring >= 3">
-
+            
             {{location.exitText}}
+            <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
         </div>
-        <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
     </div>
 
     <div *ngIf="selectedTemplate">
@@ -44,7 +45,7 @@
 
 
         <p>Perks: (Not available)</p>
-
+        <app-game-button (click)="onSelect(selectedTemplate)" text="Back"></app-game-button>
         <app-game-button (click)="chooseCharacter(selectedTemplate)"></app-game-button>
     </div>
     

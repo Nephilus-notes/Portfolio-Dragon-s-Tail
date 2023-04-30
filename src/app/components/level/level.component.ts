@@ -64,7 +64,8 @@ saveStats(): void {
   this.character.constitution = this.Attributes[2];
   this.character.intelligence = this.Attributes[3];
   
-  this.setDependentAttributes();
+  this.character.setDependentStats()
+  this.character.resetCombatStats()
 }
 
 
