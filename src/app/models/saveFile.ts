@@ -3,5 +3,6 @@ export interface SaveFile {
     userID: number;
     playerCharacterID: number;
     locationID: string;
-    // dateModified: string;
+    dateUpdated: string;
+    dateAdded: string;
 }

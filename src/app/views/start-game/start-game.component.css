@@ -1,6 +1,10 @@
-li {
-    background-color: black;
+* {
+    background-color: darkgray;
 }
+
+/* li {
+    background-color: black;
+} */
 a {
     text-decoration: none;
 }

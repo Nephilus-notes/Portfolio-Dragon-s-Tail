@@ -18,9 +18,7 @@ import { MessageService } from 'src/app/services/message.service';
 export class StartGameComponent {
   constructor(private saveService:SaveFileService, private locationService: LocationService, 
     private characterService:CharacterService, private auth: AuthService,
-    private messageService:MessageService) { 
-      this.getAllSaves()
-    }
+    private messageService:MessageService) {     }
 
   file!: SaveFile;
   character!: Character;
@@ -29,11 +27,12 @@ export class StartGameComponent {
   Loading!: boolean;
   startGame: boolean = false;
   userSaveFiles?: Array<SaveFile>;
+  userID?:string;
 
 
-  loadSaveFile() {
+  loadSaveFile(saveFileID: number): void {
     this.Loading = true;
-    this.saveService.getSaveFile(1)
+    this.saveService.getSaveFile(saveFileID)
     .subscribe(file => {
       this.file = file;
       this.getCharacter(file.playerCharacterID);
@@ -79,15 +78,22 @@ export class StartGameComponent {
   getAllSaves() {
     console.warn("starting to load games")
     let usertoken:string | undefined;
-    this.auth.user$.subscribe(user => usertoken = user?.sub)
-    console.warn(usertoken)
-
-    this.saveService.getUserSaveFiles(usertoken).subscribe( saves => {
-      this.userSaveFiles = saves;
+    this.auth.user$.subscribe(user => {
+      usertoken = user?.sub
+      console.warn(usertoken)
+      
+          this.saveService.getUserSaveFiles(usertoken).subscribe( saves => {
+            this.userSaveFiles = saves;
+          })
     })
   }
   
   ngOnInit(): void {
+    this.auth.user$.subscribe(
+      user=> {
+        this.userID = user?.sub
+      }
+    )
     this.messageService.add('initializing');
     console.warn("starting init")
     this.getAllSaves();

@@ -18,7 +18,6 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { UIformComponent } from './components/uiform/uiform.component';
 import { TextDisplayComponent } from './components/text-display/text-display.component';
 import { CombatDisplayComponent } from './components/combat-display/combat-display.component';
-import { LoadGameComponent } from './views/load-game/load-game.component';
 import { LoginPageComponent } from './views/login-page/login-page.component';
 import { CreateUserComponent } from './views/create-user/create-user.component';
 import { ShopDisplayComponent } from './components/shop-display/shop-display.component';
@@ -44,7 +43,6 @@ import { NewGameComponent } from './components/new-game/new-game.component';
     UIformComponent,
     TextDisplayComponent,
     CombatDisplayComponent,
-    LoadGameComponent,
     LoginPageComponent,
     CreateUserComponent,
     ShopDisplayComponent,
