@@ -1,25 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SaveFileService } from '../../services/save-file.service';
 import { SaveFile } from '../../models/saveFile';
 import { LocationService } from '../../services/location.service';
 import { CharacterService } from '../../services/character.service';
 import { Character } from '../../models/character';
 import { Location } from '../../models/location';
+import { AuthService } from '@auth0/auth0-angular';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-load-game',
   templateUrl: './load-game.component.html',
   styleUrls: ['./load-game.component.css']
 })
-export class LoadGameComponent {
+export class LoadGameComponent implements OnInit{
   constructor(private saveService:SaveFileService, private locationService: LocationService, 
-    private characterService:CharacterService) { }
+    private characterService:CharacterService, private auth: AuthService,
+    private messageService:MessageService) { 
+      this.getAllSaves()
+    }
 
   file!: SaveFile;
   character!: Character;
   location!: Location;
 
   Loading!: boolean;
+  userSaveFiles?: Array<SaveFile>;
 
 
   loadSaveFile() {
@@ -55,4 +61,20 @@ export class LoadGameComponent {
     });
   }
 
+  getAllSaves() {
+    console.warn("starting to load games")
+    let usertoken:string | undefined;
+    this.auth.user$.subscribe(user => usertoken = user?.sub)
+    console.warn(usertoken)
+
+    this.saveService.getUserSaveFiles(usertoken).subscribe( saves => {
+      this.userSaveFiles = saves;
+    })
+  }
+  
+  ngOnInit(): void {
+    this.messageService.add('initializing');
+    console.warn("starting init")
+    this.getAllSaves();
+  }
 }

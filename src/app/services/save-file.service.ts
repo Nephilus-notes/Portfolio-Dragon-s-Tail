@@ -62,4 +62,18 @@ saveIDCache!:number;
       }
     })
   };
+
+  getUserSaveFiles(userID:string|undefined): Observable<Array<SaveFile>>{
+    if (userID) {
+
+      let url = `${environment.saveFileURL}user/${userID}`;
+  
+      return this.http.get<Array<SaveFile>>(url)
+      // caching the save ID 
+    }
+    else {
+      console.warn(`string = ${userID}`)
+      return this.http.get<Array<SaveFile>>(`${environment.saveFileURL}`)
+    }
+  }
 }

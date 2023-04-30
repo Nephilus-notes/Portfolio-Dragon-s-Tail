@@ -2,6 +2,9 @@
     
 
     <!-- Build an ngFor to loop over the save files that user has saved and display buttons for all of them. -->
+    <div *ngFor="let save of userSaveFiles; index as i;">
+        <app-game-button></app-game-button>
+    </div>
     <button  ng (click)="loadSaveFile()"  class="loadButton">Load Game</button>
 
     <!-- build a loading bar? --><div *ngIf="Loading" class="background-primary centered mini"> ... </div>
