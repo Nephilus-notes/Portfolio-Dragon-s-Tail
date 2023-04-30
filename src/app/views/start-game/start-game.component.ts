@@ -6,6 +6,8 @@ import { CharacterService } from '../../services/character.service';
 import { TemplateService } from 'src/app/services/template.service';
 import { Character } from '../../models/character';
 import { Location } from '../../models/location';
+import { AuthService } from '@auth0/auth0-angular';
+import { MessageService } from 'src/app/services/message.service';
 
 
 @Component({
@@ -15,7 +17,10 @@ import { Location } from '../../models/location';
 })
 export class StartGameComponent {
   constructor(private saveService:SaveFileService, private locationService: LocationService, 
-    private characterService:CharacterService, private templateService: TemplateService) { }
+    private characterService:CharacterService, private auth: AuthService,
+    private messageService:MessageService) { 
+      this.getAllSaves()
+    }
 
   file!: SaveFile;
   character!: Character;
@@ -23,6 +28,7 @@ export class StartGameComponent {
 
   Loading!: boolean;
   startGame: boolean = false;
+  userSaveFiles?: Array<SaveFile>;
 
 
   loadSaveFile() {
@@ -67,6 +73,24 @@ export class StartGameComponent {
     }
       
     )
+  }
+
+  
+  getAllSaves() {
+    console.warn("starting to load games")
+    let usertoken:string | undefined;
+    this.auth.user$.subscribe(user => usertoken = user?.sub)
+    console.warn(usertoken)
+
+    this.saveService.getUserSaveFiles(usertoken).subscribe( saves => {
+      this.userSaveFiles = saves;
+    })
+  }
+  
+  ngOnInit(): void {
+    this.messageService.add('initializing');
+    console.warn("starting init")
+    this.getAllSaves();
   }
 
 }

@@ -1,6 +1,10 @@
 <div class="load background-primary centered bordered">
     
     <button  ng (click)="newGame()"  class="loadButton">New Game</button>
+
+    <div *ngFor="let save of userSaveFiles; index as i;">
+        <app-game-button></app-game-button>
+    </div>
     <!-- Build an ngFor to loop over the save files that user has saved and display buttons for all of them. -->
     <button  ng (click)="loadSaveFile()"  class="loadButton">Load Game</button>
 
