@@ -50,6 +50,7 @@ export class CharacterService {
     this.characterCache = character
     this.messageService.add('Progress Saved')
   }
+  
   /** 
   * Loads a character from the CharacterService cache without an API call
   *
@@ -58,6 +59,11 @@ export class CharacterService {
   *
   *
   */
+
+
+  // public clearCharacterCache(): void {
+  //   delete this.characterCache
+  // }
   public loadCharacter(): Character {
     this.messageService.add('Character Loaded from characterservice')
     return this.characterCache
@@ -101,7 +107,7 @@ export class CharacterService {
    * 
    * @returns - Boolean
    */
-  exists() {
+  characterCacheExists() {
     if (this.characterCache) {
       this.messageService.add('Character exists!')
       return true
@@ -111,6 +117,7 @@ export class CharacterService {
       return false
     }
   }
+
 
  
     /** 
@@ -145,5 +152,16 @@ export class CharacterService {
 
     loadTemplates(): Array<Template> {
       return this.templateCache;
+    }
+
+    templateCacheExists() {
+      if (this.templateCache) {
+        this.messageService.add('Templates exists!')
+        return true
+      }
+      else {
+        this.messageService.add("Templates don't exist")
+        return false
+      }
     }
 }

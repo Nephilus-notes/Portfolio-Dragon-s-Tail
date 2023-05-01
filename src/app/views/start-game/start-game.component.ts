@@ -28,6 +28,7 @@ export class StartGameComponent {
   startGame: boolean = false;
   userSaveFiles?: Array<SaveFile>;
   userID?:string;
+  newGameBoolean!: boolean;
 
 
   loadSaveFile(saveFileID: number): void {
@@ -69,6 +70,7 @@ export class StartGameComponent {
       this.characterService.cacheTemplates(t);
       this.Loading = false;
       this.startGame = true;
+      this.newGameBoolean = true
     }
       
     )

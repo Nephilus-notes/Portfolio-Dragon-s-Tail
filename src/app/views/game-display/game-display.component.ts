@@ -247,7 +247,7 @@ export class GameDisplayComponent {
    */
   loadLocation() {
     // this.messageService.add("Loading")
-    if (!this.locationService.locationCache) {
+    if (this.characterService.templateCacheExists()) {
       this.changeLocation('SG');
       // console.warn(`Location Cache: ${this.locationService.locationCache}`)
     } else {
@@ -372,8 +372,10 @@ export class GameDisplayComponent {
 
   ngOnInit(): void {
     this.messageService.add('initializing');
+    if (this.characterService.templateCacheExists() === false) {
+      this.loadCharacter();
+    }
     this.loadLocation();
-    this.loadCharacter();
     // }
   }
   title: string = "Dragon's Tail";

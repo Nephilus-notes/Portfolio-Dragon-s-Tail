@@ -1,10 +1,10 @@
 <div class="load background-primary centered bordered">
     
-    <app-game-button  ng (click)="newGame()"  class="loadButton" text="New Game"></app-game-button >
+    <app-game-button  ng (click)="newGame()"  class="loadButton" text="New Game" *ngIf="!this.character"></app-game-button >
         
         <div *ngFor="let save of userSaveFiles; index as i;">
-        <div class="flex centered">
-    <app-game-button ng (click)="loadSaveFile(save.id)" text="Load Character: {{save.characterName}}" class="block"></app-game-button>
+        <div  *ngIf="!newGameBoolean"class="flex centered">
+    <app-game-button ng (click)="loadSaveFile(save.id)" text="Load Character: {{save.characterName}}" class="block" ></app-game-button>
     <div class="block card">
         Date Saved:
         {{save.dateUpdated}}
