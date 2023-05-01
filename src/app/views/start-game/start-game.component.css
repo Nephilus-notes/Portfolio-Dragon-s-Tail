@@ -1,5 +1,6 @@
 * {
     background-color: darkgray;
+    box-sizing: border-box;
 }
 
 /* li {
@@ -78,4 +79,30 @@ a:active {
     100% {
         background-position: right;
     }
+  }
+
+  .block {
+    display: block;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    background-color: rgb(121, 121, 121);
+    padding-left: 20px;
+    padding-right: 15px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 50px;
+    text-align: center;
+    color:white;
+  }
+  .centered {
+    justify-content: center;
   }

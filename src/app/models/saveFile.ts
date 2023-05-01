@@ -5,4 +5,5 @@ export interface SaveFile {
     locationID: string;
     dateUpdated: string;
     dateAdded: string;
+    characterName: string;
 }

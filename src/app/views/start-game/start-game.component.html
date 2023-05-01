@@ -1,10 +1,17 @@
 <div class="load background-primary centered bordered">
     
     <app-game-button  ng (click)="newGame()"  class="loadButton" text="New Game"></app-game-button >
-
-    <div *ngFor="let save of userSaveFiles; index as i;">
-        <app-game-button ng (click)="loadSaveFile(save.id)" text="Load Game {{save.dateUpdated}}"></app-game-button> {{save.dateUpdated}}
-    </div>
+        
+        <div *ngFor="let save of userSaveFiles; index as i;">
+        <div class="flex centered">
+    <app-game-button ng (click)="loadSaveFile(save.id)" text="Load Character: {{save.characterName}}" class="block"></app-game-button>
+    <div class="block card">
+        Date Saved:
+        {{save.dateUpdated}}
+    
+            </div>
+        </div>
+</div>
     <!-- Build an ngFor to loop over the save files that user has saved and display buttons for all of them. -->
     <!-- <button  ng (click)="loadSaveFile()"  class="loadButton">Load Game</button> -->
     <!-- <app-game-button  ng (click)="loadSaveFile()"  class="loadButton" text="Load Game"></app-game-button > -->
@@ -14,8 +21,8 @@
     <!-- make this nav link an ngIf to ensure all pieces are loaded first -->
     <a  *ngIf="character && location || startGame==true" class="nav-link" ria-current="Dragon's Tail Game" routerLink="/game"
     >Start Game</a>
-    <div *ngIf="userID" class="background-primary">
+    <!-- <div *ngIf="userID" class="background-primary">
 
         {{userID}}
-    </div>
+    </div> -->
 </div>
