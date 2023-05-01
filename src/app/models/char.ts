@@ -25,6 +25,7 @@ export class Char {
         this.evadePercentage = this.dexterity; // Times 2 for maxed evasion at 50?
         this.resistValue = this.resistance;
         this.attackValue = this.intelligence;
+        this.magicValue = this.intelligence;
       }
       id?: number = undefined; // fix hard coded thing
       name: string;
@@ -62,10 +63,11 @@ export class Char {
       damageValue: number;
       evadePercentage: number;
       resistValue: number;
+      magicValue:number;
     
       //  STATUSES //
       // # Status flags
-      defended : boolean = false;
+        defended : boolean = false;
         evading : boolean = false;
         fleeing: boolean = false;
         stoneArmored : boolean = false;
@@ -151,4 +153,5 @@ export class Char {
         public resetStatusBoolean(attribute:boolean): void {
 
         }
+        
 }

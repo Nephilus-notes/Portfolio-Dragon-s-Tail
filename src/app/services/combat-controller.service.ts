@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MessageService } from './message.service';
 import { Character } from '../models/character';
 import { NPC } from '../models/npc';
+import { Char } from '../models/char';
 
 @Injectable({
   providedIn: 'root'
@@ -12,29 +13,25 @@ export class CombatControllerService {
   playerCharacter!: Character;
   NPCEnemy!: NPC;
 
-  attack(self:Character|NPC, target: Character|NPC): void {
-    if (self.currentHP > 0) {
-      let attack: number = Math.random() * 100;
-      // this.messageService.add(`attack num : ${attack}`)
-      // this.messageService.add(`damageValue ${self.name} ${self.damageValue}`)
-      // this.messageService.add(`armorvalue: ${target.armorValue}`)
-      if (attack === 100) {
-        this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
-        this.dealDamage(target, self.damageValue * 2)
-      }
-      else if (attack > target.evadePercentage) {
-        var totalDamage = self.damageValue - target.armorValue // Math.random() * self.damage * .1
+  attack(self:Character|NPC, target: Character|NPC, type:string="physical"): void {
+    let attack: number = Math.random() * 100;
 
-        if (totalDamage < 1) {
-          totalDamage = 1;
-        } 
-          this.dealDamage(target, totalDamage)
-        this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
-        
-      } else {
-        this.messageService.add(`${self.name} missed ${target.name}`, true)
-      } 
+    if (attack === 100) {
+      this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
+      this.dealDamage(target, self.damageValue * 2)
     }
+    else if (attack > target.evadePercentage) {
+      var totalDamage = self.damageValue - target.armorValue + Math.floor(Math.random() * self.damageValue * .1)
+
+      if (totalDamage < 1) {
+        totalDamage = 1;
+      } 
+        this.dealDamage(target, totalDamage)
+      this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
+      
+    } else {
+      this.messageService.add(`${self.name} missed ${target.name}`, true)
+    } 
   }
 
   dealDamage(char:Character|NPC, damage: number): void {
@@ -64,6 +61,13 @@ export class CombatControllerService {
     }
   }
 
+  public heal(self:Character|NPC, amountHealed:number): void {
+    self.currentHP += amountHealed;
+    if (self.currentHP > self.maxHP) {
+      self.currentHP = self.maxHP;
+    }
+  }
+
   Delay(time:number): Promise<boolean> {
     return new Promise(resolve => setTimeout(resolve, time))
   }
@@ -90,28 +94,19 @@ export class CombatControllerService {
   }
 
   round(character: Character, enemy: NPC, actionCall: string) {
-    // this.messageService.add(
-    //   ` character ${this.character.dexterity} enemy ${this.enemy.dexterity}`
-    // );
+
     if (character.dexterity >= enemy.dexterity) {
       this.playerAction(character, enemy, actionCall);
-      this.attack(enemy, character);
+      if (enemy.currentHP > 0) {
+        this.attack(enemy, character);
+      }
     } else {
       this.attack(enemy, character);
-      this.playerAction(character, enemy, actionCall);
+      if (character.currentHP > 0) {
+        this.playerAction(character, enemy, actionCall);
+      }
     }
-    // this.messageService.add(
-    //   `combat check ${this.checkCombatants(
-    //     character,
-    //     enemy
-    //   )}`
-    // );
 
-    // // this.CombatBool = 
-    // this.checkCombatants(
-    //   character,
-    //   enemy
-    // );
   }
 
   playerAction(character: Character, enemy: NPC, actionCall: string) {
@@ -147,14 +142,90 @@ export class CombatControllerService {
   //   this.setTempAttributes(enemy)
   // };
 
-  // setTempAttributes(character: Character | NPC) {
-  //   character.armorValue = character.armor;
-  //   character.damageValue = character.equippedItems.hand?.itemStat ?
-  //       character.equippedItems.hand?.itemStat + (character.strength / 2) : character.strength / 2;
-  //   character.evadePercentage = character.dexterity;
-  //   character.resistValue = character.resistance;
-  //   character.attackValue = character.intelligence;
-  // };
+
+  public performAbility(self: Character| NPC, target: Character| NPC, effect:string, affectedAttribute:string, modifier:number=1, duration:number=0, type:string="physical" ) {
+    if (effect == "damage") {
+      if (type == "physical") {
+        self.damageValue = self.damageValue * modifier;
+        this.attack(self, target);
+        self.resetDamageValue();
+      } else if (type == "magical") {
+        // attack but using magic against resistance
+      }
+      if (affectedAttribute) {
+        this.debuff(target, affectedAttribute, duration);
+      }
+    }
+    else if (effect == "heal") {
+      this.heal(target, self.magicValue*modifier)
+      // target.currentHP += self.attackValue * modifier; // attackValue will change to magic value
+      // if (target.currentHP > target.maxHP) {
+      //   target.currentHP = target.maxHP;
+      // }
+    }
+    if (effect == "buff") {
+      switch (affectedAttribute) {
+        case "stoneArmored": {
+          self.armorValue += Math.floor(self.attackValue) * modifier;
+          self.stoneArmored = true;
+          self.stoneArmoredRounds = duration;
+          break;
+        }
+        case "stoneFists": {
+          self.damageValue += Math.floor(self.attackValue) * modifier;
+          self.stoneFists = true
+        }
+      }
+      if (affectedAttribute == "damageValue") {
+      } 
+      else if (affectedAttribute == "resistValue") {
+        self.resistValue += Math.floor(self.attackValue) * modifier;
+      }
+      else if (affectedAttribute == "armorValue") {
+      }
+      else if (affectedAttribute == "evadePercentage") {
+        self.evadePercentage += Math.floor(self.attackValue) * modifier;
+      }
+      else if (affectedAttribute == "attackValue") {
+        self.attackValue += Math.floor(self.attackValue) * modifier;
+      }
+      else if (affectedAttribute == "magicValue") {
+        self.magicValue += Math.floor(self.attackValue) * modifier;
+      }
+    }
+  }
+
+  public debuff(target:Character| NPC, affectedAttribute:string, duration:number) {
+    switch (affectedAttribute) {
+      case "poisoned" : {
+        target.poisoned = true;
+        target.poisonedRounds = duration;
+        break;
+      }
+      case "slowed" : {
+        target.slowed = true;
+        target.slowedRounds = duration;
+        break;
+      }
+      case "vulnerable" : {
+        target.vulnerable = true;
+        target.vulnerableRounds = duration;
+        break;
+      }
+      case "hitByWind" : {
+        target.hitByWind = true;
+        break;
+      }
+      case "stunned" : {
+        target.stunned = true;
+        break;
+      }
+      case "burning" : {
+        target.burning = true;
+        break;
+      }
+    }
+  }
 
   constructor(private messageService: MessageService) { }
 }
