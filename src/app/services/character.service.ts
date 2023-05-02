@@ -75,7 +75,7 @@ export class CharacterService {
       dateUpdated:new Date().toISOString(),
       ...character,
     }
-    let response = this.http.patch<Character>(url, character)
+    let response = this.http.patch<Character>(url, charDTO)
 
     response.subscribe(p => console.warn(p))
     this.messageService.add("success, but how do we measure it?")

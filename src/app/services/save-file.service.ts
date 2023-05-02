@@ -56,19 +56,23 @@ saveIDCache!:number;
           console.warn(this.saveIDCache)
           console.warn(r);
         })
-        
+
         })
         
       } 
       else  {
         this.messageService.add("posting old")
-
-        let response = this.http.patch(`${environment.saveFileURL}${this.saveIDCache}`, {
+        let saveToPost = {
+          id:this.saveIDCache,
           UserID:user?.sub,
           PlayerCharacterID:character.id,
           LocationID:locationID,
-          DateUpdated: Date.UTC.toString()
-        })
+          DateUpdated: new Date().toISOString(),
+          CharacterName: character.name
+        }
+        console.warn(saveToPost)
+        let response = this.http.patch(`${environment.saveFileURL}${this.saveIDCache}`, saveToPost)
+        response.subscribe(r => console.warn(r))
         this.characterService.patchCharacter(character)
       }
     })
