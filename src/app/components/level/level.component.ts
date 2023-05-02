@@ -24,9 +24,20 @@ runningTotal!: number;
 constructor(private messageService:MessageService) {}
 
 incrementStat(i:number) {
-  if (this.character.currentCurrency > 5 *(this.character.level **this.character.level) / 2) {
+  if (this.character.currentCurrency > this.statPricer(this.character.level)) {
     this.Attributes[i] += 1;
+    this.character.currentCurrency -= this.statPricer(this.character.level);
   }
+}
+
+/**
+ * Either needs to be based off of individual stats or needs level logic to be in place. or both.
+ * 
+ * 
+ * @param currentLevel the level the character is at right now
+ */
+statPricer(currentLevel:number): number {
+  return Math.floor(5 *(currentLevel **2) / 2)
 }
 
 decrementStat(i:number): void {
@@ -34,24 +45,28 @@ decrementStat(i:number): void {
     case 0 : {
         if (this.Attributes[i] > this.character.strength) {
           this.Attributes[i] -= 1;
+          this.character.currentCurrency += this.statPricer(this.character.level);
         }
         break;
       }
     case 1 : {
         if (this.Attributes[i] > this.character.dexterity) {
           this.Attributes[i] -= 1;
+          this.character.currentCurrency += this.statPricer(this.character.level);
         }
         break;
       }
     case 2: {
         if (this.Attributes[i] > this.character.constitution) {
           this.Attributes[i] -= 1;
+          this.character.currentCurrency += this.statPricer(this.character.level);
         }
         break;
       }
     case 3 : {
         if (this.Attributes[i] > this.character.intelligence) {
           this.Attributes[i] -= 1;
+          this.character.currentCurrency += this.statPricer(this.character.level);
         }
         break;
       }
