@@ -24,20 +24,22 @@ runningTotal!: number;
 constructor(private messageService:MessageService) {}
 
 incrementStat(i:number) {
-  if (this.character.currentCurrency > this.statPricer(this.character.level)) {
+  if (this.character.currentCurrency > this.statPricer(this.Attributes[i], this.character.level)) {
     this.Attributes[i] += 1;
-    this.character.currentCurrency -= this.statPricer(this.character.level);
+    this.character.currentCurrency -= this.statPricer(this.Attributes[i], this.character.level);
   }
 }
 
 /**
  * Either needs to be based off of individual stats or needs level logic to be in place. or both.
  * 
- * 
+ * @param currentStat The value of the stat that
  * @param currentLevel the level the character is at right now
+ * 
+ * Can add the / 2 back in once the leveling is in place
  */
-statPricer(currentLevel:number): number {
-  return Math.floor(5 *(currentLevel **2) / 2)
+statPricer(currentStat:number, currentLevel:number): number {
+  return Math.floor(currentStat *(currentLevel **2))
 }
 
 decrementStat(i:number): void {
@@ -45,28 +47,28 @@ decrementStat(i:number): void {
     case 0 : {
         if (this.Attributes[i] > this.character.strength) {
           this.Attributes[i] -= 1;
-          this.character.currentCurrency += this.statPricer(this.character.level);
+          this.character.currentCurrency += this.statPricer(this.Attributes[i], this.character.level);
         }
         break;
       }
     case 1 : {
         if (this.Attributes[i] > this.character.dexterity) {
           this.Attributes[i] -= 1;
-          this.character.currentCurrency += this.statPricer(this.character.level);
+          this.character.currentCurrency += this.statPricer(this.Attributes[i], this.character.level);
         }
         break;
       }
     case 2: {
         if (this.Attributes[i] > this.character.constitution) {
           this.Attributes[i] -= 1;
-          this.character.currentCurrency += this.statPricer(this.character.level);
+          this.character.currentCurrency += this.statPricer(this.Attributes[i], this.character.level);
         }
         break;
       }
     case 3 : {
         if (this.Attributes[i] > this.character.intelligence) {
           this.Attributes[i] -= 1;
-          this.character.currentCurrency += this.statPricer(this.character.level);
+          this.character.currentCurrency += this.statPricer(this.Attributes[i], this.character.level);
         }
         break;
       }

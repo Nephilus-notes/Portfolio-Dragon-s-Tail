@@ -2,7 +2,7 @@
 <div class="flex flexWrap">
     <ng-template ngFor let-attribute [ngForOf]="Attributes" let-i="index">
         <div class="wide">
-            <label class="stats flex flex-center">{{attributeNames[i]}}: {{statPricer(character.level)}}</label>
+            <label class="stats flex flex-center">{{attributeNames[i]}}: {{statPricer(attribute, character.level)}}</label>
             <div class="stats flex flex-center ">
                 <app-game-button [text]="minus" (click)="decrementStat(i)"></app-game-button>
                 {{attribute}}
