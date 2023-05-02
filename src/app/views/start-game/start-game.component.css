@@ -68,6 +68,7 @@ a:active {
     background-repeat: none;
     text-rendering: optimizeSpeed;
     margin-inline: auto;
+    margin-top: 20px;
     display: block;
     width: clamp(7rem, 4vw, 70rem);
 }
