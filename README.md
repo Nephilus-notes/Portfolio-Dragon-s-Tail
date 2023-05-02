@@ -66,7 +66,7 @@ MVP+
 Character Info display
 <ul>
 <li><s>Parse a character object to display attributes</s></li>
-<li>Internal logic to calculate variable attributes</li>
+<li><s>Internal logic to calculate variable attributes</s></li>
 <li>Ability to load the current character</li>
 <li>Button to hide or expand character info</li>
 </ul>
@@ -81,16 +81,17 @@ Item Display
 </ul>
 Load Game Page
 <ul>
-<li>Allow users to start a new game</li>
-<li>Allow users to view games associated with their account</li>
+<li><s>Allow users to start a new game</s></li>
+<li><s>Allow users to view games associated with their account</s></li>
 <li><s>Allow users to load games</s></li>
 <li>Allow users to delete games associated with their account</li>
 <li></li>
  </ul>
 Login View
 <ul>
-<li>Allow users to log into their account</li>
-<li>Users should be able to log out of their account</li>
+Done with Auth0
+<li><s>Allow users to log into their account</s></li>
+<li><s>Users should be able to log out of their account</s></li>
 </ul>
 User Creation View
 <ul>
@@ -112,8 +113,8 @@ Nav Bar
 <ul>
 <li><s>link to load/start game (game entrypoint)</s></li>
 <li><s>Link to landing page</s></li>
-<li>link to log in page</li>
-<li>conditional button for logout</li>
+<li><s>link to log in page</s></li>
+<li><s>conditional button for logout</s></li>
 </ul>
 Combat component
 <ul>
