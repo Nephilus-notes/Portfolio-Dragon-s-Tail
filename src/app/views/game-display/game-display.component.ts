@@ -44,6 +44,7 @@ export class GameDisplayComponent {
   CombatBool: boolean = false;
   battleNotDone!: boolean;
   battleEndText!: string ;
+  SG: string = "SG";
   /**
    * GameStateSwitch controls all non combat, non standard travel game states.
    *

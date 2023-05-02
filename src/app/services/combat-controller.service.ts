@@ -158,10 +158,7 @@ export class CombatControllerService {
     }
     else if (effect == "heal") {
       this.heal(target, self.magicValue*modifier)
-      // target.currentHP += self.attackValue * modifier; // attackValue will change to magic value
-      // if (target.currentHP > target.maxHP) {
-      //   target.currentHP = target.maxHP;
-      // }
+
     }
     if (effect == "buff") {
       switch (affectedAttribute) {

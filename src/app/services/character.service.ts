@@ -87,7 +87,7 @@ export class CharacterService {
     let date = new Date().toISOString()
 
 
-    console.warn(date)
+    // console.warn(date)
 
     let charDTO: characterDTO = {
       dateAdded:date,
@@ -96,9 +96,12 @@ export class CharacterService {
       id:undefined
       }
     let response = this.http.post<Character>(url, charDTO)
-    console.warn(character)
-      console.warn(charDTO)
-    response.subscribe(r => console.warn(r))
+    // console.warn(character)
+      // console.warn(charDTO)
+    response.subscribe(r => {
+      character.id = r.id;
+      console.warn(r);
+    })
     this.messageService.add("success, but how do we measure it?")
     return response
   }

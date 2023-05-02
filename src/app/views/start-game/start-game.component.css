@@ -106,3 +106,8 @@ a:active {
   .centered {
     justify-content: center;
   }
+
+  .overflowScroll {
+    overflow-y: scroll;
+    height: 80%;
+  }

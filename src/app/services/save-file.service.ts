@@ -26,9 +26,13 @@ saveIDCache!:number;
     let url = `${environment.saveFileURL}${saveID}`;
 
     // caching the save ID 
-    this.saveIDCache = saveID;
+    this.cacheSaveID(saveID)
     console.warn(this.saveIDCache)
     return this.http.get<SaveFile>(url)
+  }
+  
+  cacheSaveID(saveID:number): void {
+    this.saveIDCache = saveID;
   }
 
   postSaveFile(locationID: string,character: Character): void {
@@ -37,15 +41,22 @@ saveIDCache!:number;
       if (!this.saveIDCache) {
         this.messageService.add("posting new")
         var savedChar = this.characterService.postCharacter(character).subscribe(p => {
-          let response = this.http.post(`${environment.saveFileURL}`, {
+          let response = this.http.post<any>(`${environment.saveFileURL}`, {
           UserID:user?.sub,
           PlayerCharacterID:p.id,
           LocationID:locationID,
+          characterName:character.name,
           DateAdded: new Date().toISOString(),
           DateUpdated: new Date().toISOString()
         })
-        response.subscribe(r => console.warn(r))
 
+        response.subscribe(r => {
+          console.warn(r.id)
+          this.cacheSaveID(r.id)
+          console.warn(this.saveIDCache)
+          console.warn(r);
+        })
+        
         })
         
       } 
