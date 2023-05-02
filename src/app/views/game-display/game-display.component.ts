@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CharacterService } from '../../services/character.service';
 import { MessageService } from '../../services/message.service';
 import { LocationService } from '../../services/location.service';
@@ -33,7 +34,8 @@ export class GameDisplayComponent {
     private messageService: MessageService,
     private locationService: LocationService,
     private combatService: CombatControllerService,
-    private saveService: SaveFileService
+    private saveService: SaveFileService,
+    private router: Router
   ) {
     // this.locationService.getLocations().subscribe(data => {
     //   console.warn(data)
@@ -373,6 +375,11 @@ export class GameDisplayComponent {
 
   ngOnInit(): void {
     this.messageService.add('initializing');
+    if(!this.characterService.characterCache && !this.characterService.templateCache) {
+      // redirect to start game 
+      this.router.navigate(['/startgame'])
+
+    }
     if (this.characterService.templateCacheExists() === false) {
       this.loadCharacter();
     }
@@ -380,6 +387,4 @@ export class GameDisplayComponent {
     // }
   }
   title: string = "Dragon's Tail";
-  saveString:string = "post savefile"
-  postChar:string = "patch character"
 }
