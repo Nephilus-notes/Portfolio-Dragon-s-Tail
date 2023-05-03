@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { SaveFileService } from '../../services/save-file.service';
 import { SaveFile } from '../../models/saveFile';
-import { LocationService } from '../../services/location.service';
-import { CharacterService } from '../../services/character.service';
-import { TemplateService } from 'src/app/services/template.service';
+import { ApiService } from 'src/app/services/api.service';
 import { Character } from '../../models/character';
-import { Location } from '../../models/location';
+import { Location } from '../../models/mapLocation';
 import { AuthService } from '@auth0/auth0-angular';
 import { MessageService } from 'src/app/services/message.service';
 
@@ -16,9 +14,9 @@ import { MessageService } from 'src/app/services/message.service';
   styleUrls: ['./start-game.component.css']
 })
 export class StartGameComponent {
-  constructor(private saveService:SaveFileService, private locationService: LocationService, 
-    private characterService:CharacterService, private auth: AuthService,
-    private messageService:MessageService) {     }
+  constructor(private saveService:SaveFileService, private apiService: ApiService, 
+  private auth: AuthService,
+  private messageService:MessageService) {     }
 
   file!: SaveFile;
   character!: Character;
@@ -46,28 +44,28 @@ export class StartGameComponent {
   }
 
   getCharacter(charID:number) {
-    this.characterService.getCharacter(charID)
+    this.apiService.getCharacter(charID)
     .subscribe(character => {
       this.character = character
       // console.warn(character)
-      this.characterService.cacheCharacter(character);
+      this.apiService.cacheCharacter(character);
     });
   }
 
   getLocation(locationID:string) {
-    this.locationService.getNewLocation(locationID)
+    this.apiService.getNewLocation(locationID)
     .subscribe(location => {
       this.location = location
       // console.warn(location)
-      this.locationService.saveLocation(this.location);
+      this.apiService.saveLocation(this.location);
     });
   }
 
   newGame(): void {
     this.Loading = true;
-    this.characterService.getTemplates().subscribe(t=> {
+    this.apiService.getTemplates().subscribe(t=> {
       console.warn(t);
-      this.characterService.cacheTemplates(t);
+      this.apiService.cacheTemplates(t);
       this.Loading = false;
       this.startGame = true;
       this.newGameBoolean = true

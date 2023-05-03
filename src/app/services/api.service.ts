@@ -2,21 +2,27 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Character } from '../models/character';
-import { NPC } from '../models/npc';
+
 import { MessageService } from './message.service';
 
+import { Item } from '../models/item';
 import { environment } from 'src/environment/environment';
 import { characterDTO } from '../models/characterDTO';
+import { Character } from '../models/character';
+import { NPC } from '../models/npc';
 import { Template } from '../models/template';
+import { Location } from '../models/mapLocation';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CharacterService {
+export class ApiService {
+
   constructor(private messageService: MessageService, private http:HttpClient) { }
   characterCache!: Character;
   npcCache!: Character;
+  locationCache!:Location;
+  locations!: Location[];
 
   templateCache!: Array<Template>;
   /** 
@@ -151,11 +157,11 @@ export class CharacterService {
 
     cacheTemplates(templateList:Array<Template>): void {
       this.templateCache = templateList;
-    }
+    };
 
     loadTemplates(): Array<Template> {
       return this.templateCache;
-    }
+    };
 
     templateCacheExists() {
       if (this.templateCache) {
@@ -166,5 +172,79 @@ export class CharacterService {
         this.messageService.add("Templates don't exist")
         return false
       }
+    };
+
+    getItem(itemID: number): Observable<Item> {
+  
+      let url = `${environment.itemURL}${itemID}`
+      const item = this.http.get<Item>(url)
+      this.messageService.add('ItemService: Item Fetched')
+      return item;
     }
-}
+  
+    getItems(idList:Array<number>): Array<Observable<Item>> {
+      let items = new Array<Observable<Item>>
+  
+      for(let i = 0; i < idList.length; i ++) {
+        let url = `${environment.itemURL}${idList[i]}`
+        items[i] = this.http.get<Item>(url)
+      }
+      return items
+    }
+
+    /**
+   * Takes in a location ID, makes an api call to retrieve the location object 
+   * associated with that ID, and returns it
+   * 
+   * @param loc_id - An id associated with a new location object, most likely a 
+   * sanitized user input
+   * @returns a location object
+   */
+  getNewLocation(loc_id:string): Observable<Location> {
+    let url = `${environment.locationURL}${loc_id}`;
+
+    const location = this.http.get<Location>(url)
+    return location
+  }
+
+  saveLocation(location:Location): void {
+    this.locationCache = location
+    // console.warn(location)
+    this.messageService.add('location Saved')
+  }
+  /** 
+  * Loads a location from the CharacterService cache without an API call
+  *
+  * @param none
+  * @returns a location object
+  *
+  *
+  */
+  loadLocation(): Location {
+    this.messageService.add('location Loaded')
+    return this.locationCache
+  }
+
+  cacheExists(): boolean {
+    if(this.locationCache) {
+      return true
+    }
+    return false
+  }
+
+  getLocations() {
+
+    let url = environment.locationURL;
+
+    return this.http.get<any>(url)
+  }
+
+  getCharacterTemplate(TemplateID: String): Observable<Template> {
+  
+    let url = `${environment.templateURL}${TemplateID}`
+    const character = this.http.get<Template>(url)
+
+    this.messageService.add('CharacterService: fetched characters')
+    return character;
+  };
+  }

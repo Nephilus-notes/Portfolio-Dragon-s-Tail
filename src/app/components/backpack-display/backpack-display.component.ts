@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Character } from '../../models/character';
 import { Item } from '../../models/item'
-import { CharacterService } from '../../services/character.service';
 import { MessageService } from '../../services/message.service';
 
 @Component({

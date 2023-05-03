@@ -1,11 +1,9 @@
 import { Component, Input, OnInit,  } from '@angular/core';
 
-import { Location } from 'src/app/models/location';
+import { Location } from 'src/app/models/mapLocation';
 import { Item } from 'src/app/models/item';
 import { Character } from 'src/app/models/character';
 
-import { ItemService } from 'src/app/services/item.service';
-import { MessageService } from 'src/app/services/message.service';
 import { SaveFileService } from 'src/app/services/save-file.service';
 @Component({
   selector: 'app-inn-screen',

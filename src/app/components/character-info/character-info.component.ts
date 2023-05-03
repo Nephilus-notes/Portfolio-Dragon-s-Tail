@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Character } from '../../models/character';
-import { CharacterService } from '../../services/character.service';
-import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-character-info',

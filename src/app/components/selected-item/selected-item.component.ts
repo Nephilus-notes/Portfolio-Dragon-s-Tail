@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Character } from 'src/app/models/character';
 import { Item } from 'src/app/models/item';
-import { Location } from 'src/app/models/location';
+import { Location } from 'src/app/models/mapLocation';
 
 @Component({
   selector: 'app-selected-item',

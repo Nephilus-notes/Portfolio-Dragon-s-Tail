@@ -4,8 +4,7 @@ import { catchError, retry } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { MessageService } from './message.service';
-import { LocationService } from './location.service';
-import { CharacterService } from './character.service';
+import { ApiService } from './api.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { environment } from 'src/environment/environment';
 
@@ -17,8 +16,7 @@ import { Character } from '../models/character';
 })
 export class SaveFileService {
   constructor(private messageService: MessageService, private http: HttpClient,
-    private characterService: CharacterService, private locationService: LocationService,
-    public auth: AuthService) { }
+    private apiService: ApiService, public auth: AuthService) { }
 saveIDCache!:number;
   
   getSaveFile(saveID:number): Observable<SaveFile>{
@@ -40,7 +38,7 @@ saveIDCache!:number;
 
       if (!this.saveIDCache) {
         this.messageService.add("posting new")
-        var savedChar = this.characterService.postCharacter(character).subscribe(p => {
+        var savedChar = this.apiService.postCharacter(character).subscribe(p => {
           let response = this.http.post<any>(`${environment.saveFileURL}`, {
           UserID:user?.sub,
           PlayerCharacterID:p.id,
@@ -73,7 +71,7 @@ saveIDCache!:number;
         console.warn(saveToPost)
         let response = this.http.patch(`${environment.saveFileURL}${this.saveIDCache}`, saveToPost)
         response.subscribe(r => console.warn(r))
-        this.characterService.patchCharacter(character)
+        this.apiService.patchCharacter(character)
       }
     })
   };

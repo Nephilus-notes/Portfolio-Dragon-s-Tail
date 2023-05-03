@@ -1,27 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CharacterService } from '../../services/character.service';
 import { MessageService } from '../../services/message.service';
-import { LocationService } from '../../services/location.service';
-import { CombatControllerService } from '../../services/combat-controller.service';
 
-import { Location } from '../../models/location';
-import { Char } from '../../models/char';
+import { CombatControllerService } from '../../services/combat-controller.service';
+import { ApiService } from 'src/app/services/api.service';
+import { Location } from '../../models/mapLocation';
 import { Character } from '../../models/character';
 import { NPC } from '../../models/npc';
 import { SaveFileService } from 'src/app/services/save-file.service';
 
-// const CharacterViewButton = document.getElementById('characterViewButton');
-// let characterView = false;
-
-// const onClickCharacter = function () {
-//   if (characterView) {
-//     characterView = false;
-//   } else {
-//     characterView = true;
-//   }
-//   // characterView = false ? characterView : true
-// };
 
 @Component({
   selector: 'app-game-display',
@@ -30,14 +17,13 @@ import { SaveFileService } from 'src/app/services/save-file.service';
 })
 export class GameDisplayComponent {
   constructor(
-    private characterService: CharacterService,
+    private apiService: ApiService,
     private messageService: MessageService,
-    private locationService: LocationService,
     private combatService: CombatControllerService,
     private saveService: SaveFileService,
     private router: Router
   ) {
-    // this.locationService.getLocations().subscribe(data => {
+    // this.apiService.getLocations().subscribe(data => {
     //   console.warn(data)
     // })
   }
@@ -63,7 +49,7 @@ export class GameDisplayComponent {
   location!: Location;
 
   getCharacter(): void {
-    this.characterService.getCharacter(1).subscribe((character) => {
+    this.apiService.getCharacter(1).subscribe((character) => {
       this.character = character;
 
       // console.warn(character);
@@ -71,13 +57,13 @@ export class GameDisplayComponent {
   }
 
   loadCharacter(): void {
-    if (!this.characterService.characterCache && this.location.id != "SG") {
-      // console.warn(`cache empty= ${this.characterService.characterCache}`);
+    if (!this.apiService.characterCache && this.location.id != "SG") {
+      // console.warn(`cache empty= ${this.apiService.characterCache}`);
       this.getCharacter();
       // this.messageService.add('loading failed');
-    } else if (this.characterService.characterCache) {
-      console.warn(`cache full = ${this.characterService.characterCache}`);
-      this.character = this.characterService.loadCharacter();
+    } else if (this.apiService.characterCache) {
+      console.warn(`cache full = ${this.apiService.characterCache}`);
+      this.character = this.apiService.loadCharacter();
       // this.messageService.add('Character Loaded');
     }
     else {
@@ -85,7 +71,7 @@ export class GameDisplayComponent {
     }
   }
   cacheCharacter(): void {
-    this.characterService.cacheCharacter(this.character);
+    this.apiService.cacheCharacter(this.character);
   }
 
   public playerChoice($event: any): void {
@@ -155,7 +141,7 @@ export class GameDisplayComponent {
  * @param submitString User input that has been vetted
  */
   changeLocation(submitString: string): void {
-    this.locationService
+    this.apiService
       .getNewLocation(submitString)
       .subscribe((location) => {
         this.location = location;
@@ -250,14 +236,14 @@ export class GameDisplayComponent {
    */
   loadLocation() {
     // this.messageService.add("Loading")
-    if (this.characterService.templateCacheExists()) {
+    if (this.apiService.templateCacheExists()) {
       this.changeLocation('SG');
-      // console.warn(`Location Cache: ${this.locationService.locationCache}`)
+      // console.warn(`Location Cache: ${this.apiService.locationCache}`)
     } else {
-      this.location = this.locationService.locationCache;
+      this.location = this.apiService.locationCache;
       this.messageService.add('location Loaded');
     }
-    console.warn(`Location Cache: ${this.locationService.locationCache}`);
+    console.warn(`Location Cache: ${this.apiService.locationCache}`);
   }
 /**
  * A method that links into the character service to retrieve an enemy for combat.
@@ -265,7 +251,7 @@ export class GameDisplayComponent {
  * Currently a hard code, but will change to dynamic api call with a primary key id parameter
  */
   getNPC(NPCID: number): void {
-    this.characterService.getEnemy(NPCID).subscribe((enemy) => {
+    this.apiService.getEnemy(NPCID).subscribe((enemy) => {
       this.enemy = new NPC(
         enemy.name,
         enemy.strength,
@@ -370,17 +356,17 @@ export class GameDisplayComponent {
 
   saveChar() {
     // console.warn(this.character)
-    this.characterService.patchCharacter(this.character)
+    this.apiService.patchCharacter(this.character)
   }
 
   ngOnInit(): void {
     this.messageService.add('initializing');
-    if(!this.characterService.characterCache && !this.characterService.templateCache) {
+    if(!this.apiService.characterCache && !this.apiService.templateCache) {
       // redirect to start game 
       this.router.navigate(['/startgame'])
 
     }
-    if (this.characterService.templateCacheExists() === false) {
+    if (this.apiService.templateCacheExists() === false) {
       this.loadCharacter();
     }
     this.loadLocation();

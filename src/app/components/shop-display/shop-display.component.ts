@@ -1,9 +1,9 @@
 import { Component, Input, OnInit,  } from '@angular/core';
 
-import { Location } from 'src/app/models/location';
+import { Location } from 'src/app/models/mapLocation';
 import { Item } from 'src/app/models/item';
 
-import { ItemService } from 'src/app/services/item.service';
+import { ApiService } from 'src/app/services/api.service';
 import { MessageService } from 'src/app/services/message.service';
 import { Character } from 'src/app/models/character';
 
@@ -13,6 +13,8 @@ import { Character } from 'src/app/models/character';
   styleUrls: ['./shop-display.component.css']
 })
 export class ShopDisplayComponent {
+  constructor(private apiService:ApiService, private messageService: MessageService) {};
+  
   @Input() location!: Location;
   @Input() GameStateSwitch!: number;
   @Input() character!: Character;
@@ -57,7 +59,7 @@ export class ShopDisplayComponent {
 
     for(let i = 0; i < idList.length; i ++) {
 
-      let item = this.itemService.getItem(idList[i]).subscribe(item => 
+      let item = this.apiService.getItem(idList[i]).subscribe(item => 
       {
         this.items[i] = item
       });
@@ -94,6 +96,5 @@ export class ShopDisplayComponent {
     this.selectedItem = undefined;
   };
 
-  constructor(private itemService:ItemService, private messageService: MessageService) {};
  
 }

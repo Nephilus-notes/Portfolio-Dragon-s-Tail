@@ -1,3 +1,7 @@
+/**
+ * An object represnting a visitable area.  Keys: id, name, enterText, middleText
+ * exitText, moveOptions, commonNPC, uncommonNPC, rareNPC, secretNPC, and next
+ */
 export interface Location {
     id: string;
     name: string;

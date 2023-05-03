@@ -1,8 +1,8 @@
 import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Location } from '../../models/location';
+import { Location } from '../../models/mapLocation';
 
-import { CharacterService } from 'src/app/services/character.service';
+import { ApiService } from 'src/app/services/api.service';
 import { Template } from 'src/app/models/template';
 import { Character } from 'src/app/models/character';
 
@@ -13,6 +13,8 @@ import { Character } from 'src/app/models/character';
   styleUrls: ['./text-display.component.css']
 })
 export class TextDisplayComponent implements OnInit{
+  constructor(private apiService: ApiService) {}
+
   @Input() location!: Location;
   @Input() exploring!: number;
   SG: string = "SG";
@@ -27,7 +29,7 @@ export class TextDisplayComponent implements OnInit{
       this.locationState += 1
     }
     else if (this.location.id == "SG") {
-      this.characterService.loadCharacter();
+      this.apiService.loadCharacter();
       this.submitValue.emit("T");
     } 
     else {
@@ -48,15 +50,14 @@ export class TextDisplayComponent implements OnInit{
   public chooseCharacter(template:Template) {
     var character = new Character(template.name, template.strength, template.dexterity, 
       template.intelligence, template.constitution,[template.ability]);
-      this.characterService.cacheCharacter(character);
+      this.apiService.cacheCharacter(character);
       this.incrementState();
       this.selectedTemplate = undefined;
       this.loadingCharacter.emit(true)
   }
 
 ngOnInit(): void {
-    this.templates = this.characterService.loadTemplates()
+    this.templates = this.apiService.loadTemplates()
 }
 
- constructor(private characterService: CharacterService) {}
 }

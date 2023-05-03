@@ -1,8 +1,8 @@
 import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Location } from '../../models/location';
+import { Location } from '../../models/mapLocation';
 
-import { CharacterService } from 'src/app/services/character.service';
+import { ApiService } from 'src/app/services/api.service';
 import { Template } from 'src/app/models/template';
 import { Character } from 'src/app/models/character';
 
@@ -12,6 +12,8 @@ import { Character } from 'src/app/models/character';
   styleUrls: ['./new-game.component.css']
 })
 export class NewGameComponent {
+  constructor(private apiService: ApiService) {}
+
   @Input() location!: Location;
   SG: string = "SG";
   placement:string = "enter";
@@ -43,14 +45,13 @@ export class NewGameComponent {
   public chooseCharacter(template:Template) {
     var character = new Character(template.name, template.strength, template.dexterity, 
       template.intelligence, template.constitution,[template.ability]);
-      this.characterService.cacheCharacter(character);
+      this.apiService.cacheCharacter(character);
       this.incrementState();
       this.selectedTemplate = undefined;
   }
 
 ngOnInit(): void {
-    this.templates = this.characterService.loadTemplates()
+    this.templates = this.apiService.loadTemplates()
 }
 
- constructor(private characterService: CharacterService) {}
 }
