@@ -298,9 +298,9 @@ export class GameDisplayComponent {
     this.CombatBool = false;
     this.battleNotDone = true;
     this.messageService.clear(true);
-    if (this.character.currentHP == 0) {
-      this.changeLocation("T")
+    if (this.character.currentHP <= 0) {
       this.character.fullHeal();
+      this.changeLocation("T");
     }
   }
 /**

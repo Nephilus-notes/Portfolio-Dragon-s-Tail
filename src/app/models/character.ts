@@ -12,21 +12,7 @@ export class Character extends Char {
         abilities: string[]
       ) {
         super(name, strength, dexterity, constitution, intelligence,abilities)
-        // this.name = name;
-        // this.strength = strength;
-        // this.dexterity = dexterity;
-        // this.intelligence = intelligence;
-        // this.constitution = constitution;
-        // this.abilities = abilities;
-        // this.maxHP = 2 * this.constitution;
-        // this.maxMP = 2 * this.intelligence;
-        // this.currentHP = this.maxHP;
-        // this.currentMP = this.maxMP;
-        // this.armorValue = this.armor;
-        // this.damageValue = this.strength / 2;
-        // this.evadePercentage = this.dexterity; // Times 2 for maxed evasion at 50?
-        // this.resistValue = this.resistance;
-        // this.attackValue = this.intelligence;
+
       }
      
       currentLocation!: string;
