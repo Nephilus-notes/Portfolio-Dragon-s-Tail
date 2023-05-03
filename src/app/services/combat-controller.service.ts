@@ -92,18 +92,33 @@ export class CombatControllerService {
       return true
     }
   }
-
+/**
+ * Checks to make sure all parties can attack and can be attacked
+ * @param player The current player character
+ * @param npc  The current enemy in combat 
+ * @param actionCall The player's input as a string 
+ */
+  public healthCheck(player:Character, npc: NPC, actionCall: string | null=null) {
+    if (actionCall == null && player.currentHP > 0 && npc.currentHP > 0) {
+      this.attack(npc, player);
+    }
+    else if (player.currentHP > 0 && npc.currentHP > 0) {
+      if (actionCall != null) {
+        this.playerAction(player, npc, actionCall)
+      }
+    }
+  }
   round(character: Character, enemy: NPC, actionCall: string) {
 
     if (character.dexterity >= enemy.dexterity) {
-      this.playerAction(character, enemy, actionCall);
+      this.healthCheck(character, enemy, actionCall);
       if (enemy.currentHP > 0) {
-        this.attack(enemy, character);
+        this.healthCheck(character, enemy);
       }
     } else {
-      this.attack(enemy, character);
+      this.healthCheck(character, enemy);
       if (character.currentHP > 0) {
-        this.playerAction(character, enemy, actionCall);
+        this.healthCheck(character, enemy, actionCall);
       }
     }
 
