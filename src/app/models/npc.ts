@@ -15,20 +15,24 @@ export class NPC extends Char {
       ) {
 
         let attributeList = [strength, dexterity, constitution, intelligence]
-        for (let attribute of attributeList) {
+        for (let i = 0; i < attributeList.length; i ++) {
             let min: number = 0;
             let max: number = 3;
-            if (attribute == 0) {
+            if (attributeList[i] == 0) {
                 min = 1;
             }
-            else if (attribute == 4 || attribute == 14 || attribute == 18) {
+            else if (attributeList[i] == 14 || attributeList[i] == 18) {
                 min = 0;
             }
-            else if (attribute == 10) {
+            else if (attributeList[i] == 4) {
+                min = 0;
+                max += 1;
+            }
+            else if (attributeList[i] == 10) {
                 min = -2;
             }
             // creating variable npc stats
-            attribute += Math.floor(Math.random() * (max - min) + min);
+            attributeList[i] += Math.floor(Math.random() * (max - min) + min);
             
         }
         super(name, attributeList[0], attributeList[1], attributeList[2], attributeList[3], abilities)
