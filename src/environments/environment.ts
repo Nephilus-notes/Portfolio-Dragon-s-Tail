@@ -1,7 +1,12 @@
 export const environment = {
-    production: false,
-    title: 'Local Environment Heading',
-
-    AuthDomain: "",
-    ClientID: ""
+  production: false,
+  title: `General Title`,
+  characterURL: `R_URL}`,
+  locationURL: `_URL}`,
+  itemURL: `}`,
+  NpcURL: ``,
+  saveFileURL: `_URL}`,
+  templateURL: `_URL}`,
+  AuthDomain: ``,
+  ClientID: ``
   };
