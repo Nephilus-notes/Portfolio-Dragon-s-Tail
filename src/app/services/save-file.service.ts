@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { MessageService } from './message.service';
 import { ApiService } from './api.service';
 import { AuthService } from '@auth0/auth0-angular';
-import { environment } from 'src/assets/environment/environment';
+import { environment } from 'src/environments/environment';
 
 import { SaveFile } from '../models/saveFile';
 import { Character } from '../models/character';

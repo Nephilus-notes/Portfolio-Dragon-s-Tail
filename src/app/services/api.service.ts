@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from './message.service';
 
 import { Item } from '../models/item';
-import { environment } from 'src/assets/environment/environment';
+import { environment } from 'src/environments/environment';
 import { characterDTO } from '../models/characterDTO';
 import { Character } from '../models/character';
 import { NPC } from '../models/npc';

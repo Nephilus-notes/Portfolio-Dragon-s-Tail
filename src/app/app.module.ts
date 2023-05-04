@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { AuthModule } from '@auth0/auth0-angular';
-import { environment } from 'src/assets/environment/environment';
+import { environment } from 'src/environments/environment';
 
 
 import { AppRoutingModule } from './app-routing.module';
