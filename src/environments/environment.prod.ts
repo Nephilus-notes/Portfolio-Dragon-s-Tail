@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
   title: `prod Title`,
-  characterURL: `R_URL}`,
-  locationURL: `_URL}`,
-  itemURL: `}`,
+  characterURL: ``,
+  locationURL: ``,
+  itemURL: ``,
   NpcURL: ``,
-  saveFileURL: `_URL}`,
-  templateURL: `_URL}`,
+  saveFileURL: ``,
+  templateURL: ``,
   AuthDomain: ``,
   ClientID: ``
   };
