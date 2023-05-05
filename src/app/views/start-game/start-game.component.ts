@@ -6,6 +6,7 @@ import { Character } from '../../models/character';
 import { Location } from '../../models/mapLocation';
 import { AuthService } from '@auth0/auth0-angular';
 import { MessageService } from 'src/app/services/message.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -92,6 +93,7 @@ export class StartGameComponent {
   };
   
   ngOnInit(): void {
+    console.warn(environment.AuthDomain)
     this.auth.user$.subscribe(
       user=> {
         this.userID = user?.sub
