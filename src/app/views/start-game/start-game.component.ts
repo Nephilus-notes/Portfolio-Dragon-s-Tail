@@ -94,6 +94,10 @@ export class StartGameComponent {
   
   ngOnInit(): void {
     console.warn(`auth Link: ${environment.AuthDomain}`)
+    console.warn(`character api Link: ${environment.characterURL}`)
+    console.warn(`location Link: ${environment.locationURL}`)
+    console.warn(`savefile Link: ${environment.saveFileURL}`)
+    console.warn(`auth Link: ${environment.AuthDomain}`)
     this.auth.user$.subscribe(
       user=> {
         this.userID = user?.sub
