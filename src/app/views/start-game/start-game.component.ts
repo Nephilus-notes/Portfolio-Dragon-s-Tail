@@ -77,16 +77,19 @@ export class StartGameComponent {
   
   getAllSaves() {
     console.warn("starting to load games")
-    let usertoken:string | undefined;
-    this.auth.user$.subscribe(user => {
-      usertoken = user?.sub
-      console.warn(usertoken)
-      
-          this.saveService.getUserSaveFiles(usertoken).subscribe( saves => {
-            this.userSaveFiles = saves;
-          })
-    })
-  }
+    if (this.auth.isAuthenticated$) {
+
+      let usertoken:string | undefined;
+      this.auth.user$.subscribe(user => {
+        usertoken = user?.sub
+        console.warn(usertoken)
+        
+            this.saveService.getUserSaveFiles(usertoken).subscribe( saves => {
+              this.userSaveFiles = saves;
+            })
+      })
+    }
+  };
   
   ngOnInit(): void {
     this.auth.user$.subscribe(
