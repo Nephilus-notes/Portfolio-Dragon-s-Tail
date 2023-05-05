@@ -93,7 +93,7 @@ export class StartGameComponent {
   };
   
   ngOnInit(): void {
-    console.warn(environment.AuthDomain)
+    console.warn(`auth Link: ${environment.AuthDomain}`)
     this.auth.user$.subscribe(
       user=> {
         this.userID = user?.sub
