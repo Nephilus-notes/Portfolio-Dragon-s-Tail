@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 export interface SaveFile {
     id:number;
     userID: number;
