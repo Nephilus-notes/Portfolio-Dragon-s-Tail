@@ -6,7 +6,7 @@ export const environment = {
   itemURL: ``,
   NpcURL: ``,
   saveFileURL: ``,
-  templateURL: ``,
-  AuthDomain: ``,
+  templateURL: `templateurl`,
+  AuthDomain: `authdomain link`,
   ClientID: ``
   };
