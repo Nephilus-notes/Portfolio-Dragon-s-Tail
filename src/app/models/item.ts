@@ -1,3 +1,7 @@
+/**
+ * An interface for storing and using items. Keys: id, name, itemStat, price, 
+ * slot, description
+ */
 export interface Item {
     id:number;
     name: string;
