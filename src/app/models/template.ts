@@ -1,3 +1,7 @@
+/**
+ * A template for creating new characters. Keys: it, name, strength, dexterity,
+ * constitution, intelligence, job, ability, description
+ */
 export interface Template {
     id:string;
     name: string;
