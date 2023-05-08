@@ -13,7 +13,7 @@ export class CombatControllerService {
   playerCharacter!: Character;
   NPCEnemy!: NPC;
 
-  attack(self:Character|NPC, target: Character|NPC, type:string="physical"): void {
+  public attack(self:Character|NPC, target: Character|NPC, type:string="physical"): void {
     let attack: number = Math.random() * 100;
 
     if (attack === 100) {
@@ -34,23 +34,23 @@ export class CombatControllerService {
     } 
   }
 
-  dealDamage(char:Character|NPC, damage: number): void {
+  public dealDamage(char:Character|NPC, damage: number): void {
     if (damage > 0) {
       char.currentHP -= damage
     }
   }
 
-  defend(self: Character): void {
+  public defend(self: Character): void {
     self.armorValue += 2
     this.messageService.add(`${self.name} focuses on defense`, true)
   }
 
-  evade(self: Character): void {
+  public evade(self: Character): void {
     self.evadePercentage += 2
     this.messageService.add(`${self.name} focuses on evasion`, true)
   }
 
-  flee(self: Character|NPC, target: Character|NPC): boolean {
+  public flee(self: Character|NPC, target: Character|NPC): boolean {
     if (self.dexterity > target.dexterity) {
       this.messageService.add(`${self.name} has fled!`, true)
       return true
@@ -69,7 +69,7 @@ export class CombatControllerService {
   }
 
   
-  checkCombatants(player: Character, enemy:NPC): boolean {
+  public checkCombatants(player: Character, enemy:NPC): boolean {
     if (player.fleeing == true) {
       return false
     }
@@ -105,7 +105,7 @@ export class CombatControllerService {
       }
     }
   }
-  round(character: Character, enemy: NPC, actionCall: string) {
+  public round(character: Character, enemy: NPC, actionCall: string) {
 
     if (character.dexterity >= enemy.dexterity) {
       this.healthCheck(character, enemy, actionCall);
@@ -121,7 +121,7 @@ export class CombatControllerService {
 
   }
 
-  playerAction(character: Character, enemy: NPC, actionCall: string) {
+  public playerAction(character: Character, enemy: NPC, actionCall: string) {
     // this.messageService.add(`player action call ${actionCall}`);
 
     switch (actionCall) {
@@ -144,7 +144,7 @@ export class CombatControllerService {
     }
   }
 
-  gainLoot(character: Character, enemy: NPC): void {
+  private gainLoot(character: Character, enemy: NPC): void {
     character.currentCurrency += enemy.currentCurrency;
     character.lifeTimeCurrency += enemy.currentCurrency;
   }
