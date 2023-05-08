@@ -13,7 +13,7 @@
     <div class="displayDiv">
 
 
-        <app-combat-display *ngIf="CombatBool" [combatant]="enemy" [battleNotDone]="battleNotDone"
+        <app-combat-display *ngIf="CombatBool" [combatant]="enemy" [battleNotDone]="battleOngoing"
             (CombatEnd)="combatFinish()" [battleEndText]="battleEndText"></app-combat-display>
 
         <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location"
@@ -31,7 +31,7 @@
                 {{character.abilities}}
             </div>
         </div>
-        <div class="optionsAndInput" *ngIf="location.id != SG">
+        <div class="optionsAndInput" *ngIf="location.id != SG && battleOngoing == true">
             <div class="options backgroundDark" *ngIf="CombatBool; else elseBlock">
                 (A) Attack, (E) Evade, (D) Defend, (F) Flee
 

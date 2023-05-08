@@ -30,7 +30,7 @@ export class GameDisplayComponent {
   exploring: number = 0;
   submitString!: string;
   CombatBool: boolean = false;
-  battleNotDone!: boolean;
+  battleOngoing: boolean = true;
   battleEndText!: string ;
   SG: string = "SG";
   /**
@@ -79,9 +79,9 @@ export class GameDisplayComponent {
     if (this.CombatBool === true) {
       // this.messageService.add('player action');
       this.combatService.round(this.character, this.enemy, $event);
-      this.battleNotDone = this.combatService.checkCombatants(this.character, this.enemy)
+      this.battleOngoing = this.combatService.checkCombatants(this.character, this.enemy)
 
-      if (this.battleNotDone == false) {
+      if (this.battleOngoing == false) {
         if (this.character.currentHP > 0) {
           this.battleEndText = "You won!"
         }
@@ -282,7 +282,7 @@ export class GameDisplayComponent {
 
   combatFinish(): void {
     this.CombatBool = false;
-    this.battleNotDone = true;
+    this.battleOngoing = true;
     this.messageService.clear(true);
     if (this.character.currentHP <= 0) {
       this.character.fullHeal();
