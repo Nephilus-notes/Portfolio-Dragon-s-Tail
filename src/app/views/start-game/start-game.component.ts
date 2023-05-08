@@ -40,8 +40,6 @@ export class StartGameComponent {
       this.Loading = false;
       
     })
-    // this.saveService.getSaveFile(3)
-    // .subscribe(file => console.warn(file))
   }
 
   getCharacter(charID:number) {
