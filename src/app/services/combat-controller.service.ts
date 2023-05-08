@@ -68,9 +68,6 @@ export class CombatControllerService {
     }
   }
 
-  Delay(time:number): Promise<boolean> {
-    return new Promise(resolve => setTimeout(resolve, time))
-  }
   
   checkCombatants(player: Character, enemy:NPC): boolean {
     if (player.fleeing == true) {
