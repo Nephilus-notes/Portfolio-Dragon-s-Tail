@@ -19,7 +19,12 @@ export class SaveFileService {
     private apiService: ApiService, public auth: AuthService) { }
 saveIDCache!:number;
   
-  getSaveFile(saveID:number): Observable<SaveFile>{
+/**
+ * Makes an API call to retrieve a savefile from the DB
+ * @param saveID A number representing a saveFile's primary key
+ * @returns a subscribable saveFile object
+ */
+  public getSaveFile(saveID:number): Observable<SaveFile>{
 
     let url = `${environment.saveFileURL}${saveID}`;
 
@@ -29,11 +34,22 @@ saveIDCache!:number;
     return this.http.get<SaveFile>(url)
   }
   
-  cacheSaveID(saveID:number): void {
+  /**
+   *Stores a retrieved saveFile's id in the cache to be used when patching the save
+   * @param saveIDA number representing a saveFile's primary key
+   */
+  public cacheSaveID(saveID:number): void {
     this.saveIDCache = saveID;
   }
 
-  postSaveFile(locationID: string,character: Character): void {
+  /**
+   * Checks the saveIDCache. If it's empty it then makes an API call to create a new saveFile associated with the logged in user. 
+   * If there is a cached saveID it instead patches the savefile associated with that id.
+   * Can be split into three functions: One to post, one to patch, and one to determine which is appropriate
+   * @param locationID The string primary key of the location the player is currently at
+   * @param character The entire character object
+   */
+  public postSaveFile(locationID: string,character: Character): void {
     this.auth.user$.subscribe(user => {
 
       if (!this.saveIDCache) {
@@ -76,7 +92,12 @@ saveIDCache!:number;
     })
   };
 
-  getUserSaveFiles(userID:string|undefined): Observable<Array<SaveFile>>{
+  /**
+   * Retrieves all the saveFiles associated with the logged in user's id
+   * @param userID A string associated with the logged in user
+   * @returns A subscribable array of saveFiles
+   */
+  public getUserSaveFiles(userID:string|undefined): Observable<Array<SaveFile>>{
     if (userID) {
 
       let url = `${environment.saveFileURL}user/${userID}`;
