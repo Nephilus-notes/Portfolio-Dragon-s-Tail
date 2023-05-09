@@ -77,6 +77,7 @@ export class GameDisplayComponent {
   public playerChoice($event: any): void {
     // this.messageService.add('player choice starting');
     if (this.CombatBool === true) {
+     
       // this.messageService.add('player action');
       this.combatService.round(this.character, this.enemy, $event);
       this.battleOngoing = this.combatService.checkCombatants(this.character, this.enemy)
@@ -265,6 +266,7 @@ export class GameDisplayComponent {
         );
       this.messageService.add(`got npc `);
       this.CombatBool = true;
+      this.combatService.cacheNPC(this.enemy)
     });
   }
 /**
@@ -315,6 +317,13 @@ export class GameDisplayComponent {
    */
   startCombat() {
     this.generateNPC();
+    if (!this.combatService.combatPCExists()) {
+      this.messageService.add(`caching for combat`)
+      this.combatService.cachePC(this.character)
+    }
+    else {
+      this.messageService.add(`no cache needed`)
+    }
   }
 /**
  * A function that determines which enemy to retrieve and generates it.

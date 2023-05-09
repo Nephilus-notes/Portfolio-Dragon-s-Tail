@@ -13,6 +13,21 @@ export class CombatControllerService {
   playerCharacter!: Character;
   NPCEnemy!: NPC;
 
+  public cacheNPC(npc:NPC):void {
+    this.NPCEnemy = npc;
+  }
+
+  public cachePC(character:Character): void {
+    this.playerCharacter = character;
+  }
+
+  public combatPCExists(): boolean {
+    if (this.playerCharacter) {
+      return true
+    }
+    return false
+  }
+
   /**
    * Generates a random number to determine if a critical hit happened,
    * then checks against the targets evasion to see if they are hit,
@@ -210,11 +225,13 @@ export class CombatControllerService {
  * @param target The target of the abiity
  * @param effect A string: options "damage", "heal", "buff", and "debuff"?
  * @param affectedAttribute A string that maps to a particular attribute on the character object
- * @param modifier A number that increases the effect of the ability
- * @param duration A number indicating the number of rounds the effect persists
- * @param type A string: "physical" and "magical" indicating which attribute should be used for damage (strength vs intelligence) against which defense (armor vs resistance)
+ * @param modifier Def=1 - A number that increases the effect of the ability
+ * @param duration Def=0 - number indicating the number of rounds the effect persists
+ * @param type Def="physical" - A string: "physical" and "magical" indicating which attribute should be used for damage (strength vs intelligence) against which defense (armor vs resistance)
  */
   public performAbility(self: Character| NPC, target: Character| NPC, effect:string, affectedAttribute:string, modifier:number=1, duration:number=0, type:string="physical" ) {
+    this.messageService.add(`character damageValue: ${self}`)
+    this.messageService.add(`starting ability. Effect: ${effect}`)
     if (effect == "damage") {
       if (type == "physical") {
         self.damageValue = self.damageValue * modifier;
