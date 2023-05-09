@@ -28,7 +28,7 @@ export class BackpackDisplayComponent {
    * @param item - The Item object clicked in the browser 
    * @param i - The location in the backpack array of the item
    */
-  onSelect(item:Item, i:number): void {
+  public onSelect(item:Item, i:number): void {
     if (this.selectedItem === item) {
       this.selectedItem = undefined;
       this.messageService.add('item deselected')
@@ -64,7 +64,7 @@ export class BackpackDisplayComponent {
    * Equip for equippable items and healing for all others
    * @param selectedItem - Object of type Item that will be used if conditions allow
   */
-  onItemUse(useItem: string, selectedItem: Item) {
+  public onItemUse(useItem: string, selectedItem: Item) {
     switch(useItem) {
       case "Use": {
         if (this.character.currentHP < this.character.maxHP) {
@@ -99,7 +99,7 @@ export class BackpackDisplayComponent {
           {
             this.character.items.splice(this.backpacklocation, 1);
           }
-          this.resetCharacterAttributes()
+          this.character.resetCombatStats()
 
           break;
           }
@@ -121,7 +121,7 @@ export class BackpackDisplayComponent {
           {
             this.character.items.splice(this.backpacklocation, 1);
           }
-          this.resetCharacterAttributes()
+          this.character.resetCombatStats()
           break;
           }
           case "head": {
@@ -157,14 +157,14 @@ export class BackpackDisplayComponent {
     this.backpacklocation = 0;
   }
 
-  private resetCharacterAttributes(): void {
-    this.character.armorValue = this.character.armor;
-    this.character.damageValue = this.character.equippedItems.hand?.itemStat ?
-        this.character.equippedItems.hand?.itemStat + Math.floor(this.character.strength / 2) : Math.floor(this.character.strength / 2);
-    this.character.evadePercentage = this.character.dexterity;
-    this.character.resistValue = this.character.resistance;
-    this.character.attackValue = this.character.intelligence;
-  }
+  // private resetCharacterAttributes(): void {
+  //   this.character.armorValue = this.character.armor;
+  //   this.character.damageValue = this.character.equippedItems.hand?.itemStat ?
+  //       this.character.equippedItems.hand?.itemStat + Math.floor(this.character.strength / 2) : Math.floor(this.character.strength / 2);
+  //   this.character.evadePercentage = this.character.dexterity;
+  //   this.character.resistValue = this.character.resistance;
+  //   this.character.attackValue = this.character.intelligence;
+  // }
 
   constructor(private messageService: MessageService) {}
 
