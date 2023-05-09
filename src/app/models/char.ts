@@ -118,12 +118,17 @@ export class Char {
             this.attackValue = this.intelligence;
         }
 
+        public resetMagicValue(): void {
+            this.magicValue = this.intelligence / 2;
+        }
+
         public resetCombatStats(): void {
             this.resetArmorValue();
             this.resetAttackValue();
             this.resetDamageValue();
             this.resetEvadePercentage();
             this.resetResistValue();
+            this.resetMagicValue();
         }
 
         public setDependentStats(): void {

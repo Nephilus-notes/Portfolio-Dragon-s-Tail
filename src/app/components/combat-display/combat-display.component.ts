@@ -26,17 +26,46 @@ export class CombatDisplayComponent {
     duration: 0,
     type:null
   }
-  abilitiesArray!: Array<Ability>;
+  abilitiesArray: Array<Ability> = [
+    { 
+      id:1,
+      name: "Attack",
+      effect: "damage", 
+      description: "Strikes at the opponent with fists, fangs, claws, or weapons",
+      affectedAttribute: "",
+      modifier: 1,
+      duration: 0,
+      type:null
+    },
+    { 
+      id:2,
+      name: "Heal I",
+      effect: "heal", 
+      description: "heals the target",
+      affectedAttribute: "",
+      modifier: 1,
+      duration: 0,
+      type:null
+    },
+  ];
 
   @Output() CombatEnd = new EventEmitter();
   endCombat(): void {
     this.CombatEnd.emit(true);
   }
+
   public useAbility(ability:Ability): void {
-    
+    this.messageService.add(`${ability.effect} ${ability.name}`)
+    if (ability.effect == "heal") {
+      this.messageService.add("healing")
+      this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.playerCharacter, 
+        ability.effect, ability.affectedAttribute,
+        ability.modifier,ability.duration)
+    }
+
     this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.NPCEnemy, 
-      this.attackAbility.effect, this.attackAbility.affectedAttribute,
-      this.attackAbility.modifier,this.attackAbility.duration)
+      ability.effect, ability.affectedAttribute,
+      ability.modifier,ability.duration)
   }
 
   constructor(public messageService: MessageService, private combatService: CombatControllerService) {}

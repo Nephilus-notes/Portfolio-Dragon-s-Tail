@@ -230,7 +230,6 @@ export class CombatControllerService {
  * @param type Def="physical" - A string: "physical" and "magical" indicating which attribute should be used for damage (strength vs intelligence) against which defense (armor vs resistance)
  */
   public performAbility(self: Character| NPC, target: Character| NPC, effect:string, affectedAttribute:string, modifier:number=1, duration:number=0, type:string="physical" ) {
-    this.messageService.add(`character damageValue: ${self}`)
     this.messageService.add(`starting ability. Effect: ${effect}`)
     if (effect == "damage") {
       if (type == "physical") {
@@ -245,6 +244,15 @@ export class CombatControllerService {
       }
     }
     else if (effect == "heal") {
+      this.messageService.add(`
+      self: ${self.name}, 
+      mgval ${self.magicValue}, 
+      dgval ${self.damageValue}, 
+      mgval ${self.magicValue}, 
+      mgval ${self.magicValue}, 
+      mod ${modifier}
+      `)
+      this.messageService.add(`self: ${self.name}, mgval ${self.magicValue}, mod ${modifier}`)
       this.heal(target, self.magicValue*modifier)
 
     }

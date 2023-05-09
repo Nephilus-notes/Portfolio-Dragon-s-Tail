@@ -45,6 +45,7 @@ export class StartGameComponent {
   getCharacter(charID:number) {
     this.apiService.getCharacter(charID)
     .subscribe(character => {
+
       this.character = character
       // console.warn(character)
       this.apiService.cacheCharacter(character);
