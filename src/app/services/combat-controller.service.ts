@@ -221,13 +221,17 @@ export class CombatControllerService {
 
 /**
  * New function designed to take in an ability object and us it to perform an action
+ * 
+ * I need to continue to split this up into more smaller functions. That will allow for easier c
+ * ustom logic based on what ability is being used and a more readable and scalable function overall
  * @param self The PC or NPC using the ability
  * @param target The target of the abiity
  * @param effect A string: options "damage", "heal", "buff", and "debuff"?
  * @param affectedAttribute A string that maps to a particular attribute on the character object
  * @param modifier Def=1 - A number that increases the effect of the ability
  * @param duration Def=0 - number indicating the number of rounds the effect persists
- * @param type Def="physical" - A string: "physical" and "magical" indicating which attribute should be used for damage (strength vs intelligence) against which defense (armor vs resistance)
+ * @param type Def="physical" - A string: "physical" and "magical" indicating which attribute should be 
+ * used for damage (strength vs intelligence) against which defense (armor vs resistance)
  */
   public performAbility(self: Character| NPC, target: Character| NPC, effect:string, affectedAttribute:string, modifier:number=1, duration:number=0, type:string="physical" ) {
     this.messageService.add(`starting ability. Effect: ${effect}`)
@@ -259,31 +263,70 @@ export class CombatControllerService {
     if (effect == "buff") {
       switch (affectedAttribute) {
         case "stoneArmored": {
-          self.armorValue += Math.floor(self.attackValue) * modifier;
+          self.armorValue += Math.floor(self.magicValue) * modifier;
           self.stoneArmored = true;
           self.stoneArmoredRounds = duration;
           break;
         }
         case "stoneFists": {
-          self.damageValue += Math.floor(self.attackValue) * modifier;
+          self.damageValue += Math.floor(self.magicValue) * modifier;
           self.stoneFists = true
         }
       }
       if (affectedAttribute == "damageValue") {
+        if (modifier = 0) {
+          self.damageValue += 2
+        } 
+        else {
+
+          this.messageService.add(`adding damage`)
+        }
       } 
       else if (affectedAttribute == "resistValue") {
-        self.resistValue += Math.floor(self.attackValue) * modifier;
+        if (modifier = 0) {
+          self.resistValue += 2
+        } 
+        else {
+          self.resistValue += Math.floor(self.resistValue) * modifier;
+        }
       }
-      else if (affectedAttribute == "armorValue") {
+      else if (affectedAttribute == "defending") {
+        if (modifier = 0) {
+          self.armorValue += 2
+        } 
+        else {
+          self.armorValue += Math.floor(self.armorValue) * modifier;
+        }
+        self.defended = true;
+        self.defendingRounds = duration > 2 ? duration : 2
       }
-      else if (affectedAttribute == "evadePercentage") {
-        self.evadePercentage += Math.floor(self.attackValue) * modifier;
+      else if (affectedAttribute == "evading") {
+        if (modifier = 0) {
+          self.evadePercentage += 4
+        }
+        else {
+          self.evadePercentage += Math.floor(self.evadePercentage) * modifier;
+        }
+        self.defended = true;
+        self.defendingRounds = duration > 2 ? duration : 2
       }
-      else if (affectedAttribute == "attackValue") {
-        self.attackValue += Math.floor(self.attackValue) * modifier;
+      else if (affectedAttribute == "focusing") {
+        if (modifier = 0) {
+          self.attackValue += 2
+        } 
+        else {
+          self.attackValue += Math.floor(self.attackValue) * modifier;
+        }
+        self.defended = true;
+        self.defendingRounds = duration > 2 ? duration : 2
       }
       else if (affectedAttribute == "magicValue") {
-        self.magicValue += Math.floor(self.attackValue) * modifier;
+        if (modifier = 0) {
+          self.magicValue += 2
+        } 
+        else {
+          self.magicValue += Math.floor(self.magicValue) * modifier;
+        }
       }
     }
   }
