@@ -18,8 +18,12 @@ export class Character extends Char {
       webOfDepthsExplored: number = 0,
       graithsGrottoExplored: number = 0,
       graithQueensLairExplored: number = 0,
-      items: Array<Item>,
-      equippedItems:Equipment
+      items: Array<Item> = [],
+      equippedItems:Equipment = {
+        head:  null,
+        body:  null,
+        hand:  null
+      }
       ) {
         super(name, strength, dexterity, constitution, intelligence, abilities)
 
