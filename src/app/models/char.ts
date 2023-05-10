@@ -21,7 +21,7 @@ export class Char {
         this.currentHP = this.maxHP;
         this.currentMP = this.maxMP;
         this.armorValue = this.armor;
-        this.damageValue = this.strength / 2;
+        this.damageValue = Math.floor(this.strength / 2);
         this.evadePercentage = this.dexterity; // Times 2 for maxed evasion at 50?
         this.resistValue = this.resistance;
         this.attackValue = this.intelligence;
@@ -96,8 +96,8 @@ export class Char {
         }
 
         public resetDamageValue(): void {
-            this.damageValue = this.equippedItems?.hand?.itemStat ? 
-            this.equippedItems.hand.itemStat + (this.strength / 2) : this.strength / 2;
+            this.damageValue = Math.floor(this.equippedItems?.hand?.itemStat ? 
+            this.equippedItems.hand.itemStat + (this.strength / 2) : this.strength / 2);
         }
 
         public resetEvadePercentage(): void {

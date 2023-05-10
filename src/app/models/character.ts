@@ -27,16 +27,17 @@ export class Character extends Char {
       ) {
         super(name, strength, dexterity, constitution, intelligence, abilities)
 
-        this.kratabsFollyExplored= kratabsFollyExplored,
-        this.drippingDeathExplored= drippingDeathExplored,
-        this.playersRespiteExplored= playersRespiteExplored,
-        this.tailOfTheDragonExplored= tailOfTheDragonExplored,
-        this.thagragsHopeExplored= thagragsHopeExplored,
-        this.webOfDepthsExplored= webOfDepthsExplored,
-        this.graithsGrottoExplored= graithsGrottoExplored,
-        this.graithQueensLairExplored= graithQueensLairExplored,
-        this.items = items,
-        this.equippedItems = equippedItems
+        this.kratabsFollyExplored= kratabsFollyExplored;
+        this.drippingDeathExplored= drippingDeathExplored;
+        this.playersRespiteExplored= playersRespiteExplored;
+        this.tailOfTheDragonExplored= tailOfTheDragonExplored;
+        this.thagragsHopeExplored= thagragsHopeExplored;
+        this.webOfDepthsExplored= webOfDepthsExplored;
+        this.graithsGrottoExplored= graithsGrottoExplored;
+        this.graithQueensLairExplored= graithQueensLairExplored;
+        this.items = items;
+        this.equippedItems = equippedItems;
+        this.resetDamageValue()
         }
      
       currentLocation!: string;
