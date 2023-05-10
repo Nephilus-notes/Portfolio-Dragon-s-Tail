@@ -93,21 +93,20 @@ export class CombatControllerService {
    * @param target The enemy whose speed is being compared
    * @returns A boolean. true = self is faster and will leave combat. false = the enemy is faster and self cannot escape
    */
-  public flee(self: Character|NPC, target: Character|NPC): boolean {
+  public flee(self: Character|NPC, target: Character|NPC): void {
     if (self.dexterity > target.dexterity) {
       this.messageService.add(`${self.name} has fled!`, true);
       self.fleeingRounds = 0;
-      return true
+      self.fleeing = true;
     }
     else if (self.dexterity < target.dexterity && self.fleeingRounds > 0) {
       this.messageService.add(`${self.name} has fled!`, true);
       self.fleeingRounds = 0;
-      return true
+      self.fleeing = true;
     } 
     else {
       self.fleeingRounds += 1;
       this.messageService.add(`${self.name} tried to flee!`, true);
-      return false
     }
   }
   /**
@@ -282,10 +281,11 @@ export class CombatControllerService {
         case "stoneFists": {
           self.damageValue += Math.floor(self.magicValue) * modifier;
           self.stoneFists = true
+          break;
         }
       }
       if (affectedAttribute == "damageValue") {
-        if (modifier = 0) {
+        if (modifier == 0) {
           self.damageValue += 2
         } 
         else {
@@ -294,7 +294,7 @@ export class CombatControllerService {
         }
       } 
       else if (affectedAttribute == "resistValue") {
-        if (modifier = 0) {
+        if (modifier == 0) {
           self.resistValue += 2
         } 
         else {
@@ -302,7 +302,8 @@ export class CombatControllerService {
         }
       }
       else if (affectedAttribute == "defending") {
-        if (modifier = 0) {
+        this.messageService.add(`${affectedAttribute}`)
+        if (modifier == 0) {
           self.armorValue += 2
         } 
         else {
@@ -312,17 +313,21 @@ export class CombatControllerService {
         self.defendingRounds = duration > 2 ? duration : 2
       }
       else if (affectedAttribute == "evading") {
-        if (modifier = 0) {
+        this.messageService.add(`${affectedAttribute}`)
+        if (modifier == 0) {
+          this.messageService.add('modifer is 0, boosting by 4')
           self.evadePercentage += 4
         }
         else {
+          this.messageService.add('modifer is not 0, boosting by other')
           self.evadePercentage += Math.floor(self.evadePercentage) * modifier;
         }
         self.defended = true;
         self.defendingRounds = duration > 2 ? duration : 2
       }
       else if (affectedAttribute == "focusing") {
-        if (modifier = 0) {
+        this.messageService.add(`${affectedAttribute}`)
+        if (modifier == 0) {
           self.attackValue += 2
         } 
         else {
@@ -332,7 +337,7 @@ export class CombatControllerService {
         self.defendingRounds = duration > 2 ? duration : 2
       }
       else if (affectedAttribute == "magicValue") {
-        if (modifier = 0) {
+        if (modifier == 0) {
           self.magicValue += 2
         } 
         else {

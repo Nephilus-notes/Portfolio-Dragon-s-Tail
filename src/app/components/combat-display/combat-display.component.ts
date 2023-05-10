@@ -41,7 +41,37 @@ export class CombatDisplayComponent {
       id:2,
       name: "Heal I",
       effect: "heal", 
-      description: "heals the target",
+      description: "heals the target.",
+      affectedAttribute: "",
+      modifier: 1,
+      duration: 0,
+      type:null
+    },
+    { 
+      id:2,
+      name: "Evade",
+      effect: "buff", 
+      description: "Focusing on footwork to increase evasion.",
+      affectedAttribute: "evading",
+      modifier: 0,
+      duration: 0,
+      type:null
+    },
+    { 
+      id:2,
+      name: "Defend",
+      effect: "buff", 
+      description: "Concentrates energy on deflecting attacks for 2 rounds, increasing armor.",
+      affectedAttribute: "defending",
+      modifier: 0,
+      duration: 0,
+      type:null
+    },
+    { 
+      id:2,
+      name: "Flee",
+      effect: "buff", 
+      description: "Attemps to retreat from combat.",
       affectedAttribute: "",
       modifier: 1,
       duration: 0,
@@ -56,16 +86,17 @@ export class CombatDisplayComponent {
 
   public useAbility(ability:Ability): void {
     this.messageService.add(`${ability.effect} ${ability.name}`)
-    if (ability.effect == "heal") {
-      this.messageService.add("healing")
+    if (ability.effect != "damage" && ability.effect != "debuff") {
+      // this.messageService.add("healing")
       this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.playerCharacter, 
         ability.effect, ability.affectedAttribute,
         ability.modifier,ability.duration)
     }
-
-    this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.NPCEnemy, 
-      ability.effect, ability.affectedAttribute,
-      ability.modifier,ability.duration)
+    else {
+      this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.NPCEnemy, 
+        ability.effect, ability.affectedAttribute,
+        ability.modifier,ability.duration)
+    }
   }
 
   constructor(public messageService: MessageService, private combatService: CombatControllerService) {}

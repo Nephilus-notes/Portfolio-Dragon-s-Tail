@@ -97,7 +97,7 @@ export class StartGameComponent {
       let usertoken:string | undefined;
       this.auth.user$.subscribe(user => {
         usertoken = user?.sub
-        console.warn(usertoken)
+        // console.warn(usertoken)
         
             this.saveService.getUserSaveFiles(usertoken).subscribe( saves => {
               this.userSaveFiles = saves;
