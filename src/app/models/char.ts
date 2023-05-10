@@ -31,13 +31,7 @@ export class Char {
       name: string;
       level: number = 1;
       currentCurrency: number = 0;
-      //   currentLocation!: string;
-      //   lifeTimeCurrency: number = 0;
-    //   strengthXP: number = 0;
-        // dexterityXP: number = 0;
-        // constitutionXP: number = 0;
-        // intelligenceXP: number = 0;
-    //   items: Array<Item> = [];
+   
       equippedItems: Equipment = {
         head: null,
         body: null,
