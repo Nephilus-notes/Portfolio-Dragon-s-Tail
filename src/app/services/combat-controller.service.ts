@@ -95,11 +95,18 @@ export class CombatControllerService {
    */
   public flee(self: Character|NPC, target: Character|NPC): boolean {
     if (self.dexterity > target.dexterity) {
-      this.messageService.add(`${self.name} has fled!`, true)
+      this.messageService.add(`${self.name} has fled!`, true);
+      self.fleeingRounds = 0;
       return true
     }
+    else if (self.dexterity < target.dexterity && self.fleeingRounds > 0) {
+      this.messageService.add(`${self.name} has fled!`, true);
+      self.fleeingRounds = 0;
+      return true
+    } 
     else {
-      this.messageService.add(`${self.name} tried to flee!`, true)
+      self.fleeingRounds += 1;
+      this.messageService.add(`${self.name} tried to flee!`, true);
       return false
     }
   }
@@ -259,6 +266,10 @@ export class CombatControllerService {
       this.messageService.add(`self: ${self.name}, mgval ${self.magicValue}, mod ${modifier}`)
       this.heal(target, self.magicValue*modifier)
 
+    }
+
+    if(effect == "flee") {
+      this.flee(this.playerCharacter, this.NPCEnemy)
     }
     if (effect == "buff") {
       switch (affectedAttribute) {
