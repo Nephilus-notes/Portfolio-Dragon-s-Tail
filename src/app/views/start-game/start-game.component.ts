@@ -59,7 +59,9 @@ export class StartGameComponent {
         character.thagragsHopeExplored,
         character.webOfDepthsExplored,
         character.graithsGrottoExplored,
-        character.graithQueensLairExplored
+        character.graithQueensLairExplored,
+        character.items,
+        character.equippedItems
         )
       this.character = loadedCharacter
       // console.warn(character)

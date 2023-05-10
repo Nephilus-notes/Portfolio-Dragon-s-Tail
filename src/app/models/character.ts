@@ -17,7 +17,9 @@ export class Character extends Char {
       thagragsHopeExplored: number = 0,
       webOfDepthsExplored: number = 0,
       graithsGrottoExplored: number = 0,
-      graithQueensLairExplored: number = 0
+      graithQueensLairExplored: number = 0,
+      items: Array<Item>,
+      equippedItems:Equipment
       ) {
         super(name, strength, dexterity, constitution, intelligence, abilities)
 
@@ -28,7 +30,9 @@ export class Character extends Char {
         this.thagragsHopeExplored= thagragsHopeExplored,
         this.webOfDepthsExplored= webOfDepthsExplored,
         this.graithsGrottoExplored= graithsGrottoExplored,
-        this.graithQueensLairExplored= graithQueensLairExplored
+        this.graithQueensLairExplored= graithQueensLairExplored,
+        this.items = items,
+        this.equippedItems = equippedItems
         }
      
       currentLocation!: string;
