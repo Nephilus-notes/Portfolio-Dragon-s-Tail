@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 
 import { SaveFile } from '../models/saveFile';
 import { Character } from '../models/character';
+import { Char } from '../models/char';
 
 @Injectable({
   providedIn: 'root'
@@ -49,15 +50,16 @@ saveIDCache!:number;
    * @param locationID The string primary key of the location the player is currently at
    * @param character The entire character object
    */
+  
   public postSaveFile(locationID: string,character: Character): void {
     this.auth.user$.subscribe(user => {
 
-      if (!this.saveIDCache) {
         this.messageService.add("posting new")
-        var savedChar = this.apiService.postCharacter(character).subscribe(p => {
+        var savedChar = this.apiService.postCharacter(character).subscribe(char => {
+          this.messageService.add(`character id = ${char.id}`)
           let response = this.http.post<any>(`${environment.saveFileURL}`, {
           UserID:user?.sub,
-          PlayerCharacterID:p.id,
+          PlayerCharacterID:char.id,
           LocationID:locationID,
           characterName:character.name,
           DateAdded: new Date().toISOString(),
@@ -70,27 +72,37 @@ saveIDCache!:number;
           console.warn(this.saveIDCache)
           console.warn(r);
         })
-
         })
-        
-      } 
-      else  {
-        this.messageService.add("posting old")
-        let saveToPost = {
-          id:this.saveIDCache,
-          UserID:user?.sub,
-          PlayerCharacterID:character.id,
-          LocationID:locationID,
-          DateUpdated: new Date().toISOString(),
-          CharacterName: character.name
-        }
-        console.warn(saveToPost)
-        let response = this.http.patch(`${environment.saveFileURL}${this.saveIDCache}`, saveToPost)
-        response.subscribe(r => console.warn(r))
-        this.apiService.patchCharacter(character)
-      }
+      
     })
   };
+
+  private patchSaveFile(locationID: string,character: Character): void {
+    this.auth.user$.subscribe(user => {
+    this.messageService.add("posting old")
+    let saveToPost = {
+      id:this.saveIDCache,
+      UserID:user?.sub,
+      PlayerCharacterID:character.id,
+      LocationID:locationID,
+      DateUpdated: new Date().toISOString(),
+      CharacterName: character.name
+    }
+    console.warn(saveToPost)
+    let response = this.http.patch(`${environment.saveFileURL}${this.saveIDCache}`, saveToPost)
+    // response.subscribe(r => console.warn(r))
+    this.apiService.patchCharacter(character)
+    }
+  )}
+
+  public saveGame(locationID:string, character: Character): void {
+    if (!this.saveIDCache) {
+      this.postSaveFile(locationID, character);
+    } 
+    else {
+      this.patchSaveFile(locationID, character)
+    }
+  }
 
   /**
    * Retrieves all the saveFiles associated with the logged in user's id

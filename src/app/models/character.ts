@@ -9,11 +9,27 @@ export class Character extends Char {
         dexterity: number,
         constitution: number,
         intelligence: number,
-        abilities: string[]
+        abilities: string[],
+        kratabsFollyExplored: number = 0,
+        drippingDeathExplored: number = 0,
+      playersRespiteExplored: number = 0,
+      tailOfTheDragonExplored: number = 0,
+      thagragsHopeExplored: number = 0,
+      webOfDepthsExplored: number = 0,
+      graithsGrottoExplored: number = 0,
+      graithQueensLairExplored: number = 0
       ) {
-        super(name, strength, dexterity, constitution, intelligence,abilities)
+        super(name, strength, dexterity, constitution, intelligence, abilities)
 
-      }
+        this.kratabsFollyExplored= kratabsFollyExplored,
+        this.drippingDeathExplored= drippingDeathExplored,
+        this.playersRespiteExplored= playersRespiteExplored,
+        this.tailOfTheDragonExplored= tailOfTheDragonExplored,
+        this.thagragsHopeExplored= thagragsHopeExplored,
+        this.webOfDepthsExplored= webOfDepthsExplored,
+        this.graithsGrottoExplored= graithsGrottoExplored,
+        this.graithQueensLairExplored= graithQueensLairExplored
+        }
      
       currentLocation!: string;
       

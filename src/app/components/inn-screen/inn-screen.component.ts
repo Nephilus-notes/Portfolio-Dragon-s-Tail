@@ -75,6 +75,6 @@ export class InnScreenComponent {
   }
 
   saveGame(): void {
-    this.saveService.postSaveFile(this.location.id, this.character)
+    this.saveService.saveGame(this.location.id, this.character)
   }
 }

@@ -13,8 +13,8 @@ export class Char {
         this.name = name;
         this.strength = strength;
         this.dexterity = dexterity;
-        this.intelligence = intelligence;
         this.constitution = constitution;
+        this.intelligence = intelligence;
         this.abilities = abilities;
         this.maxHP = 2 * this.constitution;
         this.maxMP = 2 * this.intelligence;

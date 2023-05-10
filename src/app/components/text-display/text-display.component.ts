@@ -49,7 +49,7 @@ export class TextDisplayComponent implements OnInit{
   @Output() loadingCharacter = new EventEmitter<boolean>();
   public chooseCharacter(template:Template) {
     var character = new Character(template.name, template.strength, template.dexterity, 
-      template.intelligence, template.constitution,[template.ability]);
+      template.constitution, template.intelligence, [template.ability]);
       this.apiService.cacheCharacter(character);
       this.incrementState();
       this.selectedTemplate = undefined;

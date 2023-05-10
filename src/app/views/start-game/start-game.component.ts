@@ -45,10 +45,25 @@ export class StartGameComponent {
   getCharacter(charID:number) {
     this.apiService.getCharacter(charID)
     .subscribe(character => {
-
-      this.character = character
+      var loadedCharacter = new Character(
+        character.name,
+        character.strength,
+        character.dexterity,
+        character.constitution,
+        character.intelligence,
+        character.abilities,
+        character.kratabsFollyExplored,
+        character.drippingDeathExplored,
+        character.playersRespiteExplored,
+        character.tailOfTheDragonExplored,
+        character.thagragsHopeExplored,
+        character.webOfDepthsExplored,
+        character.graithsGrottoExplored,
+        character.graithQueensLairExplored
+        )
+      this.character = loadedCharacter
       // console.warn(character)
-      this.apiService.cacheCharacter(character);
+      this.apiService.cacheCharacter(loadedCharacter);
     });
   }
 
