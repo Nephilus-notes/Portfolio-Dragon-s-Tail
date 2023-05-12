@@ -12,6 +12,10 @@ export class CombatControllerService {
 
   playerCharacter!: Character;
   NPCEnemy!: NPC;
+  roundCounters!: Array<number>;
+  booleanAttributes!: Array<boolean>;
+  // NPCRoundCounters?: Array<number>;
+  // NPCBooleanAttributes?: Array<boolean>;
 
   public cacheNPC(npc:NPC):void {
     this.NPCEnemy = npc;
@@ -378,6 +382,24 @@ export class CombatControllerService {
       }
     }
   }
-
+  /**
+   * split into separate functions and collect them?
+   */
+  public checkBuffDuration(self: Character|NPC): void {
+    // create hashmap of boolean (defended) and rounds (defendedRounds) and then iterate over them? or create an array of booleans and an array of 
+    this.buildAttributeArrays(self)
+    for (let i = 0; i < this.roundCounters.length; i++) {
+      if (this.roundCounters[i] > 0) {
+        this.booleanAttributes[i] = false;
+      }
+    }
+  }
+/**
+ * builds arrays of boolean attributes and round counters
+ */
+    private buildAttributeArrays(self: Character|NPC) {
+    this.booleanAttributes = [self.burning, self.burningBlades, self.defended, self.doubleArmed, self.evading, self.fleeing, self.focusing, self.poisoned,self.slowed, self.stoneArmored, self.vulnerable]
+    this.roundCounters = [self.burningRounds, self.burningBladesRounds, self.defendingRounds, self.doubleArmedRounds, self.evadingRounds, self.fleeingRounds, self.focusingRounds, self.poisonedRounds, self.slowedRounds, self.stoneArmoredRounds, self.vulnerableRounds]
+    }
   constructor(private messageService: MessageService) { }
 }

@@ -7,8 +7,7 @@
   <div class="combatMessage" *ngIf="messageService.combatMessages.length">
 
     <!-- <h2 class="message-content">Messages</h2> -->
-    <button type="button" class="clear"
-    (click)="messageService.clear(true)">Clear messages</button>
+
     <div class="message-content" *ngFor='let message of messageService.combatMessages'> {{message}} </div>
     
   </div>

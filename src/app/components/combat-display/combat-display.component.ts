@@ -39,16 +39,26 @@ export class CombatDisplayComponent {
     },
     { 
       id:2,
-      name: "Heal I",
-      effect: "heal", 
-      description: "heals the target.",
+      name: "Flee",
+      effect: "buff", 
+      description: "Attemps to retreat from combat.",
       affectedAttribute: "",
       modifier: 1,
       duration: 0,
       type:null
+    }, 
+    { 
+      id:3,
+      name: "Strengthen",
+      effect: "buff", 
+      description: "Concentrates energy on deflecting attacks for 2 rounds, increasing armor.",
+      affectedAttribute: "damageValue",
+      modifier: 0,
+      duration: 0,
+      type:null
     },
     { 
-      id:2,
+      id:4,
       name: "Evade",
       effect: "buff", 
       description: "Focusing on footwork to increase evasion.",
@@ -58,7 +68,7 @@ export class CombatDisplayComponent {
       type:null
     },
     { 
-      id:2,
+      id:5,
       name: "Defend",
       effect: "buff", 
       description: "Concentrates energy on deflecting attacks for 2 rounds, increasing armor.",
@@ -68,17 +78,27 @@ export class CombatDisplayComponent {
       type:null
     },
     { 
-      id:2,
-      name: "Flee",
+      id:6,
+      name: "Aim",
       effect: "buff", 
-      description: "Attemps to retreat from combat.",
+      description: "Focusing on footwork to increase evasion.",
+      affectedAttribute: "focusing",
+      modifier: 0,
+      duration: 0,
+      type:null
+    },
+    { 
+      id:2,
+      name: "Heal I",
+      effect: "heal", 
+      description: "heals the target.",
       affectedAttribute: "",
       modifier: 1,
       duration: 0,
       type:null
     },
   ];
-
+  
   @Output() CombatEnd = new EventEmitter();
   endCombat(): void {
     this.CombatEnd.emit(true);

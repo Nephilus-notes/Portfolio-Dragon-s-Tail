@@ -61,35 +61,35 @@ export class Char {
     
       //  STATUSES //
       // # Status flags
+        burning: boolean = false;
+        burningBlades : boolean = false;
         defended : boolean = false;
+        doubleArmed : boolean = false;
         evading : boolean = false;
         fleeing: boolean = false;
+        focusing: boolean = false;
+        poisoned : boolean = false;
         stoneArmored : boolean = false;
         slowed : boolean = false;
         vulnerable : boolean = false;
-        doubleArmed : boolean = false;
-        burningBlades : boolean = false;
-        stoneFists : boolean = false;
-        focusing: boolean = false;
-    
+        
         // no incrementers
-        poisoned : boolean = false;
-        burning: boolean = false;
         hitByWind : boolean = false;
         stunned: boolean = false;
+        stoneFists : boolean = false;
     
         // status Incrementors
-        evadingRounds: number = 0;
+        burningRounds: number = 0;
+        burningBladesRounds : number = 0;
         defendingRounds: number = 0;
+        doubleArmedRounds : number = 0;
+        evadingRounds: number = 0;
         fleeingRounds : number = 0;
         focusingRounds: number = 0;
+        poisonedRounds : number = 0;
         slowedRounds : number = 0;
         stoneArmoredRounds: number = 0;
         vulnerableRounds: number = 0;
-        doubleArmedRounds : number = 0;
-        burningBladesRounds : number = 0;
-        burningRounds: number = 0;
-        poisonedRounds : number = 0;
 
         public resetArmorValue(): void {
             this.armorValue = this.armor; // make a conditional to use the itemstat of equipped armor
