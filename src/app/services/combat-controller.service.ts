@@ -4,6 +4,7 @@ import { MessageService } from './message.service';
 import { Character } from '../models/character';
 import { NPC } from '../models/npc';
 import { Char } from '../models/char';
+import { Ability } from '../models/ability';
 
 @Injectable({
   providedIn: 'root'
@@ -157,13 +158,13 @@ export class CombatControllerService {
  * @param npc  The current enemy in combat 
  * @param actionCall The player's input as a string 
  */
-  public healthCheck(player:Character, npc: NPC, actionCall: string | null=null) {
-    if (actionCall == null && player.currentHP > 0 && npc.currentHP > 0) {
+  public healthCheck(player:Character, npc: NPC, ability: Ability | null=null) {
+    if (ability == null && player.currentHP > 0 && npc.currentHP > 0) {
       this.attack(npc, player);
     }
     else if (player.currentHP > 0 && npc.currentHP > 0) {
-      if (actionCall != null) {
-        this.playerAction(player, npc, actionCall)
+      if (ability != null) {
+        this.useAbility(player, npc, ability)
       }
     }
   }
@@ -174,17 +175,17 @@ export class CombatControllerService {
    * @param enemy 
    * @param actionCall 
    */
-  public round(character: Character, enemy: NPC, actionCall: string) {
+  public round(character: Character, enemy: NPC, playerAbility: Ability) {
 
     if (character.dexterity >= enemy.dexterity) {
-      this.healthCheck(character, enemy, actionCall);
+      this.healthCheck(character, enemy, playerAbility);
       if (enemy.currentHP > 0) {
         this.healthCheck(character, enemy);
       }
     } else {
       this.healthCheck(character, enemy);
       if (character.currentHP > 0) {
-        this.healthCheck(character, enemy, actionCall);
+        this.healthCheck(character, enemy, playerAbility);
       }
     }
 
@@ -216,6 +217,21 @@ export class CombatControllerService {
         this.flee(character, enemy);
         break;
       }
+    }
+  }
+
+  public useAbility(self: Character|NPC, enemy: Character|NPC, ability:Ability): void {
+    this.messageService.add(`${ability.effect} ${ability.name}`)
+    if (ability.effect != "damage" && ability.effect != "debuff") {
+      // this.messageService.add("healing")
+      this.performAbility(self, self, 
+        ability.effect, ability.affectedAttribute,
+        ability.modifier,ability.duration)
+    }
+    else {
+      this.performAbility(self, enemy, 
+        ability.effect, ability.affectedAttribute,
+        ability.modifier,ability.duration)
     }
   }
 
