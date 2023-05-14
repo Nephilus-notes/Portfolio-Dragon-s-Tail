@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
+import { Character } from 'src/app/models/character';
+
 // function optionValidator(control: FormControl) {
 //   let submitString = control.value
 //   return null
@@ -24,6 +26,8 @@ export class UIformComponent {
 
   @Input()combatOptions!: Array<string>;
   options!: Array<string>;
+  
+  @Input()character!: Character;
 
 
   @Output() submitValue = new EventEmitter<string|null>();

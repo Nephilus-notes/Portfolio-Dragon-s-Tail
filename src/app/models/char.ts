@@ -1,5 +1,6 @@
 import { Item } from "./item";
 import { Equipment } from "./equipment";
+import { Ability } from "./ability";
 
 export class Char {
     constructor(
@@ -8,7 +9,7 @@ export class Char {
         dexterity: number,
         constitution: number,
         intelligence: number,
-        abilities: string[]
+        abilities: Array<Ability>
       ) {
         this.name = name;
         this.strength = strength;
@@ -48,7 +49,7 @@ export class Char {
       maxMP: number;
 
     
-      abilities: Array<string>;
+      abilities: Array<Ability>;
       currentHP: number;
       currentMP: number;
     

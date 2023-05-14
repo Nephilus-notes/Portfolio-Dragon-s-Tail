@@ -1,6 +1,7 @@
 import { Equipment } from "./equipment"
 import { Item } from "./item"
 import { Character } from "./character";
+import { Ability } from "./ability";
 
 export interface characterDTO {
     
@@ -51,7 +52,7 @@ export interface characterDTO {
       maxMP: number;
 
     
-      abilities: Array<string>;
+      abilities: Array<Ability>;
       currentHP: number;
       currentMP: number;
     

@@ -1,4 +1,4 @@
-<div class="form-container"><form action="">
+<div class="form-container" *ngIf="!CombatBool; else inCombat"><form action="">
 
 <label for="Control">: </label>
 <input id="Control" type="text" [formControl]="Control" [(ngModel)]="submitString">
@@ -10,3 +10,9 @@ ng (click)="onSubmit()"
 </p>
 
 </form></div>
+
+<ng-template #inCombat>
+    <div *ngFor="let ability of character.abilities">
+        <app-game-button text="{{ability.name}}"></app-game-button>
+    </div>
+</ng-template>

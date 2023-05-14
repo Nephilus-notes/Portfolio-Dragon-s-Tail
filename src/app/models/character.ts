@@ -1,6 +1,7 @@
 import { Equipment } from './equipment';
 import { Item } from './item'
 import { Char } from './char';
+import { Ability } from './ability';
 
 export class Character extends Char {
     constructor(
@@ -9,7 +10,7 @@ export class Character extends Char {
         dexterity: number,
         constitution: number,
         intelligence: number,
-        abilities: string[],
+        abilities: Array<Ability>,
         kratabsFollyExplored: number = 0,
         drippingDeathExplored: number = 0,
       playersRespiteExplored: number = 0,

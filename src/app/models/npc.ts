@@ -1,4 +1,5 @@
 import { Char } from "./char";
+import { Ability } from "./ability";
 
 export class NPC extends Char {
     constructor(
@@ -9,7 +10,7 @@ export class NPC extends Char {
         intelligence: number,
         armor: number,
         resistance: number,
-        abilities: string[],
+        abilities: Array<Ability>,
         level: number,
 
       ) {

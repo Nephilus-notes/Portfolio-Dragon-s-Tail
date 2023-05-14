@@ -1,3 +1,5 @@
+import { Ability } from "./ability";
+
 /**
  * A template for creating new characters. Keys: it, name, strength, dexterity,
  * constitution, intelligence, job, ability, description
@@ -10,6 +12,6 @@ export interface Template {
     intelligence:number;
     constitution:number;
     job:string;
-    ability:string;
+    ability:Ability;
     description:string;
 }
