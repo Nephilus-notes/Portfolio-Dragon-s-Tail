@@ -3,6 +3,9 @@ import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
 import { Character } from 'src/app/models/character';
+import { CombatControllerService } from 'src/app/services/combat-controller.service';
+import { MessageService } from 'src/app/services/message.service';
+import { Ability } from 'src/app/models/ability';
 
 // function optionValidator(control: FormControl) {
 //   let submitString = control.value
@@ -15,6 +18,8 @@ import { Character } from 'src/app/models/character';
   styleUrls: ['./uiform.component.css']
 })
 export class UIformComponent {
+
+  constructor (private messageService: MessageService, private combatService: CombatControllerService) { }
   submitString = '';
 
   Control = new FormControl('', [
@@ -26,7 +31,7 @@ export class UIformComponent {
 
   @Input()combatOptions!: Array<string>;
   options!: Array<string>;
-  
+
   @Input()character!: Character;
 
 
@@ -41,6 +46,21 @@ ngOnChanges(): void {
     this.options = this.combatOptions;
   } else {
     this.options = this.locationOptions;
+  }
+}
+
+public useAbility(ability:Ability): void {
+  this.messageService.add(`${ability.effect} ${ability.name}`)
+  if (ability.effect != "damage" && ability.effect != "debuff") {
+    // this.messageService.add("healing")
+    this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.playerCharacter, 
+      ability.effect, ability.affectedAttribute,
+      ability.modifier,ability.duration)
+  }
+  else {
+    this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.NPCEnemy, 
+      ability.effect, ability.affectedAttribute,
+      ability.modifier,ability.duration)
   }
 }
  

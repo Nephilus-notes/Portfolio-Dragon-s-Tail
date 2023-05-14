@@ -12,7 +12,7 @@ ng (click)="onSubmit()"
 </form></div>
 
 <ng-template #inCombat>
-    <div *ngFor="let ability of character.abilities">
-        <app-game-button text="{{ability.name}}"></app-game-button>
+    <div class="inline" *ngFor="let ability of character.abilities; index as i;">
+        <app-game-button class="inline" text="{{ability.name}}" (click)="useAbility(ability)"></app-game-button>
     </div>
 </ng-template>

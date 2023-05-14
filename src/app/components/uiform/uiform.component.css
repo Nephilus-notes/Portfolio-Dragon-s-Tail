@@ -35,3 +35,15 @@ body {
 #LocationControl {
     width: 50%;
 }
+
+.flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.inline {
+    display: inline-block;
+}

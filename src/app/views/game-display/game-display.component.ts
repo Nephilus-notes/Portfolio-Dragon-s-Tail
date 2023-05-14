@@ -380,6 +380,7 @@ export class GameDisplayComponent {
     }
     if (this.apiService.templateCacheExists() === false) {
       this.loadCharacter();
+      this.messageService.add(`${this.character.abilities}`)
     }
     this.loadLocation();
     // }
