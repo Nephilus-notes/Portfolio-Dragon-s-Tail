@@ -19,7 +19,8 @@
     
 <!-- </div *ngIf="battleOngoing == true" > -->
 <div class="inline" *ngFor="let ability of character.abilities; index as i;">
-        <app-game-button class="inline" text="{{ability.name}}" (click)="startRound(ability)"></app-game-button>
+        <app-game-button class="inline" text="{{ability.name}}" (click)="startRound(ability)"
+        *ngIf="battleOngoing == true;"></app-game-button>
     </div>
     <!-- </div> -->
     
