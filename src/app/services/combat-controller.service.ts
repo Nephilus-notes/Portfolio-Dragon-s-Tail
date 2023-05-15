@@ -15,6 +15,8 @@ export class CombatControllerService {
   NPCEnemy!: NPC;
   roundCounters!: Array<number>;
   booleanAttributes!: Array<boolean>;
+  roundOrder?: Array<Character|NPC>;
+  resetArray!: Array<Function>;
   // NPCRoundCounters?: Array<number>;
   // NPCBooleanAttributes?: Array<boolean>;
 
@@ -128,24 +130,23 @@ export class CombatControllerService {
 
   /**
    * Used at the end of a round, it ensures both combatants are able to continue fighting, and if not returns false and ends combat.
-   * @param player 
-   * @param enemy 
-   * @returns 
+   * 
+   * @returns false if combat cannot continue, else true
    */
-  public checkCombatants(player: Character, enemy:NPC): boolean {
-    if (player.fleeing == true) {
+  public checkCombatants(): boolean {
+    if (this.playerCharacter.fleeing == true) {
       return false
     }
-    if (player.currentHP <= 0) {
-      player.currentHP = 0;
+    if (this.playerCharacter.currentHP <= 0) {
+      this.playerCharacter.currentHP = 0;
       this.messageService.add("You can no longer fight.", true)
 
       // Send back to town
       return false
-    } else if (enemy.currentHP <= 0) {
-      enemy.currentHP = 0;
-      this.messageService.add(`You defeated the ${enemy.name}! You scavenge ${enemy.currentCurrency} Essence.`, true);
-      this.gainLoot(player, enemy);
+    } else if (this.NPCEnemy.currentHP <= 0) {
+      this.NPCEnemy.currentHP = 0;
+      this.messageService.add(`You defeated the ${this.NPCEnemy.name}! You scavenge ${this.NPCEnemy.currentCurrency} Essence.`, true);
+      this.gainLoot(this.playerCharacter, this.NPCEnemy);
 
       return false
     } else {
@@ -153,19 +154,16 @@ export class CombatControllerService {
     }
   }
 /**
- * Checks to make sure all parties can attack and can be attacked
- * @param player The current player character
- * @param npc  The current enemy in combat 
- * @param actionCall The player's input as a string 
+ * Verifies that all parties have enough HP to attack or be attacked.
+ * 
+ * @returns true if attack can be made, else false
  */
-  public healthCheck(player:Character, npc: NPC, ability: Ability | null=null) {
-    if (ability == null && player.currentHP > 0 && npc.currentHP > 0) {
-      this.attack(npc, player);
+  public healthCheck(): boolean {
+    if (this.NPCEnemy.currentHP > 0 && this.playerCharacter.currentHP > 0) {
+      return true
     }
-    else if (player.currentHP > 0 && npc.currentHP > 0) {
-      if (ability != null) {
-        this.useAbility(player, npc, ability)
-      }
+    else {
+      return false
     }
   }
   /**
@@ -175,49 +173,30 @@ export class CombatControllerService {
    * @param enemy 
    * @param actionCall 
    */
-  public round(character: Character, enemy: NPC, playerAbility: Ability) {
-
-    if (character.dexterity >= enemy.dexterity) {
-      this.healthCheck(character, enemy, playerAbility);
-      if (enemy.currentHP > 0) {
-        this.healthCheck(character, enemy);
-      }
-    } else {
-      this.healthCheck(character, enemy);
-      if (character.currentHP > 0) {
-        this.healthCheck(character, enemy, playerAbility);
-      }
+  public round(ability: Ability): boolean {
+    if (this.roundOrder == null) {
+      if (this.playerCharacter.dexterity >= this.NPCEnemy.dexterity) {
+        this.roundOrder = [this.playerCharacter, this.NPCEnemy]; 
     }
-
+    else  {
+      this.roundOrder = [this.NPCEnemy, this.playerCharacter]
+    }
   }
 
-  /**
-   * A switch that determines which legacy ability the player uses. [Attack, Defend, Evade, Flee]
-   * @param character 
-   * @param enemy 
-   * @param actionCall 
-   */
-  public playerAction(character: Character, enemy: NPC, actionCall: string) {
-    // this.messageService.add(`player action call ${actionCall}`);
-
-    switch (actionCall) {
-      case 'A': {
-        this.attack(character, enemy);
-        break;
+     for (let i = 0; i < this.roundOrder.length; i ++) {
+    if (this.healthCheck()) {
+      var enemy!: Character|NPC;
+      if (this.roundOrder[i] == this.NPCEnemy) {
+        enemy = this.playerCharacter;
+        this.useAbility(this.roundOrder[i], enemy, this.roundOrder[i].abilities[0])
+      } 
+      else {
+        enemy = this.NPCEnemy
+        this.useAbility(this.roundOrder[i], enemy, ability)
       }
-      case 'D': {
-        this.defend(character);
-        break;
-      }
-      case 'E': {
-        this.evade(character);
-        break;
-      }
-      case 'F': {
-        this.flee(character, enemy);
-        break;
       }
     }
+    return this.checkCombatants()
   }
 
   public useAbility(self: Character|NPC, enemy: Character|NPC, ability:Ability): void {
@@ -229,6 +208,7 @@ export class CombatControllerService {
         ability.modifier,ability.duration)
     }
     else {
+      
       this.performAbility(self, enemy, 
         ability.effect, ability.affectedAttribute,
         ability.modifier,ability.duration)
@@ -401,12 +381,15 @@ export class CombatControllerService {
   /**
    * split into separate functions and collect them?
    */
-  public checkBuffDuration(self: Character|NPC): void {
+  public checkEffectsDuration(self: Character|NPC): void {
     // create hashmap of boolean (defended) and rounds (defendedRounds) and then iterate over them? or create an array of booleans and an array of 
     this.buildAttributeArrays(self)
     for (let i = 0; i < this.roundCounters.length; i++) {
-      if (this.roundCounters[i] > 0) {
-        this.booleanAttributes[i] = false;
+      if (this.booleanAttributes[i] == true) {
+        if (this.roundCounters[i] == 0) {
+          this.booleanAttributes[i] = false;
+         this.messageService.add("wish I could use a function right here.")
+        }
       }
     }
   }
@@ -416,6 +399,7 @@ export class CombatControllerService {
     private buildAttributeArrays(self: Character|NPC) {
     this.booleanAttributes = [self.burning, self.burningBlades, self.defended, self.doubleArmed, self.evading, self.fleeing, self.focusing, self.poisoned,self.slowed, self.stoneArmored, self.vulnerable]
     this.roundCounters = [self.burningRounds, self.burningBladesRounds, self.defendingRounds, self.doubleArmedRounds, self.evadingRounds, self.fleeingRounds, self.focusingRounds, self.poisonedRounds, self.slowedRounds, self.stoneArmoredRounds, self.vulnerableRounds]
+    this.resetArray = []
     }
   constructor(private messageService: MessageService) { }
 }

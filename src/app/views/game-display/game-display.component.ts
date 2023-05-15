@@ -79,8 +79,7 @@ export class GameDisplayComponent {
     if (this.CombatBool === true) {
      
       // this.messageService.add('player action');
-      this.combatService.round(this.character, this.enemy, $event);
-      this.battleOngoing = this.combatService.checkCombatants(this.character, this.enemy)
+      this.battleOngoing = this.combatService.round($event);
 
       if (this.battleOngoing == false) {
         if (this.character.currentHP > 0 && this.character.fleeing == false) {
