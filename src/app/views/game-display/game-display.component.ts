@@ -234,19 +234,40 @@ export class GameDisplayComponent {
 /**
  * A now unnecessary dev tool for entering different game states
  */
-  shopToggle(): void {
-    if (this.GameStateSwitch > 0) {
-      this.GameStateSwitch = 0;
-    } else if (
-      (this.GameStateSwitch == 0 && this.location.id == 'A') ||
-      (this.GameStateSwitch == 0 && this.location.id == 'B')
-    ) {
-      this.GameStateSwitch = 1;
-    } else if (this.GameStateSwitch == 0 && this.location.id == 'I') {
-      this.GameStateSwitch = 2;
+  shopToggle(newState:number = 0): void {
+    switch (newState) {
+      case 0: {
+        this.GameStateSwitch = 0;
+        break;
+      }
+      case 1: {
+        this.GameStateSwitch = 1;
+        break;
+      }
+      case 2: {
+        this.GameStateSwitch = 2;
+        break;
+      }
+      case 3: {
+        this.GameStateSwitch = 3;
+        break;
+      }
+      default: {
+
+        if (this.GameStateSwitch > 0) {
+          this.GameStateSwitch = 0;
+        } else if (
+          (this.GameStateSwitch == 0 && this.location.id == 'A') ||
+          (this.GameStateSwitch == 0 && this.location.id == 'B')
+        ) {
+          this.GameStateSwitch = 1;
+        } else if (this.GameStateSwitch == 0 && this.location.id == 'I') {
+          this.GameStateSwitch = 2;
+        }
+        console.warn(this.location.id);
+        console.warn(this.GameStateSwitch);
+      }
     }
-    console.warn(this.location.id);
-    console.warn(this.GameStateSwitch);
   }
 
   /**

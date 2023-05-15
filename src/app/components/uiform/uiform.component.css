@@ -7,7 +7,7 @@
 .container {
     display:flex;
     flex-wrap: wrap;
-    width:100%;
+    width: clamp(23rem, 50vw, 70rem);
     background-color: darkgray;
     border-left: 2px solid white;
     border-radius: 10px;
@@ -54,4 +54,12 @@ body {
 
 .inline {
     display: inline-block;
+}
+
+.gap-5 {
+    gap: 5px;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
 }

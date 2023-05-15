@@ -36,7 +36,8 @@
                 <app-uiform *ngIf="location.id != SG" (submitValue)="playerChoice($event)" [location]="location"
                     [CombatBool]="CombatBool" (CombatOver)="battleEnd($event)" [character]="character" 
                     [battleEndText]="battleEndText" [battleOngoing]="battleOngoing" (CombatEnd)="combatFinish()"
-                    (newLocation)="loadLocation($event)" (startCombat)="startCombat()"></app-uiform>
+                    (newLocation)="loadLocation($event)" (startCombat)="startCombat()"
+                    (gameStateChange)="shopToggle($event)"></app-uiform>
 
     </div>
     <div>

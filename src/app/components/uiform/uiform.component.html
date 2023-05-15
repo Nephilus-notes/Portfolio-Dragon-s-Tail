@@ -1,14 +1,17 @@
 <div class="container">
 
-    <div *ngIf="!CombatBool; else inCombat"><form action="">
+    <div *ngIf="!CombatBool; else inCombat" class="flex flex-wrap gap-5 space-evenly">
         <div class="inline" *ngFor="let location of location.moveOptions; index as i;">
             <app-game-button class="inline" text="{{location.name}}" 
             (click)="changeLocation(location.id)"
             *ngIf="battleOngoing == true;"></app-game-button>
         </div>
-        <app-game-button *ngIf="location.next != null" text="Explore" (click)="exploreStart()"></app-game-button>
+        <app-game-button *ngIf="location.next != null && location.next != 'S'" text="Explore" (click)="exploreStart()"
+        class="inline"></app-game-button>
+        <app-game-button *ngIf="location.next != null && location.next == 'S'" text="Shop" (click)="changeState(location.id)"
+        class="inline"></app-game-button>
         
-    </form></div>
+  </div>
     
     <ng-template #inCombat>
         <app-game-button *ngIf="battleOngoing == false;" type="button" class="clear"

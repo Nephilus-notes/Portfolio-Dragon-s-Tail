@@ -51,6 +51,24 @@ export class UIformComponent {
     this.Control.reset()
   }
 
+  @Output() gameStateChange = new EventEmitter<number>();
+  public changeState(location_id:string) {
+    switch (location_id) {
+      case "I": {
+        this.gameStateChange.emit(2)
+        break;
+      }
+      case "B": {        
+        this.gameStateChange.emit(1)
+        break;
+      }
+      case "A": {
+        this.gameStateChange.emit(1)
+        break;
+    }
+    }
+  }
+
   /**
    * An onClick event emitter that uses the api service to get a new location, 
    * caches it, and passes it to the game display component
@@ -62,6 +80,7 @@ export class UIformComponent {
       this.newLocation.emit(loc)
       console.warn(loc)
     })
+    this.gameStateChange.emit(0)
   }
 /**
  * An onClick event emitter that starts a combat round with the player's 
