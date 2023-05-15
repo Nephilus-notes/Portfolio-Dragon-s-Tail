@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
@@ -6,6 +6,9 @@ import { Character } from 'src/app/models/character';
 import { CombatControllerService } from 'src/app/services/combat-controller.service';
 import { MessageService } from 'src/app/services/message.service';
 import { Ability } from 'src/app/models/ability';
+import { NavLocation } from 'src/app/models/mapNavLocation';
+import { ApiService } from 'src/app/services/api.service';
+import { Location } from 'src/app/models/mapLocation';
 
 // function optionValidator(control: FormControl) {
 //   let submitString = control.value
@@ -19,7 +22,7 @@ import { Ability } from 'src/app/models/ability';
 })
 export class UIformComponent {
 
-  constructor (private messageService: MessageService, private combatService: CombatControllerService) { }
+  constructor (private messageService: MessageService, private combatService: CombatControllerService, private apiService: ApiService) { }
   submitString = '';
   @Input() battleOngoing!: boolean;
   @Input() battleEndText!:string;
@@ -28,7 +31,7 @@ export class UIformComponent {
     Validators.required,
     // optionValidator
   ]);
-  @Input() locationOptions!: Array<string>;
+  @Input() locationOptions!: Array<NavLocation>;
   @Input() CombatBool!: boolean;
 
   @Input()combatOptions!: Array<string>;
@@ -43,13 +46,15 @@ export class UIformComponent {
     this.submitValue.emit(this.Control.value?.toUpperCase())
     this.Control.reset()
   }
-ngOnChanges(): void {
-  if (this.CombatBool) {
-    this.options = this.combatOptions;
-  } else {
-    this.options = this.locationOptions;
+
+  @Output() newLocation = new EventEmitter<Location>();
+  public changeLocation(locationPKID:string) {
+    this.apiService.getNewLocation(locationPKID).subscribe(loc => {
+
+      this.newLocation.emit(loc)
+      console.warn(loc)
+    })
   }
-}
 
 @Output() CombatOver = new EventEmitter();
 public startRound(ability: Ability): void {
@@ -64,4 +69,7 @@ public startRound(ability: Ability): void {
     this.CombatEnd.emit(true);
   }
  
+  ngOnInit() {
+    console.warn(this.locationOptions)
+  }
 }

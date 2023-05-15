@@ -252,9 +252,13 @@ export class GameDisplayComponent {
    * Dev method that checks to see if a location is cached from saveFileService.
    * If the location is cached it loads it up, if not it calls a default location
    */
-  loadLocation() {
+  loadLocation($event:Location|null=null) {
+    console.warn($event)
+    if ($event != null) {
+      this.location = $event
+    }
     // this.messageService.add("Loading")
-    if (this.apiService.templateCacheExists()) {
+    else if (this.apiService.templateCacheExists()) {
       this.changeLocation('SG');
       // console.warn(`Location Cache: ${this.apiService.locationCache}`)
     } else {
