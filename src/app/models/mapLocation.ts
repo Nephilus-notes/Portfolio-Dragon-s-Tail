@@ -8,7 +8,7 @@ export interface Location {
     enterText: string;
     middleText: string;
     exitText: string;
-    moveOptions: Array<string>;
+    moveOptions: Array<Location>;
     commonNPC: number;
     uncommonNPC: number;
     rareNPC: number;
