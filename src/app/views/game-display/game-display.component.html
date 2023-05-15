@@ -32,22 +32,10 @@
             </div>
         </div>
 
-        
-        <div class="optionsAndInput" *ngIf="location.id != SG">
-            <!-- <div class="options backgroundDark" *ngIf="CombatBool; else elseBlock">
-                (A) Attack, (E) Evade, (D) Defend, (F) Flee
-            </div> -->
-            <ng-template *ngIf="CombatBool==false;">
-                <div class="options backgroundDark">
-                    <li>{{location.moveOptions}}</li>
-
-                </div>
-            </ng-template>
-                <app-uiform (submitValue)="playerChoice($event)" [locationOptions]="location.moveOptions"
+    
+                <app-uiform *ngIf="location.id != SG" (submitValue)="playerChoice($event)" [locationOptions]="location.moveOptions"
                     [CombatBool]="CombatBool" (CombatOver)="battleEnd($event)" [character]="character" 
                     [battleEndText]="battleEndText" [battleOngoing]="battleOngoing" (CombatEnd)="combatFinish()"></app-uiform>
-
-        </div>
 
     </div>
     <div>

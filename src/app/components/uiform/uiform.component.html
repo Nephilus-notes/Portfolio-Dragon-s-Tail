@@ -1,7 +1,11 @@
 <div class="container">
 
     <div *ngIf="!CombatBool; else inCombat"><form action="">
-        
+        <div class="inline" *ngFor="let location of locationOptions; index as i;">
+            <app-game-button class="inline" text="{{location}}" 
+           
+            *ngIf="battleOngoing == true;"></app-game-button>
+        </div>
         <label for="Control">: </label>
         <input id="Control" type="text" [formControl]="Control" [(ngModel)]="submitString">
         <button class="submitButton"  type="submit"
