@@ -21,6 +21,8 @@ export class UIformComponent {
 
   constructor (private messageService: MessageService, private combatService: CombatControllerService) { }
   submitString = '';
+  @Input() battleOngoing!: boolean;
+  @Input() battleEndText!:string;
 
   Control = new FormControl('', [
     Validators.required,
@@ -49,19 +51,17 @@ ngOnChanges(): void {
   }
 }
 
-public useAbility(ability:Ability): void {
-  this.messageService.add(`${ability.effect} ${ability.name}`)
-  if (ability.effect != "damage" && ability.effect != "debuff") {
-    // this.messageService.add("healing")
-    this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.playerCharacter, 
-      ability.effect, ability.affectedAttribute,
-      ability.modifier,ability.duration)
-  }
-  else {
-    this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.NPCEnemy, 
-      ability.effect, ability.affectedAttribute,
-      ability.modifier,ability.duration)
-  }
+@Output() CombatOver = new EventEmitter();
+public startRound(ability: Ability): void {
+  this.CombatOver.emit(this.combatService.round(ability))
+  this.messageService.add(`${this.battleOngoing}`)
 }
+/** 
+ * Probably don't need this, it's on combatDisplay.  Maybe should move here someday though
+ */
+@Output() CombatEnd = new EventEmitter();
+  endCombat(): void {
+    this.CombatEnd.emit(true);
+  }
  
 }

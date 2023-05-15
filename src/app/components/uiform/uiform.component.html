@@ -1,18 +1,27 @@
-<div class="form-container" *ngIf="!CombatBool; else inCombat"><form action="">
+<div class="container">
 
-<label for="Control">: </label>
-<input id="Control" type="text" [formControl]="Control" [(ngModel)]="submitString">
-<button class="submitButton"  type="submit"
-ng (click)="onSubmit()"
-[disabled]="submitString && !options.includes(submitString.toUpperCase()) || !submitString">Enter</button>
-<p class="invalidInput" *ngIf="submitString && !options.includes(submitString.toUpperCase())">
-    Take a close look at your options 
-</p>
-
-</form></div>
-
-<ng-template #inCombat>
-    <div class="inline" *ngFor="let ability of character.abilities; index as i;">
-        <app-game-button class="inline" text="{{ability.name}}" (click)="useAbility(ability)"></app-game-button>
+    <div *ngIf="!CombatBool; else inCombat"><form action="">
+        
+        <label for="Control">: </label>
+        <input id="Control" type="text" [formControl]="Control" [(ngModel)]="submitString">
+        <button class="submitButton"  type="submit"
+        ng (click)="onSubmit()"
+        [disabled]="submitString && !options.includes(submitString.toUpperCase()) || !submitString">Enter</button>
+        <p class="invalidInput" *ngIf="submitString && !options.includes(submitString.toUpperCase())">
+            Take a close look at your options 
+        </p>
+        
+    </form></div>
+    
+    <ng-template #inCombat>
+        <app-game-button *ngIf="battleOngoing == false;" type="button" class="clear"
+    (click)="endCombat()" [text]="battleEndText"></app-game-button>
+    
+<!-- </div *ngIf="battleOngoing == true" > -->
+<div class="inline" *ngFor="let ability of character.abilities; index as i;">
+        <app-game-button class="inline" text="{{ability.name}}" (click)="startRound(ability)"></app-game-button>
     </div>
+    <!-- </div> -->
+    
 </ng-template>
+</div>

@@ -13,8 +13,8 @@
     <div class="displayDiv">
 
 
-        <app-combat-display *ngIf="CombatBool" [combatant]="enemy" [battleNotDone]="battleOngoing"
-            (CombatEnd)="combatFinish()" [battleEndText]="battleEndText"></app-combat-display>
+        <app-combat-display *ngIf="CombatBool" [combatant]="enemy" 
+             ></app-combat-display>
 
         <app-text-display *ngIf="!CombatBool && !GameStateSwitch" [location]="location"
             (submitValue)="playerChoice($event)" (loadingCharacter)="loadCharacter()"
@@ -33,7 +33,7 @@
         </div>
 
         
-        <div class="optionsAndInput" *ngIf="location.id != SG && battleOngoing == true">
+        <div class="optionsAndInput" *ngIf="location.id != SG">
             <!-- <div class="options backgroundDark" *ngIf="CombatBool; else elseBlock">
                 (A) Attack, (E) Evade, (D) Defend, (F) Flee
             </div> -->
@@ -43,11 +43,10 @@
 
                 </div>
             </ng-template>
-            <form action="" class="input backgroundDark">
                 <app-uiform (submitValue)="playerChoice($event)" [locationOptions]="location.moveOptions"
-                    [CombatBool]="CombatBool" [combatOptions]='["A", "E", "D", "F"]' [character]="character"></app-uiform>
+                    [CombatBool]="CombatBool" (CombatOver)="battleEnd($event)" [character]="character" 
+                    [battleEndText]="battleEndText" [battleOngoing]="battleOngoing" (CombatEnd)="combatFinish()"></app-uiform>
 
-            </form>
         </div>
 
     </div>

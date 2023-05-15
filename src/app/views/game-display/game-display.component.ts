@@ -97,6 +97,21 @@ export class GameDisplayComponent {
     }
   }
 
+  public battleEnd($BattleOver:boolean) {
+    if ($BattleOver == false) {
+      this.battleOngoing = false;
+      if (this.character.currentHP > 0 && this.character.fleeing == false) {
+        this.battleEndText = "You won!"
+      }
+      else if (this.character.currentHP > 0 && this.character.fleeing == true) {
+        this.battleEndText = "You escaped"
+      }
+      else {
+        this.battleEndText = "Return to Town"
+      }
+  }
+}
+
 
   /**
    * Takes the user input as a string and performs conditional checks to determine the next step.

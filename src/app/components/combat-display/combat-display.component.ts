@@ -104,20 +104,7 @@ export class CombatDisplayComponent {
     this.CombatEnd.emit(true);
   }
 
-  public useAbility(ability:Ability): void {
-    this.messageService.add(`${ability.effect} ${ability.name}`)
-    if (ability.effect != "damage" && ability.effect != "debuff") {
-      // this.messageService.add("healing")
-      this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.playerCharacter, 
-        ability.effect, ability.affectedAttribute,
-        ability.modifier,ability.duration)
-    }
-    else {
-      this.combatService.performAbility(this.combatService.playerCharacter, this.combatService.NPCEnemy, 
-        ability.effect, ability.affectedAttribute,
-        ability.modifier,ability.duration)
-    }
-  }
+
 
   constructor(public messageService: MessageService, private combatService: CombatControllerService) {}
 }
