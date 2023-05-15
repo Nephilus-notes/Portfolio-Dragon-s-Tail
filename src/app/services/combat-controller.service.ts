@@ -77,24 +77,6 @@ export class CombatControllerService {
   }
 
   /**
-   * LEGACY an ability the player can use to briefly boost their armor
-   * @param self the character performing the action
-   */
-  public defend(self: Character): void {
-    self.armorValue += 2
-    this.messageService.add(`${self.name} focuses on defense`, true)
-  }
-
-  /**
-   * LEGACY an ability the player can use to briefly boost their evasion
-   * @param self the character performing the action
-   */
-  public evade(self: Character): void {
-    self.evadePercentage += 2
-    this.messageService.add(`${self.name} focuses on evasion`, true)
-  }
-
-  /**
    * an ability used to try to escape combat.
    * @param self the player or non player character using the ability
    * @param target The enemy whose speed is being compared
@@ -286,7 +268,7 @@ export class CombatControllerService {
       }
       if (affectedAttribute == "damageValue") {
         if (modifier == 0) {
-          self.damageValue += 2
+          self.damageValue = self.damageValue + 2
         } 
         else {
 
@@ -295,19 +277,19 @@ export class CombatControllerService {
       } 
       else if (affectedAttribute == "resistValue") {
         if (modifier == 0) {
-          self.resistValue += 2
+          self.resistValue = self.resistValue + 2
         } 
         else {
-          self.resistValue += Math.floor(self.resistValue) * modifier;
+          self.resistValue = self.resistValue + Math.floor(self.resistValue) * modifier;
         }
       }
       else if (affectedAttribute == "defending") {
         this.messageService.add(`${affectedAttribute}`)
         if (modifier == 0) {
-          self.armorValue += 2
+          self.armorValue = self.armorValue + 2
         } 
         else {
-          self.armorValue += Math.floor(self.armorValue) * modifier;
+          self.armorValue = self.armorValue + Math.floor(self.armorValue) * modifier;
         }
         self.defended = true;
         self.defendingRounds = duration > 2 ? duration : 2
@@ -316,11 +298,11 @@ export class CombatControllerService {
         this.messageService.add(`${affectedAttribute}`)
         if (modifier == 0) {
           this.messageService.add('modifer is 0, boosting by 4')
-          self.evadePercentage += 4
+          self.evadePercentage = self.evadePercentage + 4
         }
         else {
           this.messageService.add('modifer is not 0, boosting by other')
-          self.evadePercentage += Math.floor(self.evadePercentage) * modifier;
+          self.evadePercentage = self.evadePercentage + Math.floor(self.evadePercentage) * modifier;
         }
         self.defended = true;
         self.defendingRounds = duration > 2 ? duration : 2
@@ -328,20 +310,20 @@ export class CombatControllerService {
       else if (affectedAttribute == "focusing") {
         this.messageService.add(`${affectedAttribute}`)
         if (modifier == 0) {
-          self.attackValue += 2
+          self.attackValue = self.attackValue + 2
         } 
         else {
-          self.attackValue += Math.floor(self.attackValue) * modifier;
+          self.attackValue = self.attackValue + Math.floor(self.attackValue) * modifier;
         }
         self.defended = true;
         self.defendingRounds = duration > 2 ? duration : 2
       }
       else if (affectedAttribute == "magicValue") {
         if (modifier == 0) {
-          self.magicValue += 2
+          self.magicValue = self.magicValue + 2
         } 
         else {
-          self.magicValue += Math.floor(self.magicValue) * modifier;
+          self.magicValue = self.magicValue + Math.floor(self.magicValue) * modifier;
         }
       }
     }

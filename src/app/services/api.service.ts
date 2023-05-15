@@ -239,6 +239,14 @@ export class ApiService {
   *
   *
   */
+/**
+ * A wrapper to get and cache a location object in one function call
+ */
+  public goToNewLocation(loc_id:string) {
+    this.getNewLocation(loc_id).subscribe(l => {
+      this.saveLocation(l);
+    })
+  }
   public loadLocation(): Location {
     this.messageService.add('location Loaded')
     return this.locationCache

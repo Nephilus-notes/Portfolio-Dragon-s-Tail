@@ -136,15 +136,15 @@ export class GameDisplayComponent {
       this.GameStateSwitch = 2;
       this.messageService.add('got to Inn check');
     } else if (submitString === 'C') {
-      this.exploring = this.checkPlayerExploration();
-      this.messageService.add(`exploring ${this.exploring} vs pcexploring ${this.checkPlayerExploration()}`)
+      // this.exploring = this.checkPlayerExploration();
+      // this.messageService.add(`exploring ${this.exploring} vs pcexploring ${this.checkPlayerExploration()}`)
       this.messageService.add(`playerExplored ${ this.exploring}`);
       if ( this.exploring < 3) {
          this.exploring++;
-        this.modifyPlayerExploration( this.exploring);
+        // this.modifyPlayerExploration( this.exploring);
         this.startCombat();
       } else {
-        this.modifyPlayerExploration(Math.floor( this.exploring / 2));
+        // this.modifyPlayerExploration(Math.floor( this.exploring / 2));
         console.warn(`exploring ${this.exploring}`)
         this.changeLocation(this.location.next);
       }
@@ -165,87 +165,6 @@ export class GameDisplayComponent {
         this.location = location;
         // console.warn(location)
       });
-  }
-/**
- * A switch that checks how much knowledge the player has of the area they are in.
- * 
- * Uses the location ID to determine which character attribute to return
- * @returns A number representing the character's knowledge of the area.
- */
-  checkPlayerExploration(): number {
-    switch (this.location.id) {
-      case 'U': {
-        return this.character.thagragsHopeExplored;
-      }
-      case 'W': {
-        return this.character.webOfDepthsExplored;
-      }
-      case 'G': {
-        return this.character.graithsGrottoExplored;
-      }
-      case 'Q': {
-        return this.character.graithQueensLairExplored;
-      }
-      case 'S': {
-        return this.character.kratabsFollyExplored;
-      }
-      case 'D': {
-        return this.character.drippingDeathExplored;
-      }
-      case 'P': {
-        return this.character.playersRespiteExplored;
-      }
-      case 'TTD': {
-        return this.character.tailOfTheDragonExplored;
-      }
-      default: {
-        return 0;
-      }
-    }
-  }
-/**
- * Increments the player's exploration valued for the current location
- * @param newExploration The new exploration value
- */
-  modifyPlayerExploration(newExploration: number): void {
-    switch (this.location.id) {
-      case 'U': {
-        this.character.thagragsHopeExplored = newExploration;
-        break;
-      }
-      case 'W': {
-        this.character.webOfDepthsExplored = newExploration;
-        break;
-      }
-      case 'G': {
-        this.character.graithsGrottoExplored = newExploration;
-        break;
-      }
-      case 'Q': {
-        this.character.graithQueensLairExplored = newExploration;
-        break;
-      }
-      case 'S': {
-        this.character.kratabsFollyExplored = newExploration;
-        break;
-      }
-      case 'D': {
-        this.character.drippingDeathExplored = newExploration;
-        break;
-      }
-      case 'P': {
-        this.character.playersRespiteExplored = newExploration;
-        break;
-      }
-      case 'TTD': {
-        this.character.tailOfTheDragonExplored = newExploration;
-        break;
-      }
-      default: {
-        this.messageService.add(this.location.id);
-        this.messageService.add('Failed to change exploration number');
-      }
-    }
   }
 
   /**

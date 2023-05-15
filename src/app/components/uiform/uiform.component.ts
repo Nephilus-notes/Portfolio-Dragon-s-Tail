@@ -9,6 +9,7 @@ import { Ability } from 'src/app/models/ability';
 import { NavLocation } from 'src/app/models/mapNavLocation';
 import { ApiService } from 'src/app/services/api.service';
 import { Location } from 'src/app/models/mapLocation';
+import { ExplorationService } from 'src/app/services/exploration.service';
 
 // function optionValidator(control: FormControl) {
 //   let submitString = control.value
@@ -22,7 +23,8 @@ import { Location } from 'src/app/models/mapLocation';
 })
 export class UIformComponent {
 
-  constructor (private messageService: MessageService, private combatService: CombatControllerService, private apiService: ApiService) { }
+  constructor (private messageService: MessageService, private combatService: CombatControllerService, 
+    private apiService: ApiService, private explorationService:ExplorationService) { }
   submitString = '';
   @Input() battleOngoing!: boolean;
   @Input() battleEndText!:string;
@@ -39,7 +41,9 @@ export class UIformComponent {
 
   @Input()character!: Character;
 
-
+/**
+ * this is legacy
+ */
   @Output() submitValue = new EventEmitter<string|null>();
   public onSubmit(): void {
     // console.warn('clicking button')
@@ -47,19 +51,43 @@ export class UIformComponent {
     this.Control.reset()
   }
 
+  /**
+   * An onClick event emitter that uses the api service to get a new location, 
+   * caches it, and passes it to the game display component
+   */
   @Output() newLocation = new EventEmitter<Location>();
   public changeLocation(locationPKID:string) {
     this.apiService.getNewLocation(locationPKID).subscribe(loc => {
-
+      this.apiService.saveLocation(loc)
       this.newLocation.emit(loc)
       console.warn(loc)
     })
   }
-
+/**
+ * An onClick event emitter that starts a combat round with the player's 
+ * selected ability as its parameter
+ */
 @Output() CombatOver = new EventEmitter();
 public startRound(ability: Ability): void {
   this.CombatOver.emit(this.combatService.round(ability))
   this.messageService.add(`${this.battleOngoing}`)
+}
+
+
+/**
+ * An onClick event that starts a set of exploration logic
+ * 
+ */
+@Output() startCombat = new EventEmitter();
+public exploreStart() {
+  var explorationSuccessful = this.explorationService.explorationLogic(this.character, this.location)
+  if (explorationSuccessful == true) {
+    this.changeLocation(this.location.next);
+  }
+  else {
+    // start combat using an emision to get the NPCS ready
+    this.startCombat.emit(true)
+  }
 }
 /** 
  * Probably don't need this, it's on combatDisplay.  Maybe should move here someday though
