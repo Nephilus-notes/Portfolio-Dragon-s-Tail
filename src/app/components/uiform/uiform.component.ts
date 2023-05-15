@@ -31,7 +31,7 @@ export class UIformComponent {
     Validators.required,
     // optionValidator
   ]);
-  @Input() locationOptions!: Array<NavLocation>;
+  @Input() location!: Location;
   @Input() CombatBool!: boolean;
 
   @Input()combatOptions!: Array<string>;
@@ -69,7 +69,7 @@ public startRound(ability: Ability): void {
     this.CombatEnd.emit(true);
   }
  
-  ngOnInit() {
-    console.warn(this.locationOptions)
-  }
+  // ngOnInit() {
+  //   console.warn(this.locationOptions)
+  // }
 }

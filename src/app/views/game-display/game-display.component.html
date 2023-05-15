@@ -33,7 +33,7 @@
         </div>
 
     
-                <app-uiform *ngIf="location.id != SG" (submitValue)="playerChoice($event)" [locationOptions]="location.moveOptions"
+                <app-uiform *ngIf="location.id != SG" (submitValue)="playerChoice($event)" [location]="location"
                     [CombatBool]="CombatBool" (CombatOver)="battleEnd($event)" [character]="character" 
                     [battleEndText]="battleEndText" [battleOngoing]="battleOngoing" (CombatEnd)="combatFinish()"
                     (newLocation)="loadLocation($event)"></app-uiform>
