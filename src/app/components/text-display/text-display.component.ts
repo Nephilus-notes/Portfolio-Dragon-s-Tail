@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Template } from 'src/app/models/template';
 import { Character } from 'src/app/models/character';
 import { ExplorationService } from 'src/app/services/exploration.service';
+import { Ability } from 'src/app/models/ability';
 
 
 @Component({
@@ -24,8 +25,10 @@ export class TextDisplayComponent implements OnInit{
   templates!: Array<Template>;
   selectedTemplate?: Template;
 
+  newCharacterAbilities!: Array<Ability>;
 
-  
+
+
   @Output() submitValue = new EventEmitter<string|null>();
   public incrementState(): void {
     var locationState:number = this.explorationService.exploring
@@ -51,16 +54,29 @@ export class TextDisplayComponent implements OnInit{
 
   @Output() loadingCharacter = new EventEmitter<boolean>();
   public chooseCharacter(template:Template) {
-    var character = new Character(template.name, template.strength, template.dexterity, 
-      template.constitution, template.intelligence, [template.ability]);
-      this.apiService.cacheCharacter(character);
-      this.incrementState();
-      this.selectedTemplate = undefined;
-      this.loadingCharacter.emit(true)
+
+      var character = new Character(template.name, template.strength, template.dexterity, 
+        template.constitution, template.intelligence, [template.ability]);
+
+        this.apiService.getSingleAbility(1).subscribe(a => {
+          character.abilities.unshift(a)
+
+          this.apiService.getSingleAbility(2).subscribe(a=> {
+            character.abilities.push(a)
+
+            this.apiService.cacheCharacter(character);
+            this.incrementState();
+            this.selectedTemplate = undefined;
+            this.loadingCharacter.emit(true)
+          })
+        })
+
   }
+
 
 ngOnInit(): void {
     this.templates = this.apiService.loadTemplates()
+
 }
 
 }

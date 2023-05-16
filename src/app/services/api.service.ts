@@ -12,6 +12,7 @@ import { Character } from '../models/character';
 import { NPC } from '../models/npc';
 import { Template } from '../models/template';
 import { Location } from '../models/mapLocation';
+import { Ability } from '../models/ability';
 
 @Injectable({
   providedIn: 'root'
@@ -286,4 +287,16 @@ export class ApiService {
     this.messageService.add('API: got single template')
     return template;
   };
+
+  public getSingleAbility(abilityID:number): Observable<Ability> {
+    return this.http.get<Ability>(`${environment.abilityURL}`)
+  }
+
+//   public getDefaultAbilities(): Array<Observable<Ability>> {
+
+//     var abilities <Observable<Ability>>;
+//     this.getSingleAbility(1).subscribe(a => abilities[0] = a)
+//     this.getSingleAbility(2).subscribe(a => abilities[1] = a)
+// return abilities
+//   }
   }
