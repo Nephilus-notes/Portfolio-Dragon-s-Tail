@@ -54,6 +54,7 @@ body {
 
 .inline {
     display: inline-block;
+    margin-inline: auto;
 }
 
 .gap-5 {
@@ -62,4 +63,11 @@ body {
 
 .space-evenly {
     justify-content: space-evenly;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+.space-around {
+    justify-content: space-around;
 }

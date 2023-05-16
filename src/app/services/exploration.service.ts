@@ -20,13 +20,13 @@ exploring:number = 0;
   public explorationLogic(character:Character, location: Location): boolean {
     this.exploring= this.checkExploration(character,location);
     if (this.exploring < 3) {
-      this.exploring ++;
-      this.modifyPlayerExploration(character, location, this.exploring);
+      // this.exploring ++;
+      this.modifyPlayerExploration(character, location);
       // start combat 
       return false
     }
     else {
-      this.modifyPlayerExploration(character, location, 2)
+      this.modifyPlayerExploration(character, location, false)
       this.exploring = 0;
       return true;  
     }
@@ -72,38 +72,44 @@ exploring:number = 0;
  * Increments the player's exploration valued for the current location
  * @param newExploration The new exploration value
  */
-  modifyPlayerExploration(character:Character, location:Location, newExploration: number): void {
+  modifyPlayerExploration(character:Character, location:Location, increment:boolean=true): void {
+    var num!:number;
+    if (increment == true) {
+      num = 1
+    } else {
+      num = -1
+    }
     switch (location.id) {
       case 'U': {
-        character.thagragsHopeExplored = newExploration;
+        character.thagragsHopeExplored += num;
         break;
       }
       case 'W': {
-        character.webOfDepthsExplored = newExploration;
+        character.webOfDepthsExplored += num;
         break;
       }
       case 'G': {
-        character.graithsGrottoExplored = newExploration;
+        character.graithsGrottoExplored += num;
         break;
       }
       case 'Q': {
-        character.graithQueensLairExplored = newExploration;
+        character.graithQueensLairExplored += num;
         break;
       }
       case 'S': {
-        character.kratabsFollyExplored = newExploration;
+        character.kratabsFollyExplored += num;
         break;
       }
       case 'D': {
-        character.drippingDeathExplored = newExploration;
+        character.drippingDeathExplored += num;
         break;
       }
       case 'P': {
-        character.playersRespiteExplored = newExploration;
+        character.playersRespiteExplored += num;
         break;
       }
       case 'TTD': {
-        character.tailOfTheDragonExplored = newExploration;
+        character.tailOfTheDragonExplored += num;
         break;
       }
       default: {
@@ -125,5 +131,14 @@ exploring:number = 0;
 
   public resetExploring(): void {
     this.exploring = 0;
+  }
+
+  public setExploring(playerExplorationNumber:number): void {
+    if (playerExplorationNumber > 2) {
+      this.exploring = 2;
+    }
+    else {
+      this.exploring = playerExplorationNumber;
+    }
   }
 }

@@ -188,6 +188,7 @@ export class GameDisplayComponent {
   }
 /**
  * A method that links into the character service to retrieve an enemy for combat.
+ * Once the enemy is retrieved it sets the combatboolean to true to enter combat
  * 
  * Currently a hard code, but will change to dynamic api call with a primary key id parameter
  */
@@ -204,9 +205,9 @@ export class GameDisplayComponent {
         enemy.abilities,
         enemy.level
         );
-      this.messageService.add(`got npc `);
-      this.CombatBool = true;
+      // this.messageService.add(`got npc `);
       this.combatService.cacheNPC(this.enemy)
+      this.CombatBool = true;
     });
   }
 /**
@@ -279,11 +280,11 @@ export class GameDisplayComponent {
   startCombat() {
     this.generateNPC();
     if (!this.combatService.combatPCExists()) {
-      this.messageService.add(`caching for combat`)
+      // this.messageService.add(`caching for combat`)
       this.combatService.cachePC(this.character)
     }
     else {
-      this.messageService.add(`no cache needed`)
+      // this.messageService.add(`no cache needed`)
     }
   }
 /**
@@ -294,29 +295,30 @@ export class GameDisplayComponent {
  */
   private generateNPC(): void {
     var random = Math.random() * 1000;
+    var newNPCID!: number;
     if (random <= 500) {
-      this.messageService.add('common');
+      // this.messageService.add('common');
       // Grab the common enemy from the db
-      return this.getNPC(this.location.commonNPC);
+      newNPCID = this.location.commonNPC;
 
     } else if (random > 500 && random <= 850) {
-      this.messageService.add('uncommon');
+      // this.messageService.add('uncommon');
       // Grab the uncommon enemy by passing in its id
-       return this.getNPC(this.location.uncommonNPC);
+       newNPCID = this.location.uncommonNPC;
     } else if (random > 850 && random <= 995) {
-      this.messageService.add('rare');
+      // this.messageService.add('rare');
       // call getNPC(this.location.rareNPC)
-       return this.getNPC(this.location.rareNPC);
+       newNPCID = this.location.rareNPC;
     } else if (random > 995 && random <= 1000) {
-      this.messageService.add('secret');
+      // this.messageService.add('secret');
       // getNPC(this.location.secretNPC)
-       return this.getNPC(this.location.secretNPC);
+       newNPCID = this.location.secretNPC;
     } else {
       console.warn('shit happened. Check your math');
       // get a common enemy.
     }
     // This runs regardless of case right now.
-    // this.getNPC();
+     this.getNPC(newNPCID);
   }
   saveGame(locationID:string) {
   

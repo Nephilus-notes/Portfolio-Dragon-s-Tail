@@ -24,32 +24,19 @@ import { ExplorationService } from 'src/app/services/exploration.service';
 export class UIformComponent {
 
   constructor (private messageService: MessageService, private combatService: CombatControllerService, 
-    private apiService: ApiService, private explorationService:ExplorationService) { }
+    private apiService: ApiService, public explorationService:ExplorationService) { }
   submitString = '';
   @Input() battleOngoing!: boolean;
   @Input() battleEndText!:string;
 
-  Control = new FormControl('', [
-    Validators.required,
-    // optionValidator
-  ]);
+
   @Input() location!: Location;
   @Input() CombatBool!: boolean;
 
-  @Input()combatOptions!: Array<string>;
+  // @Input()combatOptions!: Array<string>;
   options!: Array<string>;
 
   @Input()character!: Character;
-
-/**
- * this is legacy
- */
-  @Output() submitValue = new EventEmitter<string|null>();
-  public onSubmit(): void {
-    // console.warn('clicking button')
-    this.submitValue.emit(this.Control.value?.toUpperCase())
-    this.Control.reset()
-  }
 
   @Output() gameStateChange = new EventEmitter<number>();
   public changeState(location_id:string) {
@@ -78,7 +65,8 @@ export class UIformComponent {
     this.apiService.getNewLocation(locationPKID).subscribe(loc => {
       this.apiService.saveLocation(loc)
       this.newLocation.emit(loc)
-      console.warn(loc)
+      // console.warn(loc)
+      this.explorationService.resetExploring()
     })
     this.gameStateChange.emit(0)
   }
@@ -108,12 +96,17 @@ public exploreStart() {
     this.startCombat.emit(true)
   }
 }
+
+public goHunting(): void {
+  this.startCombat.emit(true)
+}
 /** 
  * Probably don't need this, it's on combatDisplay.  Maybe should move here someday though
  */
 @Output() CombatEnd = new EventEmitter();
   endCombat(): void {
     this.CombatEnd.emit(true);
+    this.explorationService.setExploring(this.explorationService.checkExploration(this.character, this.location))
   }
  
   // ngOnInit() {

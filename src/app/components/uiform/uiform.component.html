@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container flex flex-wrap gap-5 space-between">
 
     <div *ngIf="!CombatBool; else inCombat" class="flex flex-wrap gap-5 space-evenly">
         <div class="inline" *ngFor="let location of location.moveOptions; index as i;">
@@ -6,6 +6,8 @@
             (click)="changeLocation(location.id)"
             *ngIf="battleOngoing == true;"></app-game-button>
         </div>
+        <app-game-button *ngIf="location.next != null && explorationService.exploring == 2" text="Hunt" (click)="exploreStart()"
+        class="inline"></app-game-button>
         <app-game-button *ngIf="location.next != null && location.next != 'S'" text="Explore" (click)="exploreStart()"
         class="inline"></app-game-button>
         <app-game-button *ngIf="location.next != null && location.next == 'S'" text="Shop" (click)="changeState(location.id)"
@@ -18,7 +20,7 @@
     (click)="endCombat()" [text]="battleEndText"></app-game-button>
     
 <!-- </div *ngIf="battleOngoing == true" > -->
-<div class="inline" *ngFor="let ability of character.abilities; index as i;">
+<div class="inline space-evenly" *ngFor="let ability of character.abilities; index as i;">
         <app-game-button class="inline" text="{{ability.name}}" (click)="startRound(ability)"
         *ngIf="battleOngoing == true;"></app-game-button>
     </div>
