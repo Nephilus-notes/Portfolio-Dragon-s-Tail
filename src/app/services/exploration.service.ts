@@ -134,8 +134,8 @@ exploring:number = 0;
   }
 
   public setExploring(playerExplorationNumber:number): void {
-    if (playerExplorationNumber > 2) {
-      this.exploring = 2;
+    if (playerExplorationNumber >= 3) {
+      this.exploring = 3;
     }
     else {
       this.exploring = playerExplorationNumber;

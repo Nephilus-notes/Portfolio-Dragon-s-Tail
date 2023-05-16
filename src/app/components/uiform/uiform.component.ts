@@ -66,9 +66,9 @@ export class UIformComponent {
       this.apiService.saveLocation(loc)
       this.newLocation.emit(loc)
       // console.warn(loc)
+      this.gameStateChange.emit(0)
       this.explorationService.resetExploring()
     })
-    this.gameStateChange.emit(0)
   }
 /**
  * An onClick event emitter that starts a combat round with the player's 
@@ -99,6 +99,7 @@ public exploreStart() {
 
 public goHunting(): void {
   this.startCombat.emit(true)
+  this.messageService.add("going hunting")
 }
 /** 
  * Probably don't need this, it's on combatDisplay.  Maybe should move here someday though

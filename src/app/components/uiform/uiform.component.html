@@ -6,7 +6,7 @@
             (click)="changeLocation(location.id)"
             *ngIf="battleOngoing == true;"></app-game-button>
         </div>
-        <app-game-button *ngIf="location.next != null && explorationService.exploring == 2" text="Hunt" (click)="exploreStart()"
+        <app-game-button *ngIf="location.next != null && explorationService.exploring == 3" text="Hunt" (click)="goHunting()"
         class="inline"></app-game-button>
         <app-game-button *ngIf="location.next != null && location.next != 'S'" text="Explore" (click)="exploreStart()"
         class="inline"></app-game-button>

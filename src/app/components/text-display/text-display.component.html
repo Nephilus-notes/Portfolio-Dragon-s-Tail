@@ -13,7 +13,7 @@
             still first - {{explorationService.exploring}}
             <app-game-button *ngIf="location.id==SG" (click)="incrementState()" [text]="placement"></app-game-button>
         </div>
-        <div *ngIf="explorationService.exploring==1">
+        <div *ngIf="explorationService.exploring > 0 && explorationService.exploring < 3">
 
             {{location.middleText}}
             We in the middle - {{explorationService.exploring}}
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="explorationService.exploring==2">
+        <div *ngIf="explorationService.exploring == 3">
             
             {{location.exitText}}
 
