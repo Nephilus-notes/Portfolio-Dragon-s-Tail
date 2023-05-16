@@ -291,11 +291,7 @@ export class ApiService {
     return this.http.get<Ability>(`${environment.abilityURL}${abilityID}`)
   }
 
-//   public getDefaultAbilities(): Array<Observable<Ability>> {
-
-//     var abilities <Observable<Ability>>;
-//     this.getSingleAbility(1).subscribe(a => abilities[0] = a)
-//     this.getSingleAbility(2).subscribe(a => abilities[1] = a)
-// return abilities
-//   }
+  public getAllAbilities(): Observable<Array<Ability>> {
+    return this.http.get<Array<Ability>>(`${environment.abilityURL}`)
+  }
   }

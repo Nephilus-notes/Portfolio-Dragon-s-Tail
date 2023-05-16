@@ -27,7 +27,7 @@
 
     <div *ngIf="learnBool;" class="centerDisplay bordered">
         trying to learn
-
+        <app-ability-learn [character]="character" [learnBool]="learnBool" (ReturnToMainInn)="backClick()"></app-ability-learn>
     </div>
 
 </ng-template>
