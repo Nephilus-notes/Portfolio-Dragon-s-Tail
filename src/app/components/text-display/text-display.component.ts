@@ -38,6 +38,7 @@ export class TextDisplayComponent implements OnInit{
     else if (this.location.id == "SG") {
       this.apiService.loadCharacter();
       this.submitValue.emit("T");
+      this.explorationService.resetExploring();
     } 
     else {
       this.explorationService.resetExploring();

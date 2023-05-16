@@ -1,38 +1,36 @@
 <div class="textDisplay">
-    <div *ngIf="location.id!=SG">
+    <!-- <div *ngIf="location.id!=SG">
 
         {{location.enterText}}
-    </div>
-    <!-- <div *ngIf="exploring > 0 && exploring < 3">
+    </div> -->
 
-        {{location.middleText}}
-</div>
-<div *ngIf="exploring >= 3">
 
-    {{location.exitText}}
-</div> -->
-
-    <div *ngIf="location.id == SG && !selectedTemplate">
+    <div *ngIf="!selectedTemplate">
 
         <div *ngIf="explorationService.exploring==0">
 
             {{location.enterText}}
-            <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
+            still first - {{explorationService.exploring}}
+            <app-game-button *ngIf="location.id==SG" (click)="incrementState()" [text]="placement"></app-game-button>
         </div>
-        <div *ngIf="explorationService.exploring==1 || exploring > 0 && exploring < 3">
+        <div *ngIf="explorationService.exploring==1">
 
             {{location.middleText}}
+            We in the middle - {{explorationService.exploring}}
 
             <div *ngIf="templates">
                 <div *ngFor="let template of templates">
-                    <app-game-button [text]="template.job" class="template" (click)="onSelect(template)"></app-game-button>
+                    <app-game-button *ngIf="location.id==SG" [text]="template.job" class="template" (click)="onSelect(template)"></app-game-button>
                 </div>
             </div>
         </div>
-        <div *ngIf="explorationService.exploring==2 || exploring >= 3">
+        <div *ngIf="explorationService.exploring==2">
             
             {{location.exitText}}
-            <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
+
+            ends - {{explorationService.exploring}}
+            <app-game-button *ngIf="location.id==SG" (click)="incrementState()" [text]="placement"></app-game-button>
+            <!-- <app-game-button *ngIf="location.id!=SG" (click)="incrementState()" [text]="placement"></app-game-button> -->
         </div>
     </div>
 
