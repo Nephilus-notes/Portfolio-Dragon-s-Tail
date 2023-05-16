@@ -14,7 +14,7 @@ export class BackpackDisplayComponent {
   selectedItem?: Item;
   selectedItemUse!: string;
   useItem!: string;
-  backpacklocation!: number;
+  backpacklocation?: number;
   /**
    * On click event from the browser: 
    * SelectedItem is assigned to the item parameter, 
@@ -28,13 +28,13 @@ export class BackpackDisplayComponent {
    * @param item - The Item object clicked in the browser 
    * @param i - The location in the backpack array of the item
    */
-  public onSelect(item:Item, i:number): void {
+  public onSelect(item:Item, i:number|null=null): void {
     if (this.selectedItem === item) {
       this.selectedItem = undefined;
       this.messageService.add('item deselected')
     } else {
       this.selectedItem = item;
-      this.backpacklocation = i;
+      this.backpacklocation = i!;
       this.messageService.add('item selected')
       switch(this.selectedItem.slot) {
         case "hand": {
@@ -72,7 +72,7 @@ export class BackpackDisplayComponent {
           if (this.character.currentHP > this.character.maxHP) {
             this.character.currentHP = this.character.maxHP;
             this.messageService.add("potion used")
-            this.character.items.splice(this.backpacklocation, 1);
+            this.character.items.splice(this.backpacklocation!, 1);
             // this.saveCharacter();
           }
         }
@@ -93,11 +93,11 @@ export class BackpackDisplayComponent {
 
             if (temp_item) 
             {
-            this.character.items[this.backpacklocation] = temp_item;
+            this.character.items[this.backpacklocation!] = temp_item;
           } 
           else 
           {
-            this.character.items.splice(this.backpacklocation, 1);
+            this.character.items.splice(this.backpacklocation!, 1);
           }
           this.character.resetCombatStats()
 
@@ -115,11 +115,11 @@ export class BackpackDisplayComponent {
 
             if (temp_item) 
             {
-            this.character.items[this.backpacklocation] = temp_item;
+            this.character.items[this.backpacklocation!] = temp_item;
           } 
           else 
           {
-            this.character.items.splice(this.backpacklocation, 1);
+            this.character.items.splice(this.backpacklocation!, 1);
           }
           this.character.resetCombatStats()
           break;
@@ -136,11 +136,11 @@ export class BackpackDisplayComponent {
 
             if (temp_item) 
             {
-            this.character.items[this.backpacklocation] = temp_item;
+            this.character.items[this.backpacklocation!] = temp_item;
           } 
           else 
           {
-            this.character.items.splice(this.backpacklocation, 1);
+            this.character.items.splice(this.backpacklocation!, 1);
           }
           break;
           }
@@ -156,15 +156,22 @@ export class BackpackDisplayComponent {
     this.selectedItem = undefined;
     this.backpacklocation = 0;
   }
+public deselectItem(): void {
+  this.selectedItem = undefined;
+}
 
-  // private resetCharacterAttributes(): void {
-  //   this.character.armorValue = this.character.armor;
-  //   this.character.damageValue = this.character.equippedItems.hand?.itemStat ?
-  //       this.character.equippedItems.hand?.itemStat + Math.floor(this.character.strength / 2) : Math.floor(this.character.strength / 2);
-  //   this.character.evadePercentage = this.character.dexterity;
-  //   this.character.resistValue = this.character.resistance;
-  //   this.character.attackValue = this.character.intelligence;
-  // }
+public unEquip(item:Item): void {
+  this.character.items.push(item);
+  if (item.slot == "head") {
+    this.character.equippedItems.head = null;
+  }
+  if (item.slot == "body") {
+    this.character.equippedItems.body = null;
+  }
+  if (item.slot == "hand") {
+    this.character.equippedItems.hand = null;
+  }
+}
 
   constructor(private messageService: MessageService) {}
 
