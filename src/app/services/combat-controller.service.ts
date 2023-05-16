@@ -83,6 +83,7 @@ export class CombatControllerService {
    * @returns A boolean. true = self is faster and will leave combat. false = the enemy is faster and self cannot escape
    */
   public flee(self: Character|NPC, target: Character|NPC): void {
+
     if (self.dexterity > target.dexterity) {
       this.messageService.add(`${self.name} has fled!`, true);
       self.fleeingRounds = 0;
