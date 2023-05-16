@@ -5,6 +5,7 @@ import { Location } from '../../models/mapLocation';
 import { ApiService } from 'src/app/services/api.service';
 import { Template } from 'src/app/models/template';
 import { Character } from 'src/app/models/character';
+import { ExplorationService } from 'src/app/services/exploration.service';
 
 
 @Component({
@@ -13,29 +14,31 @@ import { Character } from 'src/app/models/character';
   styleUrls: ['./text-display.component.css']
 })
 export class TextDisplayComponent implements OnInit{
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, public explorationService: ExplorationService) {}
 
   @Input() location!: Location;
   @Input() exploring!: number;
   SG: string = "SG";
   placement:string = "enter";
-  locationState: number = 0;
+  // locationState: number = 0;
   templates!: Array<Template>;
   selectedTemplate?: Template;
 
+
+  
   @Output() submitValue = new EventEmitter<string|null>();
   public incrementState(): void {
-    if (this.locationState < 2) {
-      this.locationState += 1
+    var locationState:number = this.explorationService.exploring
+    if (locationState < 2) {
+      this.explorationService.incrementExploring()
     }
     else if (this.location.id == "SG") {
       this.apiService.loadCharacter();
       this.submitValue.emit("T");
     } 
     else {
-      this.locationState = 0;
+      this.explorationService.resetExploring();
     }
-    console.warn(this.locationState)
   }
 
   public onSelect(template: Template): void {

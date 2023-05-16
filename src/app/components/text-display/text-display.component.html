@@ -14,12 +14,12 @@
 
     <div *ngIf="location.id == SG && !selectedTemplate">
 
-        <div *ngIf="locationState==0">
+        <div *ngIf="explorationService.exploring==0">
 
             {{location.enterText}}
             <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
         </div>
-        <div *ngIf="locationState==1 || exploring > 0 && exploring < 3">
+        <div *ngIf="explorationService.exploring==1 || exploring > 0 && exploring < 3">
 
             {{location.middleText}}
 
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="locationState==2 || exploring >= 3">
+        <div *ngIf="explorationService.exploring==2 || exploring >= 3">
             
             {{location.exitText}}
             <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>

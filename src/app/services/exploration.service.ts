@@ -9,7 +9,7 @@ import { Location } from '../models/mapLocation';
 export class ExplorationService {
 
   constructor(private apiService: ApiService) { }
-exploring:number = 0
+exploring:number = 0;
 
 /**
  * returns a boolean based on whether to enter combat or move. returns false if combat is necessary
@@ -22,7 +22,6 @@ exploring:number = 0
     if (this.exploring < 3) {
       this.exploring ++;
       this.modifyPlayerExploration(character, location, this.exploring);
-
       // start combat 
       return false
     }
@@ -118,5 +117,13 @@ exploring:number = 0
       this.apiService.saveLocation(l);
       return l
     })
+  }
+  
+  public incrementExploring(): void {
+    this.exploring += 1;
+  };
+
+  public resetExploring(): void {
+    this.exploring = 0;
   }
 }
