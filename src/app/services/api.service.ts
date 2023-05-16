@@ -99,8 +99,7 @@ export class ApiService {
       id:undefined
       }
     let response = this.http.post<Character>(url, charDTO)
-    // console.warn(character)
-      // console.warn(charDTO)
+
     response.subscribe(r => {
       character.id = r.id;
       console.warn(r);
@@ -289,7 +288,7 @@ export class ApiService {
   };
 
   public getSingleAbility(abilityID:number): Observable<Ability> {
-    return this.http.get<Ability>(`${environment.abilityURL}`)
+    return this.http.get<Ability>(`${environment.abilityURL}${abilityID}`)
   }
 
 //   public getDefaultAbilities(): Array<Observable<Ability>> {
