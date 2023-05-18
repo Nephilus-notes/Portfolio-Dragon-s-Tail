@@ -25,7 +25,8 @@ export class Character extends Char {
         body:  null,
         hand:  null
       },
-      currentCurrency: number = 0
+      currentCurrency: number = 0,
+      lifetimeCurrency: number = 0
       ) {
         super(name, strength, dexterity, constitution, intelligence, abilities)
 
@@ -41,11 +42,12 @@ export class Character extends Char {
         this.equippedItems = equippedItems;
         this.resetDamageValue()
         this.currentCurrency = currentCurrency;
+        this.lifeTimeCurrency = lifetimeCurrency
         }
      
       currentLocation!: string;
       
-      lifeTimeCurrency: number = 0;
+      lifeTimeCurrency: number;
       items: Array<Item> = [];
      
     

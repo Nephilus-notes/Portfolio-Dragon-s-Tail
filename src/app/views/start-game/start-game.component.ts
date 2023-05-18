@@ -63,7 +63,8 @@ export class StartGameComponent {
         character.graithQueensLairExplored,
         character.items,
         character.equippedItems, 
-        character.currentCurrency
+        character.currentCurrency, 
+        character.lifeTimeCurrency
         )
       this.character = loadedCharacter
       loadedCharacter.id = charID
