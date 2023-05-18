@@ -89,6 +89,7 @@ export class StartGameComponent {
       this.Loading = false;
       this.startGame = true;
       this.newGameBoolean = true
+      this.saveService.saveIDCache = undefined;
     }
       
     )

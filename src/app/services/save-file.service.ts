@@ -18,7 +18,7 @@ import { Char } from '../models/char';
 export class SaveFileService {
   constructor(private messageService: MessageService, private http: HttpClient,
     private apiService: ApiService, public auth: AuthService) { }
-saveIDCache!:number;
+saveIDCache?:number;
   
 /**
  * Makes an API call to retrieve a savefile from the DB
