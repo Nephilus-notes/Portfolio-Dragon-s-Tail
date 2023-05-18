@@ -22,8 +22,8 @@
     <div>{{selectedItem.description}}</div>
     <div class="flex center">
       <app-game-button class="useItem" (click)="deselectItem()"text="Back"></app-game-button>
-      <app-game-button *ngIf="selectedItem != character.equippedItems.hand && selectedItem != character.equippedItems.body 
-      && selectedItem != character.equippedItems.head "
+      <app-game-button *ngIf="selectedItem == character.equippedItems.hand || selectedItem == character.equippedItems.body 
+      || selectedItem == character.equippedItems.head "
       class="useItem" (click)="unEquip(selectedItem)" text="Unequip"></app-game-button>
       <app-game-button *ngIf="character.items.includes(selectedItem)"
       class="useItem" (click)="onItemUse(useItem, selectedItem)" [text]="useItem"></app-game-button>
