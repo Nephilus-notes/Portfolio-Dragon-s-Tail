@@ -8,6 +8,8 @@
         </div>
         <app-game-button *ngIf="location.next != null && explorationService.exploring == 3" text="Hunt" (click)="goHunting()"
         class="inline"></app-game-button>
+        <app-game-button *ngIf="location.id == 'TTD' && explorationService.exploring == 0" text="Boss Fight" (click)="exploreStart()"
+        class="inline"></app-game-button>
         <app-game-button *ngIf="location.next != null && location.next != 'S'" text="Explore" (click)="exploreStart()"
         class="inline"></app-game-button>
         <app-game-button *ngIf="location.next != null && location.next == 'S'" text="Shop" (click)="changeState(location.id)"
