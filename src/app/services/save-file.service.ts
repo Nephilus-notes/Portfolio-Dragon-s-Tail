@@ -67,10 +67,10 @@ saveIDCache?:number;
         })
 
         response.subscribe(r => {
-          console.warn(r.id)
-          this.cacheSaveID(r.id)
+          // console.warn(r.id)
+          // this.cacheSaveID(r.id)
           console.warn(this.saveIDCache)
-          console.warn(r);
+          // console.warn(r);
         })
         })
       
