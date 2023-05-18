@@ -108,6 +108,7 @@ public goHunting(): void {
 @Output() CombatEnd = new EventEmitter();
   endCombat(): void {
     this.CombatEnd.emit(true);
+    this.combatService.roundOrder = undefined;
     this.explorationService.setExploring(this.explorationService.checkExploration(this.character, this.location));
     this.character.fleeing = false;
   }

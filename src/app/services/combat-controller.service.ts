@@ -46,7 +46,6 @@ export class CombatControllerService {
    */
   public attack(self:Character|NPC, target: Character|NPC, type:string="physical"): void {
     let attack: number = Math.random() * 100;
-
     if (attack === 100) {
       this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
       this.dealDamage(target, self.damageValue * 2)
@@ -172,6 +171,7 @@ export class CombatControllerService {
       if (this.roundOrder[i] == this.NPCEnemy) {
         enemy = this.playerCharacter;
         this.useAbility(this.roundOrder[i], enemy, this.roundOrder[i].abilities[0])
+        // this.messageService.add(`actor:${this.roundOrder[i].name}target:${enemy.name}ability:${this.roundOrder[i].abilities[0].name}`)
       } 
       else {
         enemy = this.NPCEnemy
@@ -183,18 +183,14 @@ export class CombatControllerService {
   }
 
   public useAbility(self: Character|NPC, enemy: Character|NPC, ability:Ability): void {
-    this.messageService.add(`${ability.effect} ${ability.name}`)
+    // this.messageService.add(`${ability.effect} ${ability.name}`)
     if (ability.effect != "damage" && ability.effect != "debuff") {
       // this.messageService.add("healing")
-      this.performAbility(self, self, 
-        ability.effect, ability.affectedAttribute,
-        ability.modifier,ability.duration)
+      this.performAbility(self, self, ability)
     }
     else {
       
-      this.performAbility(self, enemy, 
-        ability.effect, ability.affectedAttribute,
-        ability.modifier,ability.duration)
+      this.performAbility(self, enemy, ability)
     }
   }
 
@@ -222,109 +218,111 @@ export class CombatControllerService {
  * @param type Def="physical" - A string: "physical" and "magical" indicating which attribute should be 
  * used for damage (strength vs intelligence) against which defense (armor vs resistance)
  */
-  public performAbility(self: Character| NPC, target: Character| NPC, effect:string, affectedAttribute:string, modifier:number=1, duration:number=0, type:string="physical" ) {
-    this.messageService.add(`starting ability. Effect: ${effect}`)
-    if (effect == "damage") {
-      if (type == "physical") {
-        self.damageValue = self.damageValue * modifier;
+  public performAbility(self: Character| NPC, target: Character| NPC, ability:Ability ) {
+    this.messageService.add(`starting ability. Effect: ${ability.effect}`)
+    this.messageService.add(`${self.name} ${ability.description} ${target.name}`, true)
+
+    if (ability.effect == "damage") {
+      if (ability.type == "physical") {
+        self.damageValue = self.damageValue * ability.modifier;
         this.attack(self, target);
         self.resetDamageValue();
-      } else if (type == "magical") {
+      } else if (ability.type == "magical") {
         // attack but using magic against resistance
       }
-      if (affectedAttribute) {
-        this.debuff(target, affectedAttribute, duration);
+      if (ability.affectedAttribute) {
+        this.debuff(target, ability.affectedAttribute, ability.duration);
       }
     }
-    else if (effect == "heal") {
+    else if (ability.effect == "heal") {
       this.messageService.add(`
       self: ${self.name}, 
       mgval ${self.magicValue}, 
       dgval ${self.damageValue}, 
       mgval ${self.magicValue}, 
       mgval ${self.magicValue}, 
-      mod ${modifier}
+      mod ${ability.modifier}
       `)
-      this.messageService.add(`self: ${self.name}, mgval ${self.magicValue}, mod ${modifier}`)
-      this.heal(target, self.magicValue*modifier)
+      // this.messageService.add(`self: ${self.name}, mgval ${self.magicValue}, mod ${ability.modifier}`)
+      this.heal(target, self.magicValue*ability.modifier)
 
     }
 
-    if(effect == "flee") {
+    if(ability.effect == "flee") {
       this.flee(this.playerCharacter, this.NPCEnemy)
     }
-    if (effect == "buff") {
-      switch (affectedAttribute) {
+    if (ability.effect == "buff") {
+      switch (ability.affectedAttribute) {
         case "stoneArmored": {
-          self.armorValue += Math.floor(self.magicValue) * modifier;
+          self.armorValue += Math.floor(self.magicValue) * ability.modifier;
           self.stoneArmored = true;
-          self.stoneArmoredRounds = duration;
+          self.stoneArmoredRounds = ability.duration;
           break;
         }
         case "stoneFists": {
-          self.damageValue += Math.floor(self.magicValue) * modifier;
+          self.damageValue += Math.floor(self.magicValue) * ability.modifier;
           self.stoneFists = true
           break;
         }
       }
-      if (affectedAttribute == "damageValue") {
-        if (modifier == 0) {
+      if (ability.affectedAttribute == "damageValue") {
+        if (ability.modifier == 0) {
           self.damageValue = self.damageValue + 2
         } 
         else {
 
-          this.messageService.add(`adding damage`)
+          // this.messageService.add(`adding damage`)
         }
       } 
-      else if (affectedAttribute == "resistValue") {
-        if (modifier == 0) {
+      else if (ability.affectedAttribute == "resistValue") {
+        if (ability.modifier == 0) {
           self.resistValue = self.resistValue + 2
         } 
         else {
-          self.resistValue = self.resistValue + Math.floor(self.resistValue) * modifier;
+          self.resistValue = self.resistValue + Math.floor(self.resistValue) * ability.modifier;
         }
       }
-      else if (affectedAttribute == "defending") {
-        this.messageService.add(`${affectedAttribute}`)
-        if (modifier == 0) {
+      else if (ability.affectedAttribute == "defending") {
+        // this.messageService.add(`${ability.affectedAttribute}`)
+        if (ability.modifier == 0) {
           self.armorValue = self.armorValue + 2
         } 
         else {
-          self.armorValue = self.armorValue + Math.floor(self.armorValue) * modifier;
+          self.armorValue = self.armorValue + Math.floor(self.armorValue) * ability.modifier;
         }
         self.defended = true;
-        self.defendingRounds = duration > 2 ? duration : 2
+        self.defendingRounds = ability.duration > 2 ? ability.duration : 2
       }
-      else if (affectedAttribute == "evading") {
-        this.messageService.add(`${affectedAttribute}`)
-        if (modifier == 0) {
-          this.messageService.add('modifer is 0, boosting by 4')
+      else if (ability.affectedAttribute == "evading") {
+        // this.messageService.add(`${ability.affectedAttribute}`)
+        if (ability.modifier == 0) {
+          // this.messageService.add('modifer is 0, boosting by 4')
           self.evadePercentage = self.evadePercentage + 4
         }
         else {
-          this.messageService.add('modifer is not 0, boosting by other')
-          self.evadePercentage = self.evadePercentage + Math.floor(self.evadePercentage) * modifier;
+          // this.messageService.add('modifer is not 0, boosting by other')
+          self.evadePercentage = self.evadePercentage + Math.floor(self.evadePercentage) * ability.modifier;
         }
         self.defended = true;
-        self.defendingRounds = duration > 2 ? duration : 2
+        self.defendingRounds = ability.duration > 2 ? ability.duration : 2
       }
-      else if (affectedAttribute == "focusing") {
-        this.messageService.add(`${affectedAttribute}`)
-        if (modifier == 0) {
+      else if (ability.affectedAttribute == "focusing") {
+        // this.messageService.add(`${ability.affectedAttribute}`)
+        if (ability.modifier == 0) {
           self.attackValue = self.attackValue + 2
         } 
         else {
-          self.attackValue = self.attackValue + Math.floor(self.attackValue) * modifier;
+          self.attackValue = self.attackValue + Math.floor(self.attackValue) * ability.modifier;
         }
         self.defended = true;
-        self.defendingRounds = duration > 2 ? duration : 2
+        self.defendingRounds = ability.duration > 2 ? ability.duration : 2
       }
-      else if (affectedAttribute == "magicValue") {
-        if (modifier == 0) {
+      else if (ability.affectedAttribute == "magicValue") {
+        if (ability.modifier == 0) {
           self.magicValue = self.magicValue + 2
         } 
         else {
-          self.magicValue = self.magicValue + Math.floor(self.magicValue) * modifier;
+          self.magicValue = self.magicValue + Math.floor(self.magicValue) * ability.modifier;
         }
       }
     }
@@ -371,7 +369,7 @@ export class CombatControllerService {
       if (this.booleanAttributes[i] == true) {
         if (this.roundCounters[i] == 0) {
           this.booleanAttributes[i] = false;
-         this.messageService.add("wish I could use a function right here.")
+        //  this.messageService.add("wish I could use a function right here.")
         }
       }
     }
