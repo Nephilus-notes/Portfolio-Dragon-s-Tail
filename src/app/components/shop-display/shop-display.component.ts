@@ -64,7 +64,7 @@ export class ShopDisplayComponent {
         this.items[i] = item
       });
       
-      this.messageService.add(`${item}`);
+      // this.messageService.add(`${item}`);
     }
   }
 
