@@ -24,7 +24,8 @@ export class Character extends Char {
         head:  null,
         body:  null,
         hand:  null
-      }
+      },
+      currentCurrency: number = 0
       ) {
         super(name, strength, dexterity, constitution, intelligence, abilities)
 
@@ -39,6 +40,7 @@ export class Character extends Char {
         this.items = items;
         this.equippedItems = equippedItems;
         this.resetDamageValue()
+        this.currentCurrency = currentCurrency;
         }
      
       currentLocation!: string;

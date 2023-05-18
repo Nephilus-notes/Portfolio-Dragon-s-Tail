@@ -90,7 +90,7 @@ saveIDCache!:number;
     }
     console.warn(saveToPost)
     let response = this.http.patch(`${environment.saveFileURL}${this.saveIDCache}`, saveToPost)
-    response.subscribe(r => console.warn(r))
+    response.subscribe(r => console.warn(` response from savefile patch${r}`))
     this.apiService.patchCharacter(character)
     }
   )}
@@ -98,6 +98,7 @@ saveIDCache!:number;
   public saveGame(locationID:string, character: Character): void {
     if (!this.saveIDCache) {
       this.postSaveFile(locationID, character);
+
     } 
     else {
       this.patchSaveFile(locationID, character)

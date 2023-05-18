@@ -66,7 +66,7 @@ export class TextDisplayComponent implements OnInit{
             character.abilities.push(a)
 
             this.apiService.cacheCharacter(character);
-            this.incrementState();
+            this.incrementState(2);
             this.selectedTemplate = undefined;
             this.loadingCharacter.emit(true)
           })

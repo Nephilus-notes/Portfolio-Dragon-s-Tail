@@ -52,7 +52,8 @@ export class InnScreenComponent {
   }
 
   ngOnInit(): void {
-    this.buildingID = this.location.id
+    this.buildingID = this.location.id;
+    console.warn(this.character)
   };
 
   levelClick(): void {
@@ -75,6 +76,7 @@ export class InnScreenComponent {
   }
 
   saveGame(): void {
+    console.warn(this.character)
     this.saveService.saveGame(this.location.id, this.character)
   }
 }
