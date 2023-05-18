@@ -119,7 +119,7 @@ export class StartGameComponent {
         this.userID = user?.sub
       }
     )
-    this.messageService.add('initializing');
+    // this.messageService.add('initializing');
     // console.warn("starting init")
     this.getAllSaves();
   }

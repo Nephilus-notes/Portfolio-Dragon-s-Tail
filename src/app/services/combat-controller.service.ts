@@ -219,7 +219,7 @@ export class CombatControllerService {
  * used for damage (strength vs intelligence) against which defense (armor vs resistance)
  */
   public performAbility(self: Character| NPC, target: Character| NPC, ability:Ability ) {
-    this.messageService.add(`starting ability. Effect: ${ability.effect}`)
+    // this.messageService.add(`starting ability. Effect: ${ability.effect}`)
     this.messageService.add(`${self.name} ${ability.description} ${target.name}`, true)
 
     if (ability.effect == "damage") {
@@ -235,14 +235,14 @@ export class CombatControllerService {
       }
     }
     else if (ability.effect == "heal") {
-      this.messageService.add(`
-      self: ${self.name}, 
-      mgval ${self.magicValue}, 
-      dgval ${self.damageValue}, 
-      mgval ${self.magicValue}, 
-      mgval ${self.magicValue}, 
-      mod ${ability.modifier}
-      `)
+      // this.messageService.add(`
+      // self: ${self.name}, 
+      // mgval ${self.magicValue}, 
+      // dgval ${self.damageValue}, 
+      // mgval ${self.magicValue}, 
+      // mgval ${self.magicValue}, 
+      // mod ${ability.modifier}
+      // `)
       // this.messageService.add(`self: ${self.name}, mgval ${self.magicValue}, mod ${ability.modifier}`)
       this.heal(target, self.magicValue*ability.modifier)
 

@@ -77,7 +77,7 @@ export class UIformComponent {
 @Output() CombatOver = new EventEmitter();
 public startRound(ability: Ability): void {
   this.CombatOver.emit(this.combatService.round(ability))
-  this.messageService.add(`${this.battleOngoing}`)
+  // this.messageService.add(`${this.battleOngoing}`)
 }
 
 
@@ -100,7 +100,7 @@ public exploreStart() {
 public goHunting(): void {
   this.explorationService.modifyPlayerExploration(this.character, this.location, true)
   this.startCombat.emit(true)
-  this.messageService.add("going hunting")
+  // this.messageService.add("going hunting")
 }
 /** 
  * Probably don't need this, it's on combatDisplay.  Maybe should move here someday though

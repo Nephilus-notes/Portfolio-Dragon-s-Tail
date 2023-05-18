@@ -114,7 +114,7 @@ export class GameDisplayComponent {
 
 
   /**
-   * Takes the user input as a string and performs conditional checks to determine the next step.
+   * LEGACY Takes the user input as a string and performs conditional checks to determine the next step.
    * 
    * Either changes the game state with the GameStateSwitch, triggers exploration and combat logic,
    * or performs the api call to move the character to the next location.
@@ -182,7 +182,7 @@ export class GameDisplayComponent {
       // console.warn(`Location Cache: ${this.apiService.locationCache}`)
     } else {
       this.location = this.apiService.locationCache;
-      this.messageService.add('location Loaded');
+      // this.messageService.add('location Loaded');
     }
     console.warn(`Location Cache: ${this.apiService.locationCache}`);
   }
@@ -216,10 +216,10 @@ export class GameDisplayComponent {
   combatToggle(): void {
     if (this.CombatBool) {
       this.CombatBool = false;
-      this.messageService.add(`CombatBool = ${this.CombatBool}`)
+      // this.messageService.add(`CombatBool = ${this.CombatBool}`)
     } else {
       this.CombatBool = true;
-      this.messageService.add(`CombatBool = ${this.CombatBool}`)
+      // this.messageService.add(`CombatBool = ${this.CombatBool}`)
     }
   }
 
@@ -323,7 +323,7 @@ export class GameDisplayComponent {
   saveGame(locationID:string) {
   
     this.saveService.postSaveFile(locationID, this.character)
-    this.messageService.add("game saved?")
+    // this.messageService.add("game saved?")
   }
 
   saveChar() {
@@ -332,7 +332,7 @@ export class GameDisplayComponent {
   }
 
   ngOnInit(): void {
-    this.messageService.add('initializing');
+    // this.messageService.add('initializing');
     if(!this.apiService.characterCache && !this.apiService.templateCache) {
       // redirect to start game 
       this.router.navigate(['/startgame'])
@@ -340,7 +340,7 @@ export class GameDisplayComponent {
     }
     if (this.apiService.templateCacheExists() === false) {
       this.loadCharacter();
-      this.messageService.add(`${this.character.abilities}`)
+      // this.messageService.add(`${this.character.abilities}`)
     }
     this.loadLocation();
     // }
