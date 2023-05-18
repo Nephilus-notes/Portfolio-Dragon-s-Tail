@@ -98,6 +98,7 @@ public exploreStart() {
 }
 
 public goHunting(): void {
+  this.explorationService.modifyPlayerExploration(this.character, this.location, true)
   this.startCombat.emit(true)
   this.messageService.add("going hunting")
 }
