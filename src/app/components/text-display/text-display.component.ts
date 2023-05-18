@@ -30,10 +30,10 @@ export class TextDisplayComponent implements OnInit{
 
 
   @Output() submitValue = new EventEmitter<string|null>();
-  public incrementState(): void {
+  public incrementState(incrementer:number=1): void {
     var locationState:number = this.explorationService.exploring
     if (locationState < 2) {
-      this.explorationService.incrementExploring()
+      this.explorationService.incrementExploring(incrementer)
     }
     else if (this.location.id == "SG") {
       this.apiService.loadCharacter();

@@ -54,9 +54,9 @@ saveIDCache!:number;
   public postSaveFile(locationID: string,character: Character): void {
     this.auth.user$.subscribe(user => {
 
-        // this.messageService.add("posting new")
+        this.messageService.add("posting new")
         var savedChar = this.apiService.postCharacter(character).subscribe(char => {
-          // this.messageService.add(`character id = ${char.id}`)
+          this.messageService.add(`character id = ${char.id}`)
           let response = this.http.post<any>(`${environment.saveFileURL}`, {
           UserID:user?.sub,
           PlayerCharacterID:char.id,
@@ -79,7 +79,7 @@ saveIDCache!:number;
 
   private patchSaveFile(locationID: string,character: Character): void {
     this.auth.user$.subscribe(user => {
-    // this.messageService.add("posting old")
+    this.messageService.add("posting old")
     let saveToPost = {
       id:this.saveIDCache,
       UserID:user?.sub,
@@ -90,7 +90,7 @@ saveIDCache!:number;
     }
     console.warn(saveToPost)
     let response = this.http.patch(`${environment.saveFileURL}${this.saveIDCache}`, saveToPost)
-    // response.subscribe(r => console.warn(r))
+    response.subscribe(r => console.warn(r))
     this.apiService.patchCharacter(character)
     }
   )}
