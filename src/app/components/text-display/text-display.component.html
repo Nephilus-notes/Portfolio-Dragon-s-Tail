@@ -10,13 +10,12 @@
         <div *ngIf="explorationService.exploring==0">
 
             {{location.enterText}}
-            still first - {{explorationService.exploring}}
+           
             <app-game-button *ngIf="location.id==SG" (click)="incrementState()" [text]="placement"></app-game-button>
         </div>
         <div *ngIf="explorationService.exploring > 0 && explorationService.exploring < 3">
 
             {{location.middleText}}
-            We in the middle - {{explorationService.exploring}}
 
             <div *ngIf="templates">
                 <div *ngFor="let template of templates">
@@ -28,7 +27,6 @@
             
             {{location.exitText}}
 
-            ends - {{explorationService.exploring}}
             <app-game-button *ngIf="location.id==SG" (click)="incrementState()" [text]="placement"></app-game-button>
             <!-- <app-game-button *ngIf="location.id!=SG" (click)="incrementState()" [text]="placement"></app-game-button> -->
         </div>

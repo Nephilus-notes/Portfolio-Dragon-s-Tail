@@ -10,6 +10,10 @@
         class="inline"></app-game-button>
         <app-game-button *ngIf="location.id == 'TTD' && explorationService.exploring == 0" text="Boss Fight" (click)="goHunting()"
         class="inline"></app-game-button>
+        <app-game-button *ngIf="location.id == 'TTD' && explorationService.exploring == 1" text="Continue" (click)="explorationService.incrementExploring(2)"
+        class="inline"></app-game-button>
+        <app-game-button *ngIf="location.id == 'TTD' && explorationService.exploring == 3" text="You Won!" (click)="changeLocation(T)"
+        class="inline"></app-game-button>
         <app-game-button *ngIf="location.id == 'Q' && explorationService.exploring == 0" text="Boss Fight" (click)="goHunting()"
         class="inline"></app-game-button>
         <app-game-button *ngIf="location.next != null && location.next != 'S'" text="Explore" (click)="exploreStart()"

@@ -125,8 +125,8 @@ exploring:number = 0;
     })
   }
   
-  public incrementExploring(): void {
-    this.exploring += 1;
+  public incrementExploring(incrementer:number=1): void {
+    this.exploring += incrementer;
   };
 
   public resetExploring(): void {
