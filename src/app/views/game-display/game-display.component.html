@@ -37,7 +37,7 @@
                     [CombatBool]="CombatBool" (CombatOver)="battleEnd($event)" [character]="character" 
                     [battleEndText]="battleEndText" [battleOngoing]="battleOngoing" (CombatEnd)="combatFinish()"
                     (newLocation)="loadLocation($event)" (startCombat)="startCombat()"
-                    (gameStateChange)="shopToggle($event)"></app-uiform>
+                    (gameStateChange)="shopToggle($event)" [GameStateSwitch]="GameStateSwitch"></app-uiform>
 
     </div>
     <div>

@@ -28,6 +28,7 @@ export class UIformComponent {
   submitString = '';
   @Input() battleOngoing!: boolean;
   @Input() battleEndText!:string;
+  @Input() GameStateSwitch!:number;
 
 
   @Input() location!: Location;
@@ -40,19 +41,25 @@ export class UIformComponent {
 
   @Output() gameStateChange = new EventEmitter<number>();
   public changeState(location_id:string) {
-    switch (location_id) {
-      case "I": {
-        this.gameStateChange.emit(2)
-        break;
+    if (this.GameStateSwitch != 0 ) {
+      this.gameStateChange.emit(0)
+    } 
+    else {
+
+      switch (location_id) {
+        case "I": {
+          this.gameStateChange.emit(2)
+          break;
+        }
+        case "B": {        
+          this.gameStateChange.emit(1)
+          break;
+        }
+        case "A": {
+          this.gameStateChange.emit(1)
+          break;
       }
-      case "B": {        
-        this.gameStateChange.emit(1)
-        break;
       }
-      case "A": {
-        this.gameStateChange.emit(1)
-        break;
-    }
     }
   }
 

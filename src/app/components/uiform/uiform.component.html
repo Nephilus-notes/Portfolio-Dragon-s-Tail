@@ -18,7 +18,9 @@
         class="inline"></app-game-button>
         <app-game-button *ngIf="location.next != null && location.next != 'S'" text="Explore" (click)="exploreStart()"
         class="inline"></app-game-button>
-        <app-game-button *ngIf="location.next != null && location.next == 'S'" text="Shop" (click)="changeState(location.id)"
+        <app-game-button *ngIf="location.next != null && location.next == 'S' && GameStateSwitch == 0" text="Shop" (click)="changeState(location.id)"
+        class="inline"></app-game-button>
+        <app-game-button *ngIf="location.next != null && location.next == 'S' && GameStateSwitch > 0" text="Back" (click)="changeState(location.id)"
         class="inline"></app-game-button>
         
   </div>
