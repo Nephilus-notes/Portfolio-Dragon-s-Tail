@@ -25,7 +25,7 @@ export class InnScreenComponent {
   levelBool:boolean = false;
   learnBool: boolean = false;
 
-  ngOnChanges(): void {
+  public ngOnChanges(): void {
     if (this.GameStateSwitch == 2) {
       this.buildingID = this.location.id
     }
@@ -51,22 +51,22 @@ export class InnScreenComponent {
     }
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.buildingID = this.location.id;
     console.warn(this.character)
   };
 
-  levelClick(): void {
+  public levelClick(): void {
     this.levelBool = true;
     console.warn(this.GameStateSwitch)
   }
 
-  learnClick(): void {
+  public learnClick(): void {
     this.learnBool = true;
     console.warn(this.GameStateSwitch)
   }
 
-  backClick(): void {
+  public backClick(): void {
     if (this.levelBool || this.learnBool) {
       this.levelBool = false;
       this.learnBool = false;
@@ -75,8 +75,12 @@ export class InnScreenComponent {
     }
   }
 
-  saveGame(): void {
+  public saveGame(): void {
     console.warn(this.character)
     this.saveService.saveGame(this.location.id, this.character)
+  }
+
+  public healCharacter(): void {
+    this.character.fullHeal()
   }
 }
