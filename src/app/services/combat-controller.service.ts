@@ -46,11 +46,11 @@ export class CombatControllerService {
    */
   public attack(self:Character|NPC, target: Character|NPC, type:string="physical"): void {
     let attack: number = Math.random() * 100;
-    if (attack === 100) {
+    if (attack >= 100 - self.dexterity) {
       this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
       this.dealDamage(target, self.damageValue * 2)
     }
-    else if (attack > target.evadePercentage) {
+    else if (attack + self.attackValue > target.evadePercentage) {
       var totalDamage = self.damageValue - target.armorValue + Math.floor(Math.random() * self.damageValue * .1)
 
       if (totalDamage < 1) {

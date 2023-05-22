@@ -110,11 +110,11 @@ export class Char {
         }
 
         public resetAttackValue(): void {
-            this.attackValue = this.intelligence;
+            this.attackValue = Math.floor(this.intelligence / 2);
         }
 
         public resetMagicValue(): void {
-            this.magicValue = this.intelligence / 2;
+            this.magicValue = Math.floor(this.intelligence / 2);
         }
 
         public resetCombatStats(): void {
