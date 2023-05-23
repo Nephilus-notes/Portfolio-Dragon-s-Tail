@@ -7,9 +7,9 @@
             </div>
 
             <app-game-button [text]="saveText" class="center marginBottomTop block"
-            (click)="saveGame()"></app-game-button>
+                (click)="saveGame()"></app-game-button>
             <app-game-button text="Heal" class="center marginBottomTop block"
-            (click)="healCharacter()"></app-game-button>
+                (click)="healCharacter()"></app-game-button>
             <app-game-button [text]="levelText" class="center marginBottomTop block"
                 (click)="levelClick()"></app-game-button>
             <app-game-button [text]="learnText" class="center marginBottomTop block"
@@ -28,8 +28,23 @@
     </div>
 
     <div *ngIf="learnBool;" class="centerDisplay bordered">
-        trying to learn
-        <app-ability-learn [character]="character" [learnBool]="learnBool" (ReturnToMainInn)="backClick()"></app-ability-learn>
+        
+        <div class="flex flex-co" *ngIf="possibleAbilities && !selectedAbility">
+            <p>Abilities</p>
+            <div *ngFor="let ability of possibleAbilities; index as i;">
+                <app-game-button text="{{ability.name}}" (click)="onSelect(ability)"></app-game-button>
+                <hr />
+            </div>
+        </div>
+<div *ngIf="possibleAbilities.length == 0">
+            You have no more abilities to learn
+        </div>
+
+        <div *ngIf="selectedAbility">
+            <app-selected-item [location]="location" [character]="character" [selectedAbility]="selectedAbility"
+                (selectedObjectReset)="resetSelectedObject()" (chosenObject)="buyObject()"></app-selected-item>
+
+        </div>
     </div>
 
 </ng-template>

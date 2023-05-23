@@ -1,11 +1,25 @@
-<h2 class="itemTitle">{{selectedItem.name}}</h2>
-{{selectedItem.price}}gp 
-{{selectedItem.description}} 
+<div *ngIf="selectedItem;">
 
-<div class="flex flex-end">
+    <h2 class="itemTitle">{{selectedItem.name}}</h2>
+    {{selectedItem.price}}gp
+    {{selectedItem.description}}
 
-    <button class="toolTipButton" (click)="cancel()">Back</button>
-    <button class="toolTipButton"  (click)="buyItem()" *ngIf="location.id=='A'||location.id=='B'"
-    >Buy</button>
-    <!-- [disabled]="character.currentCurrency<selectedItem.price" -->
-    
+    <div class="flex flex-end">
+
+        <button class="toolTipButton" (click)="cancel()">Back</button>
+        <button class="toolTipButton" (click)="buyObject()" *ngIf="location.id=='A'||location.id=='B'">Buy</button>
+        <!-- [disabled]="character.currentCurrency<selectedItem.price" -->
+    </div>
+</div>
+<!-- <ng-template #ability>  -->
+<div *ngIf="selectedAbility;">
+    <h2 class="itemTitle">Name : {{selectedAbility.name}}</h2>
+    <li>cost : {{(selectedAbility.level ? selectedAbility.level * 50 : 50)}}</li>
+    <li>effect : {{selectedAbility.effect}}</li>
+    <li>modifier : {{selectedAbility.modifier}}</li>
+    <li>duration : {{selectedAbility.duration}}</li>
+    <li>Description : {{selectedAbility.description}}</li>
+    <app-game-button (click)="cancel()" text="Back"></app-game-button>
+    <app-game-button (click)="buyObject()" text="Buy"></app-game-button>
+</div>
+<!-- </ng-template> -->

@@ -28,7 +28,6 @@ import { GameButtonComponent } from './components/game-button/game-button.compon
 import { MovingBackgroundButtonComponent } from './components/moving-background-button/moving-background-button.component';
 import { LevelComponent } from './components/level/level.component';
 import { NewGameComponent } from './components/new-game/new-game.component';
-import { AbilityLearnComponent } from './components/ability-learn/ability-learn.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +51,6 @@ import { AbilityLearnComponent } from './components/ability-learn/ability-learn.
     MovingBackgroundButtonComponent,
     LevelComponent,
     NewGameComponent,
-    AbilityLearnComponent,
   ],
   imports: [
     BrowserModule,
