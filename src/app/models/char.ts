@@ -61,73 +61,8 @@ export class Char {
       resistValue: number;
       magicValue:number;
 
-      positiveStatusFlags: Array<StatusFlag> = [
-          new StatusFlag("burningBlades"),
-          new StatusFlag("defended"),
-          new StatusFlag("doubleArmed"),
-          new StatusFlag("evading"),
-          new StatusFlag("fleeing"),
-          new StatusFlag("focusing"),
-          new StatusFlag("stoneArmored"),
-          new StatusFlag("strengthened"),
-          new StatusFlag("stoneFists"),
-          
-        ];
-        
-        negativeStatusFlags: Array<StatusFlag> = [
-            new StatusFlag("burning"),
-            new StatusFlag("poisoned"),
-            new StatusFlag("hitByWind"),
-            new StatusFlag("slowed"),
-            new StatusFlag("stunned"),
-            new StatusFlag("vulnerable")
-        ]
-      //  STATUSES //
-      // # Status flags
-        burning: boolean = false;
-        burningBlades : boolean = false;
-        defended : boolean = false;
-        doubleArmed : boolean = false;
-        evading : boolean = false;
-        fleeing: boolean = false;
-        focusing: boolean = false;
-        poisoned : boolean = false;
-        slowed : boolean = false;
-        stoneArmored : boolean = false;
-        strengthened : boolean = false;
-        vulnerable : boolean = false;
-        
-        // no incrementers
-        hitByWind : boolean = false;
-        stunned: boolean = false;
-        stoneFists : boolean = false;
-    
-        // status Incrementors
-        burningRounds: number = 0;
-        burningBladesRounds : number = 0;
-        defendingRounds: number = 0;
-        doubleArmedRounds : number = 0;
-        evadingRounds: number = 0;
-        fleeingRounds : number = 0;
-        focusingRounds: number = 0;
-        poisonedRounds : number = 0;
-        slowedRounds : number = 0;
-        stoneArmoredRounds: number = 0;
-        strengthenedRounds: number = 0;
-        vulnerableRounds: number = 0;
-
-        negativeStatusArray?: Array<boolean>;
-        negativeRoundCounterArray?: Array<number>;
-        negativeResetArray?: Array<Function>;
-        negativeStatusInflictArray?: Array<Function>;
-        
-        positiveStatusArray?: Array<boolean>;
-        positiveRoundCounterArray?: Array<number>;
-        positiveResetArray?: Array<Function>;
-       
-
-
-        public resetArmorValue(): void {
+      
+      public resetArmorValue(): void {
             this.armorValue = this.armor; // make a conditional to use the itemstat of equipped armor
         }
 
@@ -139,7 +74,7 @@ export class Char {
         public resetEvadePercentage(): void {
             this.evadePercentage = this.dexterity;
         }
-
+        
         public resetResistValue(): void {
             this.resistValue = this.resistance;
         }
@@ -180,161 +115,109 @@ export class Char {
             this.hpToMax();
             this.mpToMax();
         }
-
+        
         public checkStatus(): void {
 
         }
-
-        public resetBurningBlades(): void {
-            this.burningBlades = false;
-            this.burningBladesRounds = 0;
+        
+        public resetBurningBlades = (): void => {
             this.resetDamageValue();    
+            this.positiveStatusFlags["burningBlades"].active = false;
+            this.positiveStatusFlags["burningBlades"].rounds = 0;
         }
         
-        public resetDefended(): void {
-            this.defended = false;
-            this.defendingRounds = 0;
+        public resetDefending = (): void => {
             this.resetArmorValue();
+            this.positiveStatusFlags["defending"].active = false;
+            this.positiveStatusFlags["defending"].rounds = 0;
         }
 
-        public resetDoubleArmed(): void {
-            this.doubleArmed = false;
-            this.doubleArmedRounds = 0;
+        public resetDoubleArmed = (): void => {
             this.resetDamageValue();
+            this.positiveStatusFlags["doubleArmed"].active = false;
+            this.positiveStatusFlags["doubleArmed"].rounds = 0;
         }   
 
-        public resetEvading(): void {
-            this.evading = false;
-            this.evadingRounds = 0;
+        public resetEvading = (): void => {
             this.resetEvadePercentage();
+            this.positiveStatusFlags["evading"].active = false;
+            this.positiveStatusFlags["evading"].rounds = 0;
         }   
 
-        public resetFleeing(): void {   
-            this.fleeing = false;
-            this.fleeingRounds = 0;
+        public resetFleeing = (): void => {   
+            this.positiveStatusFlags["fleeing"].active = false;
+            this.positiveStatusFlags["fleeing"].rounds = 0;
         }   
 
-        public resetFocusing(): void {
-            this.focusing = false;
-            this.focusingRounds = 0;
+        public resetFocusing = (): void => {
             this.resetAttackValue();
+            this.positiveStatusFlags["focusing"].active = false;
+            this.positiveStatusFlags["focusing"].rounds = 0;
         }   
 
-        public resetStoneArmored(): void {
-            this.stoneArmored = false;
-            this.stoneArmoredRounds = 0;
+        public resetStoneArmored = (): void => {
             this.resetArmorValue();
+            this.positiveStatusFlags["stoneArmored"].active = false;
+            this.positiveStatusFlags["stoneArmored"].rounds = 0;
         }   
 
-        public resetStrengthened(): void {   
-            this.strengthened = false;
-            this.strengthenedRounds = 0;
+        public resetStrengthened = (): void => {   
+            this.resetDamageValue();
+            this.positiveStatusFlags["strengthened"].active = false;
+            this.positiveStatusFlags["strengthened"].rounds = 0;
         }   
 
-        public resetVulnerable(): void {
-            this.vulnerable = false;
-            this.vulnerableRounds = 0;
+        public resetVulnerable = (): void => {
+            this.positiveStatusFlags["vulnerable"].active = false;
+            this.positiveStatusFlags["vulnerable"].rounds = 0;
         }
 
-        public resetBurning(): void {
-            this.burning = false;
-            this.burningRounds = 0;
+        public resetBurning = (): void => {
+            this.negativeStatusFlags["burning"].active = false;
+            this.negativeStatusFlags["burning"].rounds = 0;
         }
         
-        public resetPoisoned(): void {
-            this.poisoned = false;
-            this.poisonedRounds = 0;
+        public resetPoisoned = (): void => {
+            this.negativeStatusFlags["poisoned"].active = false;
+            this.negativeStatusFlags["poisoned"].rounds = 0;
         }
 
-        public resetSlowed(): void {
-            this.slowed = false;
-            this.slowedRounds = 0;
+        public resetSlowed = (): void => {
+            this.negativeStatusFlags["slowed"].active = false;
+            this.negativeStatusFlags["slowed"].rounds = 0;
         }
-
-        public takePoisondamage(): void {
+        
+        public takePoisonDamage = (): void => {
             this.currentHP -= Math.floor(this.maxHP / 10);
         }
 
-        public takeBurningdamage(): void {
+        public takeBurningdamage = (): void => {
             this.currentHP -= Math.floor(this.maxHP / 10);
         }
-
-        public slowfurther(): void {
+        
+        public slowfurther = (): void => {
             this.evadePercentage -= 5;
         }
-
-        public takeVulnerable(): void {
-
-        }
-
-        public buildNegativeStatusArray(): void {
-            this.negativeStatusArray = [
-            this.burning,
-            this.poisoned,
-            this.slowed,
-            this.vulnerable];
-        }
-        public buildNegativeRoundCounterArray(): void {
-            this.negativeRoundCounterArray = [
-            this.burningRounds,
-            this.poisonedRounds,
-            this.slowedRounds,
-            this.vulnerableRounds];
-        }
-
-        public buildNegativeResetArray(): void {
-            this.negativeResetArray = [
-            this.resetBurning,
-            this.resetPoisoned,
-            this.resetSlowed,
-            this.resetVulnerable];
-        }
-        public buildNegativeStatusInflictArray(): void {
-            this.negativeStatusInflictArray = [
-            this.takeBurningdamage,
-            this.takePoisondamage,
-            this.slowfurther]
-        };
         
-        buildPositiveStatusArray(): void {
-            this.positiveStatusArray = [this.burningBlades,
-            this.defended,
-            this.doubleArmed,
-            this.evading,
-            this.fleeing,
-            this.focusing,
-            this.stoneArmored,
-            this.strengthened,];
-}
- public buildPositiveRoundCounterArray(): void {    
-    this.positiveRoundCounterArray = [this.burningBladesRounds,
-    this.defendingRounds,
-    this.doubleArmedRounds,
-    this.evadingRounds,
-    this.fleeingRounds,
-    this.focusingRounds,
-    this.stoneArmoredRounds,
-    this.strengthenedRounds,];
-}
- public buildPositiveResetArray(): void {
-    this.positiveResetArray = [this.resetBurningBlades,
-    this.resetDefended,
-    this.resetDoubleArmed,
-    this.resetEvading,
-    this.resetFleeing,
-    this.resetFocusing,
-    this.resetStoneArmored,
-    this.resetStrengthened,];
-}
-
-public buildStatusArrays(): void {
-    this.buildNegativeStatusArray();
-    this.buildNegativeRoundCounterArray();
-    this.buildNegativeResetArray();
-    this.buildPositiveStatusArray();
-    this.buildPositiveRoundCounterArray();
-    this.buildPositiveResetArray();
-    this.buildNegativeStatusInflictArray();
-};
-
-}
+        positiveStatusFlags: { [key: string]: StatusFlag } = {
+          "burningBlades" :new StatusFlag("burningBlades", this.resetBurningBlades),
+          "defending": new StatusFlag("defending", this.resetDefending),
+          "doubleArmed": new StatusFlag("doubleArmed", this.resetDoubleArmed),
+            "evading": new StatusFlag("evading", this.resetEvading),
+            "fleeing": new StatusFlag("fleeing", this.resetFleeing),
+            "focusing": new StatusFlag("focusing", this.resetFocusing),
+            "stoneArmored": new StatusFlag("stoneArmored", this.resetStoneArmored),
+            "stoneFists": new StatusFlag("stoneFists"),
+            "strengthened": new StatusFlag("strengthened", this.resetStrengthened),
+            
+        };
+          
+          negativeStatusFlags: { [key: string]: StatusFlag } = {
+              "burning" : new StatusFlag("burning", this.resetBurning, this.takeBurningdamage),
+              "poisoned" : new StatusFlag("poisoned", this.resetPoisoned, this.takePoisonDamage),
+              "hitByWind" : new StatusFlag("hitByWind"),
+              "slowed" : new StatusFlag("slowed", this.resetSlowed, this.slowfurther),
+              "stunned" : new StatusFlag("stunned"),
+              "vulnerable" : new StatusFlag("vulnerable", this.resetVulnerable),
+          };
+    }

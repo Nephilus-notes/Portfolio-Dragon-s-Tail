@@ -98,14 +98,14 @@ export class CombatControllerService {
   public flee(self: Character | NPC, target: Character | NPC): void {
     if (self.dexterity > target.dexterity) {
       this.messageService.add(`${self.name} has fled!`, true);
-      self.fleeingRounds = 0;
-      self.fleeing = true;
-    } else if (self.dexterity < target.dexterity && self.fleeingRounds > 0) {
+      self.positiveStatusFlags["fleeing"].rounds = 0;
+      self.positiveStatusFlags["fleeing"].active = true;
+    } else if (self.dexterity < target.dexterity && self.positiveStatusFlags["fleeing"].rounds > 0) {
       this.messageService.add(`${self.name} has fled!`, true);
-      self.fleeingRounds = 0;
-      self.fleeing = true;
+      self.positiveStatusFlags["fleeing"].rounds = 0;
+      self.positiveStatusFlags["fleeing"].active = true;
     } else {
-      self.fleeingRounds += 1;
+      self.positiveStatusFlags["fleeing"].rounds = 0;
       this.messageService.add(`${self.name} tried to flee!`, true);
     }
   }
@@ -131,7 +131,7 @@ export class CombatControllerService {
    * @returns false if combat cannot continue, else true
    */
   public checkCombatants(): boolean {
-    if (this.playerCharacter.fleeing == true) {
+    if (this.playerCharacter.positiveStatusFlags["fleeing"].active == true) {
       return false;
     }
     this.checkEffectsDuration(this.NPCEnemy);
@@ -248,6 +248,7 @@ export class CombatControllerService {
     ability: Ability
   ) {
     // this.messageService.add(`starting ability. Effect: ${ability.effect}`)
+    var duration = ability.duration > 2 ? ability.duration : 2;
     this.messageService.add(
       `${self.name} ${ability.description} ${target.name}`,
       true
@@ -276,13 +277,13 @@ export class CombatControllerService {
         case 'stoneArmored': {
           self.armorValue =
             self.armor + Math.floor(self.magicValue) * ability.modifier;
-          self.stoneArmored = true;
-          self.stoneArmoredRounds = ability.duration;
+          self.positiveStatusFlags["stoneArmored"].setStatus(duration);
+
           break;
         }
         case 'stoneFists': {
           self.damageValue = Math.floor(self.magicValue) * ability.modifier; // add a weapon modifier to this
-          self.stoneFists = true;
+          self.positiveStatusFlags["stoneFists"].setStatus(duration);
           break;
         }
       }
@@ -293,8 +294,7 @@ export class CombatControllerService {
           self.damageValue = Math.floor(self.strength / 2) * ability.modifier;
           // this.messageService.add(`adding damage`)
         }
-        self.strengthened = true;
-        self.strengthenedRounds = ability.duration > 2 ? ability.duration : 2;
+        self.positiveStatusFlags["strengthened"].setStatus(duration);
       } else if (ability.affectedAttribute == 'resistValue') {
         if (ability.modifier == 0) {
           self.resistValue = self.resistance + 2;
@@ -308,8 +308,7 @@ export class CombatControllerService {
         } else {
           self.armorValue = self.armor * ability.modifier;
         }
-        self.defended = true;
-        self.defendingRounds = ability.duration > 2 ? ability.duration : 2;
+        self.positiveStatusFlags["defending"].setStatus(duration);
       } else if (ability.affectedAttribute == 'evading') {
         // this.messageService.add(`${ability.affectedAttribute}`)
         if (ability.modifier == 0) {
@@ -319,8 +318,7 @@ export class CombatControllerService {
           // this.messageService.add('modifer is not 0, boosting by other')
           self.evadePercentage = Math.floor(self.dexterity) * ability.modifier;
         }
-        self.evading = true;
-        self.evadingRounds = ability.duration > 2 ? ability.duration : 2;
+        self.positiveStatusFlags["evading"].setStatus(duration);
       } else if (ability.affectedAttribute == 'focusing') {
         // this.messageService.add(`${ability.affectedAttribute}`)
         if (ability.modifier == 0) {
@@ -328,8 +326,7 @@ export class CombatControllerService {
         } else {
           self.attackValue = self.intelligence * ability.modifier;
         }
-        self.focusing = true;
-        self.focusingRounds = ability.duration > 2 ? ability.duration : 2;
+        self.positiveStatusFlags["focusing"].setStatus(duration);
       } else if (ability.affectedAttribute == 'magicValue') {
         if (ability.modifier == 0) {
           self.magicValue = Math.floor(self.intelligence / 2) + 2;
@@ -348,31 +345,31 @@ export class CombatControllerService {
   ) {
     switch (affectedAttribute) {
       case 'poisoned': {
-        target.poisoned = true;
-        target.poisonedRounds = duration;
+        target.negativeStatusFlags["poisoned"].active = true;
+        target.negativeStatusFlags["poisonedRounds"].rounds = duration;
         break;
       }
       case 'slowed': {
-        target.slowed = true;
-        target.slowedRounds = duration;
+        target.negativeStatusFlags["slowed"].active = true;
+        target.negativeStatusFlags["slowedRounds"].rounds = duration;
         break;
       }
       case 'vulnerable': {
-        target.vulnerable = true;
-        target.vulnerableRounds = duration;
+        target.negativeStatusFlags["vulnerable"].active = true;
+        target.negativeStatusFlags["vulnerableRounds"].rounds = duration;
         break;
       }
       case 'hitByWind': {
-        target.hitByWind = true;
+        target.negativeStatusFlags["hitByWind"].active
         break;
       }
       case 'stunned': {
-        target.stunned = true;
+        target.negativeStatusFlags["stunned"].active
         break;
       }
       case 'burning': {
-        target.burning = true;
-        target.burningRounds = duration;
+        target.negativeStatusFlags["burning"].active = true;
+        target.negativeStatusFlags["burningRounds"].rounds = duration;
         break;
       }
     }
@@ -381,30 +378,32 @@ export class CombatControllerService {
    * split into separate functions and collect them?
    */
   public checkEffectsDuration(self: Character | NPC): void {
-    // create hashmap of boolean (defended) and rounds (defendedRounds) and then iterate over them? or create an array of booleans and an array of
-    self.buildStatusArrays();
-    for (let i = 0; i < self.positiveRoundCounterArray!.length; i++) {
-      if (self.positiveStatusArray![i] == true) {
-        this.messageService.add(`${self.name} ${self.positiveStatusArray![i]}`)
-        this.messageService.add(`${self.name} ${self.positiveRoundCounterArray![i]}`)
-        this.messageService.add(`${self.name} ${self.positiveResetArray![i]}`)
-        if (self.positiveRoundCounterArray![i] == 0) {
-          self.positiveResetArray![i]();
+    // create hashmap of boolean (defending) and rounds (defendedRounds) and then iterate over them? or create an array of booleans and an array of
+
+    Object.keys(self.positiveStatusFlags).forEach((key) => {
+      if (self.positiveStatusFlags[key].active) {
+        if (self.positiveStatusFlags[key].rounds == 0) {
+          this.messageService.add(`${key} is turning off`)
+          self.positiveStatusFlags[key].resetFunction();
         }
         else {
-          self.positiveRoundCounterArray![i]--;
-          this.messageService.add(`${self.name} ${self.positiveRoundCounterArray![i]}`)
+          self.positiveStatusFlags[key].rounds--;
         }
-      }
-    }
 
-    for (let i = 0; i < self.negativeRoundCounterArray!.length; i++) {
-      if (self.negativeStatusArray![i] == true) {
-        self.negativeStatusInflictArray![i]();
-        if (self.negativeRoundCounterArray![i] == 0) {
-          self.negativeResetArray![i]();
-        }
       }
-    }
+    });
+
+    Object.keys(self.negativeStatusFlags).forEach((key) => {
+      if (self.negativeStatusFlags[key].active) {
+          self.negativeStatusFlags[key].useFunction?.();
+          self.negativeStatusFlags[key].rounds--;
+        
+        if (self.negativeStatusFlags[key].rounds == 0) {
+          self.negativeStatusFlags[key].resetFunction();
+        }
+
+      }
+    });
+  
   }
 }

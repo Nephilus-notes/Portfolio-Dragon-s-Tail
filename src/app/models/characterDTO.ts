@@ -61,36 +61,5 @@ export interface characterDTO {
       damageValue: number;
       evadePercentage: number;
       resistValue: number;
-    
-      //  STATUSES //
-      // # Status flags
-      defended : boolean;
-        evading : boolean;
-        fleeing: boolean;
-        stoneArmored : boolean;
-        slowed : boolean;
-        vulnerable : boolean;
-        doubleArmed : boolean;
-        burningBlades : boolean;
-        stoneFists : boolean;
-        focusing: boolean;
-    
-        // no incrementers
-        poisoned : boolean;
-        burning: boolean;
-        hitByWind : boolean;
-        stunned: boolean;
-    
-        // status Incrementors
-        evadingRounds: number;
-        defendingRounds: number;
-        fleeingRounds : number;
-        focusingRounds: number;
-        slowedRounds : number;
-        stoneArmoredRounds: number;
-        vulnerableRounds: number;
-        doubleArmedRounds : number;
-        burningBladesRounds : number;
-        burningRounds: number;
-        poisonedRounds : number;
+
   }

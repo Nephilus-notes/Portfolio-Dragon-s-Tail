@@ -117,7 +117,9 @@ public goHunting(): void {
     this.CombatEnd.emit(true);
     this.combatService.roundOrder = undefined;
     this.explorationService.setExploring(this.explorationService.checkExploration(this.character, this.location));
-    this.character.fleeing = false;
+    // reset this.character's fleeing status
+
+    this.character.resetFleeing();
     this.character.resetCombatStats();
   }
  

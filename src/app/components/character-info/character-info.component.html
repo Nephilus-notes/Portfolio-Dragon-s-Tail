@@ -12,12 +12,14 @@
       <li>Resistance: {{character.resistance}}</li>
       <li>Damage: {{character.damageValue }}</li>
       <li>Evasion: {{ character.evadePercentage }}</li>
-      <li>Defending: {{ character.defended }}</li>
-      <li>Defending: {{ character.defendingRounds }}</li>
-      <li>Evading: {{ character.evading }}</li>
-      <li>Evading: {{ character.evadingRounds }}</li>
-      <li>Focusing: {{ character.focusing }}</li>
-      <li>Focusing: {{ character.focusingRounds }}</li>
+      <li>Defending: {{ character.positiveStatusFlags["defending"].active }}</li>
+      <li>Defending: {{ character.positiveStatusFlags["defending"].rounds }}</li>
+      <li>Evading: {{ character.positiveStatusFlags["evading"].active }}</li>
+      <li>Evading: {{ character.positiveStatusFlags["evading"].rounds }}</li>
+      <li>Focusing: {{ character.positiveStatusFlags["focusing"].active }}</li>
+      <li>Focusing: {{ character.positiveStatusFlags["focusing"].rounds }}</li>
+      <li>Streng: {{ character.positiveStatusFlags["strengthened"].active }}</li>
+      <li>Streng: {{ character.positiveStatusFlags["strengthened"].rounds }}</li>
 
   </ul>
 </div>
