@@ -14,4 +14,7 @@ export interface Ability {
     modifier: number;
     duration: number;
     type: string|null;
+    cost: number;
+    level: number;
+    descendants: Array<Ability>;
 }

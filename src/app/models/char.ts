@@ -70,8 +70,9 @@ export class Char {
         fleeing: boolean = false;
         focusing: boolean = false;
         poisoned : boolean = false;
-        stoneArmored : boolean = false;
         slowed : boolean = false;
+        stoneArmored : boolean = false;
+        strengthened : boolean = false;
         vulnerable : boolean = false;
         
         // no incrementers
@@ -90,6 +91,7 @@ export class Char {
         poisonedRounds : number = 0;
         slowedRounds : number = 0;
         stoneArmoredRounds: number = 0;
+        strengthenedRounds: number = 0;
         vulnerableRounds: number = 0;
 
         public resetArmorValue(): void {
