@@ -73,7 +73,7 @@ export class ApiService {
    */
   public patchCharacter(character:Character): void {
     let url = `${environment.characterURL}${character.id}`
-    this.messageService.add(url)
+    // this.messageService.add(url)
     let charDTO: characterDTO = {
       dateUpdated:new Date().toISOString(),
       ...character,

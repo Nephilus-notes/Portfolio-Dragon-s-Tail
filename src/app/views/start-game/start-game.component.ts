@@ -38,7 +38,7 @@ export class StartGameComponent {
       this.getCharacter(file.playerCharacterID);
       this.getLocation(file.locationID);
       this.Loading = false;
-      this.messageService.add(`characterid = ${file.playerCharacterID} location = ${file.locationID}`)
+      // this.messageService.add(`characterid = ${file.playerCharacterID} location = ${file.locationID}`)
       
     })
   }

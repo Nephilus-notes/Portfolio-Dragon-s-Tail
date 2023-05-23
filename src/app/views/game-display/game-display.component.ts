@@ -82,10 +82,10 @@ export class GameDisplayComponent {
       this.battleOngoing = this.combatService.round($event);
 
       if (this.battleOngoing == false) {
-        if (this.character.currentHP > 0 && this.character.positiveStatusFlags[5].active == false) {
+        if (this.character.currentHP > 0 && this.character.positiveStatusFlags["fleeing"].active == false) {
           this.battleEndText = "You won!"
         }
-        else if (this.character.currentHP > 0 && this.character.positiveStatusFlags[5].active == true) {
+        else if (this.character.currentHP > 0 && this.character.positiveStatusFlags["fleeing"].active == true) {
           this.battleEndText = "You escaped"
         }
         else {
@@ -100,10 +100,10 @@ export class GameDisplayComponent {
   public battleEnd($BattleOver:boolean) {
     if ($BattleOver == false) {
       this.battleOngoing = false;
-      if (this.character.currentHP > 0 && this.character.positiveStatusFlags[5].active == false) {
+      if (this.character.currentHP > 0 && this.character.positiveStatusFlags["fleeing"].active == false) {
         this.battleEndText = "You won!"
       }
-      else if (this.character.currentHP > 0 && this.character.positiveStatusFlags[5].active == true) {
+      else if (this.character.currentHP > 0 && this.character.positiveStatusFlags["fleeing"].active == true) {
         this.battleEndText = "You escaped"
       }
       else {
