@@ -16,5 +16,5 @@ export interface Ability {
     type: string|null;
     cost: number;
     level: number;
-    descendants: Array<Ability>;
+    descendants?: Array<Ability>;
 }
