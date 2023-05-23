@@ -1,6 +1,7 @@
 import { Item } from "./item";
 import { Equipment } from "./equipment";
 import { Ability } from "./ability";
+import { StatusFlag } from "./statusFlag";
 
 export class Char {
     constructor(
@@ -59,7 +60,28 @@ export class Char {
       evadePercentage: number;
       resistValue: number;
       magicValue:number;
-    
+
+      positiveStatusFlags: Array<StatusFlag> = [
+          new StatusFlag("burningBlades"),
+          new StatusFlag("defended"),
+          new StatusFlag("doubleArmed"),
+          new StatusFlag("evading"),
+          new StatusFlag("fleeing"),
+          new StatusFlag("focusing"),
+          new StatusFlag("stoneArmored"),
+          new StatusFlag("strengthened"),
+          new StatusFlag("stoneFists"),
+          
+        ];
+        
+        negativeStatusFlags: Array<StatusFlag> = [
+            new StatusFlag("burning"),
+            new StatusFlag("poisoned"),
+            new StatusFlag("hitByWind"),
+            new StatusFlag("slowed"),
+            new StatusFlag("stunned"),
+            new StatusFlag("vulnerable")
+        ]
       //  STATUSES //
       // # Status flags
         burning: boolean = false;
@@ -123,7 +145,7 @@ export class Char {
         }
 
         public resetAttackValue(): void {
-            this.attackValue = Math.floor(this.intelligence / 2);
+            this.attackValue = this.intelligence / 2;
         }
 
         public resetMagicValue(): void {
@@ -242,7 +264,7 @@ export class Char {
         }
 
         public takeVulnerable(): void {
-            
+
         }
 
         public buildNegativeStatusArray(): void {

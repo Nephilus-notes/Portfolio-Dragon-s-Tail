@@ -134,6 +134,9 @@ export class CombatControllerService {
     if (this.playerCharacter.fleeing == true) {
       return false;
     }
+    this.checkEffectsDuration(this.NPCEnemy);
+    this.checkEffectsDuration(this.playerCharacter);
+    this.messageService.add("checking combatants")
     if (this.playerCharacter.currentHP <= 0) {
       this.playerCharacter.currentHP = 0;
       this.messageService.add('You can no longer fight.', true);
@@ -316,8 +319,8 @@ export class CombatControllerService {
           // this.messageService.add('modifer is not 0, boosting by other')
           self.evadePercentage = Math.floor(self.dexterity) * ability.modifier;
         }
-        self.defended = true;
-        self.defendingRounds = ability.duration > 2 ? ability.duration : 2;
+        self.evading = true;
+        self.evadingRounds = ability.duration > 2 ? ability.duration : 2;
       } else if (ability.affectedAttribute == 'focusing') {
         // this.messageService.add(`${ability.affectedAttribute}`)
         if (ability.modifier == 0) {
@@ -325,8 +328,8 @@ export class CombatControllerService {
         } else {
           self.attackValue = self.intelligence * ability.modifier;
         }
-        self.defended = true;
-        self.defendingRounds = ability.duration > 2 ? ability.duration : 2;
+        self.focusing = true;
+        self.focusingRounds = ability.duration > 2 ? ability.duration : 2;
       } else if (ability.affectedAttribute == 'magicValue') {
         if (ability.modifier == 0) {
           self.magicValue = Math.floor(self.intelligence / 2) + 2;
@@ -382,8 +385,15 @@ export class CombatControllerService {
     self.buildStatusArrays();
     for (let i = 0; i < self.positiveRoundCounterArray!.length; i++) {
       if (self.positiveStatusArray![i] == true) {
+        this.messageService.add(`${self.name} ${self.positiveStatusArray![i]}`)
+        this.messageService.add(`${self.name} ${self.positiveRoundCounterArray![i]}`)
+        this.messageService.add(`${self.name} ${self.positiveResetArray![i]}`)
         if (self.positiveRoundCounterArray![i] == 0) {
           self.positiveResetArray![i]();
+        }
+        else {
+          self.positiveRoundCounterArray![i]--;
+          this.messageService.add(`${self.name} ${self.positiveRoundCounterArray![i]}`)
         }
       }
     }
