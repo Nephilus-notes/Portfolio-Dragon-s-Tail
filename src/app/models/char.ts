@@ -26,7 +26,7 @@ export class Char {
         this.evadePercentage = this.dexterity; // Times 2 for maxed evasion at 50?
         this.resistValue = this.resistance;
         this.attackValue = this.intelligence;
-        this.magicValue = this.intelligence;
+        this.magicValue = Math.floor(this.intelligence / 2);
       }
       id?: number = undefined; // fix hard coded thing
       name: string;
@@ -94,13 +94,24 @@ export class Char {
         strengthenedRounds: number = 0;
         vulnerableRounds: number = 0;
 
+        negativeStatusArray?: Array<boolean>;
+        negativeRoundCounterArray?: Array<number>;
+        negativeResetArray?: Array<Function>;
+        negativeStatusInflictArray?: Array<Function>;
+        
+        positiveStatusArray?: Array<boolean>;
+        positiveRoundCounterArray?: Array<number>;
+        positiveResetArray?: Array<Function>;
+       
+
+
         public resetArmorValue(): void {
             this.armorValue = this.armor; // make a conditional to use the itemstat of equipped armor
         }
 
-        public resetDamageValue(): void {
-            this.damageValue = Math.floor(this.equippedItems?.hand?.itemStat ? 
-            this.equippedItems.hand.itemStat + (this.strength / 2) : this.strength / 2);
+        public resetDamageValue(boost:number = 0): void {
+            this.damageValue = (Math.floor(this.equippedItems?.hand?.itemStat ? 
+            this.equippedItems.hand.itemStat + (this.strength / 2) : this.strength / 2)) + boost;
         }
 
         public resetEvadePercentage(): void {
@@ -152,8 +163,156 @@ export class Char {
 
         }
 
-        public resetStatusBoolean(attribute:boolean): void {
-
+        public resetBurningBlades(): void {
+            this.burningBlades = false;
+            this.burningBladesRounds = 0;
+            this.resetDamageValue();    
         }
         
+        public resetDefended(): void {
+            this.defended = false;
+            this.defendingRounds = 0;
+            this.resetArmorValue();
+        }
+
+        public resetDoubleArmed(): void {
+            this.doubleArmed = false;
+            this.doubleArmedRounds = 0;
+            this.resetDamageValue();
+        }   
+
+        public resetEvading(): void {
+            this.evading = false;
+            this.evadingRounds = 0;
+            this.resetEvadePercentage();
+        }   
+
+        public resetFleeing(): void {   
+            this.fleeing = false;
+            this.fleeingRounds = 0;
+        }   
+
+        public resetFocusing(): void {
+            this.focusing = false;
+            this.focusingRounds = 0;
+            this.resetAttackValue();
+        }   
+
+        public resetStoneArmored(): void {
+            this.stoneArmored = false;
+            this.stoneArmoredRounds = 0;
+            this.resetArmorValue();
+        }   
+
+        public resetStrengthened(): void {   
+            this.strengthened = false;
+            this.strengthenedRounds = 0;
+        }   
+
+        public resetVulnerable(): void {
+            this.vulnerable = false;
+            this.vulnerableRounds = 0;
+        }
+
+        public resetBurning(): void {
+            this.burning = false;
+            this.burningRounds = 0;
+        }
+        
+        public resetPoisoned(): void {
+            this.poisoned = false;
+            this.poisonedRounds = 0;
+        }
+
+        public resetSlowed(): void {
+            this.slowed = false;
+            this.slowedRounds = 0;
+        }
+
+        public takePoisondamage(): void {
+            this.currentHP -= Math.floor(this.maxHP / 10);
+        }
+
+        public takeBurningdamage(): void {
+            this.currentHP -= Math.floor(this.maxHP / 10);
+        }
+
+        public slowfurther(): void {
+            this.evadePercentage -= 5;
+        }
+
+        public takeVulnerable(): void {
+            
+        }
+
+        public buildNegativeStatusArray(): void {
+            this.negativeStatusArray = [
+            this.burning,
+            this.poisoned,
+            this.slowed,
+            this.vulnerable];
+        }
+        public buildNegativeRoundCounterArray(): void {
+            this.negativeRoundCounterArray = [
+            this.burningRounds,
+            this.poisonedRounds,
+            this.slowedRounds,
+            this.vulnerableRounds];
+        }
+
+        public buildNegativeResetArray(): void {
+            this.negativeResetArray = [
+            this.resetBurning,
+            this.resetPoisoned,
+            this.resetSlowed,
+            this.resetVulnerable];
+        }
+        public buildNegativeStatusInflictArray(): void {
+            this.negativeStatusInflictArray = [
+            this.takeBurningdamage,
+            this.takePoisondamage,
+            this.slowfurther]
+        };
+        
+        buildPositiveStatusArray(): void {
+            this.positiveStatusArray = [this.burningBlades,
+            this.defended,
+            this.doubleArmed,
+            this.evading,
+            this.fleeing,
+            this.focusing,
+            this.stoneArmored,
+            this.strengthened,];
+}
+ public buildPositiveRoundCounterArray(): void {    
+    this.positiveRoundCounterArray = [this.burningBladesRounds,
+    this.defendingRounds,
+    this.doubleArmedRounds,
+    this.evadingRounds,
+    this.fleeingRounds,
+    this.focusingRounds,
+    this.stoneArmoredRounds,
+    this.strengthenedRounds,];
+}
+ public buildPositiveResetArray(): void {
+    this.positiveResetArray = [this.resetBurningBlades,
+    this.resetDefended,
+    this.resetDoubleArmed,
+    this.resetEvading,
+    this.resetFleeing,
+    this.resetFocusing,
+    this.resetStoneArmored,
+    this.resetStrengthened,];
+}
+
+public buildStatusArrays(): void {
+    this.buildNegativeStatusArray();
+    this.buildNegativeRoundCounterArray();
+    this.buildNegativeResetArray();
+    this.buildPositiveStatusArray();
+    this.buildPositiveRoundCounterArray();
+    this.buildPositiveResetArray();
+    this.buildNegativeStatusInflictArray();
+};
+
 }
