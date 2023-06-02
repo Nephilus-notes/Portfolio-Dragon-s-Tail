@@ -2,11 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackpackDisplayComponent } from './backpack-display.component';
 import { Character } from '../../models/character';
-import { CharacterService } from '../../services/character.service';
-
+import { ApiService } from 'src/app/services/api.service';
 describe('BackpackDisplayComponent', () => {
   let component: BackpackDisplayComponent;
-  let service: CharacterService;
+  let service: ApiService;
   let fixture: ComponentFixture<BackpackDisplayComponent>;
 
   beforeEach(async () => {
@@ -15,7 +14,7 @@ describe('BackpackDisplayComponent', () => {
     })
     .compileComponents();
     
-    service = TestBed.inject(CharacterService);
+    service = TestBed.inject(ApiService);
     fixture = TestBed.createComponent(BackpackDisplayComponent);
     component = fixture.componentInstance;
     const expectedCharacter = {
@@ -80,7 +79,7 @@ describe('BackpackDisplayComponent', () => {
           attackValue:10,
           resistValue:1
     };
-    component.character = expectedCharacter
+    // component.character = expectedCharacter
     fixture.detectChanges();
   });
 

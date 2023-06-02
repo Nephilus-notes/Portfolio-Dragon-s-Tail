@@ -7,8 +7,7 @@
   <div class="combatMessage" *ngIf="messageService.combatMessages.length">
 
     <!-- <h2 class="message-content">Messages</h2> -->
-    <button type="button" class="clear"
-    (click)="messageService.clear(true)">Clear messages</button>
+
     <div class="message-content" *ngFor='let message of messageService.combatMessages'> {{message}} </div>
     
   </div>
@@ -16,5 +15,9 @@
     (click)="endCombat()" [text]="battleEndText"></app-game-button>
 
     <!-- Make a button here for abilities that has a z index of 1 and is attached to the end -->
+    <!-- <div *ngFor="ability of abilitiesArray; index as i">
+
+      <app-game-button text="{{abilitiesArray[i].name}}" (click)="useAbility(abilitiesArray[i])"></app-game-button>
+    </div> -->
   
 </div>

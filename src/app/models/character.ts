@@ -1,6 +1,7 @@
 import { Equipment } from './equipment';
 import { Item } from './item'
 import { Char } from './char';
+import { Ability } from './ability';
 
 export class Character extends Char {
     constructor(
@@ -9,15 +10,44 @@ export class Character extends Char {
         dexterity: number,
         constitution: number,
         intelligence: number,
-        abilities: string[]
+        abilities: Array<Ability>,
+        kratabsFollyExplored: number = 0,
+        drippingDeathExplored: number = 0,
+      playersRespiteExplored: number = 0,
+      tailOfTheDragonExplored: number = 0,
+      thagragsHopeExplored: number = 0,
+      webOfDepthsExplored: number = 0,
+      graithsGrottoExplored: number = 0,
+      graithQueensLairExplored: number = 0,
+      items: Array<Item> = [],
+      equippedItems:Equipment = {
+        head:  null,
+        body:  null,
+        hand:  null
+      },
+      currentCurrency: number = 0,
+      lifetimeCurrency: number = 0
       ) {
-        super(name, strength, dexterity, constitution, intelligence,abilities)
+        super(name, strength, dexterity, constitution, intelligence, abilities)
 
-      }
+        this.kratabsFollyExplored= kratabsFollyExplored;
+        this.drippingDeathExplored= drippingDeathExplored;
+        this.playersRespiteExplored= playersRespiteExplored;
+        this.tailOfTheDragonExplored= tailOfTheDragonExplored;
+        this.thagragsHopeExplored= thagragsHopeExplored;
+        this.webOfDepthsExplored= webOfDepthsExplored;
+        this.graithsGrottoExplored= graithsGrottoExplored;
+        this.graithQueensLairExplored= graithQueensLairExplored;
+        this.items = items;
+        this.equippedItems = equippedItems;
+        this.resetDamageValue()
+        this.currentCurrency = currentCurrency;
+        this.lifeTimeCurrency = lifetimeCurrency
+        }
      
       currentLocation!: string;
       
-      lifeTimeCurrency: number = 0;
+      lifeTimeCurrency: number;
       items: Array<Item> = [];
      
     

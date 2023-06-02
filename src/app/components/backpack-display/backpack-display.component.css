@@ -46,6 +46,14 @@ ul {
     padding-inline-start: 0;
 }
 
+.equipment {
+    background-color: darkgray;
+    color: white;
+    font-size: 2rem;
+    padding: 0;
+    margin-left: 0;
+}
+
 .equipment:hover {
     background-color: lightgray;
     cursor: pointer;
@@ -95,4 +103,20 @@ button {
     margin: 0px 5px;
     margin-inline: auto;
     display: block;
+}
+
+.useItem {
+    /* padding: 10px 40px;
+    margin: 0px 5px; */
+    margin-inline: auto;
+    display: inline-block;
+    background-color: darkgray;
+}
+
+.flex {
+    display: flex;
+}
+
+.center {
+    justify-content: center;
 }

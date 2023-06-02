@@ -38,6 +38,7 @@ export class StartGameComponent {
       this.getCharacter(file.playerCharacterID);
       this.getLocation(file.locationID);
       this.Loading = false;
+      // this.messageService.add(`characterid = ${file.playerCharacterID} location = ${file.locationID}`)
       
     })
   }
@@ -45,9 +46,30 @@ export class StartGameComponent {
   getCharacter(charID:number) {
     this.apiService.getCharacter(charID)
     .subscribe(character => {
-      this.character = character
+      var loadedCharacter = new Character(
+        character.name,
+        character.strength,
+        character.dexterity,
+        character.constitution,
+        character.intelligence,
+        character.abilities,
+        character.kratabsFollyExplored,
+        character.drippingDeathExplored,
+        character.playersRespiteExplored,
+        character.tailOfTheDragonExplored,
+        character.thagragsHopeExplored,
+        character.webOfDepthsExplored,
+        character.graithsGrottoExplored,
+        character.graithQueensLairExplored,
+        character.items,
+        character.equippedItems, 
+        character.currentCurrency, 
+        character.lifeTimeCurrency
+        )
+      this.character = loadedCharacter
+      loadedCharacter.id = charID
       // console.warn(character)
-      this.apiService.cacheCharacter(character);
+      this.apiService.cacheCharacter(loadedCharacter);
     });
   }
 
@@ -68,6 +90,7 @@ export class StartGameComponent {
       this.Loading = false;
       this.startGame = true;
       this.newGameBoolean = true
+      this.saveService.saveIDCache = undefined;
     }
       
     )
@@ -81,7 +104,7 @@ export class StartGameComponent {
       let usertoken:string | undefined;
       this.auth.user$.subscribe(user => {
         usertoken = user?.sub
-        console.warn(usertoken)
+        // console.warn(usertoken)
         
             this.saveService.getUserSaveFiles(usertoken).subscribe( saves => {
               this.userSaveFiles = saves;
@@ -101,7 +124,7 @@ export class StartGameComponent {
         this.userID = user?.sub
       }
     )
-    this.messageService.add('initializing');
+    // this.messageService.add('initializing');
     // console.warn("starting init")
     this.getAllSaves();
   }

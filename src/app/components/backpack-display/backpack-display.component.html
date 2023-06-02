@@ -3,10 +3,13 @@
 
   </div>
   <h3>Equipped items</h3>
-  <div *ngIf="character.equippedItems">
-    <li *ngIf="character.equippedItems" class="equipment">Head: {{character.equippedItems.head?.name}}</li>
+  <div class="alignLeft" *ngIf="character.equippedItems">
+    <button class="equipment" type="button" (click)="onSelect(character.equippedItems.head!)">Head: {{character.equippedItems.head?.name}}</button>
+    <button class="equipment" type="button" (click)="onSelect(character.equippedItems.body!)">Body: {{character.equippedItems.body?.name}}</button>
+    <button class="equipment" type="button" (click)="onSelect(character.equippedItems.hand!)">Hand: {{character.equippedItems.hand?.name}}</button>
+    <!-- <li *ngIf="character.equippedItems" class="equipment">Head: {{character.equippedItems.head?.name}}</li>
     <li *ngIf="character.equippedItems" class="equipment">Body: {{character.equippedItems.body?.name}}</li>
-    <li *ngIf="character.equippedItems" class="equipment">Hand: {{character.equippedItems.hand?.name}}</li>
+    <li *ngIf="character.equippedItems" class="equipment">Hand: {{character.equippedItems.hand?.name}}</li> -->
   </div>
   <h3>Backpack</h3>
   <li *ngFor="let item of character.items; index as i;" class="equipment">
@@ -17,8 +20,14 @@
     <div> <p class="itemText">{{ selectedItemUse }}: {{selectedItem.itemStat}}</p>  <p class="itemText"> Price: {{selectedItem.price}} </p> </div>
     <div></div>
     <div>{{selectedItem.description}}</div>
-    <div>
-      <button class="useItem" type="button" (click)="onItemUse(useItem, selectedItem)">{{useItem}}</button>
+    <div class="flex center">
+      <app-game-button class="useItem" (click)="deselectItem()"text="Back"></app-game-button>
+      <app-game-button *ngIf="selectedItem == character.equippedItems.hand || selectedItem == character.equippedItems.body 
+      || selectedItem == character.equippedItems.head "
+      class="useItem" (click)="unEquip(selectedItem)" text="Unequip"></app-game-button>
+      <app-game-button *ngIf="character.items.includes(selectedItem)"
+      class="useItem" (click)="onItemUse(useItem, selectedItem)" [text]="useItem"></app-game-button>
+      <!-- <button class="useItem" type="button" (click)="onItemUse(useItem, selectedItem)">{{useItem}}</button> -->
     </div>
   </div>
 </div>

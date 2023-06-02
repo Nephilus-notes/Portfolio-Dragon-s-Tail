@@ -41,7 +41,7 @@
 .optionsAndInput {
     border-radius: 10px;
     display:flex;
-    min-width: fit-content;
+    min-width: 80%;
 }
 
 .options {
@@ -56,7 +56,7 @@
 .input {
     display:flex;
     flex-wrap: wrap;
-    width: fit-content;
+    width: 80%;
     background-color: darkgray;
     border-left: 2px solid white;
     border-top-right-radius: 10px;

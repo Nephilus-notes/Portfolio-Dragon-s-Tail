@@ -12,6 +12,7 @@ import { Character } from '../models/character';
 import { NPC } from '../models/npc';
 import { Template } from '../models/template';
 import { Location } from '../models/mapLocation';
+import { Ability } from '../models/ability';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class ApiService {
     let url = `${environment.characterURL}${charID}`
     const character = this.http.get<Character>(url)
 
-    this.messageService.add('CharacterService: fetched characters')
+    // this.messageService.add('CharacterService: fetched characters')
     return character;
   }
 
@@ -53,7 +54,7 @@ export class ApiService {
   public cacheCharacter(character:Character) {
     // console.warn(`character cache: ${character}`)
     this.characterCache = character
-    this.messageService.add('character cached')
+    // this.messageService.add('character cached')
   }
   
   /** 
@@ -62,7 +63,7 @@ export class ApiService {
   * @returns A character object
   */
   public loadCharacter(): Character {
-    this.messageService.add('Character Loaded from characterservice')
+    // this.messageService.add('Character Loaded from characterservice')
     return this.characterCache
   }
 
@@ -72,6 +73,7 @@ export class ApiService {
    */
   public patchCharacter(character:Character): void {
     let url = `${environment.characterURL}${character.id}`
+    // this.messageService.add(url)
     let charDTO: characterDTO = {
       dateUpdated:new Date().toISOString(),
       ...character,
@@ -79,7 +81,7 @@ export class ApiService {
     let response = this.http.patch<Character>(url, charDTO)
 
     response.subscribe(p => console.warn(p))
-    this.messageService.add("success, but how do we measure it?")
+    // this.messageService.add("success, but how do we measure it?")
   }
 
 /**
@@ -98,13 +100,12 @@ export class ApiService {
       id:undefined
       }
     let response = this.http.post<Character>(url, charDTO)
-    // console.warn(character)
-      // console.warn(charDTO)
+
     response.subscribe(r => {
       character.id = r.id;
       console.warn(r);
     })
-    this.messageService.add("success, but how do we measure it?")
+    // this.messageService.add("success, but how do we measure it?")
     return response
   }
   /**
@@ -114,11 +115,11 @@ export class ApiService {
    */
   public characterCacheExists() {
     if (this.characterCache) {
-      this.messageService.add('Character exists!')
+      // this.messageService.add('Character exists!')
       return true
     }
     else {
-      this.messageService.add("Character doesn't exist")
+      // this.messageService.add("Character doesn't exist")
       return false
     }
   }
@@ -135,7 +136,7 @@ export class ApiService {
       let url = `${environment.NpcURL}${NPCID}`
     const enemy = this.http.get<NPC>(url)
 
-    this.messageService.add('CharacterService: fetched enemy')
+    // this.messageService.add('CharacterService: fetched enemy')
     return enemy;
     }
 
@@ -147,7 +148,7 @@ export class ApiService {
       let url = `${environment.templateURL}`
       const templateList = this.http.get<Array<Template>>(url)
   
-      this.messageService.add('CharacterService: fetched templates')
+      // this.messageService.add('CharacterService: fetched templates')
       return templateList;
     }
 
@@ -173,11 +174,11 @@ export class ApiService {
      */
     public templateCacheExists(): boolean {
       if (this.templateCache) {
-        this.messageService.add('Templates exists!')
+        // this.messageService.add('Templates exists!')
         return true
       }
       else {
-        this.messageService.add("Templates don't exist")
+        // this.messageService.add("Templates don't exist")
         return false
       }
     };
@@ -191,7 +192,7 @@ export class ApiService {
   
       let url = `${environment.itemURL}${itemID}`
       const item = this.http.get<Item>(url)
-      this.messageService.add('ItemService: Item Fetched')
+      // this.messageService.add('ItemService: Item Fetched')
       return item;
     }
   
@@ -229,7 +230,7 @@ export class ApiService {
   public saveLocation(location:Location): void {
     this.locationCache = location
     // console.warn(location)
-    this.messageService.add('location Saved')
+    // this.messageService.add('location Saved')
   }
   /** 
   * Loads a location from the CharacterService cache without an API call
@@ -239,8 +240,16 @@ export class ApiService {
   *
   *
   */
+/**
+ * A wrapper to get and cache a location object in one function call
+ */
+  public goToNewLocation(loc_id:string) {
+    this.getNewLocation(loc_id).subscribe(l => {
+      this.saveLocation(l);
+    })
+  }
   public loadLocation(): Location {
-    this.messageService.add('location Loaded')
+    // this.messageService.add('location Loaded')
     return this.locationCache
   }
 
@@ -275,7 +284,15 @@ export class ApiService {
     let url = `${environment.templateURL}${TemplateID}`
     const template = this.http.get<Template>(url)
 
-    this.messageService.add('API: got single template')
+    // this.messageService.add('API: got single template')
     return template;
   };
+
+  public getSingleAbility(abilityID:number): Observable<Ability> {
+    return this.http.get<Ability>(`${environment.abilityURL}${abilityID}`)
+  }
+
+  public getAllAbilities(): Observable<Array<Ability>> {
+    return this.http.get<Array<Ability>>(`${environment.abilityURL}`)
+  }
   }

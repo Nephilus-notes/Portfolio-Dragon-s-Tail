@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Ability } from 'src/app/models/ability';
 import { Character } from 'src/app/models/character';
 import { Item } from 'src/app/models/item';
 import { Location } from 'src/app/models/mapLocation';
@@ -12,14 +13,15 @@ export class SelectedItemComponent {
   @Input() character!: Character;
   @Input() location!: Location;
   @Input() selectedItem!: Item;
+  @Input() selectedAbility!: Ability;
 
-  @Output() chosenItem = new EventEmitter<boolean>();
-  public buyItem(): void {
-    this.chosenItem.emit(true);
+  @Output() chosenObject = new EventEmitter<boolean>();
+  public buyObject(): void {
+    this.chosenObject.emit(true);
   }
 
-  @Output() selectedItemReset = new EventEmitter<boolean>();
+  @Output() selectedObjectReset = new EventEmitter<boolean>();
   public cancel(): void {
-    this.selectedItemReset.emit(false);
+    this.selectedObjectReset.emit(false);
   }
 }

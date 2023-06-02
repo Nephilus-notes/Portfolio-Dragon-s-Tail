@@ -1,17 +1,40 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnChanges } from '@angular/core';
 
 import { MessageService } from './message.service';
 import { Character } from '../models/character';
 import { NPC } from '../models/npc';
 import { Char } from '../models/char';
+import { Ability } from '../models/ability';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CombatControllerService {
+  constructor(private messageService: MessageService) {}
 
   playerCharacter!: Character;
   NPCEnemy!: NPC;
+  roundCounters!: Array<number>;
+  booleanAttributes!: Array<boolean>;
+  roundOrder?: Array<Character | NPC>;
+  resetArray!: Array<Function>;
+  // NPCRoundCounters?: Array<number>;
+  // NPCBooleanAttributes?: Array<boolean>;
+
+  public cacheNPC(npc: NPC): void {
+    this.NPCEnemy = npc;
+  }
+
+  public cachePC(character: Character): void {
+    this.playerCharacter = character;
+  }
+
+  public combatPCExists(): boolean {
+    if (this.playerCharacter) {
+      return true;
+    }
+    return false;
+  }
 
   /**
    * Generates a random number to determine if a critical hit happened,
@@ -19,28 +42,40 @@ export class CombatControllerService {
    * finally calculates damage if they are hit and calls the dealDamage function.
    * @param self The player or non player character doing the attacking
    * @param target The target of the violence
-   * @param type A string with a default value of physical, but a value of magical would change 
+   * @param type A string with a default value of physical, but a value of magical would change
    * the stats tested
    */
-  public attack(self:Character|NPC, target: Character|NPC, type:string="physical"): void {
+  public attack(
+    self: Character | NPC,
+    target: Character | NPC,
+    type: string = 'physical'
+  ): void {
     let attack: number = Math.random() * 100;
-
-    if (attack === 100) {
-      this.messageService.add(`${target.name} has been hit critically for ${self.damageValue * 2} damage!`, true)
-      this.dealDamage(target, self.damageValue * 2)
-    }
-    else if (attack > target.evadePercentage) {
-      var totalDamage = self.damageValue - target.armorValue + Math.floor(Math.random() * self.damageValue * .1)
+    if (attack >= 100 - self.dexterity) {
+      this.messageService.add(
+        `${target.name} has been hit critically for ${
+          self.damageValue * 2
+        } damage!`,
+        true
+      );
+      this.dealDamage(target, self.damageValue * 2);
+    } else if (attack + self.attackValue > target.evadePercentage) {
+      var totalDamage =
+        self.damageValue -
+        target.armorValue +
+        Math.floor(Math.random() * self.damageValue * 0.1);
 
       if (totalDamage < 1) {
         totalDamage = 1;
-      } 
-        this.dealDamage(target, totalDamage)
-      this.messageService.add(`${target.name} has been hit for ${totalDamage} damage!`, true)
-      
+      }
+      this.dealDamage(target, totalDamage);
+      this.messageService.add(
+        `${target.name} has been hit for ${totalDamage} damage!`,
+        true
+      );
     } else {
-      this.messageService.add(`${self.name} missed ${target.name}`, true)
-    } 
+      this.messageService.add(`${self.name} missed ${target.name}`, true);
+    }
   }
 
   /**
@@ -48,28 +83,10 @@ export class CombatControllerService {
    * @param char The player or non player character that is recieving damage
    * @param damage The amount of damage recieved
    */
-  public dealDamage(char:Character|NPC, damage: number): void {
+  public dealDamage(char: Character | NPC, damage: number): void {
     if (damage > 0) {
-      char.currentHP -= damage
+      char.currentHP -= damage;
     }
-  }
-
-  /**
-   * LEGACY an ability the player can use to briefly boost their armor
-   * @param self the character performing the action
-   */
-  public defend(self: Character): void {
-    self.armorValue += 2
-    this.messageService.add(`${self.name} focuses on defense`, true)
-  }
-
-  /**
-   * LEGACY an ability the player can use to briefly boost their evasion
-   * @param self the character performing the action
-   */
-  public evade(self: Character): void {
-    self.evadePercentage += 2
-    this.messageService.add(`${self.name} focuses on evasion`, true)
   }
 
   /**
@@ -78,14 +95,18 @@ export class CombatControllerService {
    * @param target The enemy whose speed is being compared
    * @returns A boolean. true = self is faster and will leave combat. false = the enemy is faster and self cannot escape
    */
-  public flee(self: Character|NPC, target: Character|NPC): boolean {
+  public flee(self: Character | NPC, target: Character | NPC): void {
     if (self.dexterity > target.dexterity) {
-      this.messageService.add(`${self.name} has fled!`, true)
-      return true
-    }
-    else {
-      this.messageService.add(`${self.name} tried to flee!`, true)
-      return false
+      this.messageService.add(`${self.name} has fled!`, true);
+      self.positiveStatusFlags["fleeing"].rounds = 0;
+      self.positiveStatusFlags["fleeing"].active = true;
+    } else if (self.dexterity < target.dexterity && self.positiveStatusFlags["fleeing"].rounds > 0) {
+      this.messageService.add(`${self.name} has fled!`, true);
+      self.positiveStatusFlags["fleeing"].rounds = 0;
+      self.positiveStatusFlags["fleeing"].active = true;
+    } else {
+      self.positiveStatusFlags["fleeing"].rounds = 0;
+      this.messageService.add(`${self.name} tried to flee!`, true);
     }
   }
   /**
@@ -93,8 +114,12 @@ export class CombatControllerService {
    * @param self the pc or npc to be healed
    * @param amountHealed The amount of hp regained
    */
-  public heal(self:Character|NPC, amountHealed:number): void {
+  public heal(self: Character | NPC, amountHealed: number): void {
     self.currentHP += amountHealed;
+    this.messageService.add(
+      `${self.name} has been healed for ${amountHealed}!`,
+      true
+    );
     if (self.currentHP > self.maxHP) {
       self.currentHP = self.maxHP;
     }
@@ -102,198 +127,283 @@ export class CombatControllerService {
 
   /**
    * Used at the end of a round, it ensures both combatants are able to continue fighting, and if not returns false and ends combat.
-   * @param player 
-   * @param enemy 
-   * @returns 
+   *
+   * @returns false if combat cannot continue, else true
    */
-  public checkCombatants(player: Character, enemy:NPC): boolean {
-    if (player.fleeing == true) {
-      return false
+  public checkCombatants(): boolean {
+    if (this.playerCharacter.positiveStatusFlags["fleeing"].active == true) {
+      return false;
     }
-    if (player.currentHP <= 0) {
-      player.currentHP = 0;
-      this.messageService.add("You can no longer fight.", true)
+    this.checkEffectsDuration(this.NPCEnemy);
+    this.checkEffectsDuration(this.playerCharacter);
+    // this.messageService.add("checking combatants")
+    if (this.playerCharacter.currentHP <= 0) {
+      this.playerCharacter.currentHP = 0;
+      this.messageService.add('You can no longer fight.', true);
 
       // Send back to town
-      return false
-    } else if (enemy.currentHP <= 0) {
-      enemy.currentHP = 0;
-      this.messageService.add(`You defeated the ${enemy.name}! You scavenge ${enemy.currentCurrency} Essence.`, true);
-      this.gainLoot(player, enemy);
+      return false;
+    } else if (this.NPCEnemy.currentHP <= 0) {
+      this.NPCEnemy.currentHP = 0;
+      this.messageService.add(
+        `You defeated the ${this.NPCEnemy.name}! You scavenge ${this.NPCEnemy.currentCurrency} Essence.`,
+        true
+      );
+      this.gainLoot(this.playerCharacter, this.NPCEnemy);
 
-      return false
+      return false;
     } else {
-      return true
-    }
-  }
-/**
- * Checks to make sure all parties can attack and can be attacked
- * @param player The current player character
- * @param npc  The current enemy in combat 
- * @param actionCall The player's input as a string 
- */
-  public healthCheck(player:Character, npc: NPC, actionCall: string | null=null) {
-    if (actionCall == null && player.currentHP > 0 && npc.currentHP > 0) {
-      this.attack(npc, player);
-    }
-    else if (player.currentHP > 0 && npc.currentHP > 0) {
-      if (actionCall != null) {
-        this.playerAction(player, npc, actionCall)
-      }
+      return true;
     }
   }
   /**
-   * A combat round. Uses the two combatants' dexterity to determine order then makes the enemy attack the player and 
+   * Verifies that all parties have enough HP to attack or be attacked.
+   *
+   * @returns true if attack can be made, else false
+   */
+  public healthCheck(): boolean {
+    if (this.NPCEnemy.currentHP > 0 && this.playerCharacter.currentHP > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  /**
+   * A combat round. Uses the two combatants' dexterity to determine order then makes the enemy attack the player and
    * performs whatever action dictated by the actionCall string the player submitted
-   * @param character 
-   * @param enemy 
-   * @param actionCall 
+   * @param character
+   * @param enemy
+   * @param actionCall
    */
-  public round(character: Character, enemy: NPC, actionCall: string) {
-
-    if (character.dexterity >= enemy.dexterity) {
-      this.healthCheck(character, enemy, actionCall);
-      if (enemy.currentHP > 0) {
-        this.healthCheck(character, enemy);
-      }
-    } else {
-      this.healthCheck(character, enemy);
-      if (character.currentHP > 0) {
-        this.healthCheck(character, enemy, actionCall);
+  public round(ability: Ability): boolean {
+    if (this.roundOrder == null) {
+      if (this.playerCharacter.dexterity >= this.NPCEnemy.dexterity) {
+        this.roundOrder = [this.playerCharacter, this.NPCEnemy];
+      } else {
+        this.roundOrder = [this.NPCEnemy, this.playerCharacter];
       }
     }
 
+    for (let i = 0; i < this.roundOrder.length; i++) {
+      if (this.healthCheck()) {
+        var enemy!: Character | NPC;
+        if (this.roundOrder[i] == this.NPCEnemy) {
+          enemy = this.playerCharacter;
+          this.useAbility(
+            this.roundOrder[i],
+            enemy,
+            this.roundOrder[i].abilities[0]
+          );
+          // this.messageService.add(`actor:${this.roundOrder[i].name}target:${enemy.name}ability:${this.roundOrder[i].abilities[0].name}`)
+        } else {
+          enemy = this.NPCEnemy;
+          this.useAbility(this.roundOrder[i], enemy, ability);
+        }
+      }
+    }
+    return this.checkCombatants();
   }
 
-  /**
-   * A switch that determines which legacy ability the player uses. [Attack, Defend, Evade, Flee]
-   * @param character 
-   * @param enemy 
-   * @param actionCall 
-   */
-  public playerAction(character: Character, enemy: NPC, actionCall: string) {
-    // this.messageService.add(`player action call ${actionCall}`);
-
-    switch (actionCall) {
-      case 'A': {
-        this.attack(character, enemy);
-        break;
-      }
-      case 'D': {
-        this.defend(character);
-        break;
-      }
-      case 'E': {
-        this.evade(character);
-        break;
-      }
-      case 'F': {
-        this.flee(character, enemy);
-        break;
-      }
+  public useAbility(
+    self: Character | NPC,
+    enemy: Character | NPC,
+    ability: Ability
+  ): void {
+    // this.messageService.add(`${ability.effect} ${ability.name}`)
+    if (ability.effect != 'damage' && ability.effect != 'debuff') {
+      // this.messageService.add("healing")
+      this.performAbility(self, self, ability);
+    } else {
+      this.performAbility(self, enemy, ability);
     }
   }
 
   /**
    * Takes the essence from the slain enemy and adds it to the players currentCurrency
-   * @param character 
-   * @param enemy 
+   * @param character
+   * @param enemy
    */
   private gainLoot(character: Character, enemy: NPC): void {
     character.currentCurrency += enemy.currentCurrency;
     character.lifeTimeCurrency += enemy.currentCurrency;
   }
 
-/**
- * New function designed to take in an ability object and us it to perform an action
- * @param self The PC or NPC using the ability
- * @param target The target of the abiity
- * @param effect A string: options "damage", "heal", "buff", and "debuff"?
- * @param affectedAttribute A string that maps to a particular attribute on the character object
- * @param modifier A number that increases the effect of the ability
- * @param duration A number indicating the number of rounds the effect persists
- * @param type A string: "physical" and "magical" indicating which attribute should be used for damage (strength vs intelligence) against which defense (armor vs resistance)
- */
-  public performAbility(self: Character| NPC, target: Character| NPC, effect:string, affectedAttribute:string, modifier:number=1, duration:number=0, type:string="physical" ) {
-    if (effect == "damage") {
-      if (type == "physical") {
-        self.damageValue = self.damageValue * modifier;
+  /**
+   * New function designed to take in an ability object and us it to perform an action
+   *
+   * I need to continue to split this up into more smaller functions. That will allow for easier c
+   * ustom logic based on what ability is being used and a more readable and scalable function overall
+   * @param self The PC or NPC using the ability
+   * @param target The target of the abiity
+   * @param effect A string: options "damage", "heal", "buff", and "debuff"?
+   * @param affectedAttribute A string that maps to a particular attribute on the character object
+   * @param modifier Def=1 - A number that increases the effect of the ability
+   * @param duration Def=0 - number indicating the number of rounds the effect persists
+   * @param type Def="physical" - A string: "physical" and "magical" indicating which attribute should be
+   * used for damage (strength vs intelligence) against which defense (armor vs resistance)
+   */
+  public performAbility(
+    self: Character | NPC,
+    target: Character | NPC,
+    ability: Ability
+  ) {
+    // this.messageService.add(`starting ability. Effect: ${ability.effect}`)
+    var duration = ability.duration > 2 ? ability.duration : 2;
+    this.messageService.add(
+      `${self.name} ${ability.description} ${target.name}`,
+      true
+    );
+
+    if (ability.effect == 'damage') {
+      if (ability.type == 'physical') {
+        self.damageValue = self.damageValue * ability.modifier;
         this.attack(self, target);
         self.resetDamageValue();
-      } else if (type == "magical") {
+      } else if (ability.type == 'magical') {
         // attack but using magic against resistance
       }
-      if (affectedAttribute) {
-        this.debuff(target, affectedAttribute, duration);
+      if (ability.affectedAttribute) {
+        this.debuff(target, ability.affectedAttribute, ability.duration);
       }
+    } else if (ability.effect == 'heal') {
+      this.heal(target, self.magicValue * ability.modifier);
     }
-    else if (effect == "heal") {
-      this.heal(target, self.magicValue*modifier)
 
+    if (ability.effect == 'flee') {
+      this.flee(this.playerCharacter, this.NPCEnemy);
     }
-    if (effect == "buff") {
-      switch (affectedAttribute) {
-        case "stoneArmored": {
-          self.armorValue += Math.floor(self.attackValue) * modifier;
-          self.stoneArmored = true;
-          self.stoneArmoredRounds = duration;
+    if (ability.effect == 'buff') {
+      switch (ability.affectedAttribute) {
+        case 'stoneArmored': {
+          self.armorValue =
+            self.armor + Math.floor(self.magicValue) * ability.modifier;
+          self.positiveStatusFlags["stoneArmored"].setStatus(duration);
+
           break;
         }
-        case "stoneFists": {
-          self.damageValue += Math.floor(self.attackValue) * modifier;
-          self.stoneFists = true
+        case 'stoneFists': {
+          self.damageValue = Math.floor(self.magicValue) * ability.modifier; // add a weapon modifier to this
+          self.positiveStatusFlags["stoneFists"].setStatus(duration);
+          break;
         }
       }
-      if (affectedAttribute == "damageValue") {
-      } 
-      else if (affectedAttribute == "resistValue") {
-        self.resistValue += Math.floor(self.attackValue) * modifier;
-      }
-      else if (affectedAttribute == "armorValue") {
-      }
-      else if (affectedAttribute == "evadePercentage") {
-        self.evadePercentage += Math.floor(self.attackValue) * modifier;
-      }
-      else if (affectedAttribute == "attackValue") {
-        self.attackValue += Math.floor(self.attackValue) * modifier;
-      }
-      else if (affectedAttribute == "magicValue") {
-        self.magicValue += Math.floor(self.attackValue) * modifier;
+      if (ability.affectedAttribute == 'strengthened') {
+        if (ability.modifier == 0) {
+          self.resetDamageValue(2);
+        } else {
+          self.damageValue = Math.floor(self.strength / 2) * ability.modifier;
+          // this.messageService.add(`adding damage`)
+        }
+        self.positiveStatusFlags["strengthened"].setStatus(duration);
+      } else if (ability.affectedAttribute == 'resistValue') {
+        if (ability.modifier == 0) {
+          self.resistValue = self.resistance + 2;
+        } else {
+          self.resistValue = self.resistance * ability.modifier;
+        }
+      } else if (ability.affectedAttribute == 'defending') {
+        // this.messageService.add(`${ability.affectedAttribute}`)
+        if (ability.modifier == 0) {
+          self.armorValue = self.armor + 2;
+        } else {
+          self.armorValue = self.armor * ability.modifier;
+        }
+        self.positiveStatusFlags["defending"].setStatus(duration);
+      } else if (ability.affectedAttribute == 'evading') {
+        // this.messageService.add(`${ability.affectedAttribute}`)
+        if (ability.modifier == 0) {
+          // this.messageService.add('modifer is 0, boosting by 4')
+          self.evadePercentage = Math.floor(self.dexterity) + 4;
+        } else {
+          // this.messageService.add('modifer is not 0, boosting by other')
+          self.evadePercentage = Math.floor(self.dexterity) * ability.modifier;
+        }
+        self.positiveStatusFlags["evading"].setStatus(duration);
+      } else if (ability.affectedAttribute == 'focusing') {
+        // this.messageService.add(`${ability.affectedAttribute}`)
+        if (ability.modifier == 0) {
+          self.attackValue = self.intelligence + 2;
+        } else {
+          self.attackValue = self.intelligence * ability.modifier;
+        }
+        self.positiveStatusFlags["focusing"].setStatus(duration);
+      } else if (ability.affectedAttribute == 'magicValue') {
+        if (ability.modifier == 0) {
+          self.magicValue = Math.floor(self.intelligence / 2) + 2;
+        } else {
+          self.magicValue =
+            Math.floor(self.intelligence / 2) * ability.modifier;
+        }
       }
     }
   }
 
-  public debuff(target:Character| NPC, affectedAttribute:string, duration:number) {
+  public debuff(
+    target: Character | NPC,
+    affectedAttribute: string,
+    duration: number
+  ) {
     switch (affectedAttribute) {
-      case "poisoned" : {
-        target.poisoned = true;
-        target.poisonedRounds = duration;
+      case 'poisoned': {
+        target.negativeStatusFlags["poisoned"].active = true;
+        target.negativeStatusFlags["poisonedRounds"].rounds = duration;
         break;
       }
-      case "slowed" : {
-        target.slowed = true;
-        target.slowedRounds = duration;
+      case 'slowed': {
+        target.negativeStatusFlags["slowed"].active = true;
+        target.negativeStatusFlags["slowedRounds"].rounds = duration;
         break;
       }
-      case "vulnerable" : {
-        target.vulnerable = true;
-        target.vulnerableRounds = duration;
+      case 'vulnerable': {
+        target.negativeStatusFlags["vulnerable"].active = true;
+        target.negativeStatusFlags["vulnerableRounds"].rounds = duration;
         break;
       }
-      case "hitByWind" : {
-        target.hitByWind = true;
+      case 'hitByWind': {
+        target.negativeStatusFlags["hitByWind"].active
         break;
       }
-      case "stunned" : {
-        target.stunned = true;
+      case 'stunned': {
+        target.negativeStatusFlags["stunned"].active
         break;
       }
-      case "burning" : {
-        target.burning = true;
+      case 'burning': {
+        target.negativeStatusFlags["burning"].active = true;
+        target.negativeStatusFlags["burningRounds"].rounds = duration;
         break;
       }
     }
   }
+  /**
+   * split into separate functions and collect them?
+   */
+  public checkEffectsDuration(self: Character | NPC): void {
+    // create hashmap of boolean (defending) and rounds (defendedRounds) and then iterate over them? or create an array of booleans and an array of
 
-  constructor(private messageService: MessageService) { }
+    Object.keys(self.positiveStatusFlags).forEach((key) => {
+      if (self.positiveStatusFlags[key].active) {
+        if (self.positiveStatusFlags[key].rounds == 0) {
+          this.messageService.add(`${key} is turning off`)
+          self.positiveStatusFlags[key].resetFunction();
+        }
+        else {
+          self.positiveStatusFlags[key].rounds--;
+        }
+
+      }
+    });
+
+    Object.keys(self.negativeStatusFlags).forEach((key) => {
+      if (self.negativeStatusFlags[key].active) {
+          self.negativeStatusFlags[key].useFunction?.();
+          self.negativeStatusFlags[key].rounds--;
+        
+        if (self.negativeStatusFlags[key].rounds == 0) {
+          self.negativeStatusFlags[key].resetFunction();
+        }
+
+      }
+    });
+  
+  }
 }

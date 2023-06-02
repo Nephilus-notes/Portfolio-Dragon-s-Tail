@@ -2,7 +2,7 @@
     <div class="flex flex-space">
         <div class="shopTitle">
 
-            {{display}} 
+            {{location.middleText}} 
         </div>
         <div class="goldDisplay">
             |{{character.currentCurrency}}
@@ -18,8 +18,8 @@
     </div>
     <div *ngIf="selectedItem">
         <app-selected-item [location]="location" [character]="character" [selectedItem]="selectedItem"
-        (selectedItemReset)="resetSelectedItem()"
-        (chosenItem)="buyItem()"></app-selected-item>
+        (selectedObjectReset)="resetSelectedItem()"
+        (chosenItem)="buyObject()"></app-selected-item>
         <!-- <h2 class="itemTitle">{{selectedItem.name}}</h2>
         {{selectedItem.price}}gp 
         {{selectedItem.description}} 

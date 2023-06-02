@@ -5,6 +5,8 @@ import { Location } from '../../models/mapLocation';
 import { ApiService } from 'src/app/services/api.service';
 import { Template } from 'src/app/models/template';
 import { Character } from 'src/app/models/character';
+import { ExplorationService } from 'src/app/services/exploration.service';
+import { Ability } from 'src/app/models/ability';
 
 
 @Component({
@@ -13,29 +15,34 @@ import { Character } from 'src/app/models/character';
   styleUrls: ['./text-display.component.css']
 })
 export class TextDisplayComponent implements OnInit{
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, public explorationService: ExplorationService) {}
 
   @Input() location!: Location;
   @Input() exploring!: number;
   SG: string = "SG";
   placement:string = "enter";
-  locationState: number = 0;
+  // locationState: number = 0;
   templates!: Array<Template>;
   selectedTemplate?: Template;
 
+  newCharacterAbilities!: Array<Ability>;
+
+
+
   @Output() submitValue = new EventEmitter<string|null>();
-  public incrementState(): void {
-    if (this.locationState < 2) {
-      this.locationState += 1
+  public incrementState(incrementer:number=1): void {
+    var locationState:number = this.explorationService.exploring
+    if (locationState < 2) {
+      this.explorationService.incrementExploring(incrementer)
     }
     else if (this.location.id == "SG") {
       this.apiService.loadCharacter();
       this.submitValue.emit("T");
+      this.explorationService.resetExploring();
     } 
     else {
-      this.locationState = 0;
+      this.explorationService.resetExploring();
     }
-    console.warn(this.locationState)
   }
 
   public onSelect(template: Template): void {
@@ -48,16 +55,29 @@ export class TextDisplayComponent implements OnInit{
 
   @Output() loadingCharacter = new EventEmitter<boolean>();
   public chooseCharacter(template:Template) {
-    var character = new Character(template.name, template.strength, template.dexterity, 
-      template.intelligence, template.constitution,[template.ability]);
-      this.apiService.cacheCharacter(character);
-      this.incrementState();
-      this.selectedTemplate = undefined;
-      this.loadingCharacter.emit(true)
+
+      var character = new Character(template.name, template.strength, template.dexterity, 
+        template.constitution, template.intelligence, [template.ability]);
+
+        this.apiService.getSingleAbility(1).subscribe(a => {
+          character.abilities.unshift(a)
+
+          this.apiService.getSingleAbility(2).subscribe(a=> {
+            character.abilities.push(a)
+
+            this.apiService.cacheCharacter(character);
+            this.incrementState(2);
+            this.selectedTemplate = undefined;
+            this.loadingCharacter.emit(true)
+          })
+        })
+
   }
+
 
 ngOnInit(): void {
     this.templates = this.apiService.loadTemplates()
+
 }
 
 }

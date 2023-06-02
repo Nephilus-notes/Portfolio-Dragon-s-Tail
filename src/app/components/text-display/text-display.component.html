@@ -1,38 +1,34 @@
 <div class="textDisplay">
     <div *ngIf="location.id!=SG">
 
-        {{location.enterText}}
+        {{location.name}}
+        <hr/>
     </div>
-    <!-- <div *ngIf="exploring > 0 && exploring < 3">
 
-        {{location.middleText}}
-</div>
-<div *ngIf="exploring >= 3">
+    <div *ngIf="!selectedTemplate">
 
-    {{location.exitText}}
-</div> -->
-
-    <div *ngIf="location.id == SG && !selectedTemplate">
-
-        <div *ngIf="locationState==0">
+        <div *ngIf="explorationService.exploring==0">
 
             {{location.enterText}}
-            <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
+           
+            <app-game-button *ngIf="location.id==SG" (click)="incrementState()" [text]="placement"></app-game-button>
         </div>
-        <div *ngIf="locationState==1 || exploring > 0 && exploring < 3">
+        <div *ngIf="explorationService.exploring > 0 && explorationService.exploring < 3">
 
             {{location.middleText}}
 
             <div *ngIf="templates">
                 <div *ngFor="let template of templates">
-                    <app-game-button [text]="template.job" class="template" (click)="onSelect(template)"></app-game-button>
+                    <app-game-button *ngIf="location.id==SG" [text]="template.job" class="template" (click)="onSelect(template)"></app-game-button>
                 </div>
             </div>
         </div>
-        <div *ngIf="locationState==2 || exploring >= 3">
+        <div *ngIf="explorationService.exploring == 3">
             
             {{location.exitText}}
-            <app-game-button (click)="incrementState()" [text]="placement"></app-game-button>
+
+            <app-game-button *ngIf="location.id==SG" (click)="incrementState()" [text]="placement"></app-game-button>
+            <!-- <app-game-button *ngIf="location.id!=SG" (click)="incrementState()" [text]="placement"></app-game-button> -->
         </div>
     </div>
 
@@ -44,7 +40,7 @@
         <p>{{selectedTemplate.description}}</p>
 
 
-        <p>Perks: (Not available)</p>
+        <p>Perks: (Not implimented)</p>
         <app-game-button (click)="onSelect(selectedTemplate)" text="Back"></app-game-button>
         <app-game-button (click)="chooseCharacter(selectedTemplate)"></app-game-button>
     </div>

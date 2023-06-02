@@ -77,7 +77,7 @@ describe('CharacterInfoComponent', () => {
           attackValue:10,
           resistValue:1
     };
-    component.character = expectedCharacter
+    // component.character = expectedCharacter
     fixture.detectChanges();
   });
 

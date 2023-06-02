@@ -64,7 +64,7 @@ export class ShopDisplayComponent {
         this.items[i] = item
       });
       
-      this.messageService.add(`${item}`);
+      // this.messageService.add(`${item}`);
     }
   }
 
@@ -74,9 +74,10 @@ export class ShopDisplayComponent {
     } else {
       this.selectedItem = item;
     }
+    console.warn(item)
   }
 
-  public buyItem(): void {
+  public buyObject(): void {
     if (this.character.currentCurrency > this.selectedItem!.price) {
       this.character.currentCurrency -= this.selectedItem!.price;
       // this.character.items = [];
