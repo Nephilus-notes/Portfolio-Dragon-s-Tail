@@ -4,7 +4,7 @@ import { Character } from '../../models/character';
 import { MessageService } from '../../services/message.service';
 import { NPC } from '../../models/npc';
 import { CombatControllerService } from 'src/app/services/combat-controller.service';
-import { Ability } from '../../models/ability';
+// import { Abili}
 
 @Component({
   selector: 'app-combat-display',

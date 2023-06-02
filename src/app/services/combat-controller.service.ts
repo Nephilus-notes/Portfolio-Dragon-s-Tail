@@ -21,21 +21,6 @@ export class CombatControllerService {
   // NPCRoundCounters?: Array<number>;
   // NPCBooleanAttributes?: Array<boolean>;
 
-  public cacheNPC(npc: NPC): void {
-    this.NPCEnemy = npc;
-  }
-
-  public cachePC(character: Character): void {
-    this.playerCharacter = character;
-  }
-
-  public combatPCExists(): boolean {
-    if (this.playerCharacter) {
-      return true;
-    }
-    return false;
-  }
-
   /**
    * Generates a random number to determine if a critical hit happened,
    * then checks against the targets evasion to see if they are hit,
@@ -228,35 +213,20 @@ export class CombatControllerService {
     character.lifeTimeCurrency += enemy.currentCurrency;
   }
 
-  /**
-   * New function designed to take in an ability object and us it to perform an action
-   *
-   * I need to continue to split this up into more smaller functions. That will allow for easier c
-   * ustom logic based on what ability is being used and a more readable and scalable function overall
-   * @param self The PC or NPC using the ability
-   * @param target The target of the abiity
-   * @param effect A string: options "damage", "heal", "buff", and "debuff"?
-   * @param affectedAttribute A string that maps to a particular attribute on the character object
-   * @param modifier Def=1 - A number that increases the effect of the ability
-   * @param duration Def=0 - number indicating the number of rounds the effect persists
-   * @param type Def="physical" - A string: "physical" and "magical" indicating which attribute should be
-   * used for damage (strength vs intelligence) against which defense (armor vs resistance)
-   */
-  public performAbility(
-    self: Character | NPC,
-    target: Character | NPC,
-    ability: Ability
-  ) {
-    // this.messageService.add(`starting ability. Effect: ${ability.effect}`)
-    var duration = ability.duration > 2 ? ability.duration : 2;
-    this.messageService.add(
-      `${self.name} ${ability.description} ${target.name}`,
-      true
-    );
-
-    if (ability.effect == 'damage') {
-      if (ability.type == 'physical') {
-        self.damageValue = self.damageValue * ability.modifier;
+/**
+ * New function designed to take in an ability object and us it to perform an action
+ * @param self The PC or NPC using the ability
+ * @param target The target of the abiity
+ * @param effect A string: options "damage", "heal", "buff", and "debuff"?
+ * @param affectedAttribute A string that maps to a particular attribute on the character object
+ * @param modifier A number that increases the effect of the ability
+ * @param duration A number indicating the number of rounds the effect persists
+ * @param type A string: "physical" and "magical" indicating which attribute should be used for damage (strength vs intelligence) against which defense (armor vs resistance)
+ */
+  public performAbility(self: Character| NPC, target: Character| NPC, effect:string, affectedAttribute:string, modifier:number=1, duration:number=0, type:string="physical" ) {
+    if (effect == "damage") {
+      if (type == "physical") {
+        self.damageValue = self.damageValue * modifier;
         this.attack(self, target);
         self.resetDamageValue();
       } else if (ability.type == 'magical') {
