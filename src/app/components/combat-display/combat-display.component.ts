@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { Character } from '../../models/character';
 import { MessageService } from '../../services/message.service';
 import { NPC } from '../../models/npc';
 import { CombatControllerService } from 'src/app/services/combat-controller.service';
-// import { Abili}
 
 @Component({
   selector: 'app-combat-display',
