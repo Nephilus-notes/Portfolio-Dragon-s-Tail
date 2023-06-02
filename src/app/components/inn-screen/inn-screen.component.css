@@ -49,7 +49,7 @@
     }
     .centerDisplay {
         width: clamp(23rem, 50vw, 70rem);
-        height: 600px;
+        min-height: 600px;
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
