@@ -31,11 +31,11 @@ export class BackpackDisplayComponent {
   public onSelect(item:Item, i:number|null=null): void {
     if (this.selectedItem === item) {
       this.selectedItem = undefined;
-      this.messageService.add('item deselected')
+      // this.messageService.add('item deselected')
     } else {
       this.selectedItem = item;
       this.backpacklocation = i!;
-      this.messageService.add('item selected')
+      // this.messageService.add('item selected')
       switch(this.selectedItem.slot) {
         case "hand": {
           this.selectedItemUse = "Damage";
