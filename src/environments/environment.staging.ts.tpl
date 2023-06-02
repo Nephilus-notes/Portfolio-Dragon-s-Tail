@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    title: `${$PROGRAM_TITLE}`,
+    title: `${PROGRAM_TITLE}`,
     abilityURL: `${API_ABILITY_URL}`,
     characterURL: `${$API_CHARACTER_URL}`,
     locationURL: `${$API_LOCATION_URL}`,
