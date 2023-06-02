@@ -136,7 +136,7 @@ export class CombatControllerService {
     }
     this.checkEffectsDuration(this.NPCEnemy);
     this.checkEffectsDuration(this.playerCharacter);
-    this.messageService.add("checking combatants")
+    // this.messageService.add("checking combatants")
     if (this.playerCharacter.currentHP <= 0) {
       this.playerCharacter.currentHP = 0;
       this.messageService.add('You can no longer fight.', true);

@@ -172,7 +172,7 @@ export class GameDisplayComponent {
    * If the location is cached it loads it up, if not it calls a default location
    */
   loadLocation($event:Location|null=null) {
-    console.warn($event)
+    // console.warn($event)
     if ($event != null) {
       this.location = $event
     }
@@ -184,7 +184,7 @@ export class GameDisplayComponent {
       this.location = this.apiService.locationCache;
       // this.messageService.add('location Loaded');
     }
-    console.warn(`Location Cache: ${this.apiService.locationCache}`);
+    // console.warn(`Location Cache: ${this.apiService.locationCache}`);
   }
 /**
  * A method that links into the character service to retrieve an enemy for combat.
