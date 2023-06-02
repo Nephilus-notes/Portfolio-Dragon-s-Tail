@@ -137,5 +137,4 @@ export class InnScreenComponent {
       this.populateAbilities();
       this.buildingID = this.location.id;
     }
-
 }
