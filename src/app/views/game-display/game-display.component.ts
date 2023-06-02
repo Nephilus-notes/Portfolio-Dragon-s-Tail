@@ -150,7 +150,7 @@ export class GameDisplayComponent {
       }
     } else {
       this.changeLocation(submitString);
-      this.messageService.add(`Got to the else. string is ${submitString}`);
+      // this.messageService.add(`Got to the else. string is ${submitString}`);
     }
   }
 /**
