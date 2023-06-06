@@ -1,8 +1,18 @@
 <div *ngIf="selectedItem;">
 
     <h2 class="itemTitle">{{selectedItem.name}}</h2>
-    {{selectedItem.price}}gp
-    {{selectedItem.description}}
+    <p>
+        Cost: {{selectedItem.price}} Essence
+    </p>
+    <p *ngIf="selectedItem.id < 5">
+        Damage: {{selectedItem.itemStat}}
+    <p *ngIf="selectedItem.id > 4 && selectedItem.id < 9">
+        Defense: {{selectedItem.itemStat}}
+    <p *ngIf="selectedItem.id > 8">
+        Health Restored: {{selectedItem.itemStat}}
+    <p>
+        {{selectedItem.description}}
+    </p>
 
     <div class="flex flex-end">
 
@@ -14,7 +24,7 @@
 <!-- <ng-template #ability>  -->
 <div *ngIf="selectedAbility;">
     <h2 class="itemTitle">Name : {{selectedAbility.name}}</h2>
-    <li>cost : {{(selectedAbility.level ? selectedAbility.level * 50 : 50)}}</li>
+    <li>Essence required : {{(selectedAbility.level ? selectedAbility.level * 50 : 50)}}</li>
     <li>effect : {{selectedAbility.effect}}</li>
     <li>modifier : {{selectedAbility.modifier}}</li>
     <li>duration : {{selectedAbility.duration}}</li>
