@@ -10,7 +10,7 @@ export class Char {
         dexterity: number,
         constitution: number,
         intelligence: number,
-        abilities: Array<Ability>
+        abilities: Array<Ability>,
       ) {
         this.name = name;
         this.strength = strength;
@@ -200,24 +200,24 @@ export class Char {
         }
         
         positiveStatusFlags: { [key: string]: StatusFlag } = {
-          "burningBlades" :new StatusFlag("burningBlades", this.resetBurningBlades),
-          "defending": new StatusFlag("defending", this.resetDefending),
-          "doubleArmed": new StatusFlag("doubleArmed", this.resetDoubleArmed),
-            "evading": new StatusFlag("evading", this.resetEvading),
-            "fleeing": new StatusFlag("fleeing", this.resetFleeing),
-            "focusing": new StatusFlag("focusing", this.resetFocusing),
-            "stoneArmored": new StatusFlag("stoneArmored", this.resetStoneArmored),
+          "burningBlades" :new StatusFlag("burningBlades", null, this.resetBurningBlades),
+          "defending": new StatusFlag("defending"," relaxes their guard.", this.resetDefending),
+          "doubleArmed": new StatusFlag("doubleArmed", null, this.resetDoubleArmed),
+            "evading": new StatusFlag("evading", ` slows back down.`, this.resetEvading),
+            "fleeing": new StatusFlag("fleeing", null, this.resetFleeing),
+            "focusing": new StatusFlag("focusing", ` relaxes their focus.`, this.resetFocusing),
+            "stoneArmored": new StatusFlag("stoneArmored", null, this.resetStoneArmored),
             "stoneFists": new StatusFlag("stoneFists"),
-            "strengthened": new StatusFlag("strengthened", this.resetStrengthened),
+            "strengthened": new StatusFlag("strengthened", ` loses steam and will not hit as hard.`, this.resetStrengthened),
             
         };
           
           negativeStatusFlags: { [key: string]: StatusFlag } = {
-              "burning" : new StatusFlag("burning", this.resetBurning, this.takeBurningdamage),
-              "poisoned" : new StatusFlag("poisoned", this.resetPoisoned, this.takePoisonDamage),
+              "burning" : new StatusFlag("burning", " puts out the fire", this.resetBurning, this.takeBurningdamage),
+              "poisoned" : new StatusFlag("poisoned", ` shook off the poison.`, this.resetPoisoned, this.takePoisonDamage),
               "hitByWind" : new StatusFlag("hitByWind"),
-              "slowed" : new StatusFlag("slowed", this.resetSlowed, this.slowfurther),
+              "slowed" : new StatusFlag("slowed", ` gets back up to speed.`, this.resetSlowed, this.slowfurther),
               "stunned" : new StatusFlag("stunned"),
-              "vulnerable" : new StatusFlag("vulnerable", this.resetVulnerable),
+              "vulnerable" : new StatusFlag("vulnerable", " returns to normal", this.resetVulnerable),
           };
     }

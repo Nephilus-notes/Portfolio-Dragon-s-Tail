@@ -388,8 +388,9 @@ export class CombatControllerService {
     Object.keys(self.positiveStatusFlags).forEach((key) => {
       if (self.positiveStatusFlags[key].active) {
         if (self.positiveStatusFlags[key].rounds == 0) {
-          this.messageService.add(`${key} is turning off`)
+          this.messageService.add(`${self.name}${self.positiveStatusFlags[key]['resetText']}`, true)
           self.positiveStatusFlags[key].resetFunction();
+          ;
         }
         else {
           self.positiveStatusFlags[key].rounds--;

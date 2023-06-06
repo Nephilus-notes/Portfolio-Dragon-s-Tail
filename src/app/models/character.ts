@@ -2,6 +2,7 @@ import { Equipment } from './equipment';
 import { Item } from './item'
 import { Char } from './char';
 import { Ability } from './ability';
+import { MessageService } from '../services/message.service';
 
 export class Character extends Char {
     constructor(
