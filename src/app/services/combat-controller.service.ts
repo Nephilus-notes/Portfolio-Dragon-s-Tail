@@ -249,10 +249,15 @@ export class CombatControllerService {
   ) {
     // this.messageService.add(`starting ability. Effect: ${ability.effect}`)
     var duration = ability.duration > 2 ? ability.duration : 2;
-    this.messageService.add(
-      `${self.name} ${ability.flavorText} ${target.name}`,
-      true
-    );
+    if (self.name != target.name) {
+      this.messageService.add(
+        `${self.name} ${ability.flavorText} ${target.name}`,
+        true
+      );
+    }
+    else {
+      this.messageService.add(`${self.name} ${ability.flavorText}`, true);
+    }
 
     if (ability.effect == 'damage') {
       if (ability.type == 'physical') {
