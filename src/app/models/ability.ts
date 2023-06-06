@@ -10,6 +10,7 @@ export interface Ability {
     name: string;
     effect: string;
     description:string;
+    flavorText: string;
     affectedAttribute: string;
     modifier: number;
     duration: number;

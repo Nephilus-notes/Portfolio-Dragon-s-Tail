@@ -250,7 +250,7 @@ export class CombatControllerService {
     // this.messageService.add(`starting ability. Effect: ${ability.effect}`)
     var duration = ability.duration > 2 ? ability.duration : 2;
     this.messageService.add(
-      `${self.name} ${ability.description} ${target.name}`,
+      `${self.name} ${ability.flavorText} ${target.name}`,
       true
     );
 

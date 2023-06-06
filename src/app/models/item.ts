@@ -9,4 +9,5 @@ export interface Item {
     price: number;
     slot: string;
     description: string;
+    type: string;
 }
