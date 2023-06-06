@@ -13,6 +13,7 @@ import { NPC } from '../models/npc';
 import { Template } from '../models/template';
 import { Location } from '../models/mapLocation';
 import { Ability } from '../models/ability';
+import { AbilityDTO } from '../models/abilityDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,16 @@ export class ApiService {
   public patchCharacter(character:Character): void {
     let url = `${environment.characterURL}${character.id}`
     // this.messageService.add(url)
+
+    // var abilitiesDTO:AbilityDTO [] = []
+    for (let ability of character.abilities) {
+      if (ability.descendants == null) {
+        ability.descendants = []
+      }
+    }
+
+    
+
     let charDTO: characterDTO = {
       dateUpdated:new Date().toISOString(),
       ...character,
@@ -92,6 +103,12 @@ export class ApiService {
   public postCharacter(character:Character): Observable<Character> {
     let url = `${environment.characterURL}`
     let date = new Date().toISOString()
+
+    for (let ability of character.abilities) {
+      if (ability.descendants == null) {
+        ability.descendants = []
+      }
+    }
 
     let charDTO: characterDTO = {
       dateAdded:date,
