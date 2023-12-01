@@ -45,17 +45,8 @@ When you go over give it a moment. The backend takes a moment to spin up and ret
  <li>A way to run a .NET project (VS Studio)</li>
  <li>And a Database (DBeaver for current PostgreSQL configuration)</li> -->
 
-This project will be hosted once I get far enough in development but in the meantime...
-
-### Clone the Repo
-Clone the repo and type "ng serve --open" to open up a development server but wait...
-
-### Spin up a backend
-[Github for ASP.NET backend](https://github.com/Nephilus-notes/DTpureback)
-Clone the repo above to download the backend API.  Currently configured with a Postgres database, if you're using Visual Studio all you have to do is put your Postgres password into your Secret Manager, Update the Database with the lastest Migration, and enjoy.
-
-
-
+# Known Bugs
+1. An issue buying armor in the shop. Character has enough essence and the button seems valid but is unresponsive.
 
 # Components
 Primary Game Display
