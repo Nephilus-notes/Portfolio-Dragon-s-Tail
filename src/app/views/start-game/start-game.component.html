@@ -11,7 +11,8 @@
                     class="block"></app-game-button>
                 <div class="block card">
                     Date Saved:
-                    {{save.dateUpdated.toDateString()}}
+                    <!-- This is saved as a string, not a datetime object. Silliness -->
+                    {{save.dateUpdated}}
                 </div>
 
             </div>
