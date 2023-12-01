@@ -37,10 +37,13 @@ Will you discover strange and wonderful things that don't result in a creature t
 
 
 ## If you want to play:
-You'll need:
+
+Just <a href="https://hilarious-cendol-0ec266.netlify.app/game" target="blank">Click Here</a>
+When you go over give it a moment. The backend takes a moment to spin up and retrieve your saved games.
+<!-- You'll need:
  <li>A way to run an Angular file (VS code or your IDE of choice)</li>
  <li>A way to run a .NET project (VS Studio)</li>
- <li>And a Database (DBeaver for current PostgreSQL configuration)</li>
+ <li>And a Database (DBeaver for current PostgreSQL configuration)</li> -->
 
 This project will be hosted once I get far enough in development but in the meantime...
 
